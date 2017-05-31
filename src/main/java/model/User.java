@@ -5,6 +5,8 @@ import com.sun.istack.internal.NotNull;
 import model.enumerations.Role;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Korisnik on 5/30/2017.
@@ -30,6 +32,21 @@ public abstract class User {
     @NotNull
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public User(String username, String password, String email, Role role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

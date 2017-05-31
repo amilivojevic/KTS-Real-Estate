@@ -1,8 +1,8 @@
 package model.enumerations;
 
 /**
- * Created by Korisnik on 5/30/2017.
+ * Created by Korisnik on 5/31/2017.
  */
-public enum Heating {
+public enum HeatingType {
     NONE, CENTRAL, FIREPLACE, SOLAR
 }
