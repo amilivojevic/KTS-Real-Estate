@@ -24,8 +24,8 @@
 
     <script src="app.js"></script>
     <script src="app/auth/login/login.controller.js"></script>
-    <!--<script src="app/auth/register/register.controller.js"></script>-->
-
+    <script src="app/auth/register/register.controller.js"></script>
+    <script src="app/util/location.service.js"></script>
 </head>
 
 
@@ -48,10 +48,10 @@
             </div>
             <div class="container-fluid" ng-show="!loginCtrl.loggedIn">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/#/login">Login</a>
+                    <a class="navbar-brand" href="#!login">Login</a>
                 </div>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/#/register">Register</a>
+                    <a class="navbar-brand" href="#!register">Register</a>
                 </div>
             </div>
         </nav>

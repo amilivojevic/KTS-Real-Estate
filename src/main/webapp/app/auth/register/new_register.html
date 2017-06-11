@@ -2,15 +2,48 @@
     <div class="col-md-4">
         <h1>Register</h1>
         <hr><br>
-        <form ng-submit="register.controller.onRegister()" novalidate>
+        <form ng-submit="registerCtrl.test()" >
+            <div>
+                <select ng-model="registerCtrl.newUser.userType" required>
+                    <option ng-repeat="t in registerCtrl.types">{{t}}</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="enter username" ng-model="authRegisterCtrl.user.username" required>
+                <input type="text" class="form-control" id="username" placeholder="enter username" ng-model="registerCtrl.newUser.username" required>
             </div>
             <div class="form-group">
-                <label for="passwowrd">Password</label>
-                <input type="password" class="form-control" id="passwowrd" placeholder="enter password" ng-model="authRegisterCtrl.user.password" required>
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="enter password" ng-model="registerCtrl.newUser.password" required>
             </div>
+
+            <div class="form-group" required>
+                <label>Location:</label><br>
+                <select ng-model="registerCtrl.newUser.location" ng-options="loc.id as loc.id for loc in registerCtrl.locations">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="text" class="form-control" id="Name" placeholder="enter name" ng-model="registerCtrl.newUser.name" required>
+            </div>
+            <div class="form-group">
+                <label>Surname</label>
+                <input type="text" class="form-control" id="surname" placeholder="enter surname" ng-model="registerCtrl.newUser.surname" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Birth date:</label>
+                <input type="date" class="form-control" id="birthdate" placeholder="enter birthdate" ng-model="registerCtrl.newUser.birthdate" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">phoneNumber</label>
+                <input type="text" class="form-control" id="phoneNumber" placeholder="enter phoneNumber" ng-model="registerCtrl.newUser.phoneNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="accountNumber">accountNumber</label>
+                <input type="text" class="form-control" id="accountNumber" placeholder="enter accountNumber" ng-model="registerCtrl.newUser.accountNumber" required>
+            </div>
+
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>
