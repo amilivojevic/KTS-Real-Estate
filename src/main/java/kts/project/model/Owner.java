@@ -1,6 +1,8 @@
-package model;
+package kts.project.model;
 
-import model.enumerations.Role;
+
+
+import kts.project.model.enumerations.Role;
 
 import javax.persistence.*;
 import java.util.ArrayList;

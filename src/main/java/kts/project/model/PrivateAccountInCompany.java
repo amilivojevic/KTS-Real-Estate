@@ -1,9 +1,6 @@
-package model;
+package kts.project.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Korisnik on 5/30/2017.
@@ -15,10 +12,12 @@ public class PrivateAccountInCompany {
     @GeneratedValue
     private long id;
 
-    @Column(name = "owner", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "owner", nullable = false)
     private Owner owner;
 
-    @Column(name = "company", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "company", nullable = false)
     private Company company;
 
     public PrivateAccountInCompany(Owner owner, Company company) {

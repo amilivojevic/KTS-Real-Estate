@@ -1,4 +1,4 @@
-package model;
+package kts.project.model;
 
 import javax.persistence.*;
 import java.util.Date;

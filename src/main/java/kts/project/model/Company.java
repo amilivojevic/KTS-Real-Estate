@@ -1,6 +1,6 @@
-package model;
+package kts.project.model;
 
-import model.enumerations.Role;
+import kts.project.model.enumerations.Role;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ public class Company extends Owner {
     @Column(name = "fax", nullable = false)
     private String fax;
 
-    @OneToMany(mappedBy = "workers", cascade = CascadeType.REMOVE)
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<PrivateAccountInCompany> workers = new ArrayList<>();
 
     public String getPib() {

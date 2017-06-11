@@ -1,12 +1,10 @@
-package model;
+package kts.project.model;
 
 
 import com.sun.istack.internal.NotNull;
-import model.enumerations.Role;
+import kts.project.model.enumerations.Role;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Korisnik on 5/30/2017.

@@ -1,4 +1,4 @@
-package model.enumerations;
+package kts.project.model.enumerations;
 
 /**
  * Created by Korisnik on 5/30/2017.

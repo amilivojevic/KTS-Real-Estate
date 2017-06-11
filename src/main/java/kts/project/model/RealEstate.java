@@ -1,7 +1,7 @@
-package model;
+package kts.project.model;
 
-import model.enumerations.HeatingType;
-import model.enumerations.RealEstateType;
+import kts.project.model.enumerations.HeatingType;
+import kts.project.model.enumerations.RealEstateType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -56,12 +56,12 @@ public class RealEstate {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private RealEstateType type;
+    private RealEstateType rs_type;
 
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<Advertisement> advertisements = new ArrayList<>();
 
-    public RealEstate(String description, String imageUrl, boolean furniture, boolean parking, float area, String constructionYear, int roomsNumber, int bathroomsNumber, Location address, Owner owner, HeatingType heatingType, RealEstateType type, List<Advertisement> advertisements) {
+    public RealEstate(String description, String imageUrl, boolean furniture, boolean parking, float area, String constructionYear, int roomsNumber, int bathroomsNumber, Location address, Owner owner, HeatingType heatingType, RealEstateType rs_type, List<Advertisement> advertisements) {
         this.description = description;
         this.imageUrl = imageUrl;
         this.furniture = furniture;
@@ -73,7 +73,7 @@ public class RealEstate {
         this.address = address;
         this.owner = owner;
         this.heatingType = heatingType;
-        this.type = type;
+        this.rs_type = rs_type;
         this.advertisements = advertisements;
     }
 
@@ -173,11 +173,8 @@ public class RealEstate {
         this.heatingType = heatingType;
     }
 
-    public RealEstateType getType() {
-        return type;
-    }
+    public RealEstateType getRs_type(){ return rs_type;}
 
-    public void setType(RealEstateType type) {
-        this.type = type;
-    }
+    public void setRs_type(RealEstateType rs_type){ this.rs_type = rs_type;}
+
 }

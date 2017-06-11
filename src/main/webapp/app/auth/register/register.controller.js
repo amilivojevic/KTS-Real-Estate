@@ -1,20 +1,36 @@
-realEstateApp.controller('registerController', function ($scope, $http, $state, $stateParams, authService) {
-    $scope.user = {};
+/**
+ * Created by Korisnik on 6/11/2017.
+ */
+(function () {
+    angular.module("realEstateApp")
+        .controller('RegisterController', registerController);
 
-    /*
-    $scope.toLogin = function () {
-        $state.transitionTo('login');
-    };
-    */
+    //register page controller
+    function registerController($http, $scope) {
 
-    $scope.register = function () {
-        if ($scope.registerForm.$valid) {
-            authService.register($scope.user, function (data) {
-                authService.setUser(data);
-                $state.transitionTo("/home");
-            }, function () {
-                alert('Registracija nije uspela! Proverite da li ste ispravno uneli sve parametre forme.');
+        var vm = this;
+        vm.register = register;
+        vm.type = "advertiser";
+
+        //method for user registration
+        function register () {
+            if(vm.pass != vm.repeatpass){
+                alert("Passwords must match!");
+                return;
+            }
+            var userData = {
+                "username": vm.username, "password": vm.pass, "email": vm.email,
+                "firstName": vm.firstName, "lastName": vm.lastName
+            };
+            //get radio option
+
+            $http.post('/api/users/register/'+vm.type, userData).then(function (response) {
+                if (response) {
+                    $scope.loginCtrl.login(userData);
+                }
+            },function(response){
+                alert(response.data.response);
             });
         }
-    };
-});
+    }
+})();

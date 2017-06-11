@@ -1,8 +1,8 @@
-package model;
+package kts.project.model;
 
-import model.enumerations.AdvertisementState;
-import model.enumerations.AdvertisementType;
-import model.enumerations.Currency;
+import kts.project.model.enumerations.AdvertisementState;
+import kts.project.model.enumerations.AdvertisementType;
+import kts.project.model.enumerations.Currency;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -48,16 +48,16 @@ public class Advertisement {
     @Enumerated(EnumType.STRING)
     private AdvertisementState state;
 
-    @NotNull
     @ManyToOne
+    @JoinColumn(name = "realEstate", nullable = false)
     private RealEstate realEstate;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
-    @NotNull
     @ManyToOne
+    @JoinColumn(name = "owner", nullable = false)
     private Owner owner;
 
     public Advertisement(String title, float price, Date announcementDate, Date updateDate, Date endingDate, String phoneNumber, List<Review> reviews, AdvertisementType type, AdvertisementState state, RealEstate realEstate, Currency currency, Owner owner) {

@@ -3,7 +3,7 @@
         .controller('LoginController', loginController);
 
     //login page controller
-    function loginController($http, $scope) {
+    function loginController($http, $cookies) {
 
         var vm = this;
 
@@ -20,6 +20,7 @@
                 vm.loggedIn = true;
                 $window.location = "#/profile";
             }
+            console.log("loggedin = " + vm.loggedIn);
         }
 
         //login method, takes form data (username and password) and calls login method from parent Controller
