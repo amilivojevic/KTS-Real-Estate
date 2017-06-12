@@ -18,15 +18,16 @@
         findAllLocations();
 
         function test(){
-            new_user = {
+            vm.new_user = {
                 role : vm.newUser.userType,
                 username: vm.newUser.username,
                 password: vm.newUser.password,
+                email: vm.newUser.email,
                 name: vm.newUser.name,
                 surname: vm.newUser.surname,
                 birthdate: vm.newUser.birthdate,
                 phoneNumber: vm.newUser.phoneNumber,
-                address: vm.newUser.location,
+                addressId: vm.newUser.location,
                 accountNumber: vm.newUser.accountNumber,
                 imageUrl: 'images/img1.jpg'
 
@@ -45,20 +46,45 @@
 
         //method for user registration
         function register () {
-            if(vm.pass != vm.repeatpass){
+            vm.new_user = {
+                role : vm.newUser.userType,
+                username: vm.newUser.username,
+                password: vm.newUser.password,
+                email: vm.newUser.email,
+                name: vm.newUser.name,
+                surname: vm.newUser.surname,
+                birthDate: vm.newUser.birthdate,
+                phoneNumber: vm.newUser.phoneNumber,
+                addressId: vm.newUser.location,
+                accountNumber: vm.newUser.accountNumber,
+                imageUrl: 'images/img1.jpg'
+
+            }
+
+            console.log("novi korisnik: " + JSON.stringify(vm.newUser) )
+
+            if(vm.newUser.password != vm.newUser.repeatpass){
                 alert("Passwords must match!");
                 return;
             }
-            var userData = {
-                "username": vm.username, "password": vm.pass, "email": vm.email,
-                "firstName": vm.firstName, "lastName": vm.lastName
-            };
-            //get radio option
+            var role = "owner";
 
-            $http.post('/api/users/register/'+vm.type, userData).then(function (response) {
-                if (response) {
+            switch(vm.new_user.role) {
+                case "Owner":
+                    role = "owner";
+                    break;
+                case "Company":
+                    role = "company";
+                    break;
+                case "Private Acc in Company":
+                    role = "privateAcc";
+                    break;
+            }
+
+            $http.post('/api/users/'+role + '/register', vm.new_user).then(function (response) {
+/*                if (response) {
                     $scope.loginCtrl.login(userData);
-                }
+                }*/
             },function(response){
                 alert(response.data.response);
             });

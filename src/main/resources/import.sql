@@ -4,3 +4,6 @@ INSERT INTO `location` (`id`, `city`, `city_area`, `has_lat_long`, `latitude`, `
 INSERT INTO `location` (`id`, `city`, `city_area`, `has_lat_long`, `latitude`, `longitude`, `state`, `street`, `street_number`, `zip_code`) VALUES (3, 'Dubai', NULL, '\0', 0, 0, '', NULL, NULL, NULL);
 INSERT INTO `location` (`id`, `city`, `city_area`, `has_lat_long`, `latitude`, `longitude`, `state`, `street`, `street_number`, `zip_code`) VALUES (4, 'Dubai', NULL, '\0', 0, 0, NULL, NULL, NULL, NULL);
 
+insert into authority (name) values ('ROLE_ADMIN');
+insert into authority (name) values ('ROLE_OWNER');
+insert into authority (name) values ('ROLE_VERIFYER');

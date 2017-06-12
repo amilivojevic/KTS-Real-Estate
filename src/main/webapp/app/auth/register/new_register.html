@@ -2,7 +2,7 @@
     <div class="col-md-4">
         <h1>Register</h1>
         <hr><br>
-        <form ng-submit="registerCtrl.test()" >
+        <form ng-submit="registerCtrl.register()" >
             <div>
                 <select ng-model="registerCtrl.newUser.userType" required>
                     <option ng-repeat="t in registerCtrl.types">{{t}}</option>
@@ -15,6 +15,16 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="enter password" ng-model="registerCtrl.newUser.password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="perpassword">Repeat password</label>
+                <input type="password" class="form-control" id="perpassword" placeholder="repet password" ng-model="registerCtrl.newUser.repeatpass" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" placeholder="enter email" ng-model="registerCtrl.newUser.email" required>
             </div>
 
             <div class="form-group" required>

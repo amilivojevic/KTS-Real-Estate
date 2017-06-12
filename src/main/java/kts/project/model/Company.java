@@ -60,8 +60,23 @@ public class Company extends Owner {
         this.workers = workers;
     }
 
-    public Company(String username, String password, String email, Role role, String name, String surname, Date birthDate, String phoneNumber, Location address, String accountNumber, String imageUrl, List<RealEstate> realEstates, List<Advertisement> advertisements, String pib, String site, String fax, List<PrivateAccountInCompany> workers) {
-        super(username, password, email, role, name, surname, birthDate, phoneNumber, address, accountNumber, imageUrl, realEstates, advertisements);
+    public Company(String username, String password, String email, Role role, String name, String surname, Date birthDate, String phoneNumber, Location address, String accountNumber, String imageUrl, String pib, String site, String fax, List<PrivateAccountInCompany> workers) {
+        super(username, password, email, role, name, surname, birthDate, phoneNumber, address, accountNumber, imageUrl);
+        this.pib = pib;
+        this.site = site;
+        this.fax = fax;
+        this.workers = workers;
+    }
+
+    public Company(List<RealEstate> realEstates, List<Advertisement> advertisements, String pib, String site, String fax, List<PrivateAccountInCompany> workers) {
+        super(realEstates, advertisements);
+        this.pib = pib;
+        this.site = site;
+        this.fax = fax;
+        this.workers = workers;
+    }
+
+    public Company(String pib, String site, String fax, List<PrivateAccountInCompany> workers) {
         this.pib = pib;
         this.site = site;
         this.fax = fax;
