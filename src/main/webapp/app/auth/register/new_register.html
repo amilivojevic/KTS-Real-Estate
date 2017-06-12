@@ -54,6 +54,32 @@
                 <input type="text" class="form-control" id="accountNumber" placeholder="enter accountNumber" ng-model="registerCtrl.newUser.accountNumber" required>
             </div>
 
+
+            <!-- dodatni atributi za registraciju kompanije -->
+            <div ng-if="registerCtrl.newUser.userType == 'Company'">
+                <div class="form-group">
+                    <label for="pib">pib</label>
+                    <input type="text" class="form-control" id="pib" placeholder="enter pib" ng-model="registerCtrl.newUser.pib" required>
+                </div>
+                <div class="form-group">
+                    <label for="site">site</label>
+                    <input type="text" class="form-control" id="site" placeholder="enter site" ng-model="registerCtrl.newUser.site" required>
+                </div>
+                <div class="form-group">
+                    <label for="fax">fax</label>
+                    <input type="text" class="form-control" id="fax" placeholder="enter fax" ng-model="registerCtrl.newUser.fax" required>
+                </div>
+            </div>
+
+            <!-- dodatni atributi za registraciju kompanije -->
+            <div ng-if="registerCtrl.newUser.userType == 'Private Acc in Company'">
+                <select ng-model="registerCtrl.newUser.companyId" required>
+                    <option ng-repeat="c in registerCtrl.companies">{{c}}</option>
+                </select>
+            </div>
+
+
+
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>

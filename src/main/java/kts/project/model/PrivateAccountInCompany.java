@@ -20,9 +20,23 @@ public class PrivateAccountInCompany {
     @JoinColumn(name = "company", nullable = false)
     private Company company;
 
+    @Column(name = "approved", nullable = false)
+    private boolean approved;
+
     public PrivateAccountInCompany(Owner owner, Company company) {
         this.owner = owner;
         this.company = company;
+    }
+
+    public PrivateAccountInCompany() {
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 
     public Owner getOwner() {

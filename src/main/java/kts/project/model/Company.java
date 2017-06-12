@@ -25,8 +25,30 @@ public class Company extends Owner {
     @Column(name = "fax", nullable = false)
     private String fax;
 
+    @Column(name = "approved", nullable = false)
+    private boolean approved;
+
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<PrivateAccountInCompany> workers = new ArrayList<>();
+
+    public Company(String username, String password, String email, Role role, String name, String surname, Date birthDate, String phoneNumber, Location address, String accountNumber, String imageUrl) {
+        super(username, password, email, role, name, surname, birthDate, phoneNumber, address, accountNumber, imageUrl);
+    }
+
+    public Company(String pib, String site, String fax, boolean approved) {
+        this.pib = pib;
+        this.site = site;
+        this.fax = fax;
+        this.approved = approved;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
 
     public String getPib() {
         return pib;
@@ -81,5 +103,16 @@ public class Company extends Owner {
         this.site = site;
         this.fax = fax;
         this.workers = workers;
+    }
+
+    public Company() {
+    }
+
+    public Company(String username, String password, String email, Role role, String name, String surname, Date birthDate, String phoneNumber, Location address, String accountNumber, String imageUrl, String pib, String site, String fax, boolean approved) {
+        super(username, password, email, role, name, surname, birthDate, phoneNumber, address, accountNumber, imageUrl);
+        this.pib = pib;
+        this.site = site;
+        this.fax = fax;
+        this.approved = approved;
     }
 }

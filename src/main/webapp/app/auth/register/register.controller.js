@@ -9,45 +9,37 @@
 /*    RegisterController.$inject = ['LocationDataService'];*/
 
     //register page controller
-    function RegisterController($http, $scope,LocationDataService) {
+    function RegisterController($http, $scope,LocationDataService, CompanyService) {
 
         var vm = this;
         vm.register = register;
         vm.types = ['Owner', 'Company', 'Private Acc in Company'];
-        vm.test = test;
+
         findAllLocations();
-
-        function test(){
-            vm.new_user = {
-                role : vm.newUser.userType,
-                username: vm.newUser.username,
-                password: vm.newUser.password,
-                email: vm.newUser.email,
-                name: vm.newUser.name,
-                surname: vm.newUser.surname,
-                birthdate: vm.newUser.birthdate,
-                phoneNumber: vm.newUser.phoneNumber,
-                addressId: vm.newUser.location,
-                accountNumber: vm.newUser.accountNumber,
-                imageUrl: 'images/img1.jpg'
-
-            }
-            console.log("novi korisnik: " + JSON.stringify(vm.newUser) )
-        }
+        findAllCompanies();
 
         function findAllLocations() {
             /*vm.locations = ['novi sad', 'bg', 'zr'];*/
             LocationDataService.findAll()
                 .then(function (data) {
-                    console.log(JSON.stringify(data.data));
+                    //console.log(JSON.stringify(data.data));
                     vm.locations = data.data;
+                });
+        }
+
+        function findAllCompanies(){
+            CompanyService.findAll()
+                .then(function (data) {
+                    console.log(JSON.stringify(data.data));
+                    vm.companies = data.data;
                 });
         }
 
         //method for user registration
         function register () {
             vm.new_user = {
-                role : vm.newUser.userType,
+                type : vm.newUser.userType,
+                role : "owner",
                 username: vm.newUser.username,
                 password: vm.newUser.password,
                 email: vm.newUser.email,
@@ -67,21 +59,25 @@
                 alert("Passwords must match!");
                 return;
             }
-            var role = "owner";
+            var type = "owner";
 
-            switch(vm.new_user.role) {
+            switch(vm.new_user.type) {
                 case "Owner":
-                    role = "owner";
+                    type = "owner";
                     break;
                 case "Company":
-                    role = "company";
+                    type = "company";
+                    vm.new_user.pib = vm.newUser.pib;
+                    vm.new_user.site = vm.newUser.site;
+                    vm.new_user.fax = vm.newUser.fax;
                     break;
                 case "Private Acc in Company":
-                    role = "privateAcc";
+                    type = "privateAcc";
                     break;
             }
+            vm.new_user.type = type;
 
-            $http.post('/api/users/'+role + '/register', vm.new_user).then(function (response) {
+            $http.post('/api/users/'+type+'/register', vm.new_user).then(function (response) {
 /*                if (response) {
                     $scope.loginCtrl.login(userData);
                 }*/

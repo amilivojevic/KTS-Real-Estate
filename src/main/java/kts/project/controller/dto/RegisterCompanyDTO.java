@@ -3,11 +3,11 @@ package kts.project.controller.dto;
 import java.util.Date;
 
 /**
- * Created by USER on 6/11/2017.
+ * Created by Sandra on 6/12/2017.
  */
-public class RegisterDTO {
+public class RegisterCompanyDTO {
 
-
+    private String type;
     private String role;
     private String username;
     private String password;
@@ -19,8 +19,40 @@ public class RegisterDTO {
     private int addressId;
     private String accountNumber;
     private String imageUrl;
+    private String pib;
+    private String site;
+    private String fax;
 
-    public RegisterDTO() {
+    @Override
+    public String toString() {
+        return "RegisterCompanyDTO{" +
+                "type='" + type + '\'' +
+                ", role='" + role + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthDate=" + birthDate +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", addressId=" + addressId +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", pib='" + pib + '\'' +
+                ", site='" + site + '\'' +
+                ", fax='" + fax + '\'' +
+                '}';
+    }
+
+    public RegisterCompanyDTO() {
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getRole() {
@@ -110,4 +142,29 @@ public class RegisterDTO {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public String getPib() {
+        return pib;
+    }
+
+    public void setPib(String pib) {
+        this.pib = pib;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
 }

@@ -3,11 +3,11 @@ package kts.project.controller.dto;
 import java.util.Date;
 
 /**
- * Created by USER on 6/11/2017.
+ * Created by Sandra on 6/12/2017.
  */
-public class RegisterDTO {
+public class RegisterPrivateAccDTO {
 
-
+    private String type;
     private String role;
     private String username;
     private String password;
@@ -19,8 +19,14 @@ public class RegisterDTO {
     private int addressId;
     private String accountNumber;
     private String imageUrl;
+    private long companyId;
 
-    public RegisterDTO() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getRole() {
@@ -109,5 +115,13 @@ public class RegisterDTO {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 }
