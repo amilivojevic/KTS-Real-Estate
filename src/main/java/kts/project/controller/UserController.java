@@ -1,18 +1,34 @@
 package kts.project.controller;
 
+import kts.project.controller.dto.LoginDTO;
 import kts.project.controller.dto.RegisterDTO;
 import kts.project.controller.dto.RegisterOwnerDTO;
+import kts.project.controller.dto.UserDTO;
 import kts.project.model.Company;
 import kts.project.model.Owner;
 import kts.project.model.PrivateAccountInCompany;
 import kts.project.model.User;
 import kts.project.model.enumerations.Role;
 import kts.project.repository.*;
+import kts.project.security.TokenUtils;
+import kts.project.security.UserUtils;
+import kts.project.service.UserService;
+import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.ServletRequest;
+import java.security.Principal;
 
 /**
  * Created by USER on 6/11/2017.
@@ -24,14 +40,47 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    AuthorityRepository authorityRepository;
+    private AuthorityRepository authorityRepository;
 
     @Autowired
-    LocationRepository locationRepository;
+    private LocationRepository locationRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private TokenUtils tokenUtils;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserUtils userUtils;
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
+        try {
+            System.out.println("*** Pocinje login na backendu");
+            // Perform the authentication
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),
+                    loginDTO.getPassword());
+            Authentication authentication = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            // Reload user details so we can generate token
+            UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
+            return new ResponseEntity<>(new ResponseMessage(tokenUtils.generateToken(details)), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(new ResponseMessage("Invalid login"),
+                    HttpStatus.NOT_FOUND);
+        }
+    }
 
     //registracija administratora i verifikatora!
     @RequestMapping(value = "/{role}/register", method = RequestMethod.POST, consumes = "application/json")
@@ -74,6 +123,41 @@ public class UserController {
         userRepository.save(user);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/data", method = RequestMethod.GET)
+    public ResponseEntity<UserDTO> getData(@RequestHeader("X-Auth-Token") String token)
+    {
+        String un = tokenUtils.getUsernameFromToken(token);
+        System.out.println("username = " + un);
+        UserDetails details = userDetailsService.loadUserByUsername(un);
+        if(details == null){
+            System.out.println("Details = null");
+        }
+        else{
+            System.out.println("detail nije null" + details.toString());
+        }
+        System.out.println("username : " + details.getUsername());
+        User user = userService.findByUsername(details.getUsername());
+
+
+
+        /*if (request == null){
+            System.out.println("request = null");
+        }
+        else{
+            System.out.println("request nijr null");
+        }
+        //System.out.println("REQUEST = " + request.getContentType());
+        User user = (User)userUtils.getLoggedUser(request);
+        if (user != null){
+            System.out.println("USER: "+user.toString());
+        }
+        else{
+            System.out.println("mrs ");
+        }*/
+        return new ResponseEntity<UserDTO>(new UserDTO(user), HttpStatus.OK);
     }
 
 }

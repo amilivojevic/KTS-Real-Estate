@@ -3,7 +3,7 @@
         .controller('LoginController', loginController);
 
     //login page controller
-    function loginController($http, $cookies) {
+    function loginController($http, $cookies,$window) {
 
         var vm = this;
 
@@ -25,16 +25,19 @@
 
         //login method, takes form data (username and password) and calls login method from parent Controller
         function login() {
-            console.log(vm.id+" and "+vm.pass);
-            var userData =  { "username": vm.id, "password": vm.pass };
+            console.log(vm.username+" and "+vm.password);
+            var userData =  { "username": vm.username, "password": vm.password };
 
             $http.post('/api/users/login', userData).then(function(response) {
                 // save user token to cookie
+                console.log("response.data = " + response.data.response);
                 $cookies.put("token", response.data.response);
                 vm.loggedIn = true;
-                //getUserData();
-                $window.location = "#/profile";
 
+                $window.location.href = "http://" + $window.location.host + "/#!/profile";
+               /* $window.location = "#/profile";*/
+
+                console.log("loggedIn = " + vm.loggedIn);
             }, function(response) {
                 alert(response.data.response);
                 console.log("Wrong username and password combination");
@@ -44,6 +47,7 @@
 
         // method for deleting user data - cookies
         function logout() {
+            console.log("USAO JE U GLUPI LOGOUT");
             vm.loggedIn = false;
             var cookies = $cookies.getAll();
             for ( var x in cookies) {

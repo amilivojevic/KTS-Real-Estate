@@ -69,13 +69,13 @@ public class PrivateAccountController {
             privateAcc.setCompany(companyRepository.findOne(registerPrivateAccDTO.getCompanyId()));
         }
         else {
-            System.out.println("ovde je caka");
+            System.out.println();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Cant create that type of user, ony Customer and Advertiser allowed");
         }
 
         //user.setVerifyCode(UUID.randomUUID().toString());
-        
+
         ownerRepository.save(user);
         privateAccountInCompanyRepository.save(privateAcc);
 

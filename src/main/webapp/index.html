@@ -22,11 +22,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+
+
     <script src="app.js"></script>
     <script src="app/auth/login/login.controller.js"></script>
     <script src="app/auth/register/register.controller.js"></script>
     <script src="app/util/location.service.js"></script>
     <script src="app/util/company.service.js"></script>
+    <script src="app/auth/login/login.controller.js"></script>
+    <script src="app/user/owner/owner.controller.js"></script>
 </head>
 
 
@@ -37,22 +41,22 @@
         <nav class="navbar navbar-inverse" >
             <div class="container-fluid" ng-show="loginCtrl.loggedIn">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/#/profile">Profile</a>
+                    <a class="navbar-brand" href="#!/profile">Profile</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="/#/registerApp">Add</a></li>
                     <li><a href="#">Search</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-click="indexCtrl.logout()"><a href="/#/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li ng-click="loginCtrl.logout()"><a href="/#/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>
             </div>
             <div class="container-fluid" ng-show="!loginCtrl.loggedIn">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#!login">Login</a>
+                    <a class="navbar-brand" href="#!/login">Login</a>
                 </div>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#!register">Register</a>
+                    <a class="navbar-brand" href="#!/register">Register</a>
                 </div>
             </div>
         </nav>

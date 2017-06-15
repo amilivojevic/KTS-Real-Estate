@@ -24,6 +24,12 @@ angular
                 controller: 'RegisterController',
                 controllerAs: 'registerCtrl'
             })
+            .when('/profile', {
+                templateUrl: 'app/user/owner/new_owner_profile.html',
+                controller: 'OwnerController',
+                controllerAs: 'ownerCtrl',
+                css: 'css/new_owner_profile.css'
+            })
             .otherwise({
                 redirectTo: '/'
             });
