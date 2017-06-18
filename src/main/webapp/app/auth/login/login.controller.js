@@ -18,8 +18,11 @@
             if($cookies.get("token") != undefined){
                 console.log("IF Logged");
                 vm.loggedIn = true;
-                $window.location = "#/profile";
+
+                $window.location = "#!/profile";
+
             }
+
             console.log("loggedin = " + vm.loggedIn);
         }
 
@@ -32,10 +35,11 @@
                 // save user token to cookie
                 console.log("response.data = " + response.data.response);
                 $cookies.put("token", response.data.response);
-                vm.loggedIn = true;
 
+                vm.loggedIn = true;
                 $window.location.href = "http://" + $window.location.host + "/#!/profile";
-               /* $window.location = "#/profile";*/
+
+                /*$window.location = "#/profile";*/
 
                 console.log("loggedIn = " + vm.loggedIn);
             }, function(response) {

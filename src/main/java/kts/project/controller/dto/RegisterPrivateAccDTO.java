@@ -16,7 +16,9 @@ public class RegisterPrivateAccDTO {
     private String surname;
     private Date birthDate;
     private String phoneNumber;
-    private int addressId;
+    private String address;
+    private String city;
+    private String country;
     private String accountNumber;
     private String imageUrl;
     private long companyId;
@@ -93,12 +95,28 @@ public class RegisterPrivateAccDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getAddressId() {
-        return addressId;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getAccountNumber() {

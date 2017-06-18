@@ -59,7 +59,9 @@ public class PrivateAccountController {
                     registerPrivateAccDTO.getSurname(),
                     registerPrivateAccDTO.getBirthDate(),
                     registerPrivateAccDTO.getPhoneNumber(),
-                    locationRepository.findOne(Long.valueOf(registerPrivateAccDTO.getAddressId())),
+                    registerPrivateAccDTO.getAddress(),
+                    registerPrivateAccDTO.getCity(),
+                    registerPrivateAccDTO.getCountry(),
                     registerPrivateAccDTO.getAccountNumber(),
                     registerPrivateAccDTO.getImageUrl()
             );

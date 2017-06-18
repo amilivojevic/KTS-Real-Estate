@@ -20,11 +20,13 @@ public class UserDTO {
     private String surname;
     private Date birthDate;
     private String phoneNumber;
-    private Location address;
+    private String address;
+    private String city;
+    private String country;
     private String accountNumber;
     private String imageUrl;
 
-    public UserDTO(String username, String email, Role role, Authority authority, String name, String surname, Date birthDate, String phoneNumber, Location address, String accountNumber, String imageUrl) {
+    public UserDTO(String username, String email, Role role, Authority authority, String name, String surname, Date birthDate, String phoneNumber, String address, String city, String country, String accountNumber, String imageUrl) {
         this.username = username;
         this.email = email;
         this.role = role;
@@ -34,6 +36,8 @@ public class UserDTO {
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.city = city;
+        this.country = country;
         this.accountNumber = accountNumber;
         this.imageUrl = imageUrl;
     }
@@ -48,6 +52,8 @@ public class UserDTO {
         this.birthDate = user.getBirthDate();
         this.phoneNumber = user.getPhoneNumber();
         this.address = user.getAddress();
+        this.city = user.getCity();
+        this.country = user.getCountry();
         this.accountNumber = user.getAccountNumber();
         this.imageUrl = user.getImageUrl();
     }
@@ -119,12 +125,28 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public Location getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Location address) {
+    public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getAccountNumber() {

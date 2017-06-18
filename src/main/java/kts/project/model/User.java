@@ -47,9 +47,14 @@ public class User {
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "address", nullable = false)
-    private Location address;
+    @Column(name = "address", nullable = false)
+    private String address;
+
+    @Column(name = "city", nullable = false)
+    private String city;
+
+    @Column(name = "country", nullable = false)
+    private String country;
 
     @Column(name = "accountNumber", nullable = false)
     private String accountNumber;
@@ -57,7 +62,7 @@ public class User {
     @Column(name = "imageUrl", nullable = false)
     private String imageUrl;
 
-    public User(String username, String password, String email, Role role, String name, String surname, Date birthDate, String phoneNumber, Location address, String accountNumber, String imageUrl) {
+    public User(String username, String password, String email, Role role, String name, String surname, Date birthDate, String phoneNumber, String address, String city, String country, String accountNumber, String imageUrl) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -67,6 +72,8 @@ public class User {
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.city = city;
+        this.country = country;
         this.accountNumber = accountNumber;
         this.imageUrl = imageUrl;
     }
@@ -154,12 +161,28 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Location getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Location address) {
+    public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getAccountNumber() {

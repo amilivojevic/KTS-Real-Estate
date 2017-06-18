@@ -115,7 +115,9 @@ public class UserController {
         user.setPassword(encoder.encode(registerDTO.getPassword()));
         user.setBirthDate(registerDTO.getBirthDate());
         user.setPhoneNumber(registerDTO.getPhoneNumber());
-        user.setAddress(locationRepository.findOne(Long.valueOf(registerDTO.getAddressId())));
+        user.setAddress(registerDTO.getAddress());
+        user.setCity(registerDTO.getCity());
+        user.setCountry(registerDTO.getCountry());
         user.setAccountNumber(registerDTO.getAccountNumber());
         user.setImageUrl(registerDTO.getImageUrl());
         //user.setVerifyCode(UUID.randomUUID().toString());

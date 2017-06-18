@@ -64,7 +64,9 @@ public class OwnerController {
         user.setPassword(encoder.encode(registerOwnerDTO.getPassword()));
         user.setBirthDate(registerOwnerDTO.getBirthDate());
         user.setPhoneNumber(registerOwnerDTO.getPhoneNumber());
-        user.setAddress(locationRepository.findOne(Long.valueOf(registerOwnerDTO.getAddressId())));
+        user.setAddress(registerOwnerDTO.getAddress());
+        user.setCity(registerOwnerDTO.getCity());
+        user.setCountry(registerOwnerDTO.getCountry());
         user.setAccountNumber(registerOwnerDTO.getAccountNumber());
         user.setImageUrl(registerOwnerDTO.getImageUrl());
         //user.setVerifyCode(UUID.randomUUID().toString());

@@ -5,7 +5,7 @@
     angular.module("realEstateApp").
         controller('OwnerController', ownerController);
 
-    // login page controller
+    // owner controller
     function ownerController($http, $scope, $cookies, $window) {
 
         var vm = this;

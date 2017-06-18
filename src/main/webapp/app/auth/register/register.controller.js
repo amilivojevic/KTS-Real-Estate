@@ -9,23 +9,23 @@
 /*    RegisterController.$inject = ['LocationDataService'];*/
 
     //register page controller
-    function RegisterController($http, $scope,LocationDataService, CompanyService) {
+    function RegisterController($http, $scope, CompanyService) {
 
         var vm = this;
         vm.register = register;
         vm.types = ['Owner', 'Company', 'Private Acc in Company'];
 
-        findAllLocations();
+     /*   findAllLocations();*/
         findAllCompanies();
 
-        function findAllLocations() {
-            /*vm.locations = ['novi sad', 'bg', 'zr'];*/
+        /*function findAllLocations() {
+            /*vm.locations = ['novi sad', 'bg', 'zr'];/*
             LocationDataService.findAll()
                 .then(function (data) {
                     //console.log(JSON.stringify(data.data));
                     vm.locations = data.data;
                 });
-        }
+        }*/
 
         function findAllCompanies(){
             CompanyService.findAll()
@@ -47,7 +47,9 @@
                 surname: vm.newUser.surname,
                 birthDate: vm.newUser.birthdate,
                 phoneNumber: vm.newUser.phoneNumber,
-                addressId: vm.newUser.location,
+                address: vm.newUser.address,
+                city: vm.newUser.city,
+                country: vm.newUser.country,
                 accountNumber: vm.newUser.accountNumber,
                 imageUrl: 'images/img1.jpg'
 

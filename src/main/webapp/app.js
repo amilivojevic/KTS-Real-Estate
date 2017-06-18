@@ -11,24 +11,32 @@ angular
     .config(function($routeProvider){
         $routeProvider
             .when('/', {
-                templateUrl: 'app/static/new_home.html'
+                templateUrl: 'app/static/notlogged_home.html'
 
             })
             .when('/login', {
-                templateUrl: 'app/auth/login/new_login.html',
+                templateUrl: 'app/auth/login/login.html',
                 controller: 'LoginController',
                 controllerAs: 'loginCtrl'
             })
             .when('/register', {
-                templateUrl: 'app/auth/register/new_register.html',
+                templateUrl: 'app/auth/register/register.html',
                 controller: 'RegisterController',
                 controllerAs: 'registerCtrl'
             })
             .when('/profile', {
-                templateUrl: 'app/user/owner/new_owner_profile.html',
+                templateUrl: 'app/user/owner/owner_profile.html',
                 controller: 'OwnerController',
                 controllerAs: 'ownerCtrl',
-                css: 'css/new_owner_profile.css'
+            })
+            .when('/listings', {
+                templateUrl: 'app/static/listings.html',
+            })
+            .when('/about', {
+                templateUrl: 'app/static/about.html',
+            })
+            .when('/contact', {
+                templateUrl: 'app/static/contact.html',
             })
             .otherwise({
                 redirectTo: '/'
