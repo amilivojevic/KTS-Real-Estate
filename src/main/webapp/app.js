@@ -38,6 +38,9 @@ angular
             .when('/contact', {
                 templateUrl: 'app/static/contact.html',
             })
+            .when('/modifyOwner', {
+                templateUrl: 'app/user/owner/owner_modify.html',
+            })
             .otherwise({
                 redirectTo: '/'
             });

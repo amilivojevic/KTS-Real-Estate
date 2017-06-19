@@ -14,6 +14,11 @@
         if ($cookies.get("token") === undefined)
             $window.location = "#/login";
 
+        $scope.redirect = function(){
+            $window.location.href = "http://" + $window.location.host + "/#!/modifyOwner";
+
+        }
+
         // ako jeste ulogovan dobavi podatke
         $http.get("/api/users/data", {headers : {'X-Auth-Token' : $cookies.get("token")}}).then(function(response) {
             // if status is ok - save user data to cookie

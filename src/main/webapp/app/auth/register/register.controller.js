@@ -9,7 +9,7 @@
 /*    RegisterController.$inject = ['LocationDataService'];*/
 
     //register page controller
-    function RegisterController($http, $scope, CompanyService) {
+    function RegisterController($http, $scope, $window, CompanyService) {
 
         var vm = this;
         vm.register = register;
@@ -33,6 +33,11 @@
                     console.log(JSON.stringify(data.data));
                     vm.companies = data.data;
                 });
+        }
+
+        $scope.redirect = function(){
+            $window.location.href = "http://" + $window.location.host + "/#!/login";
+
         }
 
         //method for user registration
@@ -61,6 +66,8 @@
                 alert("Passwords must match!");
                 return;
             }
+
+
             var type = "owner";
 
             switch(vm.new_user.type) {
@@ -79,7 +86,6 @@
             }
             vm.new_user.type = type;
 
-
             $http.post('/api/users/'+type+'/register', vm.new_user).then(function (response) {
 /*                if (response) {
                     $scope.loginCtrl.login(userData);
@@ -90,6 +96,7 @@
             });
 
         }
+
 
 
     }
