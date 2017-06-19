@@ -2,13 +2,14 @@
  * Created by Korisnik on 6/14/2017.
  */
 (function() {
-    angular.module("realEstateApp").
-        controller('OwnerController', ownerController);
+    angular.module("realEstateApp")
+        .controller('OwnerController', ownerController);
 
     // owner controller
     function ownerController($http, $scope, $cookies, $window) {
 
         var vm = this;
+
         // redirektovati na login page ako nije ulogovan
         if ($cookies.get("token") === undefined)
             $window.location = "#/login";
