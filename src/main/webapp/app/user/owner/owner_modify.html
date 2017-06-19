@@ -1,33 +1,3 @@
-<div class="header">
-    <div class="col-xs-4">
-        <div class="logo">
-            <a href="index.html"><img src="images/logo.png" alt=""/></a>
-        </div>
-    </div>
-    <div class="col-xs-8 header_right">
-        <span class="menu"></span>
-        <div class="top-menu">
-            <ul>
-                <li><a class="active scroll" href="index.html"><i class="fa fa-home"> </i>Home</a></li>
-                <li><a href="about.html"><i class="fa fa-star"> </i> About</a></li>
-                <li><a href="services.html"><i class="fa fa-thumbs-up"> </i>Services</a></li>
-                <li><a href="gallery.html"><i class="fa fa-picture-o"> </i>Gallery</a></li>
-                <li><a href="contact.html"><i class="fa fa-envelope-o"> </i>Contact</a></li>
-                <div class="clearfix"></div>
-            </ul>
-        </div>
-        <!-- script for menu -->
-        <script>
-            $( "span.menu" ).click(function() {
-                $( ".top-menu" ).slideToggle( "slow", function() {
-                    // Animation complete.
-                });
-            });
-        </script>
-        <!-- script for menu -->
-    </div>
-    <div class="clearfix"> </div>
-</div>
 
 <div class="about_top">
     <div class="container">
@@ -47,56 +17,68 @@
                             <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                             <div class="clearfix"> </div>
                             <div class="text">
-
                                 <div class="text-fild">
-                                    <span>Name:</span>
-                                    <input type="text" class="text" value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
+                                    <span for="name">Name:</span>
+                                    <input type="text" class="text" id="name" ng-model="ownerModifyCtrl.userData.name" value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
                                 </div>
                                 <div class="text-fild">
-                                    <span>Surname:</span>
-                                    <input type="text" class="text" value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}">
+                                    <span for="surname">Surname:</span>
+                                    <input type="text" class="text" id="surname" ng-model="ownerModifyCtrl.userData.surname"  value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}">
                                 </div>
-                                <div>
-                                    <div class="text-fild">
-                                        <span>Email:</span>
-                                        <input type="text" class="text" value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}">
-                                    </div>
-                                    <div class="text-fild">
-                                        <span>Password:</span>
-                                        <input type="text" class="text" value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="text-fild">
-                                        <span>Date of birth:</span>
-                                        <input type="text" class="text" value="Enter date of birth here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter date of birth here';}">
-                                    </div>
-                                    <div class="text-fild">
-                                        <span>Phone number:</span>
-                                        <input type="text" class="text" value="Enter phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter phone number here';}">
-                                    </div>
-
-                                </div>
-                                <div>
-                                    <div class="text-fild">
-                                        <span>Address:</span>
-                                        <input type="text" class="text" value="Enter address here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter address here';}">
-                                    </div>
-                                    <div class="text-fild">
-                                        <span>City:</span>
-                                        <input type="text" class="text" value="Enter city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter city here';}">
-                                    </div>
-                                    <div class="msg-fild">
-                                        <span>Bank account:</span>
-                                        <input type="text" class="text" value="Enter number of bank account here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}">
-                                    </div>
-                                </div>
-                                <div class="clearfix"> </div>
                             </div>
-                            <div align = "Center">
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="username">Username:</span>
+                                    <input type="text" class="text" id="username" ng-model="ownerModifyCtrl.userData.username"  value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter username here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="email">Email:</span>
+                                    <input type="text" class="text" id="email" ng-model="ownerModifyCtrl.userData.email"  value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}">
+                                </div>
+                            </div>
+                            <div class="text">
+                                <div class="msg-fild">
+                                    <span for="password">Password:</span>
+                                    <input type="text" class="text" id="password" ng-model="ownerModifyCtrl.userData.password"  value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
+                                </div>
+                            </div>
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="birthdate">Date of birth:</span>
+                                    </br>
+                                    <input style="width: 350px; !important "type="date" class="text" id="birthdate" ng-model="ownerModifyCtrl.userData.birthdate"  required value="Enter date of birth here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter date of birth here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="phoneNumber">Phone number:</span>
+                                    <input type="text" class="text" id="phoneNumber" ng-model="ownerModifyCtrl.userData.phoneNumber"  value="Enter phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter phone number here';}">
+                                </div>
+                            </div>
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="address">Address:</span>
+                                    <input type="text" class="text" id="address" ng-model="ownerModifyCtrl.userData.address"   value="Enter address here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter address here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="city">City:</span>
+                                    <input type="text" class="text" id="city" ng-model="ownerModifyCtrl.userData.city"  value="Enter city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter city here';}">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-fild">
+                                    <span for="country">Country:</span>
+                                    <input type="text" class="text" id="country" ng-model="ownerModifyCtrl.userData.country"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="accountNumber">Bank account:</span>
+                                    <input type="text" class="text" id="accountNumber" ng-model="ownerModifyCtrl.userData.accountNumber"  value="Enter bank account number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}">
+                                </div>
+                            </div>
 
-                                <label class="btn1 btn-8 btn-8c"><input type="submit"  value="Submit"></label>
-                                <label class="btn4 btn-82 btn-82c"><input type="submit" value="Cancel"></label>
+                            <div class="clearfix"> </div>
+                             <div align = "Center">
+
+                                 <label class="btn1 btn-8 btn-8c"><input type="submit"  value="Submit"></label>
+                                 <label class="btn4 btn-82 btn-82c"><input type="submit" value="Cancel"></label>
                             </div>
                     </form>
                 </div>

@@ -40,6 +40,8 @@ angular
             })
             .when('/modifyOwner', {
                 templateUrl: 'app/user/owner/owner_modify.html',
+                controller: 'OwnerModifyController',
+                controllerAs: 'ownerModifyCtrl'
             })
             .otherwise({
                 redirectTo: '/'
