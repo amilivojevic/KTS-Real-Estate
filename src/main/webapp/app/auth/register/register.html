@@ -2,8 +2,9 @@
     <div class="container">
        <div class="about">
        	 <h1 class="blog_head" style="color: #F94B4B">Register</h1>
+
 			<div class="contact">
-				<div class="standards">
+		<!--		<div class="standards">
 					<ul class="selectors_wrapper">
 						<li class="selector active" data-selector="1">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Person</li>
 						<li class="selector" data-selector="2">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Company</li>
@@ -11,14 +12,32 @@
 						</br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 					</ul>
 
-				</div>
+				</div> -->
+				
+				<div class="col-md-4 contact_left">
 
-				<div class="standard_content" >
-					<div class="standard active" data-selector="1"  ng-submit="registerCtrl.register()" >
-						<div class="col-md-2 contact_left">
+				</div>
+				<div>
+					<div class="text-fild">
+						<span for="name">Select type of user you want to register as:</span>
+					</div>
+					<div class="col-md-4 contact_left">
+
+					</div>
+					<div>
+					<select style="line-height: 44px;
+  							border: 1px solid #DAD8D8;
+  							width: 370px;" ng-model="registerCtrl.newUser.userType" required>
+						<option style="color: #F94B4B;" ng-repeat="t in registerCtrl.types">{{t}}</option>
+					</select>
+					</div>
+				</div>
+				<div ng-if="registerCtrl.newUser.userType == 'Owner'" >
+					<div  ng-submit="registerCtrl.register()" >
+						<div class="col-md-3 contact_left">
 
 						</div>
-						<div class="col-md-8 contact_right">
+						<div class="col-md-6 contact_right">
 							<form>
 								<div class="text">
 									<div class="text-fild">
@@ -99,11 +118,11 @@
 				</div>
 
 
-					<div class="standard" data-selector="2">
-						<div class="col-md-2 contact_left">
+					<div ng-if="registerCtrl.newUser.userType == 'Company'">
+						<div class="col-md-3 contact_left">
 					
 						</div>
-						<div class="col-md-8 contact_right">
+						<div class="col-md-6 contact_right">
 							<form>
 								<div class="text">
 									<div class="text-fild">
@@ -156,11 +175,11 @@
 						</div>
 			        </div>
 
-					<div class="standard video" data-selector="3">
-						<div class="col-md-2 contact_left">
+					<div ng-if="registerCtrl.newUser.userType == 'Private Acc in Company'">
+						<div class="col-md-3 contact_left">
 					
 						</div>
-						<div class="col-md-8 contact_right">
+						<div class="col-md-6 contact_right">
 							<form>
 											<div class="text">
 												<div class="text-fild">
