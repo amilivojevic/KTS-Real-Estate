@@ -1,0 +1,299 @@
+<div class="about_top">
+    <div class="container">
+        <div class="about">
+            <h1 class="blog_head" style="color: #F94B4B">Sell or rent your real estate</h1>
+
+            <div class="contact">
+
+                <div class="col-md-4 contact_left">
+
+            </div>
+            <div>
+                <div class="text-fild">
+                    <span for="name">Select if you want to sell or to rent your real estate:</span>
+                </div>
+                <div class="col-md-4 contact_left">
+
+                </div>
+                <div>
+                    <select style="line-height: 44px;
+  							border: 1px solid #DAD8D8;
+  							width: 370px;" ng-model="addNewRealEstateCtrl.newUser.userType" required>
+                        <option style="color: #F94B4B;" ng-repeat="t in registerCtrl.types">{{t}}</option>
+                    </select>
+                    <select style="line-height: 44px;
+  							border: 1px solid #DAD8D8;
+  							width: 370px;" ng-model="registerCtrl.newUser.userType" required>
+                        <option style="color: #F94B4B;" ng-repeat="t in registerCtrl.types">{{t}}</option>
+                    </select>
+                </div>
+            </div>
+            <div ng-if="registerCtrl.newUser.userType == 'Owner'" >
+                <div  ng-submit="registerCtrl.register()" >
+                    <div class="col-md-3 contact_left">
+
+                    </div>
+                    <div class="col-md-6 contact_right">
+                        <form>
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="name">Name:</span>
+                                    <input type="text" class="text" id="name" ng-model="registerCtrl.newUser.name" required value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="surname">Surname:</span>
+                                    <input type="text" class="text" id="surname" ng-model="registerCtrl.newUser.surname" required value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}">
+                                </div>
+                            </div>
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="username">Username:</span>
+                                    <input type="text" class="text" id="username" ng-model="registerCtrl.newUser.username" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter username here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="email">Email:</span>
+                                    <input type="text" class="text" id="email" ng-model="registerCtrl.newUser.email" required value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}">
+                                </div>
+                            </div>
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="password">Password:</span>
+                                    <input type="text" class="text" id="password" ng-model="registerCtrl.newUser.password" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="perpassword">Repeat password:</span>
+                                    <input type="text" class="text" id="perpassword" ng-model="registerCtrl.newUser.repeatpass" required value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter repeated password here';}">
+                                </div>
+                            </div>
+
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="birthdate">Date of birth:</span>
+                                    </br>
+                                    <input type="date" class="text" id="birthdate" ng-model="registerCtrl.newUser.birthdate" required value="Enter date of birth here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter date of birth here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="phoneNumber">Phone number:</span>
+                                    <input type="text" class="text" id="phoneNumber" ng-model="registerCtrl.newUser.phoneNumber" required value="Enter phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter phone number here';}">
+                                </div>
+
+                            </div>
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="address">Address:</span>
+                                    <input type="text" class="text" id="address" ng-model="registerCtrl.newUser.address" requiredvalue="Enter address here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter address here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="city">City:</span>
+                                    <input type="text" class="text" id="city" ng-model="registerCtrl.newUser.city" required value="Enter city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter city here';}">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-fild">
+                                    <span for="country">Country:</span>
+                                    <input type="text" class="text" id="country"  ng-model="registerCtrl.newUser.country" required value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="accountNumber">Bank account:</span>
+                                    <input type="text" class="text" id="accountNumber" ng-model="registerCtrl.newUser.accountNumber" required value="Enter bank account number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}">
+                                </div>
+
+                                <!--	<div class="msg-fild">
+                                    <span>Bank account:</span>
+                                    <input type="text" class="text" value="Enter number of bank account here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}"> -->
+                            </div>
+
+                            <div class="clearfix"> </div>
+
+                            <div align = "Center">
+                                <label class="btn1 btn-8 btn-8c" ><input type="submit" value="Register"></label>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div ng-if="registerCtrl.newUser.userType == 'Company'">
+                <div  ng-submit="registerCtrl.register()" >
+                    <div class="col-md-3 contact_left">
+
+                    </div>
+                    <div class="col-md-6 contact_right">
+                        <form>
+
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="nameC">Name of owner:</span>
+                                    <input type="text" class="text" id="nameC" ng-model="registerCtrl.newUser.name" required value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="surnameC">Surname of owner:</span>
+                                    <input type="text" class="text" id="surnameC" ng-model="registerCtrl.newUser.surname" required value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}">
+                                </div>
+                            </div>
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="usernameC">Username:</span>
+                                    <input type="text" class="text" id="usernameC" ng-model="registerCtrl.newUser.username" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter username here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="emailC">Email:</span>
+                                    <input type="text" class="text" id="emailC" ng-model="registerCtrl.newUser.email" required value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}">
+                                </div>
+                            </div>
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="passwordC">Password:</span>
+                                    <input type="text" class="text" id="passwordC" ng-model="registerCtrl.newUser.password" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="perpasswordC">Repeat password:</span>
+                                    <input type="text" class="text" id="perpasswordC" ng-model="registerCtrl.newUser.repeatpass" required value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter repeated password here';}">
+                                </div>
+                            </div>
+
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="birthdateC">Date of establishment:</span>
+                                    </br>
+                                    <input type="date" class="text" id="birthdateC" ng-model="registerCtrl.newUser.birthdate" required value="Enter date of establishment here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter date of establishment here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="pibC">PIB:</span>
+                                    <input type="text" class="text" id="pibC"  ng-model="registerCtrl.newUser.pib" value="Enter PIB here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter PIB here';}">
+                                </div>
+
+
+                            </div>
+
+                            <div>
+                                <div class="text-fild">
+                                    <span for="phoneNumberC">Phone number:</span>
+                                    <input type="text" class="text" id="phoneNumberC" ng-model="registerCtrl.newUser.phoneNumber" required value="Enter phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter phone number here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="faxC">Fax:</span>
+                                    <input type="text" class="text" id="faxC" ng-model="registerCtrl.newUser.fax" required value="Enter fax here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter fax here';}">
+                                </div>
+                            </div>
+
+
+                            <div class="text">
+                                <div class="text-fild">
+                                    <span for="addressC">Address:</span>
+                                    <input type="text" class="text" id="addressC" ng-model="registerCtrl.newUser.address" requiredvalue="Enter address here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter address here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="cityC">City:</span>
+                                    <input type="text" class="text" id="cityC" ng-model="registerCtrl.newUser.city" required value="Enter city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter city here';}">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-fild">
+                                    <span for="countryC">Country:</span>
+                                    <input type="text" class="text" id="countryC"  ng-model="registerCtrl.newUser.country" required value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span for="accountNumberC">Bank account:</span>
+                                    <input type="text" class="text" id="accountNumberC" ng-model="registerCtrl.newUser.accountNumber" required value="Enter bank account number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}">
+                                </div>
+
+                                <!--	<div class="msg-fild">
+                                    <span>Bank account:</span>
+                                    <input type="text" class="text" value="Enter number of bank account here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}"> -->
+                            </div>
+
+                            <div class="text">
+
+
+                            </div>
+                            <div>
+
+                            </div>
+                            <div>
+                                <div class="msg-fild">
+                                    <span for="siteC">Company site:</span>
+                                    <input type="text" class="text" id="siteC" ng-model="registerCtrl.newUser.site" required value="Enter company site here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter company site here';}">
+                                </div>
+                            </div>
+
+                            <div class="clearfix"> </div>
+
+
+                            <div align = "Center">
+                                <label class="btn1 btn-8 btn-8c"><input type="submit" value="Register"></label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="registerCtrl.newUser.userType == 'Private Acc in Company'">
+                <div class="col-md-3 contact_left">
+
+                </div>
+                <div class="col-md-6 contact_right">
+                    <form>
+                        <div class="text">
+                            <div class="text-fild">
+                                <span>Name:</span>
+                                <input type="text" class="text" value="Enter your name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your name here';}">
+                            </div>
+                            <div class="text-fild">
+                                <span>Surname:</span>
+                                <input type="text" class="text" value="Enter your surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your surname here';}">
+                            </div>
+                            <div>
+                                <div class="text-fild">
+                                    <span>Email:</span>
+                                    <input type="text" class="text" value="Enter your email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your email here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span>Password:</span>
+                                    <input type="text" class="text" value="Enter your password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your name here';}">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-fild">
+                                    <span>Date of birth:</span>
+                                    <input type="text" class="text" value="Enter your date of birth here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your date of birth here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span>Phone number:</span>
+                                    <input type="text" class="text" value="Enter your phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your phone number here';}">
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="text-fild">
+                                    <span>Address:</span>
+                                    <input type="text" class="text" value="Enter your address here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your address here';}">
+                                </div>
+                                <div class="text-fild">
+                                    <span>City:</span>
+                                    <input type="text" class="text" value="Enter your city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your address here';}">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="msg-fild">
+                            <span>Company name:</span>
+                            <input type="text" class="text" value="Enter name of company here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name of company here';}">
+                        </div>
+
+                        <p align = "Center">Your request for joining as private person inside company will be sent after completing the registration. After verifying your profile will be activated.</p>
+                        </br>
+                        <div align = "Center">
+                            <label class="btn1 btn-8 btn-8c"><input type="submit" value="Register"></label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>

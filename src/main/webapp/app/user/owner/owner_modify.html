@@ -19,7 +19,7 @@
                             <div class="text">
                                 <div class="text-fild">
                                     <span for="name">Name:</span>
-                                    <input type="text" class="text" id="name" ng-model="ownerModifyCtrl.userData.name" value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
+                                    <input type="text" class="text" id="name" ng-model="ownerModifyCtrl.userData.name" onfocus="this.value = '';">
                                 </div>
                                 <div class="text-fild">
                                     <span for="surname">Surname:</span>
@@ -77,7 +77,7 @@
                             <div class="clearfix"> </div>
                              <div align = "Center">
 
-                                 <label class="btn1 btn-8 btn-8c"><input type="submit"  value="Submit"></label>
+                                 <label class="btn1 btn-8 btn-8c" ng-click="modifyOwner()"><input type="submit"  value="Submit"></label>
                                  <label class="btn4 btn-82 btn-82c"><input type="submit" value="Cancel"></label>
                             </div>
                     </form>

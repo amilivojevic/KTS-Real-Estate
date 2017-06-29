@@ -43,6 +43,11 @@ angular
                 controller: 'OwnerModifyController',
                 controllerAs: 'ownerModifyCtrl'
             })
+            .when('/addNewRealEstate', {
+                templateUrl: 'app/realEstate/addNewRealEstate.html',
+                controller: 'AddNewRealEstateController',
+                controllerAs: 'addNewRealEstateCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
