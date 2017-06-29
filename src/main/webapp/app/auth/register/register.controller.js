@@ -42,6 +42,7 @@
 
         //method for user registration
         function register () {
+            console.log("USAO U REGISTER FUNKCIJU");
             vm.new_user = {
                 type : vm.newUser.userType,
                 role : "owner",

@@ -11,12 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 
-/**
- * This class manages with logged user
- * 
- * @author bbozo
- *
- */
+
 @Component
 public class UserUtils {
 

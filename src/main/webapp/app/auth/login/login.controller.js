@@ -31,17 +31,12 @@
             console.log(vm.username+" and "+vm.password);
             var userData =  { "username": vm.username, "password": vm.password };
 
-            $http.post('/api/users/login', userData).then(function(response) {
-                // save user token to cookie
-                console.log("response.data = " + response.data.response);
-                $cookies.put("token", response.data.response);
-
-                vm.loggedIn = true;
-                $window.location.href = "http://" + $window.location.host + "/#!/profile";
-
-                /*$window.location = "#/profile";*/
-
-                console.log("loggedIn = " + vm.loggedIn);
+            $http.post('/api/users/login', userData)
+                .then(function(token) {
+                    return{
+                        token : token.data.response,
+                        status : true
+                    }
             }, function(response) {
                 alert(response.data.response);
                 console.log("Wrong username and password combination");

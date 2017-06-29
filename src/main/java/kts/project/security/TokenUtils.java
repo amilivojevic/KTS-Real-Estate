@@ -12,11 +12,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-/**
- * This class manages with tokens
- * @author bozo
- *
- */
+
 @Component
 public class TokenUtils {
 	
