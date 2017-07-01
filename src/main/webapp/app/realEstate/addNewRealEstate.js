@@ -1,31 +1,34 @@
 /**
+ * Created by Nina on 28-Jun-17.
+ */
+/**
  * Created by Korisnik on 6/11/2017.
  */
 (function () {
 
     angular.module("realEstateApp")
-        .controller('RegisterController',RegisterController);
+        .controller('AddNewRealEstateController',AddNewRealEstateController);
 
-/*    RegisterController.$inject = ['LocationDataService'];*/
+    /*    RegisterController.$inject = ['LocationDataService'];*/
 
     //register page controller
-    function RegisterController($http, $scope, $window, CompanyService) {
+    function AddNewRealEstateController($http, $scope, $window, CompanyService) {
 
         var vm = this;
-        vm.register = register;
-        vm.types = ['Owner', 'Company', 'Private Acc in Company'];
+        vm.addNewRealEstate = addNewRealEstate;
+        vm.types = ['Sell', 'Rent'];
 
-     /*   findAllLocations();*/
+        /*   findAllLocations();*/
         findAllCompanies();
 
         /*function findAllLocations() {
-            /*vm.locations = ['novi sad', 'bg', 'zr'];/*
-            LocationDataService.findAll()
-                .then(function (data) {
-                    //console.log(JSON.stringify(data.data));
-                    vm.locations = data.data;
-                });
-        }*/
+         /*vm.locations = ['novi sad', 'bg', 'zr'];/*
+         LocationDataService.findAll()
+         .then(function (data) {
+         //console.log(JSON.stringify(data.data));
+         vm.locations = data.data;
+         });
+         }*/
 
         function findAllCompanies(){
             CompanyService.findAll()
@@ -41,10 +44,9 @@
         }
 
         //method for user registration
-        function register () {
-            console.log("USAO U REGISTER FUNKCIJU");
-            vm.new_user = {
-                type : vm.newUser.userType,
+        function addNewRealEstate () {
+            vm.new_real_estate = {
+                type : vm.newRE.userType,
                 role : "owner",
                 username: vm.newUser.username,
                 password: vm.newUser.password,
@@ -69,7 +71,7 @@
             }
 
 
-            var type = "owner";
+            var type = "sell";
 
             switch(vm.new_user.type) {
                 case "Owner":
@@ -87,10 +89,10 @@
             }
             vm.new_user.type = type;
 
-            $http.post('/api/users/'+type+'/register', vm.new_user).then(function (response) {
-/*                if (response) {
-                    $scope.loginCtrl.login(userData);
-                }*/
+            $http.post('/api/realEstate/'+type+'/addNewRealEstate', vm.new_user).then(function (response) {
+                /*                if (response) {
+                 $scope.loginCtrl.login(userData);
+                 }*/
                 $scope.redirect();
 
             },function(response){

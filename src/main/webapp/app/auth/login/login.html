@@ -2,7 +2,7 @@
     <div class="container">
        <div class="about">
        	 <h1 class="blog_head" style="color: #F94B4B">Log in</h1>
-			<div class="contact">
+			<div class="contact" ng-submit="loginCtrl.login()">
 				<div class="col-md-4 contact_left">
 					
 				</div>
@@ -35,7 +35,7 @@
 						</div>
 									
 						<div align = "Center">
-							<label class="btn1 btn-8 btn-8c"  ng-disabled="loginForm.$invalid" ng-click="loginCtrl.login()"><input type="submit" value="Log in"></label>
+							<label class="btn1 btn-8 btn-8c"  ng-disabled="loginForm.$invalid" ><input type="submit" value="Log in"></label>
 						</div>
 						</br>
 						<h5 align = "Center">You don't have account? <a href="#!/register" style="color: #F94B4B">Register </a>right now!</h5>

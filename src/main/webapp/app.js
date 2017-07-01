@@ -2,6 +2,7 @@
  * Created by Korisnik on 6/3/2017.
  */
 
+
 (function(angular) {
     'use strict';
     angular
@@ -15,7 +16,6 @@
             $routeProvider
                 .when('/', {
                     templateUrl: 'app/static/notlogged_home.html'
-
 
                 })
                 .when('/login', {
@@ -47,10 +47,14 @@
                     controller: 'OwnerModifyController',
                     controllerAs: 'ownerModifyCtrl'
                 })
+                .when('/addNewRealEstate', {
+                    templateUrl: 'app/realEstate/addNewRealEstate.html',
+                    controller: 'AddNewRealEstateController',
+                    controllerAs: 'addNewRealEstateCtrl'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
-
 
             $httpProvider
                 .interceptors.push(['$q', '$window',
