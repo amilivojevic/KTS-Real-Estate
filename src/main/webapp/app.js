@@ -34,7 +34,7 @@
                 .when('/profile', {
                     templateUrl: 'app/user/owner/owner_profile.html',
                     controller: 'OwnerController',
-                    controllerAs: 'ownerCtrl',
+                    controllerAs: 'ownerCtrl'
                 })
                 .when('/listings', {
                     templateUrl: 'app/static/listings.html',
@@ -73,8 +73,125 @@
                             controller: 'LoginController',
                             controllerAs: 'loginCtrl'
                         }
+                    },
+
+                })
+                .state('login', {
+                    url: '/login',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/auth/login/login.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        }
+                    }
+                })
+                .state('register', {
+                    url: '/register',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/auth/register/register.html',
+                            controller: 'RegisterController',
+                            controllerAs: 'registerCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        }
+                    }
+                })
+                .state('profile', {
+                    url: '/profile',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/owner/owner_profile.html',
+                            controller: 'OwnerController',
+                            controllerAs: 'ownerCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        }
+                    }
+                })
+                .state('listing', {
+                    url: '/listing',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/static/listings.html'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        }
+                    }
+                })
+                .state('about', {
+                    url: '/about',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/static/about.html',
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        }
+                    }
+                })
+                .state('contact', {
+                    url: '#!/contact',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/static/contact.html'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        }
+                    }
+                })
+                .state('ownerModify', {
+                    url: '/owner_modify',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/owner/owner_modify.html',
+                            controller: 'OwnerModifyController',
+                            controllerAs: 'ownerModifyCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        }
+                    }
+                })
+                .state('addNewRealEstate', {
+                    url: '/add_mew_real_estate',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/realEstate/addNewRealEstate.html',
+                            controller: 'AddNewRealEstateController',
+                            controllerAs: 'addNewRealEstateCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        }
                     }
                 });
+
+
 
 
             $httpProvider
