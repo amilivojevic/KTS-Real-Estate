@@ -26,6 +26,7 @@
     "restangular": "^1.6.1",
     "angular-cookies": "^1.6.4",
     "lodash": "^4.17.4",
-    "angular-file-upload": "^2.5.0"
+    "angular-file-upload": "^2.5.0",
+    "angular-ui-router": "^1.0.5"
   }
 }

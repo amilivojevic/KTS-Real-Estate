@@ -10,9 +10,12 @@
             'ngResource',
             'ngRoute',
             'ngCookies',
-            'restangular'
+            'restangular',
+            'ui.router'
         ])
-        .config(function($routeProvider, $httpProvider){
+        .config(function($routeProvider,$stateProvider,$urlRouterProvider, $httpProvider){
+            /*
+
             $routeProvider
                 .when('/', {
                     templateUrl: 'app/static/notlogged_home.html'
@@ -55,6 +58,24 @@
                 .otherwise({
                     redirectTo: '/'
                 });
+             */
+
+            $urlRouterProvider.otherwise("/home");
+            $stateProvider
+                .state('notLoggedHome', {
+                    url: '/home',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/static/notlogged_home.html',
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'LoginController',
+                            controllerAs: 'loginCtrl'
+                        }
+                    }
+                });
+
 
             $httpProvider
                 .interceptors.push(['$q', '$window',

@@ -27,6 +27,7 @@
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
     <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
     <!-- Service/Controller include -->
     <script src="app.js"></script>
@@ -52,87 +53,16 @@
         });
     </script>
 </head>
-<div ng-app="app">
-<div ng-controller="LoginController as loginCtrl">
-    <div class="header">
-        <div class="col-xs-4">
-            <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt=""/></a>
-            </div>
-        </div>
-        <div class="col-xs-8 header_right">
-            <span class="menu"></span>
-            <div class="top-menu" ng-show="loginCtrl.loggedIn">
-                <ul>
-                    <li><a href="#!/profile"><i class="fa fa-info"> </i> Profile</a></li>
-                    <li><a href="#!/listings"><i class="fa fa-home"> </i>Listings</a></li>
-                    <li><a href="gallery.html"><i class="fa fa-dollar"> </i> Sell</a></li>
+<body class="ng-cloak">
 
-                    <li><a href="#!/about"><i class="fa fa-info"> </i> About</a></li>
-                    <li><a href="#!/contact"><i class="fa fa-envelope-o"> </i>Contact</a></li>
+<div ui-view="navbar"></div>
+<div ui-view="content"></div>
 
-                    <li  ng-click="loginCtrl.logout()"><a href="#"><i class="fa fa-sign-in"> </i>Sign out</a></li>
-
-                    <div class="clearfix"></div>
-                </ul>
-            </div>
-
-
-            <div class="top-menu" ng-show="!loginCtrl.loggedIn">
-
-                <ul>
-                    <li><a href="#!/listings"><i class="fa fa-home"> </i>Listings</a></li>
-                    <li><a href="gallery.html"><i class="fa fa-dollar"> </i> Sell</a></li>
-
-                    <li><a href="#!/about"><i class="fa fa-info"> </i> About</a></li>
-                    <li><a href="#!/contact"><i class="fa fa-envelope-o"> </i>Contact</a></li>
-                    <li  ><a href="#!/login"><i class="fa fa-sign-out"> </i>Sign in</a></li>
-
-                    <div class="clearfix"></div>
-                </ul>
-            </div>
-
-            <!-- script for menu -->
-            <script>
-                $( "span.menu" ).click(function() {
-                    $( ".top-menu" ).slideToggle( "slow", function() {
-                        // Animation complete.
-                    });
-                });
-            </script>
-            <!-- script for menu -->
-        </div>
-        <div class="clearfix"> </div>
-    </div>
-
-
-
-
-          <!--          <ul class="nav navbar-nav">
-                        <li><a href="/#/registerApp">Add</a></li>
-                        <li><a href="#">Search</a></li>
-                    </ul> -->
-
-        <!-- Put model-->
-    asdd
-        <div ng-view> </div>
-
-
-asdddddd
-
-
-
-        <div class="clearfix"> </div>
-    </div>
+</br>
+<div class="copy">
+    <p>© 2017 All Rights Reseverd by N.A. </p>
     </br>
-    <div class="copy">
-        <p>© 2017 All Rights Reseverd by N.A. </p>
-    </br>
-    </div>
 </div>
-</div>
-</div>
-
 
 </body>
 </html>

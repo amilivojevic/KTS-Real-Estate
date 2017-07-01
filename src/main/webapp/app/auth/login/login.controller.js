@@ -24,6 +24,7 @@
             }
             else{
                 vm.loggedIn = false;
+                //$location.path('/');
             }
             console.log("loggedin = " + vm.loggedIn);
         }
@@ -37,7 +38,7 @@
                 .then(function(token) {
                     console.log("Da li je moguce da glupi token radi??? " + token.data.response);
                     $window.localStorage.setItem("token",token.data.response);
-
+                    checkIfLogged();
 
             }, function(response) {
                 alert(response.data.response);
@@ -55,9 +56,9 @@
 
         // method for deleting user data - cookies
         function logout() {
-            //$localStorage.$reset();
-            $scope.loggedUser = false;
-            $rootScope.currentUser = false;
+            console.log("usao u logout");
+            $window.localStorage.removeItem("token");
+            checkIfLogged();
             $location.path('/');
         }
         ;
