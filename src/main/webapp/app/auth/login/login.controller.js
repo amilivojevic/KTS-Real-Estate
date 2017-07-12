@@ -16,11 +16,14 @@
         checkIfLogged();
 
         function checkIfLogged(){
-            console.log("local storage: " + JSON.stringify($window.localStorage.getItem("token")));
+            var token = $window.localStorage.getItem("token");
+            console.log("local storage: " + JSON.stringify(token));
             if($window.localStorage.getItem("token")){
                 console.log("Logged");
                 vm.loggedIn = true;
-                $window.location = "#!/profile"
+                $window.location = "#!/profile";
+                console.log("logged user data: " + getLoggedUserData(token).data);
+                //$window.localStorage.setItem("loggedUser", getLoggedUserData(token));
             }
             else{
                 vm.loggedIn = false;
@@ -36,7 +39,6 @@
 
             $http.post('/api/users/login', userData)
                 .then(function(token) {
-                    console.log("Da li je moguce da glupi token radi??? " + token.data.response);
                     $window.localStorage.setItem("token",token.data.response);
                     checkIfLogged();
 
@@ -47,14 +49,18 @@
         }
 
         function getLoggedUserData(token) {
-            return $http.post('/api/users/login', token)
+            //var retVal;
+            return $http.get('/api/users/data', token)
                 .then(function(loggedUserData) {
+                    console.log("tralala" + JSON.stringify(loggedUserData.data));
                     return loggedUserData.data;
-                })
+            });
+            //console.log("AAAAA" + JSON.stringify(retVal));
+            //return retVal;
         };
 
 
-        // method for deleting user data - cookies
+        // method for deleting user data - token
         function logout() {
             console.log("usao u logout");
             $window.localStorage.removeItem("token");
