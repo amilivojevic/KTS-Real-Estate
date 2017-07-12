@@ -12,6 +12,7 @@ import kts.project.model.enumerations.Role;
 import kts.project.repository.*;
 import kts.project.security.TokenUtils;
 import kts.project.security.UserUtils;
+import kts.project.service.EmailService;
 import kts.project.service.UserService;
 import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,9 @@ public class UserController {
 
     @Autowired
     private UserUtils userUtils;
+
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
@@ -121,8 +125,9 @@ public class UserController {
         user.setAccountNumber(registerDTO.getAccountNumber());
         user.setImageUrl(registerDTO.getImageUrl());
         //user.setVerifyCode(UUID.randomUUID().toString());
-
         userRepository.save(user);
+
+        emailService.sendMail(user);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

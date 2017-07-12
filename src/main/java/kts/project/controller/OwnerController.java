@@ -9,6 +9,7 @@ import kts.project.repository.AuthorityRepository;
 import kts.project.repository.LocationRepository;
 import kts.project.repository.OwnerRepository;
 import kts.project.repository.UserRepository;
+import kts.project.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,9 @@ public class OwnerController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    EmailService emailService;
 
 
     //registracija obicnih korisnika!
@@ -72,6 +76,7 @@ public class OwnerController {
         //user.setVerifyCode(UUID.randomUUID().toString());
 
         ownerRepository.save(user);
+        emailService.sendMail(user);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

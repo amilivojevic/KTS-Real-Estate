@@ -148,7 +148,7 @@
                     }
                 })
                 .state('contact', {
-                    url: '#!/contact',
+                    url: '/contact',
                     views: {
                         'content': {
                             templateUrl: 'app/static/contact.html'
