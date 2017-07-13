@@ -74,11 +74,14 @@ public class UserController {
             // Perform the authentication
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),
                     loginDTO.getPassword());
+            System.out.println("token : " + token);
             Authentication authentication = authenticationManager.authenticate(token);
+            System.out.println("posle authentication");
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
+            System.out.println("linija PRE loadUserByUsername");
             // Reload user details so we can generate token
             UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
+            System.out.println("linija POSLE loadUserByUsername");
             return new ResponseEntity<>(new ResponseMessage(tokenUtils.generateToken(details)), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(new ResponseMessage("Invalid login"),
