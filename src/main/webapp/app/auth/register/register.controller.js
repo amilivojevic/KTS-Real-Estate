@@ -91,11 +91,12 @@
 /*                if (response) {
                     $scope.loginCtrl.login(userData);
                 }*/
-                $scope.redirect();
+
 
             },function(response){
-                alert(response.data.response);
+                alert("Check you email and activate your account!");
             });
+
 
         }
 

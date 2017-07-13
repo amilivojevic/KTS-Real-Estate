@@ -1,7 +1,7 @@
 <div class="about_top">
     <div class="container">
         <div class="about">
-            <h1 class="blog_head" style="color: #F94B4B">Sell or rent your real estate</h1>
+            <h1 class="blog_head" style="color: #F94B4B">Add new real estate</h1>
 
             <div class="contact">
 
@@ -9,23 +9,17 @@
 
             </div>
             <div>
-                <div class="text-fild">
-                    <span for="name">Select if you want to sell or to rent your real estate:</span>
-                </div>
+
+                <select style="line-height: 44px;
+  							border: 1px solid #DAD8D8;
+  							width: 370px;" ng-model="addNewRealEstateCtrl.newRE.type" required>
+
+                    <option style="color: #F94B4B;" ng-repeat="t in addNewRealEstateCtrl.types">{{t}}</option>
+                </select>
+            </div>
+
                 <div class="col-md-4 contact_left">
 
-                </div>
-                <div>
-                    <select style="line-height: 44px;
-  							border: 1px solid #DAD8D8;
-  							width: 370px;" ng-model="addNewRealEstateCtrl.newUser.userType" required>
-                        <option style="color: #F94B4B;" ng-repeat="t in registerCtrl.types">{{t}}</option>
-                    </select>
-                    <select style="line-height: 44px;
-  							border: 1px solid #DAD8D8;
-  							width: 370px;" ng-model="registerCtrl.newUser.userType" required>
-                        <option style="color: #F94B4B;" ng-repeat="t in registerCtrl.types">{{t}}</option>
-                    </select>
                 </div>
             </div>
             <div ng-if="registerCtrl.newUser.userType == 'Owner'" >

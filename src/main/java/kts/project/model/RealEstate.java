@@ -177,4 +177,11 @@ public class RealEstate {
 
     public void setRs_type(RealEstateType rs_type){ this.rs_type = rs_type;}
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

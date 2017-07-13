@@ -20,7 +20,7 @@
                 console.log("Logged");
                 vm.loggedIn = true;
                 vm.token = $window.localStorage.getItem("token");
-                $window.location = "#!/profile";
+            /**    $window.location = "#!/profile"; **/
 
                 getLoggedUserData();
                 console.log("***** $scope.logData " + JSON.stringify($scope.logData));
