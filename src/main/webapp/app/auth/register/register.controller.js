@@ -88,9 +88,8 @@
             vm.new_user.type = type;
 
             $http.post('/api/users/'+type+'/register', vm.new_user).then(function (response) {
-/*                if (response) {
-                    $scope.loginCtrl.login(userData);
-                }*/
+
+                $scope.redirect();
 
 
             },function(response){

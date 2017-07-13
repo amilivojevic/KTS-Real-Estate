@@ -20,15 +20,21 @@
                 console.log("Logged");
                 vm.loggedIn = true;
                 vm.token = $window.localStorage.getItem("token");
-            /**    $window.location = "#!/profile"; **/
 
                 getLoggedUserData();
-                console.log("***** $scope.logData " + JSON.stringify($scope.logData));
+                var user = angular.fromJson($window.localStorage['loggedUser']);
 
+                switch (user.role){
+                    case "OWNER" :
+                        $window.location = "#!/profile"; break;
+                    case "SYS_ADMIN" :
+                        $window.location = "#!/admin"; break;
+                    case "VERIFYER" :
+                        $window.location = "#!/verifyer"; break;
+                }
             }
             else{
                 vm.loggedIn = false;
-                //$location.path('/');
             }
             console.log("loggedin = " + vm.loggedIn);
         }
@@ -55,7 +61,8 @@
             var promise = LoginFactory.getLoggedUserData(vm.token);
             promise.then(
                 function(loggedUser) {
-                    $window.localStorage.setItem("loggedUser", loggedUser);
+                    console.log("ucitan u funkciji: " + JSON.stringify(loggedUser));
+                    $window.localStorage['loggedUser'] = angular.toJson(loggedUser);
                     $scope.loggedUser = loggedUser;
 
                 }

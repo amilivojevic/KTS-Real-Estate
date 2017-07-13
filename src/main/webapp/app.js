@@ -70,8 +70,8 @@
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
-                            controller: 'LoginController',
-                            controllerAs: 'loginCtrl'
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
                         }
                     },
 
@@ -86,8 +86,8 @@
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
-                            controller: 'LoginController',
-                            controllerAs: 'loginCtrl'
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
                         }
                     }
                 })
@@ -101,8 +101,8 @@
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
-                            controller: 'LoginController',
-                            controllerAs: 'loginCtrl'
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
                         }
                     }
                 })
@@ -116,8 +116,68 @@
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
-                            controller: 'LoginController',
-                            controllerAs: 'loginCtrl'
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
+                .state('admin', {
+                    url: '/admin',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/admin/admin_profile.html',
+                            controller: 'AdminController',
+                            controllerAs: 'adminCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
+                .state('adminModify', {
+                    url: '/admin_modify',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/admin/admin_modify.html',
+                            controller: 'AdminModifyController',
+                            controllerAs: 'adminModifyCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
+                .state('verifyer', {
+                    url: '/verifyer',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/verifyer/verifyer_profile.html',
+                            controller: 'VerifyerController',
+                            controllerAs: 'verifyerCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
+                .state('verifyerModify', {
+                    url: '/verifyer_modify',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/verifyer/verifyer_modify.html',
+                            controller: 'verifyerModifyController',
+                            controllerAs: 'verifyerModifyCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
                         }
                     }
                 })
@@ -129,8 +189,8 @@
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
-                            controller: 'LoginController',
-                            controllerAs: 'loginCtrl'
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
                         }
                     }
                 })
@@ -143,8 +203,8 @@
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
-                            controller: 'LoginController',
-                            controllerAs: 'loginCtrl'
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
                         }
                     }
                 })
@@ -156,8 +216,8 @@
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
-                            controller: 'LoginController',
-                            controllerAs: 'loginCtrl'
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
                         }
                     }
                 })
@@ -171,8 +231,8 @@
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
-                            controller: 'LoginController',
-                            controllerAs: 'loginCtrl'
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
                         }
                     }
                 })
@@ -186,8 +246,8 @@
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
-                            controller: 'LoginController',
-                            controllerAs: 'loginCtrl'
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
                         }
                     }
                 })
