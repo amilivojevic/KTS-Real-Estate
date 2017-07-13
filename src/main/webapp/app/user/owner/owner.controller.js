@@ -6,7 +6,25 @@
         .controller('OwnerController', ownerController);
 
     // owner controller
-    function ownerController($http, $scope, $cookies, $window) {
+    function ownerController($http, $scope, $cookies, $window,LoginFactory) {
+        var vm = this;
+        //$scope.userData = $window.localStorage.getItem("loggedUser");
+
+        getLoggedUserData();
+
+        function getLoggedUserData() {
+            var promise = LoginFactory.getLoggedUserData(vm.token);
+            promise.then(
+                function(loggedUser) {
+                    $window.localStorage.setItem("loggedUser", loggedUser);
+                    vm.userData = loggedUser;
+                    console.log("$scope.userData = " +JSON.stringify(vm.userData));
+                }
+            );
+        };
+
+
+
         /*
          var vm = this;
 

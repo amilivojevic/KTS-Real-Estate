@@ -2,9 +2,8 @@
     angular.module("realEstateApp")
         .controller('LoginController', loginController);
 
-
         //login page controller
-    function loginController($scope, $rootScope,$location, $http,$window) {
+    function loginController($scope,$location, $http,$window,LoginFactory) {
 
         var vm = this;
 
@@ -16,14 +15,16 @@
         checkIfLogged();
 
         function checkIfLogged(){
-            var token = $window.localStorage.getItem("token");
-            console.log("local storage: " + JSON.stringify(token));
+
             if($window.localStorage.getItem("token")){
                 console.log("Logged");
                 vm.loggedIn = true;
+                vm.token = $window.localStorage.getItem("token");
                 $window.location = "#!/profile";
-                console.log("logged user data: " + getLoggedUserData(token).data);
-                //$window.localStorage.setItem("loggedUser", getLoggedUserData(token));
+
+                getLoggedUserData();
+                console.log("***** $scope.logData " + JSON.stringify($scope.logData));
+
             }
             else{
                 vm.loggedIn = false;
@@ -48,15 +49,17 @@
             });
         }
 
-        function getLoggedUserData(token) {
-            //var retVal;
-            return $http.get('/api/users/data', token)
-                .then(function(loggedUserData) {
-                    console.log("tralala" + JSON.stringify(loggedUserData.data));
-                    return loggedUserData.data;
-            });
-            //console.log("AAAAA" + JSON.stringify(retVal));
-            //return retVal;
+
+
+        function getLoggedUserData() {
+            var promise = LoginFactory.getLoggedUserData(vm.token);
+            promise.then(
+                function(loggedUser) {
+                    $window.localStorage.setItem("loggedUser", loggedUser);
+                    $scope.loggedUser = loggedUser;
+
+                }
+            );
         };
 
 
