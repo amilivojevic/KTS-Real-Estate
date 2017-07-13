@@ -44,9 +44,6 @@ public class UserController {
     private AuthorityRepository authorityRepository;
 
     @Autowired
-    private LocationRepository locationRepository;
-
-    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -59,13 +56,11 @@ public class UserController {
     private TokenUtils tokenUtils;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserUtils userUtils;
-
-    @Autowired
-    private EmailService emailService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
@@ -135,39 +130,32 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    //registracija administratora i verifikatora!
+    @RequestMapping(value = "/{role}/modify", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity modifyUser(@PathVariable String role,@RequestBody RegisterDTO changedAdminDTO,@RequestHeader("X-Auth-Token") String token) {
+        User user = userService.findByToken(token);
+        user.setName(changedAdminDTO.getName());
+        user.setSurname(changedAdminDTO.getSurname());
+        user.setEmail(changedAdminDTO.getEmail());
+        user.setBirthDate(changedAdminDTO.getBirthDate());
+        user.setPhoneNumber(changedAdminDTO.getPhoneNumber());
+        user.setAddress(changedAdminDTO.getAddress());
+        user.setCity(changedAdminDTO.getCity());
+        user.setCountry(changedAdminDTO.getCountry());
+        user.setAccountNumber(changedAdminDTO.getAccountNumber());
+        user.setImageUrl(changedAdminDTO.getImageUrl());
+        userRepository.save(user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+
+
 
     @RequestMapping(value = "/data", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> getData(@RequestHeader("X-Auth-Token") String token)
     {
-        String un = tokenUtils.getUsernameFromToken(token);
-        System.out.println("username = " + un);
-        UserDetails details = userDetailsService.loadUserByUsername(un);
-        if(details == null){
-            System.out.println("Details = null");
-        }
-        else{
-            System.out.println("detail nije null" + details.toString());
-        }
-        System.out.println("username : " + details.getUsername());
-        User user = userService.findByUsername(details.getUsername());
-
-
-
-        /*if (request == null){
-            System.out.println("request = null");
-        }
-        else{
-            System.out.println("request nijr null");
-        }
-        //System.out.println("REQUEST = " + request.getContentType());
-        User user = (User)userUtils.getLoggedUser(request);
-        if (user != null){
-            System.out.println("USER: "+user.toString());
-        }
-        else{
-            System.out.println("mrs ");
-        }*/
-        return new ResponseEntity<UserDTO>(new UserDTO(user), HttpStatus.OK);
+        User user = userService.findByToken(token);
+        return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
     }
 
 }

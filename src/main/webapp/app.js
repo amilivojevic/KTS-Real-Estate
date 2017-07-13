@@ -136,6 +136,21 @@
                         }
                     }
                 })
+                .state('adminModify', {
+                    url: '/admin_modify',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/admin/admin_modify.html',
+                            controller: 'AdminModifyController',
+                            controllerAs: 'adminModifyCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
                 .state('verifyer', {
                     url: '/verifyer',
                     views: {
@@ -151,7 +166,21 @@
                         }
                     }
                 })
-
+                .state('verifyerModify', {
+                    url: '/verifyer_modify',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/verifyer/verifyer_modify.html',
+                            controller: 'verifyerModifyController',
+                            controllerAs: 'verifyerModifyCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
                 .state('listing', {
                     url: '/listing',
                     views: {

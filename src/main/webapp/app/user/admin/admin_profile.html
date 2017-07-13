@@ -11,59 +11,59 @@
 
                 </div>
                 <div class="col-md-8 contact_right">
-                    <form>
+                    <form ng-submit="adminCtrl.modify()">
                         <center>
                             <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                             <div class="clearfix"> </div>
                             <div class="text">
                                 <div class="text-fild">
                                     <span for="name">Name:</span>
-                                    <input type="text" class="text" id="name" ng-model="ownerCtrl.userData.name" disabled value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
+                                    <input type="text" class="text" id="name" ng-model="adminCtrl.userData.name" disabled value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
                                 </div>
                                 <div class="text-fild">
                                     <span for="surname">Surname:</span>
-                                    <input type="text" class="text" id="surname" ng-model="ownerCtrl.userData.surname" disabled value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}">
+                                    <input type="text" class="text" id="surname" ng-model="adminCtrl.userData.surname" disabled value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}">
                                 </div>
                             </div>
                             <div class="text">
                                 <div class="text-fild">
                                     <span for="username">Username:</span>
-                                    <input type="text" class="text" id="username" ng-model="ownerCtrl.userData.username" disabled value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter username here';}">
+                                    <input type="text" class="text" id="username" ng-model="adminCtrl.userData.username" disabled value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter username here';}">
                                 </div>
                                 <div class="text-fild">
                                     <span for="email">Email:</span>
-                                    <input type="text" class="text" id="email" ng-model="ownerCtrl.userData.email" disabled value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}">
+                                    <input type="text" class="text" id="email" ng-model="adminCtrl.userData.email" disabled value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}">
                                 </div>
                             </div>
                             <div class="text">
                                 <div class="text-fild">
                                     <span for="birthdate">Date of birth:</span>
                                     </br>
-                                    <input style="width: 350px; !important "type="date" class="text" id="birthdate" ng-model="ownerCtrl.userData.birthdate" disabled required value="Enter date of birth here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter date of birth here';}">
+                                    <input style="width: 350px; !important "type="date" class="text" id="birthdate" ng-model="adminCtrl.userData.birthdate" disabled required value="Enter date of birth here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter date of birth here';}">
                                 </div>
                                 <div class="text-fild">
                                     <span for="phoneNumber">Phone number:</span>
-                                    <input type="text" class="text" id="phoneNumber" ng-model="ownerCtrl.userData.phoneNumber" disabled value="Enter phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter phone number here';}">
+                                    <input type="text" class="text" id="phoneNumber" ng-model="adminCtrl.userData.phoneNumber" disabled value="Enter phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter phone number here';}">
                                 </div>
                             </div>
                             <div class="text">
                                 <div class="text-fild">
                                     <span for="address">Address:</span>
-                                    <input type="text" class="text" id="address" ng-model="ownerCtrl.userData.address" disabled  value="Enter address here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter address here';}">
+                                    <input type="text" class="text" id="address" ng-model="adminCtrl.userData.address" disabled  value="Enter address here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter address here';}">
                                 </div>
                                 <div class="text-fild">
                                     <span for="city">City:</span>
-                                    <input type="text" class="text" id="city" ng-model="ownerCtrl.userData.city" disabled value="Enter city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter city here';}">
+                                    <input type="text" class="text" id="city" ng-model="adminCtrl.userData.city" disabled value="Enter city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter city here';}">
                                 </div>
                             </div>
                             <div>
                                 <div class="text-fild">
                                     <span for="country">Country:</span>
-                                    <input type="text" class="text" id="country" ng-model="ownerCtrl.userData.country" disabled disabled value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                                    <input type="text" class="text" id="country" ng-model="adminCtrl.userData.country" disabled disabled value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
                                 </div>
                                 <div class="text-fild">
                                     <span for="accountNumber">Bank account:</span>
-                                    <input type="text" class="text" id="accountNumber" ng-model="ownerCtrl.userData.accountNumber" disabled value="Enter bank account number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}">
+                                    <input type="text" class="text" id="accountNumber" ng-model="adminCtrl.userData.accountNumber" disabled value="Enter bank account number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}">
                                 </div>
                             </div>
 
@@ -71,7 +71,7 @@
 
                             <div align = "Center">
 
-                                <label class="btn1 btn-8 btn-8c" ng-click="redirect()"><input type="submit"  value="Edit"></label>
+                                <label class="btn1 btn-8 btn-8c"><input type="submit"  value="Edit"></label>
                             </div>
                     </form>
 
