@@ -1,12 +1,15 @@
 /**
+ * Created by Sandra on 7/14/2017.
+ */
+/**
  * Created by Sandra on 7/13/2017.
  */
 (function () {
     angular.module("realEstateApp")
-        .controller('NavbarController', navbarController);
+        .controller('NavbarAdminController', navbarAdminController);
 
     //login page controller
-    function navbarController($scope,$location,$window,LoginFactory) {
+    function navbarAdminController($scope,$location,$window,LoginFactory) {
 
         var vm = this;
 

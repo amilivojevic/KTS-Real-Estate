@@ -1,20 +1,23 @@
 /**
- * Created by Sandra on 7/13/2017.
+ * Created by Nina on 20-Jun-17.
  */
+
 (function() {
     angular.module("realEstateApp")
-        .controller('AdminModifyController', adminModifyController);
+        .controller('OwnerModifyController', ownerModifyController);
 
-    function adminModifyController($http, $scope, $cookies, $window,LoginFactory) {
+    // owner controller
+    function ownerModifyController($http, $scope, $cookies, $window,LoginFactory) {
+
         var vm = this;
         //$scope.userData = $window.localStorage.getItem("loggedUser");
 
         vm.userData = angular.fromJson($window.localStorage['loggedUser']);
-        
+
         vm.change = function () {
             vm.changed_user = {
-                type : vm.userData.userType,
-                role : "admin",
+                type : "OWNER",
+                role : "OWNER", //!!!!!
                 username: vm.userData.username,
                 password: vm.userData.password,
                 email: vm.userData.email,
@@ -29,14 +32,26 @@
                 imageUrl: 'images/img1.jpg'
             }
 
-            $http.post('/api/users/admin/modify', vm.changed_user).then(function (response) {
-                $window.location.href = "http://" + $window.location.host + "/#!/admin";
+            $http.post('/api/users/owner/modify', vm.changed_user).then(function (response) {
+
+                //dovlace se podaci ulogovanog iz baze
+                var promise = LoginFactory.getLoggedUserData(vm.token);
+                promise.then(
+                    function(loggedUser) {
+                        console.log("ucitan u funkciji: " + JSON.stringify(loggedUser));
+                        $window.localStorage['loggedUser'] = angular.toJson(loggedUser);
+                        $scope.userData = loggedUser;
+                        $window.location.href = "#!/profile";
+                    }
+                );
+
 
             },function(response){
                 alert(response.data.response);
             });
-        }
 
+
+        }
 
     }
 })();
