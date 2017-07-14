@@ -316,7 +316,7 @@
                     views: {
                         'content': {
                             templateUrl: 'app/realEstate/getAllRealEstates.html',
-                            controller: 'getAllRealEstates',
+                            controller: 'GetAllRealEstatesController',
                             controllerAs: 'getAllRealEstatesCtrl'
                         },
                         'navbar': {

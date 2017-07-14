@@ -15,6 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Nina on 14-Jul-17.
  */
@@ -106,6 +109,21 @@ public class RealEstateController {
             realEstateRepository.save(rs);
 
             return new ResponseEntity<>(rs, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getAllRealEstates", method = RequestMethod.GET)
+    public ResponseEntity getAllRealEstates()
+    {
+
+        List<RealEstate> allRealEstates = new ArrayList<>();
+
+            for (RealEstate o : realEstateRepository.findAll()) {
+
+                allRealEstates.add(o);
+
+            }
+            return new ResponseEntity<>(allRealEstates, HttpStatus.OK);
+
     }
 
 }

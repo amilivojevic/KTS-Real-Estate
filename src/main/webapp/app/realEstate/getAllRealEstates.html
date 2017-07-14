@@ -1,74 +1,81 @@
 <div class="about_top">
     <div class="container">
-        <div class="about" ng-submit="addNewRealEstateCtrl.addNewRealEstate()">
-            <h1 class="blog_head" style="color: #F94B4B">Choose real estate for new listing</h1>
+        <div class="about">
+            <div class="contact">
+                <div class="col-md-2 contact_left">
+                </div >
+                <div class="col-md-8 contact_right">
+                    </br></br>
 
+                    <h1 class="blog_head" style="color: #F94B4B">New real estate:</h1>
+                    <div class="clearfix"> </div>
 
+                    <div align = "Center">
+                        <span>Want to add new Real Estate to make a listing? Click on button bellow.</span>
+                        <form ng-submit="getAllRealEstatesCtrl.redirect()" >
+                            <label class="btn4 btn-82 btn-82c"><input type="submit" value="Add new real estate"></label>
+                        </form>
+                    </div>
+                    </br></br>
+                    <h1 class="blog_head" style="color: #F94B4B">New listing:</h1>
+                    <div align = "Center">
+                        <span>Already have a Real Estate you want to Rent/Sell? </span></br>
+                         <span>  Click on button bellow to make a new listing.</span>
+                    </div>
+                    </br></br>
 
-                <div ng-if="addNewAdvertisementCtrl.newAd.type == 'Rent'" >
-                    <div    >
-                        <div class="col-md-2 contact_left">
+                    <div class="tab-1">
+                        <div  ng-repeat="o in getAllRealEstatesCtrl.allRealEstates">
 
-                        </div>
-                        <div class="col-md-8 contact_right">
-                            <form>
-                                <div class="text">
-                                    <div class="text-fild">
-                                        <span for="title">Title:</span>
-                                        <input type="text" class="text" id="title" ng-model="addNewAdvertisementCtrl.newAd.title" required value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
+                            <ul class="tab_img tab_1" >
+                                <li>
+                                    <div class="client_box1">
+                                        <img src="images/pic4.jpg" class="img-responsive" alt=""/>
+                                        <h3 class="m_1"><a href="single.html">Dolor suit</a></h3>
+                                        <div class="boxed_mini_details clearfix">
+                                                <span class="area first"><strong>Rooms</strong><i></i>
+                                                   {{o.roomsNumber}}</span>
+                                            <span class="status"><strong>Bathrooms</strong>
+                                                    {{o.bathroomsNumber}}</span>
+                                            <span class="bedrooms last"><strong>Area(m2)</strong>
+                                                    {{o.area}}</span>
+                                        </div>
+                                        <div align = "Center">
+                                            <form ng-submit="getAllRealEstatesCtrl.redirect2()" >
+                                                <label class="btn4 btn-82 btn-82c"><input type="submit" value="Add advertisement"></label>
+                                            </form>
+                                            <form ng-submit="getAllRealEstatesCtrl.deleteRealEstate()">
+                                                <label class="btn1 btn-8 btn-8c"  ><input  type="submit" value="Delete"></label>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="text-fild">
-                                        <span for="price">Price per month:</span>
-                                        <input style="width: 350px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important"  type="number"  min=0 class="text" id="price" required ng-model="addNewAdvertisementCtrl.newAd.price"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
-                                    </div>
-                                </div>
-                                <div class="text">
-                                    <div class="text-fild">
-                                        <span for="endingDate">Expiration date:</span>
-                                        <input type="date" style="width: 350px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" class="text" id="endingDate" ng-model="addNewAdvertisementCtrl.newAd.endingDate" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
-                                    </div>
-                                    <div class="text-fild">
-                                        <span for="phoneNumber">Phone number:</span>
-                                        <input type="text" class="text" id="phoneNumber" ng-model="addNewAdvertisementCtrl.newAd.phoneNumber" required value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter repeated password here';}">
-                                    </div>
-                                </div>
 
-                                <div class="col-md-3 contact_left">
+                                </li>
 
-                                </div>
-                                <div>
-                                    <div class="text-fild">
-                                        <span for="name">Select type of currency:</span>
-                                    </div>
-                                    <div class="col-md-3 contact_left">
-
-                                    </div>
-                                    <div>
-                                        <select style="line-height: 44px;
-  							border: 1px solid #DAD8D8;
-  							width: 370px;" ng-model="addNewAdvertisementCtrl.newAd.currency" required>
-                                            <option style="color: #F94B4B;" ng-repeat="t in addNewAdvertisementCtrl.currency">{{t}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-
-                                <div class="clearfix"> </div>
-
-                                <div align = "Center">
-
-                                    <label class="btn1 btn-8 btn-8c"><input type="submit" value="Save"></label>
-
-                                </div>
-                            </form>
+                                <div class="clearfix"></div>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
     </div>
+
+
+
+
+
+    <div class="clearfix"> </div>
 </div>
+
+
+
+
+
+<div class="clearfix"> </div>
+</br>
+
 </div>
 </div>
