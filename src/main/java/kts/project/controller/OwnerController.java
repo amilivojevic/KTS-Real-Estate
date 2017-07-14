@@ -46,7 +46,10 @@ public class OwnerController {
 
     @Autowired
     RealEstateRepository realEstateRepository;
-    
+
+    @Autowired
+    AdvertisementRepo
+
 
 
     //registracija obicnih korisnika!
@@ -116,7 +119,7 @@ public class OwnerController {
 
             User eraseUser = userRepository.findByUsername(username);
 
-            for (Advertisement a : adve)
+            for (Advertisement a : advertisementRepo)
 
             for (RealEstate re : realEstateRepository.findAll()) {
                 if(re.getOwner().getUsername().equals(username)){
