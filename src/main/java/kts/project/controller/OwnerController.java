@@ -2,14 +2,10 @@ package kts.project.controller;
 
 import kts.project.controller.dto.RegisterDTO;
 import kts.project.controller.dto.RegisterOwnerDTO;
-import kts.project.model.Company;
-import kts.project.model.Owner;
-import kts.project.model.User;
+import kts.project.model.*;
+import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.Role;
-import kts.project.repository.AuthorityRepository;
-import kts.project.repository.LocationRepository;
-import kts.project.repository.OwnerRepository;
-import kts.project.repository.UserRepository;
+import kts.project.repository.*;
 import kts.project.service.EmailService;
 import kts.project.service.UserService;
 import kts.project.util.ResponseMessage;
@@ -47,6 +43,10 @@ public class OwnerController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RealEstateRepository realEstateRepository;
+    
 
 
     //registracija obicnih korisnika!
@@ -104,6 +104,32 @@ public class OwnerController {
                 }
             }
             return new ResponseEntity<>(allOwners, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/erase/{username}", method = RequestMethod.GET)
+    public ResponseEntity erase(@PathVariable String username, @RequestHeader("X-Auth-Token") String token)
+    {
+        User user = userService.findByToken(token);
+        if (user.getRole() == Role.SYS_ADMIN){
+
+            User eraseUser = userRepository.findByUsername(username);
+
+            for (Advertisement a : adve)
+
+            for (RealEstate re : realEstateRepository.findAll()) {
+                if(re.getOwner().getUsername().equals(username)){
+                    realEstateRepository.delete(re.getId());
+                }
+            }
+
+
+
+            ownerRepository.delete((Owner)eraseUser);
+            userRepository.delete(eraseUser);
+            //treba obrisati i sve one iste!!!!
+            return new ResponseEntity<>(eraseUser, HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
     }
