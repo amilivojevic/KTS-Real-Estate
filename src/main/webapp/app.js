@@ -171,7 +171,7 @@
                     views: {
                         'content': {
                             templateUrl: 'app/user/verifyer/verifyer_modify.html',
-                            controller: 'verifyerModifyController',
+                            controller: 'VerifyerModifyController',
                             controllerAs: 'verifyerModifyCtrl'
                         },
                         'navbar': {
