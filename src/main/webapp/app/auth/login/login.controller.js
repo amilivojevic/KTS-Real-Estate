@@ -61,8 +61,9 @@
             var promise = LoginFactory.getLoggedUserData(vm.token);
             promise.then(
                 function(loggedUser) {
-                    console.log("ucitan u funkciji: " + JSON.stringify(loggedUser));
+
                     $window.localStorage['loggedUser'] = angular.toJson(loggedUser);
+                    console.log("ucitan u funkciji window.localstorage: " + JSON.stringify($window.localStorage['loggedUser']));
                     $scope.loggedUser = loggedUser;
 
                 }

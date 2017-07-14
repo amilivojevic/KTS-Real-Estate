@@ -13,7 +13,7 @@
         
         vm.change = function () {
             vm.changed_user = {
-                type : vm.userData.userType,
+                type : "admin",
                 role : "admin",
                 username: vm.userData.username,
                 password: vm.userData.password,
@@ -30,11 +30,24 @@
             }
 
             $http.post('/api/users/admin/modify', vm.changed_user).then(function (response) {
-                $window.location.href = "http://" + $window.location.host + "/#!/admin";
+
+                //dovlace se podaci ulogovanog iz baze
+                var promise = LoginFactory.getLoggedUserData(vm.token);
+                promise.then(
+                    function(loggedUser) {
+                        console.log("ucitan u funkciji: " + JSON.stringify(loggedUser));
+                        $window.localStorage['loggedUser'] = angular.toJson(loggedUser);
+                        $scope.userData = loggedUser;
+                        $window.location.href = "http://" + $window.location.host + "/#!/admin";
+                    }
+                );
+
 
             },function(response){
                 alert(response.data.response);
             });
+
+
         }
 
 
