@@ -37,28 +37,28 @@ import java.security.Principal;
 
 
 @RestController
-@RequestMapping("/api/users")
-public class UserController {
+    @RequestMapping("/api/users")
+    public class UserController {
 
-    @Autowired
-    private AuthorityRepository authorityRepository;
+        @Autowired
+        private AuthorityRepository authorityRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+        @Autowired
+        private UserRepository userRepository;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+        @Autowired
+        private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+        @Autowired
+        private UserDetailsService userDetailsService;
 
-    @Autowired
-    private TokenUtils tokenUtils;
+        @Autowired
+        private TokenUtils tokenUtils;
 
-    @Autowired
-    private EmailService emailService;
+        @Autowired
+        private EmailService emailService;
 
-    @Autowired
+        @Autowired
     private UserService userService;
 
 

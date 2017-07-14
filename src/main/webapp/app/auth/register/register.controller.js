@@ -88,11 +88,14 @@
             vm.new_user.type = type;
 
             $http.post('/api/users/'+type+'/register', vm.new_user).then(function (response) {
+
                 $scope.redirect();
 
+
             },function(response){
-                alert(response.data.response);
+                alert("Check you email and activate your account!");
             });
+
 
         }
 

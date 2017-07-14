@@ -61,6 +61,9 @@ public class RealEstate {
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<Advertisement> advertisements = new ArrayList<>();
 
+    public RealEstate() {
+    }
+
     public RealEstate(String description, String imageUrl, boolean furniture, boolean parking, float area, String constructionYear, int roomsNumber, int bathroomsNumber, Location address, Owner owner, HeatingType heatingType, RealEstateType rs_type, List<Advertisement> advertisements) {
         this.description = description;
         this.imageUrl = imageUrl;
@@ -177,4 +180,11 @@ public class RealEstate {
 
     public void setRs_type(RealEstateType rs_type){ this.rs_type = rs_type;}
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

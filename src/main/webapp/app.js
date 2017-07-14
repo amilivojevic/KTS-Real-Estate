@@ -244,6 +244,7 @@
                     views: {
                         'content': {
                             templateUrl: 'app/static/about.html',
+
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
@@ -267,7 +268,7 @@
                 })
 
                 .state('addNewRealEstate', {
-                    url: '/add_mew_real_estate',
+                    url: '/add_new_real_estate',
                     views: {
                         'content': {
                             templateUrl: 'app/realEstate/addNewRealEstate.html',
@@ -280,6 +281,11 @@
                             controllerAs: 'navbarCtrl'
                         }
                     }
+                })
+                .state('verify', {
+                    url: '/authenticate/{id:int}',
+                    templateUrl: 'page/authentication.html',
+                    controller: 'verificationController'
                 });
 
 
