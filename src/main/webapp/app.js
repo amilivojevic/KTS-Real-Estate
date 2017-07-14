@@ -145,9 +145,9 @@
                             controllerAs: 'adminCtrl'
                         },
                         'navbar': {
-                            templateUrl: 'app/navbar/navbar.html',
-                            controller: 'NavbarController',
-                            controllerAs: 'navbarCtrl'
+                            templateUrl: 'app/navbar/navbarAdmin.html',
+                            controller: 'NavbarAdminController',
+                            controllerAs: 'navbarAdminCtrl'
                         }
                     }
                 })
@@ -155,9 +155,39 @@
                     url: '/admin_modify',
                     views: {
                         'content': {
-                            templateUrl: 'app/user/admin/admin_modify.html',
+                            templateUrl: 'app/user/admin/adminModify.html',
                             controller: 'AdminModifyController',
                             controllerAs: 'adminModifyCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbarAdmin.html',
+                            controller: 'NavbarAdminController',
+                            controllerAs: 'navbarAdminCtrl'
+                        }
+                    }
+                })
+                .state('addAdmin', {
+                    url: '/add_admin',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/admin/addAdmin/addAdmin.html',
+                            controller: 'AddAdminController',
+                            controllerAs: 'addAdminCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbarAdmin.html',
+                            controller: 'NavbarAdminController',
+                            controllerAs: 'navbarAdminCtrl'
+                        }
+                    }
+                })
+                .state('addVerifier', {
+                    url: '/add_verifier',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/admin/addVerifier/addVerifier.html',
+                            controller: 'AddVerifierController',
+                            controllerAs: 'addVerifierCtrl'
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
@@ -170,7 +200,7 @@
                     url: '/verifyer',
                     views: {
                         'content': {
-                            templateUrl: 'app/user/verifyer/verifyer_profile.html',
+                            templateUrl: 'app/user/verifyer/verifyerProfile.html',
                             controller: 'VerifyerController',
                             controllerAs: 'verifyerCtrl'
                         },
@@ -185,7 +215,7 @@
                     url: '/verifyer_modify',
                     views: {
                         'content': {
-                            templateUrl: 'app/user/verifyer/verifyer_modify.html',
+                            templateUrl: 'app/user/verifyer/verifyerModify.html',
                             controller: 'VerifyerModifyController',
                             controllerAs: 'verifyerModifyCtrl'
                         },
