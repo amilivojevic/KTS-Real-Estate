@@ -4,17 +4,23 @@ import kts.project.controller.dto.RegisterDTO;
 import kts.project.controller.dto.RegisterOwnerDTO;
 import kts.project.model.Company;
 import kts.project.model.Owner;
+import kts.project.model.User;
 import kts.project.model.enumerations.Role;
 import kts.project.repository.AuthorityRepository;
 import kts.project.repository.LocationRepository;
 import kts.project.repository.OwnerRepository;
 import kts.project.repository.UserRepository;
 import kts.project.service.EmailService;
+import kts.project.service.UserService;
+import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by USER on 6/11/2017.
@@ -38,6 +44,9 @@ public class OwnerController {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    UserService userService;
 
 
     //registracija obicnih korisnika!
@@ -81,5 +90,22 @@ public class OwnerController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public ResponseEntity getAllUsers(@RequestHeader("X-Auth-Token") String token)
+    {
+        User user = userService.findByToken(token);
+        if (user.getRole() == Role.SYS_ADMIN){
+            List<Owner> allOwners = new ArrayList<Owner>();
+
+            for (User o : userRepository.findAll()) {
+                if (o.getRole() == Role.OWNER){
+                    allOwners.add((Owner)o);
+                }
+            }
+            return new ResponseEntity<>(allOwners, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+    }
 
 }

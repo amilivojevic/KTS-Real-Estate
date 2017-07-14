@@ -158,4 +158,10 @@ import java.security.Principal;
         return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public ResponseEntity getAllUsers(@RequestHeader("X-Auth-Token") String token)
+    {
+        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+    }
+
 }
