@@ -6,7 +6,6 @@
     angular.module("realEstateApp")
         .controller('RegisterController',RegisterController);
 
-/*    RegisterController.$inject = ['LocationDataService'];*/
 
     //register page controller
     function RegisterController($http, $scope, $window, CompanyService) {
@@ -15,17 +14,8 @@
         vm.register = register;
         vm.types = ['Owner', 'Company', 'Private Acc in Company'];
 
-     /*   findAllLocations();*/
         findAllCompanies();
 
-        /*function findAllLocations() {
-            /*vm.locations = ['novi sad', 'bg', 'zr'];/*
-            LocationDataService.findAll()
-                .then(function (data) {
-                    //console.log(JSON.stringify(data.data));
-                    vm.locations = data.data;
-                });
-        }*/
 
         function findAllCompanies(){
             CompanyService.findAll()
@@ -68,7 +58,6 @@
                 return;
             }
 
-
             var type = "owner";
 
             switch(vm.new_user.type) {
@@ -90,7 +79,6 @@
             $http.post('/api/users/'+type+'/register', vm.new_user).then(function (response) {
 
                 $scope.redirect();
-
 
             },function(response){
                 alert("Check you email and activate your account!");
