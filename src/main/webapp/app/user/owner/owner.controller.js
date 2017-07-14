@@ -9,24 +9,12 @@
     function ownerController($http, $scope, $cookies, $window,LoginFactory) {
         var vm = this;
 
-        //vm.userData = angular.fromJson($window.localStorage['loggedUser']);
-        //console.log("vm.userData = " + JSON.stringify(vm.userData));
+        vm.userData = angular.fromJson($window.localStorage['loggedUser']);
+        console.log("vm.userData = " + JSON.stringify(vm.userData));
         vm.modify = function () {
             $window.location = "#!/owner_modify";
         }
 
-        getLoggedUserData();
-
-        function getLoggedUserData() {
-            var promise = LoginFactory.getLoggedUserData(vm.token);
-            promise.then(
-                function(loggedUser) {
-                    $window.localStorage.setItem("loggedUser", loggedUser);
-                    vm.userData = loggedUser;
-                    console.log("$scope.userData = " +JSON.stringify(vm.userData));
-                }
-            );
-        };
 
     }
 })();

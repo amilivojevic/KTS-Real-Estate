@@ -121,6 +121,21 @@
                         }
                     }
                 })
+                .state('ownerModify', {
+                    url: '/owner_modify',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/owner/owner_modify.html',
+                            controller: 'OwnerModifyController',
+                            controllerAs: 'ownerModifyCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
                 .state('admin', {
                     url: '/admin',
                     views: {
@@ -220,21 +235,7 @@
                         }
                     }
                 })
-                .state('ownerModify', {
-                    url: '/owner_modify',
-                    views: {
-                        'content': {
-                            templateUrl: 'app/user/owner/owner_modify.html',
-                            controller: 'OwnerModifyController',
-                            controllerAs: 'ownerModifyCtrl'
-                        },
-                        'navbar': {
-                            templateUrl: 'app/navbar/navbar.html',
-                            controller: 'NavbarController',
-                            controllerAs: 'navbarCtrl'
-                        }
-                    }
-                })
+
                 .state('addNewRealEstate', {
                     url: '/add_mew_real_estate',
                     views: {
