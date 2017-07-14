@@ -49,47 +49,9 @@
 
             console.log("novi korisnik: " + JSON.stringify(vm.newUser) )
 
-            var re_type = "apartment";
-
-            switch(vm.new_real_estate.rs_type) {
-                case "Apartment":
-                    rs_type = "APARTMENT";
-                    break;
-                case "House":
-                    rs_type = "HOUSE";
-                    break;
-                case "Office":
-                    rs_type = "OFFICE";
-                    break;
-                case "Garage":
-                    rs_type = "GARAGE";
-                    break;
-
-            }
-            vm.new_real_estate.rs_type = rs_type;
-
-            var heatingType = "central";
-
-            switch(vm.new_real_estate.heatingType) {
-                case "None":
-                    heatingType = "NONE";
-                    break;
-                case "Central":
-                    heatingType = "CENTRAL";
-                    break;
-                case "Fireplace":
-                    heatingType = "FIREPLACE";
-                    break;
-                case "Solar":
-                    heatingType = "SOLAR";
-                    break;
-
-            }
-            vm.new_real_estate.heatingType = heatingType;
-
             $http.post('/api/realEstate/addNewRealEstate', vm.new_real_estate).then(function (response) {
 
-                $scope.redirect();
+              /*  $scope.redirect();*/
 
 
             },function(response){
