@@ -36,27 +36,27 @@
                             </div>
                             <div class="message-fild">
                                 <span for="description">Description:</span>
-                                <textarea type="text" class="text" id="description" ng-model="addNewRealEstateCtrl.newRE.description" required value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}" > </textarea>
+                                <textarea type="text" class="text" id="description" required ng-model="addNewRealEstateCtrl.newRE.description" required value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}" > </textarea>
                             </div>
 
                             <div class="text">
                                 <div class="text-fild">
                                     <span for="city">City:</span>
-                                    <input type="text" class="text" id="city" ng-model="addNewRealEstateCtrl.newRE.city" onfocus="this.value = '';">
+                                    <input type="text" class="text" id="city"  required ng-model="addNewRealEstateCtrl.newRE.city" onfocus="this.value = '';">
                                 </div>
                                 <div class="text-fild">
                                     <span for="cityArea">City area:</span>
-                                    <input type="text" class="text" id="cityArea" ng-model="addNewRealEstateCtrl.newRE.cityArea"  value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}">
+                                    <input type="text" class="text" id="cityArea" required ng-model="addNewRealEstateCtrl.newRE.cityArea"  value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}">
                                 </div>
                             </div>
                             <div class="text">
                                 <div class="text-fild">
                                     <span for="street">Street:</span>
-                                    <input type="text" class="text" id="street" ng-model="addNewRealEstateCtrl.newRE.street"  value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter username here';}">
+                                    <input type="text" class="text" id="street" required ng-model="addNewRealEstateCtrl.newRE.street"  value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter username here';}">
                                 </div>
                                 <div class="text-fild">
                                     <span for="streetNumber">Street number:</span>
-                                    <input type="text" class="text" id="streetNumber" ng-model="addNewRealEstateCtrl.newRE.streetNumber"  value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}">
+                                    <input type="text" class="text" id="streetNumber" required ng-model="addNewRealEstateCtrl.newRE.streetNumber"  value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}">
                                 </div>
                             </div>
 
@@ -64,37 +64,45 @@
                                 <div class="text-fild">
                                     <span for="state">Country:</span>
                                     </br>
-                                    <input type="text" class="text" id="state" ng-model="addNewRealEstateCtrl.newRE.state"  required value="Enter date of birth here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter date of birth here';}">
+                                    <input type="text" class="text" id="state" required ng-model="addNewRealEstateCtrl.newRE.state">
                                 </div>
                                 <div class="text-fild">
                                     <span for="zipCode">Zip code:</span>
-                                    <input type="text" class="text" id="zipCode" ng-model="addNewRealEstateCtrl.newRE.zipCode"  value="Enter phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter phone number here';}">
+                                    <input type="text" class="text" id="zipCode" required ng-model="addNewRealEstateCtrl.newRE.zipCode"  value="Enter phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter phone number here';}">
                                 </div>
                             </div>
                             <div class="text">
                                 <div class="text-fild">
                                     <span for="area">Area in m2:</span>
-                                    <input type="text" class="text" id="area" ng-model="addNewRealEstateCtrl.newRE.area"   value="Enter address here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter address here';}">
+
+
+                                    <input type="number" style="width: 350px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" class="text" min="0" step = 0.01 id="area" required ng-model="addNewRealEstateCtrl.newRE.area"  onkeypress="return isNumber(event)" />
+
+
+
                                 </div>
                                 <div class="text-fild">
                                     <span for="constructionYear">Construction year:</span>
-                                    <input type="text" class="text" id="constructionYear" ng-model="addNewRealEstateCtrl.newRE.constructionYear"  value="Enter city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter city here';}">
+                                    <input type="text" class="text" id="constructionYear" required ng-model="addNewRealEstateCtrl.newRE.constructionYear"  value="Enter city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter city here';}">
                                 </div>
                             </div>
                             <div>
                                 <div class="text-fild">
                                     <span for="roomsNumber">Room number:</span>
-                                    <input type="text" class="text" id="roomsNumber" ng-model="addNewRealEstateCtrl.newRE.roomsNumber"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                                    <input style="width: 350px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important"  type="number"  min=0 class="text" id="roomsNumber" required ng-model="addNewRealEstateCtrl.newRE.roomsNumber"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
                                 </div>
                                 <div class="text-fild">
                                     <span for="bathroomsNumber">Bathroom number:</span>
-                                    <input type="text" class="text" id="bathroomsNumber" ng-model="addNewRealEstateCtrl.newRE.bathroomsNumber"  value="Enter bank account number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}">
+                                    <input style="width: 350px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min=0 class="text" id="bathroomsNumber" required ng-model="addNewRealEstateCtrl.newRE.bathroomsNumber"  value="Enter bank account number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}">
                                 </div>
                             </div>
                             <div>
                                 <div class="text-fild">
                                     <span for="furniture">Furniture:</span>
-                                    <input type="checkbox" class="text" id="furniture" ng-model="addNewRealEstateCtrl.newRE.furniture"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                                    <input type="checkbox" class="text" id="furniture"  ng-model="addNewRealEstateCtrl.newRE.furniture"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
                                 </div>
                                 <div class="text-fild">
                                     <span for="parking">Parking:</span>
