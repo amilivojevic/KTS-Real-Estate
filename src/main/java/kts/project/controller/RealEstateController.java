@@ -11,7 +11,6 @@ import kts.project.repository.RealEstateRepository;
 import kts.project.service.RealEstateService;
 import kts.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,13 +62,49 @@ public class RealEstateController {
             location.setZipCode(realEstateDTO.getZipCode());
             locationRepository.save(location);
             rs.setAddress(location);
-
-
             rs.setOwner((Owner) userService.findByToken(realEstateDTO.getToken()));
-            rs.setHeatingType(HeatingType.CENTRAL);
-            rs.setRs_type(RealEstateType.APARTMENT);
 
+            HeatingType heatingType;
+            switch (realEstateDTO.getHeatingType()){
+                case "None":
+                    heatingType = HeatingType.NONE;
+                    break;
+                case "Central":
+                    heatingType = HeatingType.CENTRAL;
+                    break;
+                case "Fireplace":
+                    heatingType = HeatingType.FIREPLACE;
+                    break;
+                case "Solar":
+                    heatingType = HeatingType.SOLAR;
+                    break;
+                default:
+                    heatingType = HeatingType.NONE;
+                    break;
+            }
 
+            rs.setHeatingType(heatingType);
+
+            RealEstateType realEstateType;
+        switch (realEstateDTO.getRs_type()){
+            case "Apartment":
+                realEstateType = RealEstateType.APARTMENT;
+                break;
+            case "House":
+                realEstateType = RealEstateType.HOUSE;
+                break;
+            case "Office":
+                realEstateType = RealEstateType.OFFICE;
+                break;
+            case "Garage":
+                realEstateType = RealEstateType.GARAGE;
+                break;
+            default:
+                realEstateType = RealEstateType.APARTMENT;
+                break;
+
+        }
+        rs.setRs_type(realEstateType);
 
             realEstateRepository.save(rs);
 

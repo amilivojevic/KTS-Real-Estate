@@ -281,7 +281,21 @@
                         }
                     }
                 })
-
+                .state('addNewAdvertisement', {
+                    url: '/add_new_advertisement',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/advertisement/addNewAdvertisement.html',
+                            controller: 'AddNewAdvertisementController',
+                            controllerAs: 'addNewAdvertisementCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
                 .state('addNewRealEstate', {
                     url: '/add_new_real_estate',
                     views: {
