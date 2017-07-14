@@ -190,9 +190,24 @@
                             controllerAs: 'addVerifierCtrl'
                         },
                         'navbar': {
-                            templateUrl: 'app/navbar/navbar.html',
-                            controller: 'NavbarController',
-                            controllerAs: 'navbarCtrl'
+                            templateUrl: 'app/navbar/navbarAdmin.html',
+                            controller: 'NavbarAdminController',
+                            controllerAs: 'navbarAdminCtrl'
+                        }
+                    }
+                })
+                .state('eraseOwner', {
+                    url: '/erase_owner',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/admin/eraseOwner/eraseOwner.html',
+                            controller: 'EraseOwnerController',
+                            controllerAs: 'eraseOwnerCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbarAdmin.html',
+                            controller: 'NavbarAdminController',
+                            controllerAs: 'navbarAdminCtrl'
                         }
                     }
                 })

@@ -1,10 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="about_top">
+    <div class="container">
+        <div class="about">
+            <h1 class="blog_head" style="color: #F94B4B">Register</h1>
 
-</body>
-</html>
+            <div class="contact">
+                <div class="col-md-4 contact_left">
+
+                </div>
+                <div>
+                    <div  ng-submit="addVerifierCtrl.add()" >
+                        <div class="col-md-3 contact_left">
+
+                        </div>
+                        <div class="col-md-6 contact_right">
+                            <form>
+                                <div class="text">
+                                    <div class="text-fild">
+                                        <span for="name">Name:</span>
+                                        <input type="text" class="text" id="name" ng-model="addVerifierCtrl.newUser.name" required value="Enter name here">
+                                    </div>
+                                    <div class="text-fild">
+                                        <span for="surname">Surname:</span>
+                                        <input type="text" class="text" id="surname" ng-model="addVerifierCtrl.newUser.surname" required value="Enter surname here">
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <div class="text-fild">
+                                        <span for="username">Username:</span>
+                                        <input type="text" class="text" id="username" ng-model="addVerifierCtrl.newUser.username" required value="Enter email here">
+                                    </div>
+                                    <div class="text-fild">
+                                        <span for="email">Email:</span>
+                                        <input type="text" class="text" id="email" ng-model="addVerifierCtrl.newUser.email" required value="Enter password here">
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <div class="text-fild">
+                                        <span for="password">Password:</span>
+                                        <input type="text" class="text" id="password" ng-model="addVerifierCtrl.newUser.password" required value="Enter email here">
+                                    </div>
+                                    <div class="text-fild">
+                                        <span for="perpassword">Repeat password:</span>
+                                        <input type="text" class="text" id="perpassword" ng-model="addVerifierCtrl.newUser.repeatpass" required value="Enter password here">
+                                    </div>
+                                </div>
+
+                                <div class="text">
+                                    <div class="text-fild">
+                                        <span for="birthdate">Date of birth:</span>
+                                        </br>
+                                        <input type="date" class="text" id="birthdate" ng-model="addVerifierCtrl.newUser.birthdate" required value="Enter date of birth here">
+                                    </div>
+                                    <div class="text-fild">
+                                        <span for="phoneNumber">Phone number:</span>
+                                        <input type="text" class="text" id="phoneNumber" ng-model="addVerifierCtrl.newUser.phoneNumber" required value="Enter phone number here">
+                                    </div>
+
+                                </div>
+                                <div class="text">
+                                    <div class="text-fild">
+                                        <span for="address">Address:</span>
+                                        <input type="text" class="text" id="address" ng-model="addVerifierCtrl.newUser.address" requiredvalue="Enter address here">
+                                    </div>
+                                    <div class="text-fild">
+                                        <span for="city">City:</span>
+                                        <input type="text" class="text" id="city" ng-model="addVerifierCtrl.newUser.city" required value="Enter city here">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-fild">
+                                        <span for="country">Country:</span>
+                                        <input type="text" class="text" id="country"  ng-model="addVerifierCtrl.newUser.country" required value="Enter country here">
+                                    </div>
+                                    <div class="text-fild">
+                                        <span for="accountNumber">Bank account:</span>
+                                        <input type="text" class="text" id="accountNumber" ng-model="addVerifierCtrl.newUser.accountNumber" required value="Enter bank account number here" >
+                                    </div>
+
+                                </div>
+
+                                <div class="clearfix"> </div>
+
+                                <div align = "Center">
+
+                                    <label class="btn1 btn-8 btn-8c"><input type="submit" value="Register"></label>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
