@@ -10,4 +10,5 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement,Lon
 
     Advertisement findById(Long id);
 
+
 }

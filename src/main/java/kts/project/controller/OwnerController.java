@@ -47,6 +47,9 @@ public class OwnerController {
     @Autowired
     RealEstateRepository realEstateRepository;
 
+    @Autowired
+    AdvertisementRepository advertisementRepository;
+
 
     //registracija obicnih korisnika!
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
@@ -115,7 +118,11 @@ public class OwnerController {
 
             User eraseUser = userRepository.findByUsername(username);
 
-           
+            for (Advertisement a : advertisementRepository.findAll()) {
+                if(a.getOwner().getUsername().equals(username)){
+                    advertisementRepository.delete(a.getId());
+                }
+            }
 
             for (RealEstate re : realEstateRepository.findAll()) {
                 if(re.getOwner().getUsername().equals(username)){
