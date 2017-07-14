@@ -1,18 +1,16 @@
 /**
- * Created by Nina on 28-Jun-17.
+ * Created by Nina on 14-Jul-17.
  */
 (function () {
 
     angular.module("realEstateApp")
-        .controller('AddNewRealEstateController',AddNewRealEstateController);
-
-    /*    RegisterController.$inject = ['LocationDataService'];*/
+        .controller('GetAllRealEstatesController',GetAllRealEstatesController);
 
     //register page controller
-    function AddNewRealEstateController($http, $scope, $window, CompanyService) {
+    function GetAllRealEstatesController($http, $scope, $window) {
 
         var vm = this;
-        vm.addNewRealEstate = addNewRealEstate;
+        vm.getAllRealEstates = getAllRealEstates;
         vm.types = ['Apartment', 'House', 'Office', 'Garage'];
         vm.typesOfHeating = ['None', 'Central', 'Fireplace', 'Solar'];
 
@@ -21,13 +19,13 @@
 
 
         //method for user registration
-        function addNewRealEstate () {
-            console.log("USAO U REGISTER FUNKCIJU");
+        function getAllRealEstates () {
+
             var token = $window.localStorage.getItem("token");
             vm.new_real_estate = {
 
 
-            description: vm.newRE.description,
+                description: vm.newRE.description,
                 imageUrl: 'images/img1.jpg',
                 city: vm.newRE.city,
                 cityArea: vm.newRE.cityArea,
@@ -49,11 +47,9 @@
 
 
 
-            console.log("novi korisnik: " + JSON.stringify(vm.newUser) )
+            $http.post('/api/realEstate/getAllRealEstates', vm.new_real_estate).then(function (response) {
 
-            $http.post('/api/realEstate/addNewRealEstate', vm.new_real_estate).then(function (response) {
-
-              /*  $scope.redirect();*/
+                /*  $scope.redirect();*/
 
 
             },function(response){

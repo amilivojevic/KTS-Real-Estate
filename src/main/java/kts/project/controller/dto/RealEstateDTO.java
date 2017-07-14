@@ -44,8 +44,6 @@ public class RealEstateDTO {
 
     protected String zipCode;
 
-    protected String token;
-
     protected String heatingType;
 
     protected String rs_type;
@@ -169,14 +167,6 @@ public class RealEstateDTO {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getHeatingType() {

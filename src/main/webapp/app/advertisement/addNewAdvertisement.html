@@ -3,7 +3,7 @@
         <div class="about">
             <h1 class="blog_head" style="color: #F94B4B">Rent or Sell you Real Estate</h1>
 
-            <div class="contact">
+            <div class="contact" ng-submit="addNewAdvertisementCtrl.addNewAdvertisement()">
 
 
                 <div class="col-md-4 contact_left">
@@ -24,8 +24,9 @@
                         </select>
                     </div>
                 </div>
+
                 <div ng-if="addNewAdvertisementCtrl.newAd.type == 'Rent'" >
-                    <div   ng-submit="addNewAdvertisementCtrl.addNewAdvertisement()" >
+                    <div    >
                         <div class="col-md-2 contact_left">
 
                         </div>
@@ -45,7 +46,8 @@
                                 <div class="text">
                                     <div class="text-fild">
                                         <span for="endingDate">Expiration date:</span>
-                                        <input type="text" class="text" id="endingDate" ng-model="addNewAdvertisementCtrl.newAd.endingDate" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
+                                        <input type="date" style="width: 350px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" class="text" id="endingDate" ng-model="addNewAdvertisementCtrl.newAd.endingDate" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
                                     </div>
                                     <div class="text-fild">
                                         <span for="phoneNumber">Phone number:</span>
@@ -86,7 +88,7 @@
                 </div>
 
 
-                <div ng-if="addNewAdvertisementCtrl.newAd.type == 'Sell'" >
+                <div ng-if="addNewAdvertisementCtrl.newAd.type == 'Sale'" >
                     <div   ng-submit="addNewAdvertisementCtrl.addNewAdvertisement()" >
                         <div class="col-md-2 contact_left">
 

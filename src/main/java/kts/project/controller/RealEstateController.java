@@ -13,10 +13,7 @@ import kts.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Nina on 14-Jul-17.
@@ -39,7 +36,7 @@ public class RealEstateController {
 
     //Adding new real estate
     @RequestMapping(value = "/addNewRealEstate", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity addNewRealEstate(@RequestBody RealEstateDTO realEstateDTO) {
+    public ResponseEntity addNewRealEstate(@RequestHeader("X-Auth-Token") String token,@RequestBody RealEstateDTO realEstateDTO) {
 
 
             RealEstate rs = new RealEstate();
@@ -62,7 +59,7 @@ public class RealEstateController {
             location.setZipCode(realEstateDTO.getZipCode());
             locationRepository.save(location);
             rs.setAddress(location);
-            rs.setOwner((Owner) userService.findByToken(realEstateDTO.getToken()));
+            rs.setOwner((Owner) userService.findByToken(token));
 
             HeatingType heatingType;
             switch (realEstateDTO.getHeatingType()){
