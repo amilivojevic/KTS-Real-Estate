@@ -43,8 +43,9 @@
         // method for deleting user data - token
         function logout() {
             console.log("usao u logout");
+            $window.localStorage.removeItem("loggedUser");
             $window.localStorage.removeItem("token");
-            checkIfLogged();
+
             $location.path('/');
         }
         ;

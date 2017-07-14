@@ -21,17 +21,30 @@
                 vm.loggedIn = true;
                 vm.token = $window.localStorage.getItem("token");
 
-                getLoggedUserData();
-                var user = angular.fromJson($window.localStorage['loggedUser']);
+                //getLoggedUserData();
 
-                switch (user.role){
-                    case "OWNER" :
-                        $window.location = "#!/profile"; break;
-                    case "SYS_ADMIN" :
-                        $window.location = "#!/admin"; break;
-                    case "VERIFYER" :
-                        $window.location = "#!/verifyer"; break;
-                }
+
+                var promise = LoginFactory.getLoggedUserData(vm.token);
+                promise.then(
+                    function(loggedUser) {
+
+                        $window.localStorage['loggedUser'] = angular.toJson(loggedUser);
+                        console.log("ucitan u funkciji window.localstorage: " + JSON.stringify($window.localStorage['loggedUser']));
+                        $scope.loggedUser = loggedUser;
+                        var user = angular.fromJson($window.localStorage['loggedUser']);
+
+                        switch (user.role){
+                            case "OWNER" :
+                                $window.location = "#!/profile"; break;
+                            case "SYS_ADMIN" :
+                                $window.location = "#!/admin"; break;
+                            case "VERIFYER" :
+                                $window.location = "#!/verifyer"; break;
+                        }
+                    }
+                );
+
+                
             }
             else{
                 vm.loggedIn = false;
@@ -75,6 +88,7 @@
         function logout() {
             console.log("usao u logout");
             $window.localStorage.removeItem("token");
+            $window.localStorage.removeItem("loggedUser");
             checkIfLogged();
             $location.path('/');
         }
