@@ -20,13 +20,13 @@ public class AddAdvertisementDTO {
 
     protected String phoneNumber;
 
-    protected AdvertisementType type;
+    protected String type;
 
+    //id od nekretnine!!!
     private long id;
 
-    private Currency currency;
+    private String currency;
 
-    private String token;
 
     public AddAdvertisementDTO() {
     }
@@ -63,12 +63,20 @@ public class AddAdvertisementDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public AdvertisementType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(AdvertisementType type) {
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public long getId() {
@@ -79,19 +87,4 @@ public class AddAdvertisementDTO {
         this.id = id;
     }
 
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 }

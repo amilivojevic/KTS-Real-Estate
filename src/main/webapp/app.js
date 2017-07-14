@@ -311,6 +311,21 @@
                         }
                     }
                 })
+                .state('getAllRealEstates', {
+                    url: '/get_all_real_estates',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/realEstate/getAllRealEstates.html',
+                            controller: 'GetAllRealEstatesController',
+                            controllerAs: 'getAllRealEstatesCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
                 .state('verify', {
                     url: '/authenticate/{id:int}',
                     templateUrl: 'page/authentication.html',

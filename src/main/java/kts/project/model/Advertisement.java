@@ -60,6 +60,9 @@ public class Advertisement {
     @JoinColumn(name = "owner", nullable = false)
     private Owner owner;
 
+    public Advertisement() {
+    }
+
     public Advertisement(String title, float price, Date announcementDate, Date updateDate, Date endingDate, String phoneNumber, List<Review> reviews, AdvertisementType type, AdvertisementState state, RealEstate realEstate, Currency currency, Owner owner) {
         this.title = title;
         this.price = price;
@@ -170,4 +173,6 @@ public class Advertisement {
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
+
+
 }

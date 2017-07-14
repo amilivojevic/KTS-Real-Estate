@@ -12,26 +12,26 @@
     function AddNewAdvertisementController($http, $scope, $window) {
 
         var vm = this;
-        vm.addNewRealEstate = addNewRealEstate;
-        vm.types = ['Rent', 'Sell'];
+        vm.addNewAdvertisement = addNewAdvertisement;
+        vm.types = ['Rent', 'Sale'];
         vm.currency = ['EUR', 'RSD', 'USD'];
 
         //method for user registration
-        function addNewRealEstate () {
+        function addNewAdvertisement () {
             console.log("USAO U dodaj novi add FUNKCIJU");
             vm.new_advertisement = {
                 title : vm.newAd.title,
-                price : vm.newAd.price,
+                price : parseFloat(vm.newAd.price),
                 endingDate : vm.newAd.endingDate,
                 phoneNumber : vm.newAd.phoneNumber,
                 type : vm.newAd.type,
-                id : vm.newAd.id,
+                ////id od nekretnine!!!
+                id : 1,
                 currency : vm.newAd.currency,
-                token : vm.newAd.token
-
+                realEstateId : 1
             }
 
-            $http.post('/api/advertisements/'+type+'/addNewAdvertisement', vm.new_advertisement).then(function (response) {
+            $http.post('/api/advertisement/addNewAdvertisement', vm.new_advertisement).then(function (response) {
 
               /*  $scope.redirect();*/
 
