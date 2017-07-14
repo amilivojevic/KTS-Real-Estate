@@ -1,4 +1,4 @@
-package kts.project.dto;
+package kts.project.controller.dto;
 
 import kts.project.model.Advertisement;
 import kts.project.model.Location;
@@ -16,8 +16,6 @@ import java.util.List;
 public class RealEstateDTO {
 
 
-    protected long id;
-
     protected String description;
 
     protected String imageUrl;
@@ -34,44 +32,32 @@ public class RealEstateDTO {
 
     protected int bathroomsNumber;
 
-    protected Location address;
+    protected String city;
 
-    protected Owner owner;
+    protected String cityArea;
 
-    protected HeatingType heatingType;
+    protected String street;
 
-    protected RealEstateType rs_type;
+    protected String streetNumber;
 
-    private List<Advertisement> advertisements = new ArrayList<>();
+    protected String state;
 
-    public RealEstateDTO(RealEstate realEstate) {
-        id = realEstate.getId();
-        description = realEstate.getDescription();
-        imageUrl = realEstate.getImageUrl();
-        furniture = realEstate.isFurniture();
-        parking = realEstate.isParking();
-        area = realEstate.getArea();
-        constructionYear = realEstate.getConstructionYear();
-        roomsNumber = realEstate.getRoomsNumber();
-        bathroomsNumber = realEstate.getBathroomsNumber();
-        address = realEstate.getAddress();
-        owner = realEstate.getOwner();
-        heatingType = realEstate.getHeatingType();
-        rs_type = realEstate.getRs_type();
-        advertisements = realEstate.getAdvertisements();
+    protected String zipCode;
 
-    }
+    protected String token;
+
+    protected String heatingType;
+
+    protected String rs_type;
+
+
+
 
     public RealEstateDTO() {
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+
 
     public String getDescription() {
         return description;
@@ -137,43 +123,75 @@ public class RealEstateDTO {
         this.bathroomsNumber = bathroomsNumber;
     }
 
-    public Location getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(Location address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public String getCityArea() {
+        return cityArea;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setCityArea(String cityArea) {
+        this.cityArea = cityArea;
     }
 
-    public HeatingType getHeatingType() {
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getHeatingType() {
         return heatingType;
     }
 
-    public void setHeatingType(HeatingType heatingType) {
+    public void setHeatingType(String heatingType) {
         this.heatingType = heatingType;
     }
 
-    public RealEstateType getRs_type() {
+    public String getRs_type() {
         return rs_type;
     }
 
-    public void setRs_type(RealEstateType rs_type) {
+    public void setRs_type(String rs_type) {
         this.rs_type = rs_type;
-    }
-
-    public List<Advertisement> getAdvertisements() {
-        return advertisements;
-    }
-
-    public void setAdvertisements(List<Advertisement> advertisements) {
-        this.advertisements = advertisements;
     }
 }

@@ -61,6 +61,9 @@ public class RealEstate {
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<Advertisement> advertisements = new ArrayList<>();
 
+    public RealEstate() {
+    }
+
     public RealEstate(String description, String imageUrl, boolean furniture, boolean parking, float area, String constructionYear, int roomsNumber, int bathroomsNumber, Location address, Owner owner, HeatingType heatingType, RealEstateType rs_type, List<Advertisement> advertisements) {
         this.description = description;
         this.imageUrl = imageUrl;

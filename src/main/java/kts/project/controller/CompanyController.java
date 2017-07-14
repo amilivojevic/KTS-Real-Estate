@@ -54,23 +54,7 @@ public class CompanyController {
                 registerCompanyDTO.getType().equalsIgnoreCase("COMPANY")) {
 
             company = new Company(
-                registerCompanyDTO.getUsername(),
-                    encoder.encode(registerCompanyDTO.getPassword()),
-                registerCompanyDTO.getEmail(),
-                Role.OWNER,
-                registerCompanyDTO.getName(),
-                registerCompanyDTO.getSurname(),
-                registerCompanyDTO.getBirthDate(),
-                registerCompanyDTO.getPhoneNumber(),
-                registerCompanyDTO.getAddress(),
-                registerCompanyDTO.getCity(),
-                registerCompanyDTO.getCountry(),
-                registerCompanyDTO.getAccountNumber(),
-                registerCompanyDTO.getImageUrl(),
-                registerCompanyDTO.getPib(),
-                registerCompanyDTO.getSite(),
-                registerCompanyDTO.getFax(),
-                false
+
             );
 
             company.setAuthority(authorityRepository.findByName(("ROLE_OWNER")));
