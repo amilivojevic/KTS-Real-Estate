@@ -122,8 +122,9 @@ public class AdvertisementController {
         List<Advertisement> allAdvertisements = new ArrayList<>();
 
         for (Advertisement o : advertisementRepository.findAll()) {
-
-            allAdvertisements.add(o);
+            if(o.getState() == AdvertisementState.ACCEPTED) {
+                allAdvertisements.add(o);
+            }
 
         }
 
