@@ -9,6 +9,7 @@
     function ownerController($http, $scope, $cookies, $window,LoginFactory) {
         var vm = this;
         vm.getAllAdvertisements = getAllAdvertisements;
+        vm.eraseAdvertisement = eraseAdvertisement;
 
         getAllAdvertisements();
 
@@ -42,6 +43,20 @@
                 }, function(response) {
                     alert(JSON.stringify(response.data));
                 });
+        }
+
+        function eraseAdvertisement(id){
+            if (confirm("Are you sure you want to erase this advertisement: " + id + "?") == true) {
+
+                $http.get('/api/advertisement/erase/'+ id)
+                    .then(function(response) {
+
+
+                        getAllAdvertisements();
+                    }, function(response) {
+                        alert(JSON.stringify(response.data));
+                    });
+            }
         }
     }
 
