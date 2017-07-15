@@ -80,102 +80,42 @@
 
                     <h1 class="blog_head" style="color: #F94B4B">Your listings:</h1>
                     <div class="tab-1">
-                    <ul class="tab_img tab_1">
-                        <li>
-                            <div class="client_box1">
-                                <img src="images/pic1.jpg" class="img-responsive" alt=""/>
-                                <div class="box_type">$&nbsp;650</div>
-                                <h3 class="m_1"><a href="single.html">Dolor Sit</a></h3>
-                                <div class="boxed_mini_details clearfix">
-                                                    <span class="area first"><strong>Rooms</strong><i class="fa fa-car icon1"></i>
-                                                    2</span>
-                                    <span class="status"><strong>Bathrooms</strong>
-                                                    2</span>
-                                    <span class="bedrooms last"><strong>Garage</strong>
-                                                    2</span>
-                                </div>
+
+                        <div class="tab-1">
+                            <div  ng-repeat="o in ownerCtrl.allAdvertisements">
+
+                                <ul class="tab_img tab_1" >
+                                    <li>
+                                        <div class="client_box1">
+                                            <img ng-src="{{o.realEstate.imageUrl}}" class="img-responsive" alt="images/pic4.jpg"/>
+                                            <h3 class="m_1"><a href="single.html">Dolor suit</a></h3>
+                                            <div class="boxed_mini_details clearfix">
+                                                <span class="bedrooms last"><strong>Title</strong>
+                                                    {{o.title}}</span>
+                                                <span class="area first"><strong>Price</strong><i></i>
+                                                   {{o.price}}</span>
+                                                <span class="bedrooms last"><strong>Contact</strong>
+                                                    {{o.phoneNumber}}</span>
+                                            </div>
+                                            <div align = "Center">
+                                                <form ng-submit="getAllRealEstatesCtrl.redirect2(o.id)" >
+                                                    <label class="btn4 btn-82 btn-82c"><input type="submit" value="Edit"></label>
+                                                </form>
+                                                <form ng-submit="getAllRealEstatesCtrl.deleteRealEstate(o.id)">
+                                                    <label class="btn1 btn-8 btn-8c"  ><input  type="submit" value="Delete"></label>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </li>
+
+                                    <div class="clearfix"></div>
+                                </ul>
                             </div>
-                        </li>
-                        <li>
-                            <div class="client_box1">
-                                <img src="images/pic2.jpg" class="img-responsive" alt=""/>
-                                <div class="box_type">$&nbsp;450</div>
-                                <h3 class="m_1"><a href="single.html">Dolor Sit</a></h3>
-                                <div class="boxed_mini_details clearfix">
-                                                <span class="area first"><strong>Rooms</strong><i class="glyphicon glyphicon-user"></i>
-                                                    2</span>
-                                    <span class="status"><strong>Bathrooms</strong>
-                                                    2</span>
-                                    <span class="bedrooms last"><strong>Garage</strong>
-                                                    2</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="last">
-                            <div class="client_box1">
-                                <img src="images/pic3.jpg" class="img-responsive" alt=""/>
-                                <div class="box_type">$&nbsp;220</div>
-                                <h3 class="m_1"><a href="single.html">Dolor Sit</a></h3>
-                                <div class="boxed_mini_details clearfix">
-                                                    <span class="area first"><strong>Rooms</strong><i class="fa fa-info icon1"></i>
-                                                    2</span>
-                                    <span class="status"><strong>Bathrooms</strong>
-                                                    2</span>
-                                    <span class="bedrooms last"><strong>Garage</strong>
-                                                    2</span>
-                                </div>
-                            </div>
-                        </li>
-                        <div class="clearfix"></div>
-                    </ul>
-                    <ul class="tab_img">
-                        <li>
-                            <div class="client_box1">
-                                <img src="images/pic4.jpg" class="img-responsive" alt=""/>
-                                <div class="box_type">$&nbsp;650</div>
-                                <h3 class="m_1"><a href="single.html">Dolor Sit</a></h3>
-                                <div class="boxed_mini_details clearfix">
-                                                <span class="area first"><strong>Rooms</strong><i class="fa fa-info icon1"></i>
-                                                    2</span>
-                                    <span class="status"><strong>Bathrooms</strong>
-                                                    2</span>
-                                    <span class="bedrooms last"><strong>Garage</strong>
-                                                    2</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="client_box1">
-                                <img src="images/pic5.jpg" class="img-responsive" alt=""/>
-                                <div class="box_type">$&nbsp;450</div>
-                                <h3 class="m_1"><a href="single.html">Dolor Sit</a></h3>
-                                <div class="boxed_mini_details clearfix">
-                                                <span class="area first"><strong>Rooms</strong><i class="fa fa-info icon1"></i>
-                                                    2</span>
-                                    <span class="status"><strong>Bathrooms</strong>
-                                                    2</span>
-                                    <span class="bedrooms last"><strong>Garage</strong>
-                                                    2</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="last">
-                            <div class="client_box1">
-                                <img src="images/pic6.jpg" class="img-responsive" alt=""/>
-                                <div class="box_type">$&nbsp;500</div>
-                                <h3 class="m_1"><a href="single.html">Dolor Sit</a></h3>
-                                <div class="boxed_mini_details clearfix">
-                                                    <span class="area first"><strong>Garage</strong>
-                                                    2</span>
-                                    <span class="status"><strong>Baths</strong>
-                                                    2</span>
-                                    <span class="bedrooms last"><strong>Beds</strong>
-                                                    2</span>
-                                </div>
-                            </div>
-                        </li>
-                        <div class="clearfix"></div>
-                    </ul>
+                        </div>
+
+
+
                 </div>
                 </div>
             </div>

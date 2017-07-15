@@ -89,7 +89,7 @@
 
 
                 <div ng-if="addNewAdvertisementCtrl.newAd.type == 'Sale'" >
-                    <div   ng-submit="addNewAdvertisementCtrl.addNewAdvertisement()" >
+                    <div    >
                         <div class="col-md-2 contact_left">
 
                         </div>
@@ -97,23 +97,24 @@
                             <form>
                                 <div class="text">
                                     <div class="text-fild">
-                                        <span for="titleS">Title:</span>
-                                        <input type="text" class="text" id="titleS" ng-model="addNewAdvertisementCtrl.newAd.title" required value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
+                                        <span for="title2">Title:</span>
+                                        <input type="text" class="text" id="title2" ng-model="addNewAdvertisementCtrl.newAd.title" required value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
                                     </div>
                                     <div class="text-fild">
-                                        <span for="priceS">Price per month:</span>
+                                        <span for="price2">Price per month:</span>
                                         <input style="width: 350px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important"  type="number"  min=0 class="text" id="priceS" required ng-model="addNewAdvertisementCtrl.newAd.price"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                                           border: 1px solid #DAD8D8; !important"  type="number"  min=0 class="text" id="price2" required ng-model="addNewAdvertisementCtrl.newAd.price"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
                                     </div>
                                 </div>
                                 <div class="text">
                                     <div class="text-fild">
-                                        <span for="endingDateS">Expiration date:</span>
-                                        <input type="text" class="text" id="endingDateS" ng-model="addNewAdvertisementCtrl.newAd.endingDate" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
+                                        <span for="endingDate2">Expiration date:</span>
+                                        <input type="date" style="width: 350px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" class="text" id="endingDate2" ng-model="addNewAdvertisementCtrl.newAd.endingDate" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
                                     </div>
                                     <div class="text-fild">
-                                        <span for="phoneNumberS">Phone number:</span>
-                                        <input type="text" class="text" id="phoneNumberS" ng-model="addNewAdvertisementCtrl.newAd.phoneNumber" required value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter repeated password here';}">
+                                        <span for="phoneNumber2">Phone number:</span>
+                                        <input type="text" class="text" id="phoneNumber2" ng-model="addNewAdvertisementCtrl.newAd.phoneNumber" required value="Enter password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter repeated password here';}">
                                     </div>
                                 </div>
 

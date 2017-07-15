@@ -2,14 +2,12 @@ package kts.project.controller;
 
 import kts.project.controller.dto.RegisterDTO;
 import kts.project.controller.dto.RegisterOwnerDTO;
+import kts.project.model.Advertisement;
 import kts.project.model.Company;
 import kts.project.model.Owner;
 import kts.project.model.User;
 import kts.project.model.enumerations.Role;
-import kts.project.repository.AuthorityRepository;
-import kts.project.repository.LocationRepository;
-import kts.project.repository.OwnerRepository;
-import kts.project.repository.UserRepository;
+import kts.project.repository.*;
 import kts.project.service.EmailService;
 import kts.project.service.UserService;
 import kts.project.util.ResponseMessage;
@@ -48,6 +46,8 @@ public class OwnerController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    AdvertisementRepository advertisementRepository;
 
     //registracija obicnih korisnika!
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
@@ -106,6 +106,22 @@ public class OwnerController {
             return new ResponseEntity<>(allOwners, HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getAllAdvertisements", method = RequestMethod.GET)
+    public ResponseEntity getAllAdvertisements()
+    {
+
+        List<Advertisement> allAdvertisements = new ArrayList<>();
+
+        for (Advertisement o : advertisementRepository.findAll()) {
+
+            allAdvertisements.add(o);
+
+        }
+
+        return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
+
     }
 
 }
