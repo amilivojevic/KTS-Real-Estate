@@ -6,6 +6,8 @@ import kts.project.model.Advertisement;
 import kts.project.model.Company;
 import kts.project.model.Owner;
 import kts.project.model.User;
+import kts.project.model.*;
+import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.Role;
 import kts.project.repository.*;
 import kts.project.service.EmailService;
@@ -48,6 +50,10 @@ public class OwnerController {
 
     @Autowired
     AdvertisementRepository advertisementRepository;
+
+    @Autowired
+    RealEstateRepository realEstateRepository;
+
 
     //registracija obicnih korisnika!
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
@@ -109,8 +115,7 @@ public class OwnerController {
     }
 
     @RequestMapping(value = "/getAllAdvertisements", method = RequestMethod.GET)
-    public ResponseEntity getAllAdvertisements()
-    {
+    public ResponseEntity getAllAdvertisements() {
 
         List<Advertisement> allAdvertisements = new ArrayList<>();
 
@@ -121,6 +126,36 @@ public class OwnerController {
         }
 
         return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/erase/{username}", method = RequestMethod.GET)
+    public ResponseEntity erase(@PathVariable String username, @RequestHeader("X-Auth-Token") String token)
+    {
+        User user = userService.findByToken(token);
+        if (user.getRole() == Role.SYS_ADMIN){
+
+            User eraseUser = userRepository.findByUsername(username);
+
+            for (Advertisement a : advertisementRepository.findAll()) {
+                if(a.getOwner().getUsername().equals(username)){
+                    advertisementRepository.delete(a.getId());
+                }
+            }
+
+            for (RealEstate re : realEstateRepository.findAll()) {
+                if(re.getOwner().getUsername().equals(username)){
+                    realEstateRepository.delete(re.getId());
+                }
+            }
+
+
+
+            ownerRepository.delete((Owner)eraseUser);
+            userRepository.delete(eraseUser);
+            //treba obrisati i sve one iste!!!!
+            return new ResponseEntity<>(eraseUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
 
     }
 
