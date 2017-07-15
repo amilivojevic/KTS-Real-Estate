@@ -4,6 +4,7 @@ import kts.project.controller.dto.AddAdvertisementDTO;
 import kts.project.model.Advertisement;
 import kts.project.model.Owner;
 import kts.project.model.Review;
+import kts.project.model.User;
 import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.AdvertisementType;
 import kts.project.model.enumerations.Currency;
@@ -11,6 +12,7 @@ import kts.project.repository.AdvertisementRepository;
 import kts.project.repository.RealEstateRepository;
 import kts.project.service.AdvertisementService;
 import kts.project.service.UserService;
+import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -120,12 +122,29 @@ public class AdvertisementController {
         List<Advertisement> allAdvertisements = new ArrayList<>();
 
         for (Advertisement o : advertisementRepository.findAll()) {
-
-            allAdvertisements.add(o);
+            if(o.getState() == AdvertisementState.ACCEPTED) {
+                allAdvertisements.add(o);
+            }
 
         }
 
         return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/erase/{id}", method = RequestMethod.GET)
+    public ResponseEntity erase(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
+    {
+        User user = userService.findByToken(token);
+        Advertisement a = advertisementRepository.findById(id);
+        if (a.getOwner().getId() == user.getId()){
+
+            advertisementRepository.delete(a);
+
+            //treba obrisati i sve one iste!!!!
+            return new ResponseEntity<>(a, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete advertisement!"), HttpStatus.OK);
 
     }
 

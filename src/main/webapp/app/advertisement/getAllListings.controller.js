@@ -14,6 +14,18 @@
         var vm = this;
         vm.getAllListings = getAllListings;
 
+        vm.setFilter = function () {
+            console.log("fileter1!! : " + vm.filterConteiners.f1);
+            console.log("fileter2!! : " + vm.filterConteiners.f2);
+            console.log("fileter3!! : " + vm.filterConteiners.f3);
+            console.log("fileter4!! : " + vm.filterConteiners.f4);
+            console.log("fileter5!! : " + vm.filterConteiners.f5);
+
+            $window.location.href = "http://" + $window.location.host + "/#!/filterAdvertisement";
+
+
+        }
+
         getAllListings();
 
 
@@ -21,7 +33,7 @@
         function getAllListings() {
 
 
-
+            vm.filterConteiners = {};
 
             $(function () {
                 $("#slider").responsiveSlides({

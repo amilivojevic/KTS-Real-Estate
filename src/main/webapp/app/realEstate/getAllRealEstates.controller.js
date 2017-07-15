@@ -9,6 +9,7 @@
     function getAllRealEstatesController($http, $scope, $cookies, $window,NewAdvertisementService) {
 
         var vm = this;
+        vm.eraseRealEstate = eraseRealEstate;
         vm.getAllRealEstates = getAllRealEstates;
 
         getAllRealEstates();
@@ -47,6 +48,20 @@
                 }, function(response) {
                     alert(JSON.stringify(response.data));
                 });
+        }
+
+        function eraseRealEstate(id){
+            if (confirm("Are you sure you want to erase this real estate: " + id + "?") == true) {
+
+                $http.get('/api/realEstate/erase/'+ id)
+                    .then(function(response) {
+
+
+                        getAllRealEstates();
+                    }, function(response) {
+                        alert(JSON.stringify(response.data));
+                    });
+            }
         }
     }
 })();

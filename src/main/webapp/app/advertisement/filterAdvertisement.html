@@ -1,0 +1,205 @@
+<div class="about_top">
+    <div class="container" >
+        <div class="about" >
+            <h1 class="blog_head" style="color: #F94B4B">Advanced filters:</h1>
+            <div ng-submit="filterAdvertisementCtrl.setFilter()" >
+                <div class="">
+                    <div class="container">
+                        <div class="col-xs-10 dropdown-buttons">
+                            <div class="col-xs-2 dropdown-button" style="line-height: 44px;
+  							border: 1px solid #DAD8D8;
+  							width: 200px;">
+                                <div class="section_room" >
+                                    <select ng-model="filterAdvertisementCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                        <option value="" disabled selected>Select contract type</option>
+                                        <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
+                                        <option style="color: #F94B4B;" value="Rent">Rent</option>
+                                        <option style="color: #F94B4B;" value="Sel">Sell</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-3" >
+                            <div  class="text-fild" style="width: 220px;">
+                                <input  type="text" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                            </div>
+                            </div>
+                            <div class="col-xs-2" >
+                                <div class="text-fild" style="width: 142px;">
+                                    <input style="width: 142px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
+                                </div>
+                            </div>
+                            <div class="col-xs-2" >
+                                <div class="text-fild" style="width: 142px;">
+                                    <input style="width: 142px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+                </br>
+
+
+                <!-- -->
+
+
+
+
+                <div class="">
+                <div class="container">
+                    <div class="col-xs-10 dropdown-buttons">
+                        <div class="col-xs-2 dropdown-button" style="line-height: 44px;
+                            border: 1px solid #DAD8D8;
+                            width: 200px;">
+                            <div class="section_room" >
+                                <select ng-model="filterAdvertisementCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                    <option value="" disabled selected>Select currency</option>
+                                    <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
+                                    <option  style="color: #F94B4B;"value="EUR">EUR</option>
+                                    <option  style="color: #F94B4B;" value="RSD">RSD</option>
+                                    <option  style="color: #F94B4B;"value="USD">USD</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-2" >
+                            <div  class="text-fild" style="width: 142px;">
+                                <input  type="text" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f6" id="adLocation" required placeholder="Enter area in m2">
+                            </div>
+                        </div>
+                        <div class="col-xs-2" >
+                            <div class="text-fild">
+                                <input style="width: 142px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f7" id="idMinPrice"  required placeholder="Rooms number">
+                            </div>
+                        </div>
+                        <div class="col-xs-2" >
+                            <div class="text-fild">
+                                <input style="width: 161px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f8" id="idMaxPrice"  required placeholder="Batrhrooms number">
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="col-xs-2 submit_button">
+                        <form>
+                            <input type="submit" value="Search">
+                        </form>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+
+                </br>
+
+                <div class="">
+                    <div class="container">
+                        <div class="col-xs-10 dropdown-buttons">
+                            <div class="col-xs-4 dropdown-button" style="line-height: 44px;
+                            border: 1px solid #DAD8D8;
+                            width: 200px;">
+                                <div class="section_room" >
+                                    <select ng-model="filterAdvertisementCtrl.filterConteiners.f9" id="adCurrency" class="frm-field required" required>
+                                        <option value="" disabled selected>Select heating type</option>
+                                        <option  style="color: #F94B4B;"value="All heating types">All heating types</option>
+                                        <option  style="color: #F94B4B;"value="EUR">None</option>
+                                        <option  style="color: #F94B4B;" value="RSD">Central</option>
+                                        <option  style="color: #F94B4B;"value="USD">Fireplace</option>
+                                        <option  style="color: #F94B4B;"value="USD">Solar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 text-fild">
+                                <span for="furniture">Furniture:</span>
+                                <input type="checkbox" class="text" id="furniture"  ng-model="filterAdvertisementCtrl.filterConteiners.f10"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                            </div>
+                            <div class="col-xs-6 text-fild">
+                                <span for="furniture">Parking:</span>
+                                <input type="checkbox" class="text" id="furniture"  ng-model="filterAdvertisementCtrl.filterConteiners.f11"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                            </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+            <div class="contact">
+
+
+                <div class="col-md-2 contact_left">
+
+                </div>
+                <div class="col-md-8 contact_right">
+
+                    <h1 class="blog_head" style="color: #F94B4B">Your listings:</h1>
+                    <div class="tab-1">
+
+                        <div class="tab-1">
+                            <div  ng-repeat="o in ownerCtrl.allAdvertisements">
+
+                                <ul class="tab_img tab_1" >
+                                    <li>
+                                        <div class="client_box1">
+                                            <img ng-src="{{o.realEstate.imageUrl}}" class="img-responsive" alt="images/pic4.jpg"/>
+                                            <h3 class="m_1"><a href="single.html">Dolor suit</a></h3>
+                                            <div class="boxed_mini_details clearfix">
+                                                <span class="bedrooms last"><strong>Title</strong>
+                                                    {{o.title}}</span>
+                                                <span class="area first"><strong>Price</strong><i></i>
+                                                   {{o.price}}</span>
+                                                <span class="bedrooms last"><strong>Contact</strong>
+                                                    {{o.phoneNumber}}</span>
+                                            </div>
+                                            <div align = "Center">
+                                                <form ng-submit="getAllRealEstatesCtrl.redirect2(o.id)" >
+                                                    <label class="btn4 btn-82 btn-82c"><input type="submit" value="Edit"></label>
+                                                </form>
+                                                <form ng-submit="ownerCtrl.eraseAdvertisement(o.id)">
+                                                    <label class="btn1 btn-8 btn-8c"  ><input  type="submit" value="Delete"></label>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </li>
+
+                                    <div class="clearfix"></div>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="clearfix"> </div>
+</div>
+
+
+
+
+
+<div class="clearfix"> </div>
+</br>
+
+</div>
+</div>

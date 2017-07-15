@@ -1,15 +1,15 @@
 package kts.project.controller;
 
 import kts.project.controller.dto.RealEstateDTO;
-import kts.project.model.Location;
-import kts.project.model.Owner;
-import kts.project.model.RealEstate;
+import kts.project.model.*;
 import kts.project.model.enumerations.HeatingType;
 import kts.project.model.enumerations.RealEstateType;
+import kts.project.repository.AdvertisementRepository;
 import kts.project.repository.LocationRepository;
 import kts.project.repository.RealEstateRepository;
 import kts.project.service.RealEstateService;
 import kts.project.service.UserService;
+import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +36,9 @@ public class RealEstateController {
 
     @Autowired
     private LocationRepository locationRepository;
+
+    @Autowired
+    private AdvertisementRepository advertisementRepository;
 
     //Adding new real estate
     @RequestMapping(value = "/addNewRealEstate", method = RequestMethod.POST, consumes = "application/json")
@@ -123,6 +126,31 @@ public class RealEstateController {
 
             }
             return new ResponseEntity<>(allRealEstates, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/erase/{id}", method = RequestMethod.GET)
+    public ResponseEntity erase(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
+    {
+        User user = userService.findByToken(token);
+
+
+        RealEstate re = realEstateRepository.findById(id);
+
+        if (re.getOwner().getId() == user.getId()){
+
+
+            for (Advertisement a : advertisementRepository.findAll()) {
+                if(a.getRealEstate().getId() == id){
+                    advertisementRepository.delete(a.getId());
+                }
+            }
+            realEstateRepository.delete(re);
+
+            //treba obrisati i sve one iste!!!!
+            return new ResponseEntity<>(re, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete this real estate!"), HttpStatus.OK);
 
     }
 

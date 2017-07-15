@@ -47,7 +47,7 @@
 
             }
 
-
+            $window.location.href = "http://" + $window.location.host + "/#!/profile";
 
             console.log("novi korisnik: " + JSON.stringify(vm.newUser) )
 

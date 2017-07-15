@@ -373,6 +373,21 @@
                         }
                     }
                 })
+                .state('filterAdvertisement', {
+                    url: '/filterAdvertisement',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/advertisement/filterAdvertisement.html',
+                            controller: 'FilterAdvertisementController',
+                            controllerAs: 'filterAdvertisementCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
                 .state('verify', {
                     url: '/authenticate/{id:int}',
                     templateUrl: 'page/authentication.html',

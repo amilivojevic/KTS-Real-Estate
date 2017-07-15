@@ -10,39 +10,47 @@
                         <h1>Est notare quam littera gothica, quam nunc.</h1>
                         <h2>33000 different properties</h2>
                     </div>
-                    <div class="details">
+                    <div class="details" ng-submit="getAllListingsCtrl.setFilter()">
                         <div class="container">
                             <div class="col-xs-10 dropdown-buttons">
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All property types</option>
-                                            <option value="null">Apartment</option>
-                                            <option value="null">House</option>
-                                            <option value="null">Office</option>
-                                            <option value="null">Garage</option>
+                                <div class="col-xs-4 dropdown-button" style="width: 200px; ">
+                                    <div class="section_room" >
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                            <option value="" disabled selected>Select contract type</option>
+                                            <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
+                                            <option style="color: #F94B4B;" value="Rent">Rent</option>
+                                            <option style="color: #F94B4B;" value="Sel">Sell</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">City</option>
-
-                                        </select>
+                                <div  class="text-fild" style="width: 250px;">
+                                    <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                                </div>
+                                <div class="col-xs-2" >
+                                    <div class="text-fild" style="width: 120px;">
+                                        <input  style="width: 127px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
                                     </div>
                                 </div>
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All contracts</option>
-                                            <option value="null">Sale</option>
-                                            <option value="AX">Rent</option>
-                                            <option value="AX">Sold</option>
+                                <div class="" >
+                                    <div class="text-fild" style="width: 125px;">
+                                        <input  style="width: 129px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 dropdown-button" style="width: 175px; ">
+                                    <div class="section_room" >
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                            <option value="" disabled selected>Select currency</option>
+                                            <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
+                                            <option  style="color: #F94B4B;"value="EUR">EUR</option>
+                                            <option  style="color: #F94B4B;" value="RSD">RSD</option>
+                                            <option  style="color: #F94B4B;"value="USD">USD</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-xs-2 submit_button">
                                 <form>
                                     <input type="submit" value="Search">
@@ -53,55 +61,64 @@
                     </div>
                 </div>
             </li>
+
+
             <li><img src="images/b2.jpg" class="img-responsive" alt=""/>
-                <div class="banner_desc">
-                    <div class="container">
-                        <h1>Est notare quam littera gothica, quam nunc.</h1>
-                        <h2>170 countries covered</h2>
-                    </div>
-                    <div class="details">
-                        <div class="container">
-                            <div class="col-xs-10 dropdown-buttons">
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All Locations</option>
-                                            <option value="null">Business</option>
-                                            <option value="AX">First Class</option>
-                                            <option value="AX">Premium Economy</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All Property types</option>
-                                            <option value="null">House</option>
-                                            <option value="AX">Apartment</option>
-                                            <option value="AX">Premium Economy</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All contracts</option>
-                                            <option value="null">Sale</option>
-                                            <option value="AX">Rent</option>
-                                            <option value="AX">Sold</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-2 submit_button">
-                                <form>
-                                    <input type="submit" value="Search">
-                                </form>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                    </div>
-                </div>
+               <div class="banner_desc">
+                   <div class="container">
+                       <h1>Est notare quam littera gothica, quam nunc.</h1>
+                       <h2>33000 different properties</h2>
+                   </div>
+                   <div class="details" ng-submit="getAllListingsCtrl.setFilter()">
+                       <div class="container">
+                           <div class="col-xs-10 dropdown-buttons">
+                               <div class="col-xs-4 dropdown-button" style="width: 200px; ">
+                                   <div class="section_room" >
+                                       <select ng-model="getAllListingsCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                           <option value="" disabled selected>Select contract type</option>
+                                           <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
+                                           <option style="color: #F94B4B;" value="Rent">Rent</option>
+                                           <option style="color: #F94B4B;" value="Sel">Sell</option>
+                                       </select>
+                                   </div>
+                               </div>
+                               <div  class="text-fild" style="width: 250px;">
+                                   <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                               </div>
+                               <div class="col-xs-2" >
+                                   <div class="text-fild" style="width: 120px;">
+                                       <input  style="width: 127px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
+                                   </div>
+                               </div>
+                               <div class="" >
+                                   <div class="text-fild" style="width: 125px;">
+                                       <input  style="width: 129px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                   </div>
+                               </div>
+                               <div class="col-xs-2 dropdown-button" style="width: 175px; ">
+                                   <div class="section_room" >
+                                       <select ng-model="getAllListingsCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                           <option value="" disabled selected>Select currency</option>
+                                           <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
+                                           <option  style="color: #F94B4B;"value="EUR">EUR</option>
+                                           <option  style="color: #F94B4B;" value="RSD">RSD</option>
+                                           <option  style="color: #F94B4B;"value="USD">USD</option>
+                                       </select>
+                                   </div>
+                               </div>
+                           </div>
+
+                           <div class="col-xs-2 submit_button">
+                               <form>
+                                   <input type="submit" value="Search">
+                               </form>
+                           </div>
+                           <div class="clearfix"> </div>
+                       </div>
+                   </div>
+               </div>
             </li>
             <li><img src="images/b3.jpg" class="img-responsive" alt=""/>
                 <div class="banner_desc">
@@ -109,40 +126,47 @@
                         <h1>Est notare quam littera gothica, quam nunc.</h1>
                         <h2>Over 100 000 satisfied users</h2>
                     </div>
-                    <div class="details">
+                    <div class="details" ng-submit="getAllListingsCtrl.setFilter()">
                         <div class="container">
                             <div class="col-xs-10 dropdown-buttons">
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All Locations</option>
-                                            <option value="null">Business</option>
-                                            <option value="AX">First Class</option>
-                                            <option value="AX">Premium Economy</option>
+                                <div class="col-xs-4 dropdown-button" style="width: 200px; ">
+                                    <div class="section_room" >
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                            <option value="" disabled selected>Select contract type</option>
+                                            <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
+                                            <option style="color: #F94B4B;" value="Rent">Rent</option>
+                                            <option style="color: #F94B4B;" value="Sel">Sell</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All Property types</option>
-                                            <option value="null">House</option>
-                                            <option value="AX">Apartment</option>
-                                            <option value="AX">Premium Economy</option>
-                                        </select>
+                                <div  class="text-fild" style="width: 250px;">
+                                    <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                                </div>
+                                <div class="col-xs-2" >
+                                    <div class="text-fild" style="width: 120px;">
+                                        <input  style="width: 127px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
                                     </div>
                                 </div>
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All contracts</option>
-                                            <option value="null">Sale</option>
-                                            <option value="AX">Rent</option>
-                                            <option value="AX">Sold</option>
+                                <div class="" >
+                                    <div class="text-fild" style="width: 125px;">
+                                        <input  style="width: 129px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 dropdown-button" style="width: 175px; ">
+                                    <div class="section_room" >
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                            <option value="" disabled selected>Select currency</option>
+                                            <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
+                                            <option  style="color: #F94B4B;"value="EUR">EUR</option>
+                                            <option  style="color: #F94B4B;" value="RSD">RSD</option>
+                                            <option  style="color: #F94B4B;"value="USD">USD</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-xs-2 submit_button">
                                 <form>
                                     <input type="submit" value="Search">
@@ -159,40 +183,47 @@
                         <h1>Est notare quam littera gothica, quam nunc.</h1>
                         <h2>24\7 client service</h2>
                     </div>
-                    <div class="details">
+                    <div class="details" ng-submit="getAllListingsCtrl.setFilter()">
                         <div class="container">
                             <div class="col-xs-10 dropdown-buttons">
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All Locations</option>
-                                            <option value="null">Business</option>
-                                            <option value="AX">First Class</option>
-                                            <option value="AX">Premium Economy</option>
+                                <div class="col-xs-4 dropdown-button" style="width: 200px; ">
+                                    <div class="section_room" >
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                            <option value="" disabled selected>Select contract type</option>
+                                            <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
+                                            <option style="color: #F94B4B;" value="Rent">Rent</option>
+                                            <option style="color: #F94B4B;" value="Sel">Sell</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All Property types</option>
-                                            <option value="null">House</option>
-                                            <option value="AX">Apartment</option>
-                                            <option value="AX">Premium Economy</option>
-                                        </select>
+                                <div  class="text-fild" style="width: 250px;">
+                                    <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                                </div>
+                                <div class="col-xs-2" >
+                                    <div class="text-fild" style="width: 120px;">
+                                        <input  style="width: 127px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
                                     </div>
                                 </div>
-                                <div class="col-xs-4 dropdown-button">
-                                    <div class="section_room">
-                                        <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                                            <option value="null">All contracts</option>
-                                            <option value="null">Sale</option>
-                                            <option value="AX">Rent</option>
-                                            <option value="AX">Sold</option>
+                                <div class="" >
+                                    <div class="text-fild" style="width: 125px;">
+                                        <input  style="width: 129px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 dropdown-button" style="width: 175px; ">
+                                    <div class="section_room" >
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                            <option value="" disabled selected>Select currency</option>
+                                            <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
+                                            <option  style="color: #F94B4B;"value="EUR">EUR</option>
+                                            <option  style="color: #F94B4B;" value="RSD">RSD</option>
+                                            <option  style="color: #F94B4B;"value="USD">USD</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-xs-2 submit_button">
                                 <form>
                                     <input type="submit" value="Search">
@@ -381,6 +412,7 @@
 			                                    {{o.phoneNumber}}</span>
                                             <span class="bedrooms last"><strong>Bathrooms</strong>
 			                                    2</span>
+
                                         </div>
                                     </div>
                                 </li>

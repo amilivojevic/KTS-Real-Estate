@@ -16,6 +16,9 @@
         vm.types = ['Rent', 'Sale'];
         vm.currency = ['EUR', 'RSD', 'USD'];
 
+
+
+
         //method for user registration
         function addNewAdvertisement () {
             var id = NewAdvertisementService.setRealEstateId();
