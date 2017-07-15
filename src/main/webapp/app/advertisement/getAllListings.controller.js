@@ -15,6 +15,25 @@
         vm.getAllListings = getAllListings;
 
         vm.setFilter = function () {
+
+
+
+            if(vm.filterConteiners.f1 == null){
+                vm.filterConteiners.f1 = "All contracts";
+            }
+            if(vm.filterConteiners.f2 == undefined){
+                vm.filterConteiners.f2 = "";
+            }
+            if(vm.filterConteiners.f3 == undefined){
+                vm.filterConteiners.f3 = 10000;
+            }
+            if(vm.filterConteiners.f4 == undefined){
+                vm.filterConteiners.f4 = 10000;
+            }
+            if(vm.filterConteiners.f5 == undefined){
+                vm.filterConteiners.f5 = "All currencies";
+            }
+            
             console.log("fileter1!! : " + vm.filterConteiners.f1);
             console.log("fileter2!! : " + vm.filterConteiners.f2);
             console.log("fileter3!! : " + vm.filterConteiners.f3);
