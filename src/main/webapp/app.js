@@ -37,7 +37,7 @@
                     controllerAs: 'ownerCtrl'
                 })
                 .when('/listings', {
-                    templateUrl: 'app/static/listings.html',
+                    templateUrl: 'app/static/getAllListings.html',
                 })
                 .when('/about', {
                     templateUrl: 'app/static/about.html',
@@ -257,10 +257,12 @@
                     }
                 })
                 .state('listing', {
-                    url: '/listing',
+                    url: '/listings',
                     views: {
                         'content': {
-                            templateUrl: 'app/static/listings.html'
+                            templateUrl: 'app/advertisement/getAllListings.html',
+                            controller: 'GetAllListingsController',
+                            controllerAs: 'getAllListingsCtrl'
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',

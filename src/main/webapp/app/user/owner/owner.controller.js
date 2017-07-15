@@ -8,6 +8,10 @@
     // owner controller
     function ownerController($http, $scope, $cookies, $window,LoginFactory) {
         var vm = this;
+        vm.getAllAdvertisements = getAllAdvertisements;
+
+        getAllAdvertisements();
+
 
         vm.userData = angular.fromJson($window.localStorage['loggedUser']);
         console.log("vm.userData = " + JSON.stringify(vm.userData));
@@ -16,5 +20,30 @@
         }
 
 
+        function getAllAdvertisements() {
+
+            $http.get('/api/users/owner/getAllAdvertisements')
+                .then(function(response) {
+
+
+                    vm.allAdvertisements = [];
+                    var ulogovani = angular.fromJson($window.localStorage['loggedUser']);
+                    console.log("Ulogovani: " + JSON.stringify(ulogovani));
+                    for (var i=0; i<response.data.length; i++) {
+                        console.log("++advertisement: " + JSON.stringify(response.data[i]));
+                        console.log("response.data[i].owner.username = "+response.data[i].owner.username );
+                        console.log("ulogovani.username = " + ulogovani.username);
+                        if ( new String(response.data[i].owner.username).valueOf() == new String(ulogovani.username).valueOf()){
+                            vm.allAdvertisements.push(response.data[i]);
+
+                        }
+                    }
+
+                }, function(response) {
+                    alert(JSON.stringify(response.data));
+                });
+        }
     }
+
+
 })();

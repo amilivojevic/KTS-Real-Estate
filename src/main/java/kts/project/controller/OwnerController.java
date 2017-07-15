@@ -2,6 +2,10 @@ package kts.project.controller;
 
 import kts.project.controller.dto.RegisterDTO;
 import kts.project.controller.dto.RegisterOwnerDTO;
+import kts.project.model.Advertisement;
+import kts.project.model.Company;
+import kts.project.model.Owner;
+import kts.project.model.User;
 import kts.project.model.*;
 import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.Role;
@@ -45,10 +49,10 @@ public class OwnerController {
     UserService userService;
 
     @Autowired
-    RealEstateRepository realEstateRepository;
+    AdvertisementRepository advertisementRepository;
 
     @Autowired
-    AdvertisementRepository advertisementRepository;
+    RealEstateRepository realEstateRepository;
 
 
     //registracija obicnih korisnika!
@@ -110,6 +114,20 @@ public class OwnerController {
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/getAllAdvertisements", method = RequestMethod.GET)
+    public ResponseEntity getAllAdvertisements() {
+
+        List<Advertisement> allAdvertisements = new ArrayList<>();
+
+        for (Advertisement o : advertisementRepository.findAll()) {
+
+            allAdvertisements.add(o);
+
+        }
+
+        return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/erase/{username}", method = RequestMethod.GET)
     public ResponseEntity erase(@PathVariable String username, @RequestHeader("X-Auth-Token") String token)
     {
@@ -138,6 +156,7 @@ public class OwnerController {
             return new ResponseEntity<>(eraseUser, HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+
     }
 
 }
