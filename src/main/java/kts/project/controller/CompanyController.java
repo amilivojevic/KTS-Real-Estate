@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 /**
  * Created by Sandra on 6/12/2017.
  */
@@ -53,9 +55,26 @@ public class CompanyController {
         if (registerCompanyDTO.getRole().equalsIgnoreCase("OWNER") &&
                 registerCompanyDTO.getType().equalsIgnoreCase("COMPANY")) {
 
-            company = new Company(
-
-            );
+            company = new Company();
+            company.setApproved(false);
+            company.setFax(registerCompanyDTO.getFax());
+            company.setPib(registerCompanyDTO.getPib());
+            company.setSite(registerCompanyDTO.getSite());
+            company.setAccountNumber(registerCompanyDTO.getAccountNumber());
+            company.setAddress(registerCompanyDTO.getAddress());
+            company.setBirthDate(registerCompanyDTO.getBirthDate());
+            company.setCity(registerCompanyDTO.getCity());
+            company.setCountry(registerCompanyDTO.getCountry());
+            company.setName(registerCompanyDTO.getName());
+            company.setSurname(registerCompanyDTO.getSurname());
+            company.setUsername(registerCompanyDTO.getUsername());
+            company.setEmail(registerCompanyDTO.getEmail());
+            company.setPassword(encoder.encode(registerCompanyDTO.getPassword()));
+            company.setPhoneNumber(registerCompanyDTO.getPhoneNumber());
+            company.setImageUrl(registerCompanyDTO.getImageUrl());
+            //
+            company.setWorkers(new ArrayList<>());
+            company.setAdvertisements(new ArrayList<>());
 
             company.setAuthority(authorityRepository.findByName(("ROLE_OWNER")));
         }

@@ -130,11 +130,11 @@
 
 									<div class="text">
 										<div class="text-fild">
-											<span for="nameC">Name of owner:</span>
+											<span for="nameC">Name of company:</span>
 											<input type="text" class="text" id="nameC" ng-model="registerCtrl.newUser.name" required value="Enter name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name here';}">
 										</div>
 										<div class="text-fild">
-											<span for="surnameC">Surname of owner:</span>
+											<span for="surnameC">Name of owner:</span>
 											<input type="text" class="text" id="surnameC" ng-model="registerCtrl.newUser.surname" required value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}">
 										</div>
 									</div>
@@ -240,7 +240,7 @@
 					
 						</div>
 						<div class="col-md-6 contact_right">
-							<form>
+							<form ng-submit="registerCtrl.register()">
 											<div class="text">
 												<div class="text-fild">
 													<span>Name:</span>
@@ -284,8 +284,12 @@
 												
 											</div>
 											<div class="msg-fild">
-													<span>Company name:</span>
-													<input type="text" class="text" value="Enter name of company here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter name of company here';}">
+												<div>
+													<span for="siteC">Company:</span><br>
+													<select style="line-height: 44px;border: 1px solid #DAD8D8;"  required>
+														<option style="color: #F94B4B;" ng-model="vm.companyId" value="{{t.id}}" ng-repeat="t in registerCtrl.companies">{{t.username}}</option>
+													</select>
+												</div>
 											</div>
 												
 											<p align = "Center">Your request for joining as private person inside company will be sent after completing the registration. After verifying your profile will be activated.</p>

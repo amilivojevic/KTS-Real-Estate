@@ -72,6 +72,7 @@
                     break;
                 case "Private Acc in Company":
                     type = "privateAcc";
+                    vm.new_user.companyId = vm.newUser.companyId;
                     break;
             }
             vm.new_user.type = type;

@@ -14,9 +14,6 @@
             findAll: findAll
         };
 
-        /*        function pathWithId(id) {
-         return BASE_URL + '/' + id;
-         }*/
 
         function findAll() {
             return $http.get(BASE_URL + "/all");

@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletRequest;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by USER on 6/11/2017.
@@ -59,7 +61,9 @@ import java.security.Principal;
         private EmailService emailService;
 
         @Autowired
-    private UserService userService;
+        private UserService userService;
+
+
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
@@ -162,6 +166,39 @@ import java.security.Principal;
     public ResponseEntity getAllUsers(@RequestHeader("X-Auth-Token") String token)
     {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "verifier/getAll", method = RequestMethod.GET)
+    public ResponseEntity getAllVerifiers(@RequestHeader("X-Auth-Token") String token)
+    {
+        User user = userService.findByToken(token);
+        if (user.getRole() == Role.SYS_ADMIN){
+            List<User> allVerifiers = new ArrayList<User>();
+
+            for (User v : userRepository.findAll()) {
+                if (v.getRole() == Role.VERIFYER){
+                    allVerifiers.add((User) v);
+                }
+            }
+            return new ResponseEntity<>(allVerifiers, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/verifier/erase/{username}", method = RequestMethod.GET)
+    public ResponseEntity erase(@PathVariable String username, @RequestHeader("X-Auth-Token") String token)
+    {
+        User user = userService.findByToken(token);
+        if (user.getRole() == Role.SYS_ADMIN){
+
+            User eraseUser = userRepository.findByUsername(username);
+
+            //obrisati i sve one stvari verifikatora!!!
+            userRepository.delete(eraseUser);
+
+            return new ResponseEntity<>(eraseUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
     }
 
 }

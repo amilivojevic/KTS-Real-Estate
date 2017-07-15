@@ -211,6 +211,21 @@
                         }
                     }
                 })
+                .state('eraseVerifier', {
+                    url: '/erase_verifier',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/admin/eraseVerifier/eraseVerifier.html',
+                            controller: 'EraseVerifierController',
+                            controllerAs: 'eraseVerifierCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbarAdmin.html',
+                            controller: 'NavbarAdminController',
+                            controllerAs: 'navbarAdminCtrl'
+                        }
+                    }
+                })
                 .state('verifyer', {
                     url: '/verifyer',
                     views: {
