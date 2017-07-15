@@ -16,17 +16,17 @@
                     </br>
                     </br>
 
-                    <h1 class="blog_head" style="color: #F94B4B">All owners:</h1>
+                    <h1 class="blog_head" style="color: #F94B4B">Companies waiting to be approved:</h1>
                     <div class="tab-1">
-                        <div ng-repeat="o in eraseOwnerCtrl.allOwners">
+                        <div ng-repeat="c in approvePrivateAccountCtrl.allUnapproved">
                             <ul class="tab_img tab_1">
                                 <li>
                                     <div class="client_box1">
-                                        <img ng-src="{{o.imageUrl}}" class="img-responsive" alt="asd"/>
-                                        <h3 class="m_1"><a href="single.html">{{o.username}}</a></h3>
+                                        <img ng-src="{{c.owner.imageUrl}}" class="img-responsive" alt="asd"/>
+                                        <h3 class="m_1">{{c.owner.username}}</h3>
                                     </div>
                                 </li>
-                                <a ng-click="eraseOwnerCtrl.erase(o.username)">Erase</a>
+                                <a ng-click="approvePrivateAccountCtrl.approve(c.id,c.owner.username)">Approve</a>
                                 <div class="clearfix"></div>
                             </ul>
 

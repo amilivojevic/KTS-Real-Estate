@@ -48,4 +48,5 @@ public class Owner extends User {
     public void setAdvertisements(List<Advertisement> advertisements) {
         this.advertisements = advertisements;
     }
+    
 }

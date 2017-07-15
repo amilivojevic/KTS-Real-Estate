@@ -211,6 +211,51 @@
                         }
                     }
                 })
+                .state('eraseVerifier', {
+                    url: '/erase_verifier',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/admin/eraseVerifier/eraseVerifier.html',
+                            controller: 'EraseVerifierController',
+                            controllerAs: 'eraseVerifierCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbarAdmin.html',
+                            controller: 'NavbarAdminController',
+                            controllerAs: 'navbarAdminCtrl'
+                        }
+                    }
+                })
+                .state('approveCompany', {
+                    url: '/approve_company',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/admin/approveCompany/approveCompany.html',
+                            controller: 'ApproveCompanyController',
+                            controllerAs: 'approveCompanyCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbarAdmin.html',
+                            controller: 'NavbarAdminController',
+                            controllerAs: 'navbarAdminCtrl'
+                        }
+                    }
+                })
+                .state('approvePrivateAccount', {
+                    url: '/approve_private_account',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/company/approvePrivateAccount/approvePrivateAccount.html',
+                            controller: 'ApprovePrivateAccountController',
+                            controllerAs: 'approvePrivateAccountCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbarAdmin.html',
+                            controller: 'NavbarAdminController',
+                            controllerAs: 'navbarAdminCtrl'
+                        }
+                    }
+                })
                 .state('verifyer', {
                     url: '/verifyer',
                     views: {

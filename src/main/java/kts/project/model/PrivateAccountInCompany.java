@@ -54,4 +54,22 @@ public class PrivateAccountInCompany {
     public void setCompany(Company company) {
         this.company = company;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "PrivateAccountInCompany{" +
+                "id=" + id +
+                ", ownerID=" + owner.getId() +
+                ", companyID=" + company.getId() +
+                ", approved=" + approved +
+                '}';
+    }
 }

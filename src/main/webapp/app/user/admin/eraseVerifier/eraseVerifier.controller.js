@@ -1,24 +1,27 @@
 /**
+ * Created by Sandra on 7/15/2017.
+ */
+/**
  * Created by Sandra on 7/14/2017.
  */
 (function() {
     angular.module("realEstateApp")
-        .controller('EraseOwnerController', eraseOwnerController);
+        .controller('EraseVerifierController', eraseVerifierController);
 
 
-    function eraseOwnerController($http, $scope, $cookies, $window) {
+    function eraseVerifierController($http, $scope, $cookies, $window) {
 
         var vm = this;
-        vm.getAllUnapprovedCompanies = getAllUnapprovedCompanies;
+        vm.getAllVerifiers = getAllVerifiers;
         vm.erase = erase;
 
-        getAllUnapprovedCompanies();
+        getAllVerifiers();
 
-        function getAllOwners() {
-            $http.get('/api/users/owner/getAll')
+        function getAllVerifiers() {
+            $http.get('/api/users/verifier/getAll')
                 .then(function(response) {
-                    console.log("all users: " + angular.toJson(response.data));
-                    vm.allOwners =  response.data;
+                    console.log("all verifiers: " + angular.toJson(response.data));
+                    vm.allVerifiers =  response.data;
 
 
                 }, function(response) {
@@ -29,11 +32,11 @@
         function erase(username){
             if (confirm("Are you sure you want to erase user: " + username + "?") == true) {
 
-                $http.get('/api/users/owner/erase/'+ username)
+                $http.get('/api/users/verifier/erase/'+ username)
                     .then(function(response) {
 
 
-                        getAllUnapprovedCompanies();
+                        getAllVerifiers();
                     }, function(response) {
                         alert(JSON.stringify(response.data));
                     });

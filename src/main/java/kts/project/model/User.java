@@ -63,6 +63,8 @@ public class User {
     @Column(name = "imageUrl", nullable = false)
     private String imageUrl;
 
+
+
     public User(String username, String password, String email, Role role, String name, String surname, Date birthDate, String phoneNumber, String address, String city, String country, String accountNumber, String imageUrl) {
         this.username = username;
         this.password = password;

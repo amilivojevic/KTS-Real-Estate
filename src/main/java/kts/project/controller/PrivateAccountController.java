@@ -5,16 +5,19 @@ import kts.project.controller.dto.RegisterPrivateAccDTO;
 import kts.project.model.Company;
 import kts.project.model.Owner;
 import kts.project.model.PrivateAccountInCompany;
+import kts.project.model.User;
 import kts.project.model.enumerations.Role;
 import kts.project.repository.*;
+import kts.project.service.UserService;
+import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sandra on 6/12/2017.
@@ -37,6 +40,9 @@ public class PrivateAccountController {
 
     @Autowired
     CompanyRepository companyRepository;
+
+    @Autowired
+    UserService userService;
 
 
     //registracija obicnih korisnika!
@@ -82,5 +88,54 @@ public class PrivateAccountController {
         privateAccountInCompanyRepository.save(privateAcc);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+
+    //dobavljaju se samo unapproved private accounts od companije koja je ulogovana
+    @RequestMapping(value = "/all/unapproved", method = RequestMethod.GET)
+    public ResponseEntity getAllUnapproved(@RequestHeader("X-Auth-Token") String token) {
+        List<PrivateAccountInCompany> unapprovedPrivate = new ArrayList<>();
+        User user = userService.findByToken(token);
+        if (user.getRole() == Role.OWNER) {
+            if(companyRepository.getOne(user.getId()) != null){
+                for (PrivateAccountInCompany c: privateAccountInCompanyRepository.findAll()) {
+
+                    if(c.getCompany().getId() == user.getId()) {
+                        if (c.isApproved() == false) {
+                            unapprovedPrivate.add(c);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        return new ResponseEntity<>(unapprovedPrivate, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/approve/{id}", method = RequestMethod.GET)
+    public ResponseEntity approve(@PathVariable long id, @RequestHeader("X-Auth-Token") String token) {
+
+        User user = userService.findByToken(token);
+        System.out.println("Funkcija approve, user.getId() = " + user.getId());
+        if (user.getRole() == Role.OWNER) {
+            System.out.println("user je owner");
+            if(companyRepository.getOne(user.getId()) != null){
+
+                PrivateAccountInCompany p = privateAccountInCompanyRepository.getOne(id);
+
+                System.out.println("Nasao je privateaccount u bazi : " + p.toString());
+
+                p.setApproved(true);
+                System.out.println("postavio na approved");
+                privateAccountInCompanyRepository.save(p);
+                System.out.println("zapamtio u bazi");
+                return new ResponseEntity<>(new ResponseMessage("Private acccount in company approved!"), HttpStatus.OK);
+            }
+
+
+        }
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
     }
 }
