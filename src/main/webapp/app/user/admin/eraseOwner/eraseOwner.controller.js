@@ -9,10 +9,10 @@
     function eraseOwnerController($http, $scope, $cookies, $window) {
 
         var vm = this;
-        vm.getAllOwners = getAllOwners;
+        vm.getAllUnapprovedCompanies = getAllUnapprovedCompanies;
         vm.erase = erase;
 
-        getAllOwners();
+        getAllUnapprovedCompanies();
 
         function getAllOwners() {
             $http.get('/api/users/owner/getAll')
@@ -33,7 +33,7 @@
                     .then(function(response) {
 
 
-                        getAllOwners();
+                        getAllUnapprovedCompanies();
                     }, function(response) {
                         alert(JSON.stringify(response.data));
                     });

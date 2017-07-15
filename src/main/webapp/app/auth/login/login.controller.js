@@ -59,8 +59,31 @@
 
             $http.post('/api/users/login', userData)
                 .then(function(token) {
+
                     $window.localStorage.setItem("token",token.data.response);
-                    checkIfLogged();
+                    console.log("token = " + $window.localStorage.getItem("token"));
+
+
+                    //provera ako je firma ili owner u okviru firme da li je odobren nalog:
+                    $http.post('/api/users/checkApproved',{})
+                        .then(function(response){
+                            console.log("*** approved response.data = " + response.data);
+                            if(response.data){
+                                checkIfLogged();
+                            }
+                            else{
+                                alert("Your registration has not been approved yet");
+                            }
+
+
+                        }, function(response) {
+                        alert(response.data.response);
+                        console.log("Wrong username and password combination");
+                    });
+
+
+
+
 
             }, function(response) {
                 alert(response.data.response);

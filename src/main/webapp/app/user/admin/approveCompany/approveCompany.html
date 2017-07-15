@@ -1,0 +1,57 @@
+<div class="about_top">
+    <div class="container">
+        <div class="about">
+
+
+
+            <div class="contact">
+
+
+                <div class="col-md-2 contact_left">
+
+                </div>
+                <div class="col-md-8 contact_right">
+
+
+                    </br>
+                    </br>
+
+                    <h1 class="blog_head" style="color: #F94B4B">Companies waiting to be approved:</h1>
+                    <div class="tab-1">
+                        <div ng-repeat="c in approveCompanyCtrl.allUnapprovedCompanies">
+                            <ul class="tab_img tab_1">
+                                <li>
+                                    <div class="client_box1">
+                                        <img ng-src="{{c.imageUrl}}" class="img-responsive" alt="asd"/>
+                                        <h3 class="m_1">{{c.username}}</h3>
+                                    </div>
+                                </li>
+                                <a ng-click="approveCompanyCtrl.approve(c.username)">Approve</a>
+                                <div class="clearfix"></div>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="clearfix"> </div>
+</div>
+
+
+
+
+
+<div class="clearfix"> </div>
+</br>
+
+</div>
+</div>

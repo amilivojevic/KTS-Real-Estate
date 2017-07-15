@@ -79,14 +79,10 @@ import java.util.List;
             // Perform the authentication
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),
                     loginDTO.getPassword());
-            System.out.println("token : " + token);
             Authentication authentication = authenticationManager.authenticate(token);
-            System.out.println("posle authentication");
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            System.out.println("linija PRE loadUserByUsername");
             // Reload user details so we can generate token
             UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
-            System.out.println("linija POSLE loadUserByUsername");
             return new ResponseEntity<>(new ResponseMessage(tokenUtils.generateToken(details)), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(new ResponseMessage("Invalid login"),
@@ -94,7 +90,34 @@ import java.util.List;
         }
     }
 
-    //registracija administratora i verifikatora!
+    @RequestMapping(value = "/checkApproved", method = RequestMethod.POST, consumes = "application/json;charset=utf-8")
+    public ResponseEntity checkApproved(@RequestHeader("X-Auth-Token") String token,@RequestBody EmptyDTO loginDTO) {
+        boolean approved = true;
+        User user = userService.findByToken(token);
+        if(user.getRole() == Role.OWNER){
+            //company
+            if(user instanceof Company){
+                approved = ((Company) user).isApproved();
+            }
+            //private account in company
+            else if(checkIfOwnerIsPrivate(user.getId()) != -1){
+                PrivateAccountInCompany p = privateAccountInCompanyRepository.findOne(checkIfOwnerIsPrivate(user.getId()));
+                approved = p.isApproved();
+            }
+        }
+        return new ResponseEntity<>(approved,HttpStatus.OK);
+    }
+
+    public long checkIfOwnerIsPrivate(long ownerId){
+        for(PrivateAccountInCompany p : privateAccountInCompanyRepository.findAll()){
+            if(p.getOwner().getId() == ownerId){
+                return p.getId();
+            }
+        }
+        return -1;
+    }
+
+        //registracija administratora i verifikatora!
     @RequestMapping(value = "/{role}/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity saveUser(@PathVariable String role,@RequestBody RegisterDTO registerDTO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

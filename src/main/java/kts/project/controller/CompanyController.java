@@ -5,8 +5,11 @@ import kts.project.controller.dto.RegisterOwnerDTO;
 import kts.project.model.Company;
 import kts.project.model.Owner;
 import kts.project.model.PrivateAccountInCompany;
+import kts.project.model.User;
 import kts.project.model.enumerations.Role;
 import kts.project.repository.*;
+import kts.project.service.UserService;
+import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sandra on 6/12/2017.
@@ -27,9 +31,6 @@ public class CompanyController {
     AuthorityRepository authorityRepository;
 
     @Autowired
-    LocationRepository locationRepository;
-
-    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -39,7 +40,7 @@ public class CompanyController {
     CompanyRepository companyRepository;
 
     @Autowired
-    PrivateAccountInCompanyRepository privateAccRepository;
+    UserService userService;
 
 
     //registracija obicnih korisnika!
@@ -56,6 +57,7 @@ public class CompanyController {
                 registerCompanyDTO.getType().equalsIgnoreCase("COMPANY")) {
 
             company = new Company();
+            company.setRole(Role.OWNER);
             company.setApproved(false);
             company.setFax(registerCompanyDTO.getFax());
             company.setPib(registerCompanyDTO.getPib());
@@ -97,5 +99,34 @@ public class CompanyController {
         return new ResponseEntity<>(companyRepository.findAll(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/all/unapproved", method = RequestMethod.GET)
+    public ResponseEntity getAllUnapprovedCompanies() {
+        List<Company> unapprovedCompanies = new ArrayList<>();
+        for (Company c: companyRepository.findAll()) {
+            if (c.isApproved() == false)
+                unapprovedCompanies.add(c);
+        }
+        return new ResponseEntity<>(unapprovedCompanies, HttpStatus.OK);
+    }
+
+
+
+    @RequestMapping(value = "/approve/{username}", method = RequestMethod.GET)
+    public ResponseEntity approve(@PathVariable String username, @RequestHeader("X-Auth-Token") String token) {
+
+        User user = userService.findByToken(token);
+        if (user.getRole() == Role.SYS_ADMIN) {
+
+            User eraseUser = userRepository.findByUsername(username);
+            Company c = companyRepository.findByUsername(username);
+            System.out.println("Nasao je kompaniju u bazi : " + c.toString());
+
+            c.setApproved(true);
+            companyRepository.save(c);
+
+            return new ResponseEntity<>(eraseUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+    }
 
 }
