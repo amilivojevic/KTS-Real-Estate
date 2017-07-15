@@ -51,7 +51,7 @@
 
             }
 
-            console.log("novi korisnik: " + JSON.stringify(vm.newUser) )
+
 
             if(vm.newUser.password != vm.newUser.repeatpass){
                 alert("Passwords must match!");
@@ -76,6 +76,8 @@
                     break;
             }
             vm.new_user.type = type;
+            console.log("novi korisnik: " + JSON.stringify(vm.new_user) );
+
 
             $http.post('/api/users/'+type+'/register', vm.new_user).then(function (response) {
 
@@ -84,6 +86,7 @@
             },function(response){
                 alert("Check you email and activate your account!");
             });
+
 
 
         }

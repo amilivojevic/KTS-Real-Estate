@@ -1,9 +1,6 @@
 package kts.project.controller;
 
-import kts.project.controller.dto.LoginDTO;
-import kts.project.controller.dto.RegisterDTO;
-import kts.project.controller.dto.RegisterOwnerDTO;
-import kts.project.controller.dto.UserDTO;
+import kts.project.controller.dto.*;
 import kts.project.model.Company;
 import kts.project.model.Owner;
 import kts.project.model.PrivateAccountInCompany;
@@ -62,6 +59,15 @@ import java.util.List;
 
         @Autowired
         private UserService userService;
+
+        @Autowired
+        private PrivateAccountInCompanyRepository privateAccountInCompanyRepository;
+
+        @Autowired
+        private OwnerRepository ownerRepository;
+
+        @Autowired
+        private CompanyRepository companyRepository;
 
 
 
@@ -132,6 +138,55 @@ import java.util.List;
         emailService.sendMail(user);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+
+    //registracija obicnih korisnika unutar firme
+    @RequestMapping(value = "privateAcc/register", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity saveOwner(@RequestBody RegisterPrivateAccDTO registerPrivateAccDTO) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        System.out.println("Pocinje registracija ownera unutar firme na backendu!");
+
+        Owner user;
+
+        if (registerPrivateAccDTO.getRole().equalsIgnoreCase("OWNER")) {
+
+            user = new Owner();
+            user.setAuthority(authorityRepository.findByName(("ROLE_OWNER")));
+
+        }
+        else {
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Cant create that type of user, ony Customer and Advertiser allowed");
+        }
+
+        user.setRole(Role.OWNER);
+        user.setName(registerPrivateAccDTO.getName());
+        user.setSurname(registerPrivateAccDTO.getSurname());
+        user.setEmail(registerPrivateAccDTO.getEmail());
+        user.setUsername(registerPrivateAccDTO.getUsername());
+        user.setPassword(encoder.encode(registerPrivateAccDTO.getPassword()));
+        user.setBirthDate(registerPrivateAccDTO.getBirthDate());
+        user.setPhoneNumber(registerPrivateAccDTO.getPhoneNumber());
+        user.setAddress(registerPrivateAccDTO.getAddress());
+        user.setCity(registerPrivateAccDTO.getCity());
+        user.setCountry(registerPrivateAccDTO.getCountry());
+        user.setAccountNumber(registerPrivateAccDTO.getAccountNumber());
+        user.setImageUrl(registerPrivateAccDTO.getImageUrl());
+
+        ownerRepository.save(user);
+
+        PrivateAccountInCompany privateAcc = new PrivateAccountInCompany();
+        privateAcc.setApproved(false);
+        privateAcc.setCompany(companyRepository.findOne(registerPrivateAccDTO.getCompanyId()));
+        privateAcc.setOwner(ownerRepository.findByUsername(registerPrivateAccDTO.getUsername()));
+
+        privateAccountInCompanyRepository.save(privateAcc);
+
+        emailService.sendMail(user);
+
+        return new ResponseEntity<>(privateAcc, HttpStatus.OK);
     }
 
     //registracija administratora i verifikatora!

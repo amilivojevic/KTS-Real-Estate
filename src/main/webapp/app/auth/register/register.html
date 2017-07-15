@@ -4,15 +4,6 @@
        	 <h1 class="blog_head" style="color: #F94B4B">Register</h1>
 
 			<div class="contact">
-		<!--		<div class="standards">
-					<ul class="selectors_wrapper">
-						<li class="selector active" data-selector="1">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Person</li>
-						<li class="selector" data-selector="2">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Company</li>
-						<li class="selector" data-selector="3">Person\Company</li>
-						</br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-					</ul>
-
-				</div> -->
 				
 				<div class="col-md-4 contact_left">
 
@@ -241,62 +232,117 @@
 						</div>
 						<div class="col-md-6 contact_right">
 							<form ng-submit="registerCtrl.register()">
-											<div class="text">
-												<div class="text-fild">
-													<span>Name:</span>
-													<input type="text" class="text" value="Enter your name here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your name here';}">
-												</div>
-												<div class="text-fild">
-													<span>Surname:</span>
-													<input type="text" class="text" value="Enter your surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your surname here';}">
-												</div>
-												<div>
-													<div class="text-fild">
-														<span>Email:</span>
-														<input type="text" class="text" value="Enter your email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your email here';}">
-													</div>
-													<div class="text-fild">
-														<span>Password:</span>
-														<input type="text" class="text" value="Enter your password here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your name here';}">
-													</div>
-												</div>
-												<div>
-													<div class="text-fild">
-														<span>Date of birth:</span>
-														<input type="text" class="text" value="Enter your date of birth here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your date of birth here';}">
-													</div>
-													<div class="text-fild">
-														<span>Phone number:</span>
-														<input type="text" class="text" value="Enter your phone number here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your phone number here';}">
-													</div>
-													
-												</div>
-												<div>
-													<div class="text-fild">
-														<span>Address:</span>
-														<input type="text" class="text" value="Enter your address here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your address here';}">
-													</div>
-													<div class="text-fild">
-														<span>City:</span>
-														<input type="text" class="text" value="Enter your city here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your address here';}">
-													</div>
-												</div>
-												
-											</div>
-											<div class="msg-fild">
-												<div>
-													<span for="siteC">Company:</span><br>
-													<select style="line-height: 44px;border: 1px solid #DAD8D8;"  required>
-														<option style="color: #F94B4B;" ng-model="vm.companyId" value="{{t.id}}" ng-repeat="t in registerCtrl.companies">{{t.username}}</option>
-													</select>
-												</div>
-											</div>
-												
-											<p align = "Center">Your request for joining as private person inside company will be sent after completing the registration. After verifying your profile will be activated.</p>
-											</br>
-											<div align = "Center">
-													<label class="btn1 btn-8 btn-8c" ng-messages="expression" role="alert"><input type="submit" value="Register"></label>
-											</div>
+
+								<div class="text">
+									<div class="text-fild">
+										<span for="nameC">Name of company:</span>
+										<input type="text" class="text" id="nameC2" ng-model="registerCtrl.newUser.name" required >
+									</div>
+									<div class="text-fild">
+										<span for="surnameC">Name of owner:</span>
+										<input type="text" class="text" id="surnameC2" ng-model="registerCtrl.newUser.surname" required >
+									</div>
+								</div>
+								<div class="text">
+									<div class="text-fild">
+										<span for="usernameC">Username:</span>
+										<input type="text" class="text" id="usernameC2" ng-model="registerCtrl.newUser.username" required >
+									</div>
+									<div class="text-fild">
+										<span for="emailC">Email:</span>
+										<input type="text" class="text" id="emailC2" ng-model="registerCtrl.newUser.email" required >
+									</div>
+								</div>
+								<div class="text">
+									<div class="text-fild">
+										<span for="passwordC">Password:</span>
+										<input type="text" class="text" id="passwordC2" ng-model="registerCtrl.newUser.password" required >
+									</div>
+									<div class="text-fild">
+										<span for="perpasswordC">Repeat password:</span>
+										<input type="text" class="text" id="perpasswordC2" ng-model="registerCtrl.newUser.repeatpass" required >
+									</div>
+								</div>
+
+								<div class="text">
+									<div class="text-fild">
+										<span for="birthdateC">Date of establishment:</span>
+										</br>
+										<input type="date" class="text" id="birthdateC2" ng-model="registerCtrl.newUser.birthdate" required >
+									</div>
+									<div class="text-fild">
+										<span for="pibC">PIB:</span>
+										<input type="text" class="text" id="pibC2"  ng-model="registerCtrl.newUser.pib" >
+									</div>
+
+
+								</div>
+
+								<div>
+									<div class="text-fild">
+										<span for="phoneNumberC">Phone number:</span>
+										<input type="text" class="text" id="phoneNumberC2" ng-model="registerCtrl.newUser.phoneNumber" required >
+									</div>
+									<div class="text-fild">
+										<span for="faxC">Fax:</span>
+										<input type="text" class="text" id="faxC2" ng-model="registerCtrl.newUser.fax" required >
+									</div>
+								</div>
+
+
+								<div class="text">
+									<div class="text-fild">
+										<span for="addressC">Address:</span>
+										<input type="text" class="text" id="addressC2" ng-model="registerCtrl.newUser.address" requiredvalue="Enter address here" >
+									</div>
+									<div class="text-fild">
+										<span for="cityC">City:</span>
+										<input type="text" class="text" id="cityC2" ng-model="registerCtrl.newUser.city" required >
+									</div>
+								</div>
+								<div>
+									<div class="text-fild">
+										<span for="countryC">Country:</span>
+										<input type="text" class="text" id="countryC2"  ng-model="registerCtrl.newUser.country" required >
+									</div>
+									<div class="text-fild">
+										<span for="accountNumberC">Bank account:</span>
+										<input type="text" class="text" id="accountNumberC2" ng-model="registerCtrl.newUser.accountNumber" required >
+									</div>
+
+									<!--	<div class="msg-fild">
+                                        <span>Bank account:</span>
+                                        <input type="text" class="text" value="Enter number of bank account here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter bank account number here';}"> -->
+								</div>
+
+								<div class="text">
+
+
+								</div>
+								<div>
+
+								</div>
+
+								<div class="msg-fild">
+									<div>
+										<span for="siteC">Company:</span>
+										<select style="line-height: 44px;border: 1px solid #DAD8D8;" ng-model="registerCtrl.newUser.companyId" required>
+											<option style="color: #F94B4B;"  value="{{t.id}}" ng-repeat="t in registerCtrl.companies">{{t.username}}</option>
+										</select>
+									</div>
+								</div>
+
+								<p align = "Center">Your request for joining as private person inside company will be sent after completing the registration. After verifying your profile will be activated.</p>
+								</br>
+								<div align = "Center">
+									<label class="btn1 btn-8 btn-8c" ng-messages="expression" role="alert"><input type="submit" value="Register"></label>
+								</div>
+								<div class="clearfix"> </div>
+
+
+
+
+
 							</form>
 						</div>
 					</div>
