@@ -65,10 +65,10 @@
             });
 
 
-            $http.get('/api/advertisement/getAllListings')
+            $http.get('/api/advertisement/getAllAcceptedListings')
                 .then(function(response) {
 
-                    console.log("all advertisements: " + angular.toJson(response.data));
+                    //console.log("all advertisements: " + angular.toJson(response.data));
                     vm.allListings =  response.data;
 
                 }, function(response) {

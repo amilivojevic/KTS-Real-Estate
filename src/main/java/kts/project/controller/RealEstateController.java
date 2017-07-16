@@ -4,6 +4,7 @@ import kts.project.controller.dto.RealEstateDTO;
 import kts.project.model.*;
 import kts.project.model.enumerations.HeatingType;
 import kts.project.model.enumerations.RealEstateType;
+import kts.project.model.enumerations.Role;
 import kts.project.repository.AdvertisementRepository;
 import kts.project.repository.LocationRepository;
 import kts.project.repository.RealEstateRepository;
@@ -114,18 +115,24 @@ public class RealEstateController {
             return new ResponseEntity<>(rs, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/getAllRealEstates", method = RequestMethod.GET)
-    public ResponseEntity getAllRealEstates()
+    @RequestMapping(value = "/getAllMyRealEstates", method = RequestMethod.GET)
+    public ResponseEntity getAllMyRealEstates(@RequestHeader("X-Auth-Token") String token)
     {
 
-        List<RealEstate> allRealEstates = new ArrayList<>();
+        User user = userService.findByToken(token);
+        if (user.getRole() == Role.OWNER){
+
+            List<RealEstate> allMyRealEstates = new ArrayList<>();
 
             for (RealEstate o : realEstateRepository.findAll()) {
-
-                allRealEstates.add(o);
-
+                if (o.getOwner().getId() == user.getId()){
+                    allMyRealEstates.add(o);
+                }
             }
-            return new ResponseEntity<>(allRealEstates, HttpStatus.OK);
+            return new ResponseEntity<>(allMyRealEstates, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new ResponseMessage("Logged User is not an owner!"), HttpStatus.BAD_REQUEST);
 
     }
 

@@ -16,12 +16,9 @@
         vm.types = ['Rent', 'Sale'];
         vm.currency = ['EUR', 'RSD', 'USD'];
 
-
-
-
         //method for user registration
         function addNewAdvertisement () {
-            var id = NewAdvertisementService.setRealEstateId();
+            var id = NewAdvertisementService.getRealEstateId();
             console.log("ID = " + id);
             console.log("USAO U dodaj novi add FUNKCIJU");
             vm.new_advertisement = {

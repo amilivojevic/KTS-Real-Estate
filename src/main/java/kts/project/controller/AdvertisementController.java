@@ -115,14 +115,28 @@ public class AdvertisementController {
 
     }
 
-    @RequestMapping(value = "/getAllListings", method = RequestMethod.GET)
-    public ResponseEntity getAllAdvertisements()
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public ResponseEntity getAllAdvertisements() {
+
+        List<Advertisement> allAdvertisements = new ArrayList<>();
+
+        for (Advertisement o : advertisementRepository.findAll()) {
+
+            allAdvertisements.add(o);
+
+        }
+
+        return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getAllAcceptedListings", method = RequestMethod.GET)
+    public ResponseEntity getAllAcceptedAdvertisements()
     {
 
         List<Advertisement> allAdvertisements = new ArrayList<>();
 
         for (Advertisement o : advertisementRepository.findAll()) {
-            if(o.getState() == AdvertisementState.WAITING) {
+            if(o.getState() == AdvertisementState.ACCEPTED) {
                 allAdvertisements.add(o);
             }
         }

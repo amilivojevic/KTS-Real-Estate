@@ -114,6 +114,7 @@ public class OwnerController {
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.BAD_REQUEST);
     }
 
+/*
     @RequestMapping(value = "/getAllAdvertisements", method = RequestMethod.GET)
     public ResponseEntity getAllAdvertisements() {
 
@@ -127,6 +128,7 @@ public class OwnerController {
 
         return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
     }
+*/
 
     @RequestMapping(value = "/getAllMyAdvertisements", method = RequestMethod.GET)
     public ResponseEntity getAllMyAdvertisements(@RequestHeader("X-Auth-Token") String token) {
