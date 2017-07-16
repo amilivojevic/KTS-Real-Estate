@@ -1,0 +1,70 @@
+<div class="about_top">
+    <div class="container">
+        <div class="about">
+            <div class="contact">
+                <div class="col-md-2 contact_left">
+                </div>
+                <div class="col-md-8 contact_right">
+                    <h1 class="blog_head" style="color: #F94B4B">Waiting advertisements:</h1>
+                    <div class="tab-1">
+
+                        <div class="tab-1">
+                            <div  ng-repeat="o in approveAdvertisementCtrl.allWaitingAdvertisements">
+
+                                <ul class="tab_img tab_1" >
+                                    <li>
+                                        <div class="client_box1">
+                                            <img ng-src="{{o.realEstate.imageUrl}}" class="img-responsive" alt="images/pic4.jpg"/>
+                                            <h3 class="m_1"><a ng-click="approveAdvertisementCtrl.redirect(o.id)">More info</a></h3>
+                                            <div class="boxed_mini_details clearfix">
+                                                <span class="bedrooms last"><strong>Title</strong>
+                                                    {{o.title}}</span>
+                                                <span class="area first"><strong>Price</strong><i></i>
+                                                   {{o.price}}</span>
+                                                <span class="bedrooms last"><strong>Contact</strong>
+                                                    {{o.phoneNumber}}</span>
+                                            </div>
+                                            <div align = "Center">
+
+                                                <form ng-submit="getAllRealEstatesCtrl.redirect2(o.id)" >
+                                                    <label class="btn4 btn-82 btn-82c"><input type="submit" value="Accept"></label>
+                                                </form>
+                                                <form ng-submit="ownerCtrl.eraseAdvertisement(o.id)">
+                                                    <label class="btn1 btn-8 btn-8c"  ><input  type="submit" value="Decline"></label>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </li>
+
+                                    <div class="clearfix"></div>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="clearfix"> </div>
+</div>
+
+
+
+
+
+<div class="clearfix"> </div>
+</br>
+
+</div>
+</div>

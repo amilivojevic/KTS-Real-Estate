@@ -132,6 +132,33 @@ public class AdvertisementController {
 
     }
 
+    @RequestMapping(value = "/getAllWaiting", method = RequestMethod.GET)
+    public ResponseEntity getAllWaitingAdvertisements()
+    {
+
+        List<Advertisement> allWaitingAdvertisements = new ArrayList<>();
+
+        for (Advertisement o : advertisementRepository.findAll()) {
+            if(o.getState() == AdvertisementState.WAITING) {
+                allWaitingAdvertisements.add(o);
+            }
+
+        }
+
+        return new ResponseEntity<>(allWaitingAdvertisements, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/getSingleAdvertisement/{id}", method = RequestMethod.GET)
+    public ResponseEntity getSingleAdvertisement(@PathVariable Long id)
+    {
+
+        Advertisement singleAdvertisement = advertisementRepository.findById(id);
+
+        return new ResponseEntity<>(singleAdvertisement, HttpStatus.OK);
+
+    }
+
     @RequestMapping(value = "/erase/{id}", method = RequestMethod.GET)
     public ResponseEntity erase(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
     {
