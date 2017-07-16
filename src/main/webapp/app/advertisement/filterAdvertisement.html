@@ -10,7 +10,7 @@
   							border: 1px solid #DAD8D8;
   							width: 200px;">
                                 <div class="section_room" >
-                                    <select ng-model="filterAdvertisementCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                    <select ng-model="filterAdvertisementCtrl.filterConteiners.type" id="adType" class="frm-field required">
                                         <option value="" disabled selected>Select contract type</option>
                                         <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
                                         <option style="color: #F94B4B;" value="Rent">Rent</option>
@@ -20,19 +20,19 @@
                             </div>
                             <div class="col-xs-3" >
                             <div  class="text-fild" style="width: 220px;">
-                                <input  type="text" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                                <input  type="text" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.location" id="adLocation" required placeholder="Enter country, city or zip code...">
                             </div>
                             </div>
                             <div class="col-xs-2" >
                                 <div class="text-fild" style="width: 142px;">
                                     <input style="width: 142px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.minPrice" id="idMinPrice"  required placeholder="Enter min price">
                                 </div>
                             </div>
                             <div class="col-xs-2" >
                                 <div class="text-fild" style="width: 142px;">
                                     <input style="width: 142px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.maxPrice" id="idMaxPrice"  required placeholder="Enter max price">
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                             border: 1px solid #DAD8D8;
                             width: 200px;">
                             <div class="section_room" >
-                                <select ng-model="filterAdvertisementCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                <select ng-model="filterAdvertisementCtrl.filterConteiners.currency" id="adCurrency" class="frm-field required" required>
                                     <option value="" disabled selected>Select currency</option>
                                     <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
                                     <option  style="color: #F94B4B;"value="EUR">EUR</option>
@@ -65,19 +65,19 @@
                         </div>
                         <div class="col-xs-2" >
                             <div  class="text-fild" style="width: 142px;">
-                                <input  type="text" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f6" id="adLocation" required placeholder="Enter area in m2">
+                                <input  type="text" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.area"  required placeholder="Enter area in m2">
                             </div>
                         </div>
                         <div class="col-xs-2" >
                             <div class="text-fild">
                                 <input style="width: 142px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f7" id="idMinPrice"  required placeholder="Rooms number">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.roomsNu"   required placeholder="Rooms number">
                             </div>
                         </div>
                         <div class="col-xs-2" >
                             <div class="text-fild">
                                 <input style="width: 161px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.f8" id="idMaxPrice"  required placeholder="Batrhrooms number">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.bathroomsNu"   required placeholder="Batrhrooms number">
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="col-xs-2 submit_button">
-                        <form>
+                        <form ng-submit="filterAdvertisementController.setFilter()" >
                             <input type="submit" value="Search">
                         </form>
                     </div>
@@ -104,7 +104,7 @@
                             border: 1px solid #DAD8D8;
                             width: 200px;">
                                 <div class="section_room" >
-                                    <select ng-model="filterAdvertisementCtrl.filterConteiners.f9" id="adCurrency" class="frm-field required" required>
+                                    <select ng-model="filterAdvertisementCtrl.filterConteiners.heatingType" id="adCurrency" class="frm-field required" required>
                                         <option value="" disabled selected>Select heating type</option>
                                         <option  style="color: #F94B4B;"value="All heating types">All heating types</option>
                                         <option  style="color: #F94B4B;"value="EUR">None</option>
@@ -116,11 +116,11 @@
                             </div>
                             <div class="col-xs-6 text-fild">
                                 <span for="furniture">Furniture:</span>
-                                <input type="checkbox" class="text" id="furniture"  ng-model="filterAdvertisementCtrl.filterConteiners.f10"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                                <input type="checkbox" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.furniture">
                             </div>
                             <div class="col-xs-6 text-fild">
                                 <span for="furniture">Parking:</span>
-                                <input type="checkbox" class="text" id="furniture"  ng-model="filterAdvertisementCtrl.filterConteiners.f11"   value="Enter country here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter country here';}">
+                                <input type="checkbox" class="text" ng-model="filterAdvertisementCtrl.filterConteiners.parking">
                             </div>
                         <div class="clearfix"> </div>
                     </div>

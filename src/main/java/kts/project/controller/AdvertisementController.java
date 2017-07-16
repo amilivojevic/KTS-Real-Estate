@@ -1,6 +1,7 @@
 package kts.project.controller;
 
 import kts.project.controller.dto.AddAdvertisementDTO;
+import kts.project.controller.dto.FilterAdvertisementDTO;
 import kts.project.model.Advertisement;
 import kts.project.model.Owner;
 import kts.project.model.Review;
@@ -189,20 +190,18 @@ public class AdvertisementController {
     }
 
 
-    @RequestMapping(value = "/filterListings", method = RequestMethod.GET)
-    public ResponseEntity filterListings()
+    @RequestMapping(value = "/filterListings", method = RequestMethod.POST)
+    public ResponseEntity filterListings(@RequestBody FilterAdvertisementDTO filterAdvertisementDTO)
     {
 
-        List<Advertisement> allAdvertisements = new ArrayList<>();
-
+        List<Advertisement> filteredAdvertisements = new ArrayList<>();
+        System.out.println(filterAdvertisementDTO);
         for (Advertisement o : advertisementRepository.findAll()) {
-            if(o.getState() == AdvertisementState.ACCEPTED) {
-                allAdvertisements.add(o);
-            }
+
 
         }
 
-        return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
+        return new ResponseEntity<>(filteredAdvertisements, HttpStatus.OK);
 
     }
 

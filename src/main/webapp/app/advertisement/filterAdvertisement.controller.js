@@ -9,14 +9,17 @@
     function filterAdvertisementController($http, $scope, $cookies, $window,FilterService) {
 
         var vm = this;
-        vm.getAllListings = getAllListings;
+        vm.getAllFiltrated = getAllFiltrated;
         vm.previousFilter = FilterService.getFilter();
+        vm.setFilter = setFilter;
 
         getAllFiltrated();
 
 
-        vm.setFilter = function () {
+        function setFilter() {
 //fileter!! : {"type":"All contracts","location":"","minPrice":10000,"maxPrice":10000,"currency":"All currencies"}
+
+/*
 
             if(vm.filterConteiners.type == null){
                 vm.filterConteiners.type = "All contracts";
@@ -46,7 +49,6 @@
                 vm.filterConteiners.heatingType = "All heating types";
             }
 
-
             if(vm.filterConteiners.furniture == undefined){
                 vm.filterConteiners.furniture = false;
             }
@@ -54,20 +56,16 @@
                 vm.filterConteiners.parking = false;
             }
 
-            console.log("fileter1!! : " + vm.filterConteiners.f1);
-            console.log("fileter2!! : " + vm.filterConteiners.f2);
-            console.log("fileter3!! : " + vm.filterConteiners.f3);
-            console.log("fileter4!! : " + vm.filterConteiners.f4);
-            console.log("fileter5!! : " + vm.filterConteiners.f5);
-            console.log("fileter6!! : " + vm.filterConteiners.f6);
-            console.log("fileter7!! : " + vm.filterConteiners.f7);
-            console.log("fileter8!! : " + vm.filterConteiners.f8);
-            console.log("fileter9!! : " + vm.filterConteiners.f9);
-            console.log("fileter10!! : " + vm.filterConteiners.f10);
-            console.log("fileter11!! : " + vm.filterConteiners.f11);
+*/
+
+            console.log("fileter: " + JSON.stringify(vm.filterConteiners));
+            $http.post("/api/advertisement/filterListings",vm.filterConteiners)
+                .then(function(response) {
 
 
-            $window.location.href = "http://" + $window.location.host + "/#!/filterAdvertisement";
+                }, function(response) {
+                    alert(JSON.stringify(response.data));
+                });
 
 
         }
@@ -79,27 +77,7 @@
         function getAllFiltrated() {
 
 
-            /*
-            vm.filterConteiners = {};
 
-            $http.get('/api/advertisement/getAllListings')
-                .then(function(response) {
-
-                    console.log("all advertisements: " + angular.toJson(response.data));
-                    vm.allListings =  response.data;
-
-                }, function(response) {
-                    alert(JSON.stringify(response.data));
-                });
-
-            $http.post('/api/advertisement/filterListings', vm.filterConteiners).then(function (response) {
-
-
-
-            },function(response){
-                alert("Check you email and activate your account!");
-            });
-            */
         }
     }
 })();

@@ -13,7 +13,7 @@
 
 
         var id = SingleAdvertisementService.getRealEstateId();
-        
+
         getSingleAdvertisement();
 
 
