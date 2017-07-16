@@ -111,7 +111,7 @@ public class OwnerController {
             }
             return new ResponseEntity<>(allOwners, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/getAllAdvertisements", method = RequestMethod.GET)
@@ -126,6 +126,25 @@ public class OwnerController {
         }
 
         return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getAllMyAdvertisements", method = RequestMethod.GET)
+    public ResponseEntity getAllMyAdvertisements(@RequestHeader("X-Auth-Token") String token) {
+
+        User user = userService.findByToken(token);
+        if (user.getRole() == Role.OWNER){
+
+            List<Advertisement> myAdvertisements = new ArrayList<>();
+
+            for (Advertisement o : advertisementRepository.findAll()) {
+                if (o.getOwner().getId() == user.getId()){
+                    myAdvertisements.add(o);
+                }
+            }
+            return new ResponseEntity<>(myAdvertisements, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new ResponseMessage("Logged User is not an owner!"), HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/erase/{username}", method = RequestMethod.GET)

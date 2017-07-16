@@ -122,10 +122,9 @@ public class AdvertisementController {
         List<Advertisement> allAdvertisements = new ArrayList<>();
 
         for (Advertisement o : advertisementRepository.findAll()) {
-            if(o.getState() == AdvertisementState.ACCEPTED) {
+            if(o.getState() == AdvertisementState.WAITING) {
                 allAdvertisements.add(o);
             }
-
         }
 
         return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);

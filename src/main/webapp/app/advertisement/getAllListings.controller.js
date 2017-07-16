@@ -40,7 +40,7 @@
         }
 
         getAllListings();
-        
+
         function getAllListings() {
 
 

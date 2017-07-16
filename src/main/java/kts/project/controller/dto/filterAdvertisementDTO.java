@@ -7,7 +7,7 @@ public class filterAdvertisementDTO {
 
     protected String type;
 
-    protected String
+
 
 
 }

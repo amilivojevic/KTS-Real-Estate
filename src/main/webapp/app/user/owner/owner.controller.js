@@ -8,10 +8,10 @@
     // owner controller
     function ownerController($http, $scope, $cookies, $window,LoginFactory) {
         var vm = this;
-        vm.getAllAdvertisements = getAllAdvertisements;
+        vm.getAllMyAdvertisements = getAllMyAdvertisements;
         vm.eraseAdvertisement = eraseAdvertisement;
 
-        getAllAdvertisements();
+        getAllMyAdvertisements();
 
 
         vm.userData = angular.fromJson($window.localStorage['loggedUser']);
@@ -21,25 +21,12 @@
         }
 
 
-        function getAllAdvertisements() {
+        function getAllMyAdvertisements() {
 
-            $http.get('/api/users/owner/getAllAdvertisements')
+            $http.get('/api/users/owner/getAllMyAdvertisements')
                 .then(function(response) {
-
-
-                    vm.allAdvertisements = [];
-                    var ulogovani = angular.fromJson($window.localStorage['loggedUser']);
-                    console.log("Ulogovani: " + JSON.stringify(ulogovani));
-                    for (var i=0; i<response.data.length; i++) {
-                        console.log("++advertisement: " + JSON.stringify(response.data[i]));
-                        console.log("response.data[i].owner.username = "+response.data[i].owner.username );
-                        console.log("ulogovani.username = " + ulogovani.username);
-                        if ( new String(response.data[i].owner.username).valueOf() == new String(ulogovani.username).valueOf()){
-                            vm.allAdvertisements.push(response.data[i]);
-
-                        }
-                    }
-
+                    console.log("Svi moji oglasi: " + JSON.stringify(response.data));
+                    vm.allMyAdvertisements = response.data;
                 }, function(response) {
                     alert(JSON.stringify(response.data));
                 });

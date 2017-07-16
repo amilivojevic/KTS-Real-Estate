@@ -22,6 +22,7 @@
         //method for user registration
         function addNewAdvertisement () {
             var id = NewAdvertisementService.setRealEstateId();
+            console.log("ID = " + id);
             console.log("USAO U dodaj novi add FUNKCIJU");
             vm.new_advertisement = {
                 title : vm.newAd.title,
@@ -32,9 +33,8 @@
                 ////id od nekretnine!!!
                 id : id,
                 currency : vm.newAd.currency,
-                realEstateId : id
             }
-
+            console.log("ADVERT: " + JSON.stringify(vm.new_advertisement));
             $window.location.href = "http://" + $window.location.host + "/#!/profile";
 
             $http.post('/api/advertisement/addNewAdvertisement', vm.new_advertisement).then(function (response) {
