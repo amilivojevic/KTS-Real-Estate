@@ -422,7 +422,7 @@
                     url: '/report_baned_advertisement',
                     views: {
                         'content': {
-                            templateUrl: 'app/static/reportBannedAdvertisement.html',
+                            templateUrl: 'app/user/verifyer/approveAdvertisement/reportBannedAdvertisement.html',
                             controller: 'ReportBanedAdvertisementController',
                             controllerAs: 'reportBanedAdvertisementCtrl'
                         },
