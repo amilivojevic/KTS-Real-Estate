@@ -113,6 +113,14 @@
                 }, function(response) {
                     alert(JSON.stringify(response.data));
                 });
+
+            $http.post('/api/advertisement/filterListings', vm.filterConteiners).then(function (response) {
+
+
+
+            },function(response){
+                alert("Check you email and activate your account!");
+            });
         }
     }
 })();

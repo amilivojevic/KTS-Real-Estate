@@ -16,29 +16,23 @@
 
         vm.setFilter = function () {
 
+            if(vm.filterConteiners.type == null){
+                vm.filterConteiners.type = "All contracts";
+            }
+            if(vm.filterConteiners.location == undefined){
+                vm.filterConteiners.location = "";
+            }
+            if(vm.filterConteiners.minPrice == undefined){
+                vm.filterConteiners.minPrice = 10000;
+            }
+            if(vm.filterConteiners.maxPrice == undefined){
+                vm.filterConteiners.maxPrice = 10000;
+            }
+            if(vm.filterConteiners.currency == undefined){
+                vm.filterConteiners.currency = "All currencies";
+            }
 
-
-            if(vm.filterConteiners.f1 == null){
-                vm.filterConteiners.f1 = "All contracts";
-            }
-            if(vm.filterConteiners.f2 == undefined){
-                vm.filterConteiners.f2 = "";
-            }
-            if(vm.filterConteiners.f3 == undefined){
-                vm.filterConteiners.f3 = 10000;
-            }
-            if(vm.filterConteiners.f4 == undefined){
-                vm.filterConteiners.f4 = 10000;
-            }
-            if(vm.filterConteiners.f5 == undefined){
-                vm.filterConteiners.f5 = "All currencies";
-            }
-            
-            console.log("fileter1!! : " + vm.filterConteiners.f1);
-            console.log("fileter2!! : " + vm.filterConteiners.f2);
-            console.log("fileter3!! : " + vm.filterConteiners.f3);
-            console.log("fileter4!! : " + vm.filterConteiners.f4);
-            console.log("fileter5!! : " + vm.filterConteiners.f5);
+            console.log("fileter!! : " + JSON.stringify(vm.filterConteiners));
 
             $window.location.href = "http://" + $window.location.host + "/#!/filterAdvertisement";
 
@@ -46,9 +40,7 @@
         }
 
         getAllListings();
-
-
-
+        
         function getAllListings() {
 
 

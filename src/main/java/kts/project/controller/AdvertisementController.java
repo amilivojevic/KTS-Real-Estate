@@ -149,4 +149,22 @@ public class AdvertisementController {
     }
 
 
+    @RequestMapping(value = "/filterListings", method = RequestMethod.GET)
+    public ResponseEntity filterListings()
+    {
+
+        List<Advertisement> allAdvertisements = new ArrayList<>();
+
+        for (Advertisement o : advertisementRepository.findAll()) {
+            if(o.getState() == AdvertisementState.ACCEPTED) {
+                allAdvertisements.add(o);
+            }
+
+        }
+
+        return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
+
+    }
+
+
 }
