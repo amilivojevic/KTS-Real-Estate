@@ -9,7 +9,7 @@
         .controller('GetAllListingsController', getAllListingsController);
 
 
-    function getAllListingsController($http, $scope, $cookies, $window) {
+    function getAllListingsController($http, $scope, $cookies, $window, FilterService) {
 
         var vm = this;
         vm.getAllListings = getAllListings;
@@ -33,6 +33,7 @@
             }
 
             console.log("fileter!! : " + JSON.stringify(vm.filterConteiners));
+            FilterService.setFilter(vm.filterConteiners);
 
             $window.location.href = "http://" + $window.location.host + "/#!/filterAdvertisement";
 
