@@ -15,7 +15,7 @@
                             <div class="col-xs-10 dropdown-buttons">
                                 <div class="col-xs-4 dropdown-button" style="width: 200px; ">
                                     <div class="section_room" >
-                                        <select ng-model="getAllListingsCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.type" class="frm-field required">
                                             <option value="" disabled selected>Select contract type</option>
                                             <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
                                             <option style="color: #F94B4B;" value="Rent">Rent</option>
@@ -24,23 +24,23 @@
                                     </div>
                                 </div>
                                 <div  class="text-fild" style="width: 250px;">
-                                    <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                                    <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.location"  required placeholder="Enter country, city or zip code...">
                                 </div>
                                 <div class="col-xs-2" >
                                     <div class="text-fild" style="width: 120px;">
                                         <input  style="width: 127px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.minPrice"   required placeholder="Enter min price">
                                     </div>
                                 </div>
                                 <div class="" >
                                     <div class="text-fild" style="width: 125px;">
                                         <input  style="width: 129px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.maxPrice"   required placeholder="Enter max price">
                                     </div>
                                 </div>
                                 <div class="col-xs-2 dropdown-button" style="width: 175px; ">
                                     <div class="section_room" >
-                                        <select ng-model="getAllListingsCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.currency"  class="frm-field required" required>
                                             <option value="" disabled selected>Select currency</option>
                                             <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
                                             <option  style="color: #F94B4B;"value="EUR">EUR</option>
@@ -74,7 +74,7 @@
                            <div class="col-xs-10 dropdown-buttons">
                                <div class="col-xs-4 dropdown-button" style="width: 200px; ">
                                    <div class="section_room" >
-                                       <select ng-model="getAllListingsCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                       <select ng-model="getAllListingsCtrl.filterConteiners.type" class="frm-field required">
                                            <option value="" disabled selected>Select contract type</option>
                                            <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
                                            <option style="color: #F94B4B;" value="Rent">Rent</option>
@@ -83,23 +83,23 @@
                                    </div>
                                </div>
                                <div  class="text-fild" style="width: 250px;">
-                                   <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                                   <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.location"  required placeholder="Enter country, city or zip code...">
                                </div>
                                <div class="col-xs-2" >
                                    <div class="text-fild" style="width: 120px;">
                                        <input  style="width: 127px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.minPrice"   required placeholder="Enter min price">
                                    </div>
                                </div>
                                <div class="" >
                                    <div class="text-fild" style="width: 125px;">
                                        <input  style="width: 129px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.maxPrice"   required placeholder="Enter max price">
                                    </div>
                                </div>
                                <div class="col-xs-2 dropdown-button" style="width: 175px; ">
                                    <div class="section_room" >
-                                       <select ng-model="getAllListingsCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                       <select ng-model="getAllListingsCtrl.filterConteiners.currency"  class="frm-field required" required>
                                            <option value="" disabled selected>Select currency</option>
                                            <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
                                            <option  style="color: #F94B4B;"value="EUR">EUR</option>
@@ -131,7 +131,7 @@
                             <div class="col-xs-10 dropdown-buttons">
                                 <div class="col-xs-4 dropdown-button" style="width: 200px; ">
                                     <div class="section_room" >
-                                        <select ng-model="getAllListingsCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.type" class="frm-field required">
                                             <option value="" disabled selected>Select contract type</option>
                                             <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
                                             <option style="color: #F94B4B;" value="Rent">Rent</option>
@@ -140,23 +140,23 @@
                                     </div>
                                 </div>
                                 <div  class="text-fild" style="width: 250px;">
-                                    <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                                    <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.location"  required placeholder="Enter country, city or zip code...">
                                 </div>
                                 <div class="col-xs-2" >
                                     <div class="text-fild" style="width: 120px;">
                                         <input  style="width: 127px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.minPrice"   required placeholder="Enter min price">
                                     </div>
                                 </div>
                                 <div class="" >
                                     <div class="text-fild" style="width: 125px;">
                                         <input  style="width: 129px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.maxPrice"   required placeholder="Enter max price">
                                     </div>
                                 </div>
                                 <div class="col-xs-2 dropdown-button" style="width: 175px; ">
                                     <div class="section_room" >
-                                        <select ng-model="getAllListingsCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.currency"  class="frm-field required" required>
                                             <option value="" disabled selected>Select currency</option>
                                             <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
                                             <option  style="color: #F94B4B;"value="EUR">EUR</option>
@@ -188,7 +188,7 @@
                             <div class="col-xs-10 dropdown-buttons">
                                 <div class="col-xs-4 dropdown-button" style="width: 200px; ">
                                     <div class="section_room" >
-                                        <select ng-model="getAllListingsCtrl.filterConteiners.f1" id="adType" class="frm-field required">
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.type" class="frm-field required">
                                             <option value="" disabled selected>Select contract type</option>
                                             <option style="color: #F94B4B;" value="All contracts" >All contracts</option>
                                             <option style="color: #F94B4B;" value="Rent">Rent</option>
@@ -197,23 +197,23 @@
                                     </div>
                                 </div>
                                 <div  class="text-fild" style="width: 250px;">
-                                    <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.f2" id="adLocation" required placeholder="Enter country, city or zip code...">
+                                    <input  type="text" class="text" ng-model="getAllListingsCtrl.filterConteiners.location"  required placeholder="Enter country, city or zip code...">
                                 </div>
                                 <div class="col-xs-2" >
                                     <div class="text-fild" style="width: 120px;">
                                         <input  style="width: 127px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f3" id="idMinPrice"  required placeholder="Enter min price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.minPrice"   required placeholder="Enter min price">
                                     </div>
                                 </div>
                                 <div class="" >
                                     <div class="text-fild" style="width: 125px;">
                                         <input  style="width: 129px; line-height: 44px;
-                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.f4" id="idMaxPrice"  required placeholder="Enter max price">
+                                           border: 1px solid #DAD8D8; !important" type="number" min="0" class="text" ng-model="getAllListingsCtrl.filterConteiners.maxPrice"   required placeholder="Enter max price">
                                     </div>
                                 </div>
                                 <div class="col-xs-2 dropdown-button" style="width: 175px; ">
                                     <div class="section_room" >
-                                        <select ng-model="getAllListingsCtrl.filterConteiners.f5" id="adCurrency" class="frm-field required" required>
+                                        <select ng-model="getAllListingsCtrl.filterConteiners.currency"  class="frm-field required" required>
                                             <option value="" disabled selected>Select currency</option>
                                             <option  style="color: #F94B4B;"value="All currencies">All currencies</option>
                                             <option  style="color: #F94B4B;"value="EUR">EUR</option>

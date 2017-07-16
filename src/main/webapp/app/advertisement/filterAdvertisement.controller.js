@@ -6,58 +6,54 @@
         .controller('FilterAdvertisementController', filterAdvertisementController);
 
 
-    function filterAdvertisementController($http, $scope, $cookies, $window) {
+    function filterAdvertisementController($http, $scope, $cookies, $window,FilterService) {
 
         var vm = this;
         vm.getAllListings = getAllListings;
+        vm.previousFilter = FilterService.getFilter();
+
+        getAllFiltrated();
 
 
         vm.setFilter = function () {
+//fileter!! : {"type":"All contracts","location":"","minPrice":10000,"maxPrice":10000,"currency":"All currencies"}
 
-
-            if(vm.filterConteiners.f1 == null){
-                vm.filterConteiners.f1 = "All contracts";
+            if(vm.filterConteiners.type == null){
+                vm.filterConteiners.type = "All contracts";
             }
-            if(vm.filterConteiners.f2 == undefined){
-                vm.filterConteiners.f2 = "";
+            if(vm.filterConteiners.location == undefined){
+                vm.filterConteiners.location = "";
             }
-            if(vm.filterConteiners.f3 == undefined){
-                vm.filterConteiners.f3 = 10000;
+            if(vm.filterConteiners.minPrice == undefined){
+                vm.filterConteiners.minPrice = 10000;
             }
-            if(vm.filterConteiners.f4 == undefined){
-                vm.filterConteiners.f4 = 10000;
+            if(vm.filterConteiners.maxPrice == undefined){
+                vm.filterConteiners.maxPrice = 10000;
             }
-            if(vm.filterConteiners.f5 == undefined){
-                vm.filterConteiners.f5 = "All currencies";
+            if(vm.filterConteiners.currency == undefined){
+                vm.filterConteiners.currency = "All currencies";
             }
-            if(vm.filterConteiners.f6 == undefined){
-                vm.filterConteiners.f6 = "50";
+            if(vm.filterConteiners.area == undefined){
+                vm.filterConteiners.area = "50";
             }
-            if(vm.filterConteiners.f7 == undefined){
-                vm.filterConteiners.f7 = 2;
+            if(vm.filterConteiners.roomsNu == undefined){
+                vm.filterConteiners.roomsNu = 2;
             }
-            if(vm.filterConteiners.f8 == undefined){
-                vm.filterConteiners.f8 = 2;
+            if(vm.filterConteiners.bathroomsNu == undefined){
+                vm.filterConteiners.bathroomsNu = 2;
             }
-            if(vm.filterConteiners.f9 == undefined){
-                vm.filterConteiners.f9 = "All heating types";
-            }
-
-
-            if(vm.filterConteiners.f10 == undefined){
-                vm.filterConteiners.f10 = false;
-            }
-            if(vm.filterConteiners.f11 == undefined){
-                vm.filterConteiners.f11 = false;
+            if(vm.filterConteiners.heatingType == undefined){
+                vm.filterConteiners.heatingType = "All heating types";
             }
 
 
-
-
-
-            if(vm.filterConteiners.f11 == undefined){
-                vm.filterConteiners.f11 = false;
+            if(vm.filterConteiners.furniture == undefined){
+                vm.filterConteiners.furniture = false;
             }
+            if(vm.filterConteiners.parking == undefined){
+                vm.filterConteiners.parking = false;
+            }
+
             console.log("fileter1!! : " + vm.filterConteiners.f1);
             console.log("fileter2!! : " + vm.filterConteiners.f2);
             console.log("fileter3!! : " + vm.filterConteiners.f3);
@@ -76,33 +72,15 @@
 
         }
 
-        getAllListings();
 
 
 
-        function getAllListings() {
+
+        function getAllFiltrated() {
 
 
+            /*
             vm.filterConteiners = {};
-
-            $(function () {
-                $("#slider").responsiveSlides({
-                    auto: true,
-                    nav: true,
-                    speed: 500,
-                    namespace: "callbacks",
-                    pager: true,
-                });
-            });
-
-            $(document).ready(function () {
-                $('#horizontalTab').easyResponsiveTabs({
-                    type: 'default', //Types: default, vertical, accordion
-                    width: 'auto', //auto or any width like 600px
-                    fit: true   // 100% fit in a container
-                });
-            });
-
 
             $http.get('/api/advertisement/getAllListings')
                 .then(function(response) {
@@ -113,6 +91,15 @@
                 }, function(response) {
                     alert(JSON.stringify(response.data));
                 });
+
+            $http.post('/api/advertisement/filterListings', vm.filterConteiners).then(function (response) {
+
+
+
+            },function(response){
+                alert("Check you email and activate your account!");
+            });
+            */
         }
     }
 })();

@@ -25,7 +25,7 @@
                     </br></br>
 
                     <div class="tab-1">
-                        <div  ng-repeat="o in getAllRealEstatesCtrl.allRealEstates">
+                        <div  ng-repeat="o in getAllRealEstatesCtrl.allMyRealEstates">
 
                             <ul class="tab_img tab_1" >
                                 <li>
@@ -41,7 +41,7 @@
                                                     {{o.area}}</span>
                                         </div>
                                         <div align = "Center">
-                                            <form ng-submit="getAllRealEstatesCtrl.redirect2(o.id)" >
+                                            <form ng-submit="getAllRealEstatesCtrl.redirect2(o.id)">
                                                 <label class="btn4 btn-82 btn-82c"><input type="submit" value="Add advertisement"></label>
                                             </form>
                                             <form ng-submit="getAllRealEstatesCtrl.eraseRealEstate(o.id)">

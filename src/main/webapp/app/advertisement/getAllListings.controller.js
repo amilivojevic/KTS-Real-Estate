@@ -9,17 +9,31 @@
         .controller('GetAllListingsController', getAllListingsController);
 
 
-    function getAllListingsController($http, $scope, $cookies, $window) {
+    function getAllListingsController($http, $scope, $cookies, $window, FilterService) {
 
         var vm = this;
         vm.getAllListings = getAllListings;
 
         vm.setFilter = function () {
-            console.log("fileter1!! : " + vm.filterConteiners.f1);
-            console.log("fileter2!! : " + vm.filterConteiners.f2);
-            console.log("fileter3!! : " + vm.filterConteiners.f3);
-            console.log("fileter4!! : " + vm.filterConteiners.f4);
-            console.log("fileter5!! : " + vm.filterConteiners.f5);
+
+            if(vm.filterConteiners.type == null){
+                vm.filterConteiners.type = "All contracts";
+            }
+            if(vm.filterConteiners.location == undefined){
+                vm.filterConteiners.location = "";
+            }
+            if(vm.filterConteiners.minPrice == undefined){
+                vm.filterConteiners.minPrice = 10000;
+            }
+            if(vm.filterConteiners.maxPrice == undefined){
+                vm.filterConteiners.maxPrice = 10000;
+            }
+            if(vm.filterConteiners.currency == undefined){
+                vm.filterConteiners.currency = "All currencies";
+            }
+
+            console.log("fileter!! : " + JSON.stringify(vm.filterConteiners));
+            FilterService.setFilter(vm.filterConteiners);
 
             $window.location.href = "http://" + $window.location.host + "/#!/filterAdvertisement";
 
@@ -27,8 +41,6 @@
         }
 
         getAllListings();
-
-
 
         function getAllListings() {
 
@@ -54,10 +66,10 @@
             });
 
 
-            $http.get('/api/advertisement/getAllListings')
+            $http.get('/api/advertisement/getAllAcceptedListings')
                 .then(function(response) {
 
-                    console.log("all advertisements: " + angular.toJson(response.data));
+                    //console.log("all advertisements: " + angular.toJson(response.data));
                     vm.allListings =  response.data;
 
                 }, function(response) {

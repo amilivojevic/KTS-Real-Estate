@@ -82,16 +82,18 @@
                     <div class="tab-1">
 
                         <div class="tab-1">
-                            <div  ng-repeat="o in ownerCtrl.allAdvertisements">
+                            <div  ng-repeat="o in ownerCtrl.allMyAdvertisements">
 
                                 <ul class="tab_img tab_1" >
                                     <li>
                                         <div class="client_box1">
                                             <img ng-src="{{o.realEstate.imageUrl}}" class="img-responsive" alt="images/pic4.jpg"/>
-                                            <h3 class="m_1"><a href="single.html">Dolor suit</a></h3>
+                                            <h3 class="m_1">{{o.state}}</h3>
                                             <div class="boxed_mini_details clearfix">
-                                                <span class="bedrooms last"><strong>Title</strong>
-                                                    {{o.title}}</span>
+                                                <span class="bedrooms last">
+                                                    <strong>Title</strong>
+                                                    <a href="single.html">{{o.title}}</a>
+                                                </span>
                                                 <span class="area first"><strong>Price</strong><i></i>
                                                    {{o.price}}</span>
                                                 <span class="bedrooms last"><strong>Contact</strong>

@@ -115,8 +115,22 @@ public class AdvertisementController {
 
     }
 
-    @RequestMapping(value = "/getAllListings", method = RequestMethod.GET)
-    public ResponseEntity getAllAdvertisements()
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public ResponseEntity getAllAdvertisements() {
+
+        List<Advertisement> allAdvertisements = new ArrayList<>();
+
+        for (Advertisement o : advertisementRepository.findAll()) {
+
+            allAdvertisements.add(o);
+
+        }
+
+        return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getAllAcceptedListings", method = RequestMethod.GET)
+    public ResponseEntity getAllAcceptedAdvertisements()
     {
 
         List<Advertisement> allAdvertisements = new ArrayList<>();
@@ -125,7 +139,6 @@ public class AdvertisementController {
             if(o.getState() == AdvertisementState.ACCEPTED) {
                 allAdvertisements.add(o);
             }
-
         }
 
         return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
@@ -172,6 +185,24 @@ public class AdvertisementController {
             return new ResponseEntity<>(a, HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete advertisement!"), HttpStatus.OK);
+
+    }
+
+
+    @RequestMapping(value = "/filterListings", method = RequestMethod.GET)
+    public ResponseEntity filterListings()
+    {
+
+        List<Advertisement> allAdvertisements = new ArrayList<>();
+
+        for (Advertisement o : advertisementRepository.findAll()) {
+            if(o.getState() == AdvertisementState.ACCEPTED) {
+                allAdvertisements.add(o);
+            }
+
+        }
+
+        return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
 
     }
 
