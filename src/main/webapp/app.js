@@ -286,6 +286,21 @@
                         }
                     }
                 })
+                .state('approveAdvertisement', {
+                    url: '/approve_advertisement',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/verifyer/approveAdvertisement/approveAdvertisement.html',
+                            controller: 'ApproveAdvertisementController',
+                            controllerAs: 'approveAdvertisementCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
                 .state('listing', {
                     url: '/listings',
                     views: {
@@ -320,6 +335,21 @@
                     views: {
                         'content': {
                             templateUrl: 'app/static/contact.html'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
+                .state('single', {
+                    url: '/single_advertisement',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/advertisement/singleAdvertisement.html',
+                            controller: 'SingleAdvertisementController',
+                            controllerAs: 'singleAdvertisementCtrl'
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',
