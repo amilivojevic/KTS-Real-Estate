@@ -1,5 +1,6 @@
 package kts.project.service;
 
+import kts.project.model.PrivateAccountInCompany;
 import kts.project.model.User;
 import kts.project.repository.UserRepository;
 import kts.project.security.TokenUtils;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by Korisnik on 6/14/2017.
@@ -40,4 +43,17 @@ public class UserService {
 
         return user;
     }
+
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
+
+    public User save(User u){
+        return userRepository.save(u);
+    }
+
+    public void delete(User eraseUser){
+         userRepository.delete(eraseUser);
+    }
+
 }

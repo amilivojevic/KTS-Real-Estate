@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PrivateAccountInCompanyRepository extends JpaRepository<PrivateAccountInCompany,Long>{
 
+    PrivateAccountInCompany findById(Long id);
+
 }

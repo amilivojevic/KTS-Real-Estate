@@ -10,6 +10,7 @@ import kts.project.repository.*;
 import kts.project.security.TokenUtils;
 import kts.project.security.UserUtils;
 import kts.project.service.EmailService;
+import kts.project.service.PrivateAccountInCompanyService;
 import kts.project.service.UserService;
 import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,6 @@ import java.util.List;
         private AuthorityRepository authorityRepository;
 
         @Autowired
-        private UserRepository userRepository;
-
-        @Autowired
         private AuthenticationManager authenticationManager;
 
         @Autowired
@@ -61,7 +59,7 @@ import java.util.List;
         private UserService userService;
 
         @Autowired
-        private PrivateAccountInCompanyRepository privateAccountInCompanyRepository;
+        private PrivateAccountInCompanyService privateAccountInCompanyService;
 
         @Autowired
         private OwnerRepository ownerRepository;
@@ -101,7 +99,7 @@ import java.util.List;
             }
             //private account in company
             else if(checkIfOwnerIsPrivate(user.getId()) != -1){
-                PrivateAccountInCompany p = privateAccountInCompanyRepository.findOne(checkIfOwnerIsPrivate(user.getId()));
+                PrivateAccountInCompany p = privateAccountInCompanyService.findById(checkIfOwnerIsPrivate(user.getId()));
                 approved = p.isApproved();
             }
         }
@@ -109,7 +107,7 @@ import java.util.List;
     }
 
     public long checkIfOwnerIsPrivate(long ownerId){
-        for(PrivateAccountInCompany p : privateAccountInCompanyRepository.findAll()){
+        for(PrivateAccountInCompany p : privateAccountInCompanyService.findAll()){
             if(p.getOwner().getId() == ownerId){
                 return p.getId();
             }
@@ -131,6 +129,8 @@ import java.util.List;
         if(registerDTO.getUsername() == null || registerDTO.getEmail() == null || registerDTO.getPassword() == null){
             return new ResponseEntity<>(new ResponseMessage("Username should not be null!"), HttpStatus.BAD_REQUEST);
         }
+
+
 
         if (registerDTO.getRole().equalsIgnoreCase("VERIFYER")) {
             user = new User();
@@ -169,7 +169,7 @@ import java.util.List;
 
 
 
-        userRepository.save(user);
+        userService.save(user);
 
         emailService.sendMail(user);
 
@@ -218,7 +218,7 @@ import java.util.List;
         privateAcc.setCompany(companyRepository.findOne(registerPrivateAccDTO.getCompanyId()));
         privateAcc.setOwner(ownerRepository.findByUsername(registerPrivateAccDTO.getUsername()));
 
-        privateAccountInCompanyRepository.save(privateAcc);
+        privateAccountInCompanyService.save(privateAcc);
 
         emailService.sendMail(user);
 
@@ -239,7 +239,7 @@ import java.util.List;
         user.setCountry(changedAdminDTO.getCountry());
         user.setAccountNumber(changedAdminDTO.getAccountNumber());
         user.setImageUrl(changedAdminDTO.getImageUrl());
-        userRepository.save(user);
+        userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -256,7 +256,7 @@ import java.util.List;
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public ResponseEntity getAllUsers(@RequestHeader("X-Auth-Token") String token)
     {
-        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "verifier/getAll", method = RequestMethod.GET)
@@ -266,7 +266,7 @@ import java.util.List;
         if (user.getRole() == Role.SYS_ADMIN){
             List<User> allVerifiers = new ArrayList<User>();
 
-            for (User v : userRepository.findAll()) {
+            for (User v : userService.findAll()) {
                 if (v.getRole() == Role.VERIFYER){
                     allVerifiers.add((User) v);
                 }
@@ -282,10 +282,10 @@ import java.util.List;
         User user = userService.findByToken(token);
         if (user.getRole() == Role.SYS_ADMIN){
 
-            User eraseUser = userRepository.findByUsername(username);
+            User eraseUser = userService.findByUsername(username);
 
             //obrisati i sve one stvari verifikatora!!!
-            userRepository.delete(eraseUser);
+            userService.delete(eraseUser);
 
             return new ResponseEntity<>(eraseUser, HttpStatus.OK);
         }
