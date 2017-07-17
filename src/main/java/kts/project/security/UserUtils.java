@@ -80,20 +80,17 @@ public class UserUtils {
 	}*/
 
 /*	*//**
-	 * This method checks if passed email and user name already exists
-	 * 
-	 * @param email
+	 * This method checks if passed user name already exists
+	 *
 	 * @param username
 	 * @return true or false
-	 *//*
-	public boolean checkUniqueEmailAndUsername(String email, String username) {
+	 */
+	public boolean checkUniqueUsername(String username) {
 
-		if (adminService.findByUsername(username) != null || adminService.findByEmail(email) != null
-				|| userService.findByUsername(username) != null || userService.findByEmail(email) != null
-				|| verifierService.findByUsername(username) != null || verifierService.findByEmail(email) != null) {
+		if (userService.findByUsername(username) != null) {
 			return false;
 		}
 		return true;
-	}*/
+	}
 
 }
