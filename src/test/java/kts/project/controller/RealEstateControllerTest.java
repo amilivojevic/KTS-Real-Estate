@@ -8,6 +8,7 @@ import kts.project.KtsprojectApplication;
 import kts.project.LoginTest;
 import kts.project.TestUtil;
 import kts.project.controller.dto.RealEstateDTO;
+import kts.project.model.RealEstate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,10 +96,74 @@ public class RealEstateControllerTest {
 
         String token = loginTest.login(USERNAME,PASSWORD);
         String json = TestUtil.json(realEstateDTO);
-        this.mockMvc.perform(post(URL_PREFIX + "/reportBanedAdvertisement/").header("X-Auth-Token", token).contentType(contentType).content(json))
+        this.mockMvc.perform(post(URL_PREFIX + "/addNewRealEstate").header("X-Auth-Token", token).contentType(contentType).content(json))
                 .andExpect(status().isCreated());
 
     }
 
+    /**
+     * This method should test adding new Real Estate with report with invalid input.
+     * Expect to miss some not nullable fields. Expected: method post, status
+     * BAD_REQUEST, and specified content
+     *
+     * @throws Exception
+     **/
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void testAddNewRealEstateInvalid() throws Exception {
+        RealEstateDTO realEstateDTO = null;
 
+        String token = loginTest.login(USERNAME,PASSWORD);
+        String json = TestUtil.json(realEstateDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/addNewRealEstate").header("X-Auth-Token", token).contentType(contentType).content(json))
+                .andExpect(status().isBadRequest());
+
+        realEstateDTO = new RealEstateDTO();
+        realEstateDTO.setDescription(BAD_DESCRIPTION);
+        realEstateDTO.setImageUrl(BAD_IMAGE_URL);
+        realEstateDTO.setFurniture(BAD_FURNITURE);
+        realEstateDTO.setParking(BAD_PARKING);
+        realEstateDTO.setArea(BAD_AREA);
+        realEstateDTO.setConstructionYear(BAD_CONSTRUCTION_YEAR);
+        realEstateDTO.setRoomsNumber(BAD_ROOMS_NUMBER);
+        realEstateDTO.setBathroomsNumber(BAD_BATHROOMS_NUMBER);
+        realEstateDTO.setCity(BAD_CITY);
+        realEstateDTO.setCityArea(BAD_CITY_AREA);
+        realEstateDTO.setStreet(BAD_STREET);
+        realEstateDTO.setStreetNumber(BAD_STREET_NUMBER);
+        realEstateDTO.setState(BAD_STATE);
+        realEstateDTO.setZipCode(BAD_ZIP_CODE);
+        realEstateDTO.setHeatingType(BAD_HEATING_TYPE);
+        realEstateDTO.setRs_type(BAD_RS_TYPE);
+
+        token = loginTest.login(USERNAME,PASSWORD);
+        json = TestUtil.json(realEstateDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/addNewRealEstate").header("X-Auth-Token", token).contentType(contentType).content(json))
+                .andExpect(status().isBadRequest());
+
+        realEstateDTO = new RealEstateDTO();
+        realEstateDTO.setDescription(NEW_DESCRIPTION);
+        realEstateDTO.setImageUrl(NEW_IMAGE_URL);
+        realEstateDTO.setFurniture(NEW_FURNITURE);
+        realEstateDTO.setParking(NEW_PARKING);
+        realEstateDTO.setArea(NEW_AREA);
+        realEstateDTO.setConstructionYear(NEW_CONSTRUCTION_YEAR);
+        realEstateDTO.setRoomsNumber(NEW_ROOMS_NUMBER);
+        realEstateDTO.setBathroomsNumber(NEW_BATHROOMS_NUMBER);
+        realEstateDTO.setCity(NEW_CITY);
+        realEstateDTO.setCityArea(NEW_CITY_AREA);
+        realEstateDTO.setStreet(NEW_STREET);
+        realEstateDTO.setStreetNumber(NEW_STREET_NUMBER);
+        realEstateDTO.setState(NEW_STATE);
+        realEstateDTO.setZipCode(NEW_ZIP_CODE);
+        realEstateDTO.setHeatingType(BAD_HEATING_TYPE);
+        realEstateDTO.setRs_type(BAD_RS_TYPE);
+
+        token = loginTest.login(USERNAME,PASSWORD);
+        json = TestUtil.json(realEstateDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/addNewRealEstate").header("X-Auth-Token", token).contentType(contentType).content(json))
+                .andExpect(status().isBadRequest());
+
+    }
 }

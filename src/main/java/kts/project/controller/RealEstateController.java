@@ -22,6 +22,11 @@ import java.util.List;
 /**
  * Created by Nina on 14-Jul-17.
  */
+
+/**
+ *This class represents controller for Real Estate and manages with all Real Estate
+ * functionalities.
+ */
 @RestController
 @RequestMapping("/api/realEstate")
 public class RealEstateController {
@@ -41,11 +46,19 @@ public class RealEstateController {
     @Autowired
     private AdvertisementRepository advertisementRepository;
 
-    //Adding new real estate
+    //TESTING COMPLETED
+
+    /**
+     * This method represents adding of a new Real Estate
+     * @param token
+     * @param realEstateDTO
+     * @return ResponseEntity with HttpStatus CREATED if everything is OK, BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/addNewRealEstate", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity addNewRealEstate(@RequestHeader("X-Auth-Token") String token,@RequestBody RealEstateDTO realEstateDTO) {
 
-        if (!checkRealEstateDTOInput(realEstateDTO)){
+
+        if (!realEstateService.checkRealEstateDTOInput(realEstateDTO)){
             return new ResponseEntity<>(new ResponseMessage("New Real Estate input is not valid (some fields are null)"), HttpStatus.BAD_REQUEST);
         }
 
@@ -118,33 +131,7 @@ public class RealEstateController {
             return new ResponseEntity<>(rs, HttpStatus.CREATED);
     }
 
-    /**
-     * This method is checking if all required inputs for RealEstateDTO are entered
-     * @param realEstateDTO
-     * @return true or false
-     */
-    private boolean checkRealEstateDTOInput(RealEstateDTO realEstateDTO){
-        if (realEstateDTO.getDescription().equals("") ||
-                realEstateDTO.getImageUrl() == "" ||
-                realEstateDTO.getArea() <= 0 ||
-                realEstateDTO.getConstructionYear().equals("")||
-                realEstateDTO.getRoomsNumber() < 0 ||
-                realEstateDTO.getBathroomsNumber() <0 ||
-                realEstateDTO.getCity().equals("")||
-                realEstateDTO.getCityArea().equals("")||
-                realEstateDTO.getStreet().equals("")||
-                realEstateDTO.getStreetNumber().equals("")||
-                realEstateDTO.getState().equals("")||
-                realEstateDTO.getZipCode().equals("")||
-                realEstateDTO.getHeatingType() == null ||
-                realEstateDTO.getRs_type() == null){
 
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
 
     @RequestMapping(value = "/getAllMyRealEstates", method = RequestMethod.GET)
     public ResponseEntity getAllMyRealEstates(@RequestHeader("X-Auth-Token") String token)

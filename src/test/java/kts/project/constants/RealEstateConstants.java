@@ -32,6 +32,23 @@ public class RealEstateConstants {
     public static final String USERNAME = "a";
     public static final String PASSWORD = "a";
 
+    public static final String BAD_DESCRIPTION = "";
+    public static final String BAD_IMAGE_URL = "";
+    public static final boolean BAD_FURNITURE = true;
+    public static final boolean BAD_PARKING = false;
+    public static final double BAD_AREA = -1d;
+    public static final String BAD_CONSTRUCTION_YEAR = "";
+    public static final int BAD_ROOMS_NUMBER = -2;
+    public static final int BAD_BATHROOMS_NUMBER = -1;
+    public static final String BAD_CITY = "";
+    public static final String BAD_CITY_AREA = "";
+    public static final String BAD_STREET = "";
+    public static final String BAD_STREET_NUMBER = "";
+    public static final String BAD_STATE = "";
+    public static final String BAD_ZIP_CODE = "";
+    public static final String BAD_HEATING_TYPE = null;
+    public static final String BAD_RS_TYPE = null;
+
     public static final long DB_ID = 2L;
 
     public static final String DB_DESCRIPTION = "xfbnz";
