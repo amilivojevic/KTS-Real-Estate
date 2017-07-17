@@ -117,12 +117,20 @@ import java.util.List;
         return -1;
     }
 
+
+
+    //TESTED
+
         //registracija administratora i verifikatora!
     @RequestMapping(value = "/{role}/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity saveUser(@PathVariable String role,@RequestBody RegisterDTO registerDTO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println("Pocinje registracija na backendu!");
         User user;
+
+        if(registerDTO.getUsername() == null || registerDTO.getEmail() == null || registerDTO.getPassword() == null){
+            return new ResponseEntity<>(new ResponseMessage("Username should not be null!"), HttpStatus.BAD_REQUEST);
+        }
 
         if (registerDTO.getRole().equalsIgnoreCase("VERIFYER")) {
             user = new User();
@@ -156,11 +164,16 @@ import java.util.List;
         user.setAccountNumber(registerDTO.getAccountNumber());
         user.setImageUrl(registerDTO.getImageUrl());
         //user.setVerifyCode(UUID.randomUUID().toString());
+
+
+
+
+
         userRepository.save(user);
 
         emailService.sendMail(user);
 
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
 
