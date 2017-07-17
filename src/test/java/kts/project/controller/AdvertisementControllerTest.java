@@ -77,11 +77,52 @@ public class AdvertisementControllerTest {
         addAdvertisementDTO.setType(NEWADV_TYPE);
 
         String token = loginTest.login(USERNAME,PASSWORD);
-        
+
         String json = TestUtil.json(addAdvertisementDTO);
         this.mockMvc.perform(post(URL_PREFIX + "/addNewAdvertisement").header("X-Auth-Token", token).contentType(contentType).content(json))
                 .andExpect(status().isCreated());
     }
+
+    /**
+     * This method tests adding new Advertisement and saving it to the database.
+     * Expected invalid input fields, unique phone number. Expected: method
+     * post, status BAD_REQUEST
+     *
+     * @throws Exception
+     **/
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void testSaveAdvertisementInvalid() throws Exception {
+        AddAdvertisementDTO addAdvertisementDTO = new AddAdvertisementDTO();
+        String token = loginTest.login(USERNAME,PASSWORD);
+
+
+        addAdvertisementDTO.setCurrency(NEWADV_CURRENCY_BAD);
+        addAdvertisementDTO.setEndingDate(NEWADV_ENDING_DATE_BAD);
+        addAdvertisementDTO.setId(NEWADV_RS_ID);
+        addAdvertisementDTO.setPhoneNumber(NEWADV_PHONE_NUMBER_BAD);
+        addAdvertisementDTO.setPrice(NEWADV_PRICE_BAD);
+        addAdvertisementDTO.setTitle(NEWADV_TITLE_BAD);
+        addAdvertisementDTO.setType(NEWADV_TYPE_BAD);
+        String json = TestUtil.json(addAdvertisementDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/addNewAdvertisement").header("X-Auth-Token", token).contentType(contentType).content(json))
+                    .andExpect(status().isBadRequest());
+
+        addAdvertisementDTO.setCurrency(NEWADV_CURRENCY);
+        addAdvertisementDTO.setEndingDate(NEWADV_ENDING_DATE);
+        addAdvertisementDTO.setId(NEWADV_RS_ID_BAD);
+        addAdvertisementDTO.setPhoneNumber(NEWADV_PHONE_NUMBER);
+        addAdvertisementDTO.setPrice(NEWADV_PRICE);
+        addAdvertisementDTO.setTitle(NEWADV_TITLE);
+        addAdvertisementDTO.setType(NEWADV_TYPE);
+        json = TestUtil.json(addAdvertisementDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/addNewAdvertisement").header("X-Auth-Token", token).contentType(contentType).content(json))
+                .andExpect(status().isNotFound());
+    }
+
+
+
 
 
 
