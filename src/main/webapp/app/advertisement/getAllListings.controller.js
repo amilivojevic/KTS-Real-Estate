@@ -15,6 +15,7 @@
         vm.getAllListings = getAllListings;
 
         vm.setFilter = function () {
+/*
 
             if(vm.filterConteiners.type == null){
                 vm.filterConteiners.type = "All contracts";
@@ -31,6 +32,7 @@
             if(vm.filterConteiners.currency == undefined){
                 vm.filterConteiners.currency = "All currencies";
             }
+*/
 
             console.log("fileter!! : " + JSON.stringify(vm.filterConteiners));
             FilterService.setFilter(vm.filterConteiners);

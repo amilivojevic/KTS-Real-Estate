@@ -10,10 +10,10 @@
 
         var vm = this;
         vm.getSingleAdvertisement = getSingleAdvertisement;
-
-
+        
         var id = SingleAdvertisementService.getAdvertisementId();
         
+
         getSingleAdvertisement();
 
 
