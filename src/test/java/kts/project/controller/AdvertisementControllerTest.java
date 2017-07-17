@@ -3,7 +3,9 @@ package kts.project.controller;
 import kts.project.KtsprojectApplication;
 import kts.project.LoginTest;
 import kts.project.TestUtil;
+import kts.project.constants.AdvertisementConstants;
 import kts.project.controller.dto.AddAdvertisementDTO;
+import kts.project.model.Advertisement;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static sun.security.krb5.Confounder.intValue;
 
 /**
  * Created by Sandra on 7/17/2017.
@@ -144,7 +147,16 @@ public class AdvertisementControllerTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(DB_ADV_ID.intValue())))
                 .andExpect(jsonPath("$.[*].title").value(hasItem(DB_ADV_TITLE)))
                 .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DB_ADV_PHONE_NUMBER)))
-                .andExpect(jsonPath("$.[*].price").value(hasItem(DB_ADV_PRICE)));
+                .andExpect(jsonPath("$.[*].price").value(hasItem(DB_ADV_PRICE)))
+                .andExpect(jsonPath("$.[*].realEstate.id").value(hasItem(DB_ADV_RS_ID.intValue())))
+                .andExpect(jsonPath("$.[*].owner.id").value(hasItem(DB_ADV_OWNER_ID.intValue())))
+                .andExpect(jsonPath("$.[*].currency").value(hasItem(DB_ADV_CURRENCY)));
+
+/*                .andExpect(jsonPath("$.[*].price").value(hasItem(DB_ADV_PRICE)))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(DB_ADV_ID.intValue())))
+                .andExpect(jsonPath("$.[*].title").value(hasItem(DB_ADV_TITLE)))
+                .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DB_ADV_PHONE_NUMBER)))
+                .andExpect(jsonPath("$.[*].price").value(hasItem(DB_ADV_PRICE)));*/
     }
 
 
