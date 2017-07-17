@@ -2,6 +2,7 @@ package kts.project.controller;
 
 import kts.project.KtsprojectApplication;
 import kts.project.TestUtil;
+import kts.project.controller.dto.LoginDTO;
 import kts.project.controller.dto.RegisterDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,8 +56,75 @@ public class UserControllerTest {
     }
 
     /**
-     * This method should registrate new admins and verifiers. Expecting all valid input
-     * fields. Expected: method post, status CREATED, and specified content
+     * This method should test log in of users of all types. Expecting all valid input
+     * fields. Expected: method post, status OK
+     *
+     * @throws Exception
+     **/
+
+
+    /**
+     * This Method tests if a controller with URL_PREFIX returns token of logged user
+     * with valid input parameters. Expected: Status OK
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testLogin() throws Exception {
+        LoginDTO loginUser = new LoginDTO();
+        loginUser.setUsername(DB_USERNAME);
+        loginUser.setPassword(DB_PASSWORD);
+
+
+        System.out.println("username" + loginUser.getUsername());
+        System.out.println("password" + loginUser.getPassword());
+        String json = TestUtil.json(loginUser);
+        mockMvc.perform(post(URL_PREFIX + "/login").contentType(contentType).content(json)).andExpect(status().isOk());
+    }
+
+    /**
+     * Method tests if a controller with URL_PREFIX returns bad request with
+     * invalid input parameters like empty object and invalid data in object.
+     * Expected: Status Bad Request
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testInvalidLogin() throws Exception {
+        LoginDTO loginUser = new LoginDTO();
+        loginUser.setUsername(NEW_USERNAME);
+        loginUser.setPassword(NEW_PASSWORD);
+
+        String json = TestUtil.json(loginUser);
+        mockMvc.perform(post(URL_PREFIX + "/login").contentType(contentType).content(json))
+                .andExpect(status().isBadRequest());
+
+        loginUser = new LoginDTO();
+        loginUser.setUsername(NEW_USERNAME);
+        loginUser.setPassword(DB_PASSWORD);
+
+        json = TestUtil.json(loginUser);
+        mockMvc.perform(post(URL_PREFIX + "/login").contentType(contentType).content(json))
+                .andExpect(status().isBadRequest());
+
+        loginUser = new LoginDTO();
+        loginUser.setUsername(DB_USERNAME);
+        loginUser.setPassword(NEW_PASSWORD);
+
+        json = TestUtil.json(loginUser);
+        mockMvc.perform(post(URL_PREFIX + "/login").contentType(contentType).content(json))
+                .andExpect(status().isBadRequest());
+
+        String json1 = TestUtil.json(new LoginDTO());
+        mockMvc.perform(post(URL_PREFIX + "/login").contentType(contentType).content(json1))
+                .andExpect(status().isBadRequest());
+
+    }
+
+    /**
+     * This method should test registration new admins and verifiers with valid input.
+     * Expect all fields to be full filed correctly. Expected: method post, status
+     * OK, and specified content
      *
      * @throws Exception
      **/
@@ -88,7 +156,7 @@ public class UserControllerTest {
 
 
     /**
-     * This method should test registrating new admins and verifiers with invalid input.
+     * This method should test registration new admins and verifiers with invalid input.
      * Expect to miss some not nullable fields. Expected: method post, status
      * BAD_REQUEST, and specified content
      *
@@ -129,6 +197,31 @@ public class UserControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    /**
+     * This method should test registration new admins and verifiers with data that already
+     * exist. Expected: method post, status BAD_REQUEST, and specified content
+     *
+     * @throws Exception
+     **/
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void testSaveUserUnique() throws Exception {
+        RegisterDTO registerDTO = new RegisterDTO();
+
+        String json = TestUtil.json(registerDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/admin/register").contentType(contentType).content(json))
+                .andExpect(status().isBadRequest());
+
+        registerDTO.setEmail(NEW_EMAIL);
+        registerDTO.setPassword(NEW_PASSWORD);
+        registerDTO.setUsername(kts.project.constants.UserContstants.DB_USERNAME);
+
+        json = TestUtil.json(registerDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/admin/register").contentType(contentType).content(json))
+                .andExpect(status().isBadRequest());
+
+    }
 
 
 

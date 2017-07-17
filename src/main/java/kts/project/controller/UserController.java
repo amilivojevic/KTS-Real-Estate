@@ -9,9 +9,7 @@ import kts.project.model.enumerations.Role;
 import kts.project.repository.*;
 import kts.project.security.TokenUtils;
 import kts.project.security.UserUtils;
-import kts.project.service.EmailService;
-import kts.project.service.PrivateAccountInCompanyService;
-import kts.project.service.UserService;
+import kts.project.service.*;
 import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -36,12 +34,16 @@ import java.util.List;
  */
 
 
+/**
+ *This class represents controller for User and manages with all User
+ * functionalities.
+ */
 @RestController
     @RequestMapping("/api/users")
     public class UserController {
 
         @Autowired
-        private AuthorityRepository authorityRepository;
+        private AuthorityService authorityService;
 
         @Autowired
         private AuthenticationManager authenticationManager;
@@ -62,18 +64,30 @@ import java.util.List;
         private PrivateAccountInCompanyService privateAccountInCompanyService;
 
         @Autowired
-        private OwnerRepository ownerRepository;
+        private OwnerService ownerService;
 
         @Autowired
-        private CompanyRepository companyRepository;
+        private CompanyService companyService;
+
+        @Autowired
+        private UserUtils userUtils;
 
 
-
-
+    // TESTING IN PROGRESS
+    /**
+     *This method represents log in for all types of users.
+     *
+     * @param loginDTO
+     * @return ResponseEntity with HttpStatus OK if everything is OK, BAD_REQUEST if not OK, else NOT_FOUND
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
         try {
-            System.out.println("*** Pocinje login na backendu");
+         /*   System.out.println("*** Pocinje login na backendu"); */
+
+            if(loginDTO.getUsername() == null || loginDTO.getPassword() == null){
+                return new ResponseEntity<>(new ResponseMessage("Username or password must be inserted!"), HttpStatus.BAD_REQUEST);
+            }
             // Perform the authentication
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),
                     loginDTO.getPassword());
@@ -81,17 +95,25 @@ import java.util.List;
             SecurityContextHolder.getContext().setAuthentication(authentication);
             // Reload user details so we can generate token
             UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
+
             return new ResponseEntity<>(new ResponseMessage(tokenUtils.generateToken(details)), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(new ResponseMessage("Invalid login"),
-                    HttpStatus.NOT_FOUND);
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
+    /**
+     * This method is checking if Company or private Owner in Company are approved
+     * @param token
+     * @param loginDTO
+     * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/checkApproved", method = RequestMethod.POST, consumes = "application/json;charset=utf-8")
     public ResponseEntity checkApproved(@RequestHeader("X-Auth-Token") String token,@RequestBody EmptyDTO loginDTO) {
         boolean approved = true;
         User user = userService.findByToken(token);
+
         if(user.getRole() == Role.OWNER){
             //company
             if(user instanceof Company){
@@ -103,9 +125,18 @@ import java.util.List;
                 approved = p.isApproved();
             }
         }
+        else{
+            return new ResponseEntity<>(approved,HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(approved,HttpStatus.OK);
+
     }
 
+    /**
+     * This method is checking if Owner is private Owner inside Company
+     * @param ownerId
+     * @return id of Owner inside company if found, -1 if not
+     */
     public long checkIfOwnerIsPrivate(long ownerId){
         for(PrivateAccountInCompany p : privateAccountInCompanyService.findAll()){
             if(p.getOwner().getId() == ownerId){
@@ -117,32 +148,40 @@ import java.util.List;
 
 
 
-    //TESTED
-
+    //TESTED FULLY
+    /**
+     * This method represents register for Admin and Verifier types of Users, sets authority and saves
+     * it to the database.
+     * @param role
+     * @param registerDTO
+     * @return ResponseEntity with HttpStatus CREATED if everything is OK or BAD_REQUEST if not OK
+     */
         //registracija administratora i verifikatora!
     @RequestMapping(value = "/{role}/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity saveUser(@PathVariable String role,@RequestBody RegisterDTO registerDTO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println("Pocinje registracija na backendu!");
         User user;
 
+        if(!userUtils.checkUniqueUsername(registerDTO.getUsername())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Username is not unique!");
+        }
         if(registerDTO.getUsername() == null || registerDTO.getEmail() == null || registerDTO.getPassword() == null){
             return new ResponseEntity<>(new ResponseMessage("Username should not be null!"), HttpStatus.BAD_REQUEST);
         }
 
 
-
         if (registerDTO.getRole().equalsIgnoreCase("VERIFYER")) {
             user = new User();
             user.setRole(Role.VERIFYER);
-            user.setAuthority(authorityRepository.findByName(("ROLE_VERIFYER")));
+            user.setAuthority(authorityService.findByName(("ROLE_VERIFYER")));
 
         }
 
         else if (registerDTO.getRole().equalsIgnoreCase("ADMIN")) {
             user = new User();
             user.setRole(Role.SYS_ADMIN);
-            user.setAuthority(authorityRepository.findByName(("ROLE_ADMIN")));
+            user.setAuthority(authorityService.findByName(("ROLE_ADMIN")));
 
         }
         else {
@@ -165,10 +204,6 @@ import java.util.List;
         user.setImageUrl(registerDTO.getImageUrl());
         //user.setVerifyCode(UUID.randomUUID().toString());
 
-
-
-
-
         userService.save(user);
 
         emailService.sendMail(user);
@@ -177,6 +212,11 @@ import java.util.List;
     }
 
 
+    /**
+     * This method represents registration of private Owners inside Company
+     * @param registerPrivateAccDTO
+     * @return ResponseEntity with HttpStatus CREATED if everything is OK or BAD_REQUEST if not OK
+     */
     //registracija obicnih korisnika unutar firme
     @RequestMapping(value = "privateAcc/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity saveOwner(@RequestBody RegisterPrivateAccDTO registerPrivateAccDTO) {
@@ -188,7 +228,7 @@ import java.util.List;
         if (registerPrivateAccDTO.getRole().equalsIgnoreCase("OWNER")) {
 
             user = new Owner();
-            user.setAuthority(authorityRepository.findByName(("ROLE_OWNER")));
+            user.setAuthority(authorityService.findByName(("ROLE_OWNER")));
 
         }
         else {
@@ -211,20 +251,27 @@ import java.util.List;
         user.setAccountNumber(registerPrivateAccDTO.getAccountNumber());
         user.setImageUrl(registerPrivateAccDTO.getImageUrl());
 
-        ownerRepository.save(user);
+        ownerService.save(user);
 
         PrivateAccountInCompany privateAcc = new PrivateAccountInCompany();
         privateAcc.setApproved(false);
-        privateAcc.setCompany(companyRepository.findOne(registerPrivateAccDTO.getCompanyId()));
-        privateAcc.setOwner(ownerRepository.findByUsername(registerPrivateAccDTO.getUsername()));
+        privateAcc.setCompany(companyService.findById(registerPrivateAccDTO.getCompanyId()));
+        privateAcc.setOwner(ownerService.findByUsername(registerPrivateAccDTO.getUsername()));
 
         privateAccountInCompanyService.save(privateAcc);
 
         emailService.sendMail(user);
 
-        return new ResponseEntity<>(privateAcc, HttpStatus.OK);
+        return new ResponseEntity<>(privateAcc, HttpStatus.CREATED);
     }
 
+    /**
+     * This method represents modifying for Admin and Verifier types of users
+     * @param role
+     * @param changedAdminDTO
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK
+     */
     //registracija administratora i verifikatora!
     @RequestMapping(value = "/{role}/modify", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity modifyUser(@PathVariable String role,@RequestBody RegisterDTO changedAdminDTO,@RequestHeader("X-Auth-Token") String token) {
@@ -243,9 +290,11 @@ import java.util.List;
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-
-
-
+    /**
+     * This method is getting all data of an user
+     * @param token
+     * @return ResponseEntity with HttpStatus Ok if everything is OK
+     */
     @RequestMapping(value = "/data", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> getData(@RequestHeader("X-Auth-Token") String token)
     {
@@ -253,12 +302,22 @@ import java.util.List;
         return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
     }
 
+    /**
+     * This method returns list of all the users
+     * @param token
+     * @return ResponseEntity with HttpStatus Ok if everything is OK
+     */
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public ResponseEntity getAllUsers(@RequestHeader("X-Auth-Token") String token)
     {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
+    /**
+     * This method gets all users of type Verifier
+     * @param token
+     * @return ResponseEntity with HttpStatus Ok if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "verifier/getAll", method = RequestMethod.GET)
     public ResponseEntity getAllVerifiers(@RequestHeader("X-Auth-Token") String token)
     {
@@ -273,9 +332,15 @@ import java.util.List;
             }
             return new ResponseEntity<>(allVerifiers, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * This method deletes user with type Verifier
+     * @param username
+     * @param token
+     * @return ResponseEntity with HttpStatus Ok if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/verifier/erase/{username}", method = RequestMethod.GET)
     public ResponseEntity erase(@PathVariable String username, @RequestHeader("X-Auth-Token") String token)
     {
@@ -289,7 +354,7 @@ import java.util.List;
 
             return new ResponseEntity<>(eraseUser, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.BAD_REQUEST);
     }
 
 }
