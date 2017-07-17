@@ -22,7 +22,12 @@ import javax.annotation.PostConstruct;
 import java.nio.charset.Charset;
 
 import static kts.project.constants.AdvertisementConstants.*;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -122,8 +127,25 @@ public class AdvertisementControllerTest {
     }
 
 
+    /**
+     * This method tests adding new Advertisement and saving it to the database.
+     * Expected invalid input fields, unique phone number. Expected: method
+     * post, status BAD_REQUEST
+     *
+     * @throws Exception
+     **/
+    @Test
+    public void testGetAllAdvertisements() throws Exception {
 
-
+        mockMvc.perform(get(URL_PREFIX + "/getAll"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$", hasSize(DB_ADV_NUMBER)))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(DB_ADV_ID.intValue())))
+                .andExpect(jsonPath("$.[*].title").value(hasItem(DB_ADV_TITLE)))
+                .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DB_ADV_PHONE_NUMBER)))
+                .andExpect(jsonPath("$.[*].price").value(hasItem(DB_ADV_PRICE)));
+    }
 
 
 

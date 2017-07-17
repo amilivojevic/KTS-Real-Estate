@@ -23,7 +23,7 @@ public class Advertisement {
     private String title;
 
     @Column(name = "price", nullable = false)
-    private float price;
+    private double price;
 
     @Column(name = "announcementDate", nullable = false)
     private Date announcementDate;
@@ -63,7 +63,7 @@ public class Advertisement {
     public Advertisement() {
     }
 
-    public Advertisement(String title, float price, Date announcementDate, Date updateDate, Date endingDate, String phoneNumber, List<Review> reviews, AdvertisementType type, AdvertisementState state, RealEstate realEstate, Currency currency, Owner owner) {
+    public Advertisement(String title, double price, Date announcementDate, Date updateDate, Date endingDate, String phoneNumber, List<Review> reviews, AdvertisementType type, AdvertisementState state, RealEstate realEstate, Currency currency, Owner owner) {
         this.title = title;
         this.price = price;
         this.announcementDate = announcementDate;
@@ -94,11 +94,11 @@ public class Advertisement {
         this.title = title;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

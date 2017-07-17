@@ -128,9 +128,7 @@ public class AdvertisementController {
         List<Advertisement> allAdvertisements = new ArrayList<>();
 
         for (Advertisement o : advertisementService.findAll()) {
-
             allAdvertisements.add(o);
-
         }
 
         return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
@@ -213,7 +211,7 @@ public class AdvertisementController {
         return new ResponseEntity<>(filteredAdvertisements, HttpStatus.OK);
 
     }
-    
+
 }
 
 
