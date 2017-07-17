@@ -31,7 +31,7 @@ public class RealEstate {
     private boolean parking;
 
     @Column(name = "area", nullable = false)
-    private float area;
+    private double area;
 
     @Column(name = "constructionYear", nullable = false)
     private String constructionYear;
@@ -64,7 +64,7 @@ public class RealEstate {
     public RealEstate() {
     }
 
-    public RealEstate(String description, String imageUrl, boolean furniture, boolean parking, float area, String constructionYear, int roomsNumber, int bathroomsNumber, Location address, Owner owner, HeatingType heatingType, RealEstateType rs_type, List<Advertisement> advertisements) {
+    public RealEstate(String description, String imageUrl, boolean furniture, boolean parking, double area, String constructionYear, int roomsNumber, int bathroomsNumber, Location address, Owner owner, HeatingType heatingType, RealEstateType rs_type, List<Advertisement> advertisements) {
         this.description = description;
         this.imageUrl = imageUrl;
         this.furniture = furniture;
@@ -120,11 +120,11 @@ public class RealEstate {
         this.parking = parking;
     }
 
-    public float getArea() {
+    public double getArea() {
         return area;
     }
 
-    public void setArea(float area) {
+    public void setArea(double area) {
         this.area = area;
     }
 

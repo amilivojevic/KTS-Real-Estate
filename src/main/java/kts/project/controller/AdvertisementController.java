@@ -54,9 +54,13 @@ public class AdvertisementController {
      */
     @RequestMapping(value = "/addNewAdvertisement", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity addNewAdvertisement(@RequestHeader("X-Auth-Token") String token, @RequestBody AddAdvertisementDTO addAdvertisementDTO) {
-
-        if (!checkAdvertisementDTOInput(addAdvertisementDTO)){
+        if (!advertisementService.checkAdvertisementDTOInput(addAdvertisementDTO)){
             return new ResponseEntity<>(new ResponseMessage("New Advertisement input is not valid (some fields are null)"), HttpStatus.BAD_REQUEST);
+        }
+
+        if(realEstateService.findById(addAdvertisementDTO.getId()) == null){
+            return new ResponseEntity<>(new ResponseMessage("Real Estate with id: " + addAdvertisementDTO.getId() + "doesn't exist"), HttpStatus.NOT_FOUND);
+
         }
 
         Advertisement ad = new Advertisement();
@@ -68,18 +72,9 @@ public class AdvertisementController {
         ad.setUpdateDate(new Date());
         ad.setPhoneNumber(addAdvertisementDTO.getPhoneNumber());
         ad.setReviews(new ArrayList<>());
-
-
         ad.setState(AdvertisementState.WAITING);
 
-        if (realEstateService.findById(addAdvertisementDTO.getId()) != null){
-            System.out.println("real estate nije null");
-            ad.setRealEstate(realEstateService.findById(addAdvertisementDTO.getId()));
-        }
-        else{
-            System.out.println("real estate NULL");
-        }
-
+        ad.setRealEstate(realEstateService.findById(addAdvertisementDTO.getId()));
 
         AdvertisementType type;
 
@@ -122,18 +117,6 @@ public class AdvertisementController {
 
     }
 
-    private boolean checkAdvertisementDTOInput(AddAdvertisementDTO addAdvertisementDTO){
-        if (addAdvertisementDTO.getCurrency().equals("") ||
-                addAdvertisementDTO.getEndingDate() == null ||
-                addAdvertisementDTO.getPhoneNumber().equals("") ||
-                addAdvertisementDTO.getTitle().equals("") ||
-                addAdvertisementDTO.getType() == null){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
 
     /**
      *
@@ -145,9 +128,7 @@ public class AdvertisementController {
         List<Advertisement> allAdvertisements = new ArrayList<>();
 
         for (Advertisement o : advertisementService.findAll()) {
-
             allAdvertisements.add(o);
-
         }
 
         return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
@@ -220,100 +201,16 @@ public class AdvertisementController {
         List<Advertisement> filteredAdvertisements = new ArrayList<>();
         System.out.println(filterAdvertisementDTO);
 
-        AdvertisementType aTypeDTO = getAdvertisementFromString(filterAdvertisementDTO.getType());
-        Currency aCurrencyDTO = getCurrencyFromString(filterAdvertisementDTO.getCurrency());
+        AdvertisementType aTypeDTO = advertisementService.getAdvertisementFromString(filterAdvertisementDTO.getType());
+        Currency aCurrencyDTO = advertisementService.getCurrencyFromString(filterAdvertisementDTO.getCurrency());
         filteredAdvertisements = advertisementService.findAll();
 
-        filteredAdvertisements = typeFilter(filteredAdvertisements,aTypeDTO);
-        filteredAdvertisements = priceFilter(filteredAdvertisements,filterAdvertisementDTO.getMinPrice(),filterAdvertisementDTO.getMaxPrice(),aCurrencyDTO);
+        filteredAdvertisements = advertisementService.typeFilter(filteredAdvertisements,aTypeDTO);
+        filteredAdvertisements = advertisementService.priceFilter(filteredAdvertisements,filterAdvertisementDTO.getMinPrice(),filterAdvertisementDTO.getMaxPrice(),aCurrencyDTO);
 
         return new ResponseEntity<>(filteredAdvertisements, HttpStatus.OK);
 
     }
-
-
-    private AdvertisementType getAdvertisementFromString(String stringType){
-        if(stringType == null){
-            System.out.println("tip je null");
-            return null;
-        }
-        if(stringType.equalsIgnoreCase("RENT")){
-            System.out.println("tip je rent");
-            return AdvertisementType.RENT;
-        }
-        else if(stringType.equalsIgnoreCase("SELL")){
-            System.out.println("tip je sell");
-            return AdvertisementType.SELL;
-        }
-        return null;
-    }
-
-    private Currency getCurrencyFromString(String stringCurrency){
-        if(stringCurrency == null){
-            System.out.println("Currency je null");
-            return null;
-        }
-        if(stringCurrency.equalsIgnoreCase("EUR")){
-            System.out.println("Currency je EUR");
-            return Currency.EUR;
-        }
-        else if(stringCurrency.equalsIgnoreCase("RSD")){
-            System.out.println("Currency je RSD");
-            return Currency.RSD;
-        }
-        else if(stringCurrency.equalsIgnoreCase("USD")){
-            System.out.println("Currency je USD");
-            return Currency.USD;
-        }
-        return null;
-    }
-
-
-
-    private List<Advertisement> typeFilter(List<Advertisement> list, AdvertisementType type){
-        List<Advertisement> copy = new ArrayList<Advertisement>();
-        for(Advertisement a : list){ copy.add(a);}
-
-        for (Advertisement a : copy){
-
-            if(type != null && type != a.getType()){
-
-                list.remove(a);
-            }
-        }
-        return list;
-    }
-
-    private List<Advertisement> priceFilter(List<Advertisement> list, float minPrice, float maxPrice, Currency currency){
-
-        List<Advertisement> copy = new ArrayList<>();
-        for(Advertisement a : list){ copy.add(a);}
-
-        for (Advertisement a : copy){
-
-            if(currency != a.getCurrency()){
-
-                //ako je maxPrice == 0.0 onda znaci da nije nista upisano u input polje
-                if(maxPrice > 0){
-
-                    if(a.getPrice() < minPrice || a.getPrice() > maxPrice){
-                        list.remove(a);
-                    }
-
-                }
-                // ako nije popunuo maxPrice polje, treba proveriti samo minPrice
-                else if(maxPrice == 0.0 ){
-                    if(a.getPrice() < minPrice){
-                        list.remove(a);
-                    }
-                }
-
-            }
-
-        }
-        return list;
-    }
-
 
 }
 
