@@ -404,12 +404,27 @@
                     }
                 })
                 .state('filterAdvertisement', {
-                    url: '/filterAdvertisement',
+                url: '/filterAdvertisement',
+                views: {
+                    'content': {
+                        templateUrl: 'app/advertisement/filterAdvertisement.html',
+                        controller: 'FilterAdvertisementController',
+                        controllerAs: 'filterAdvertisementCtrl'
+                    },
+                    'navbar': {
+                        templateUrl: 'app/navbar/navbar.html',
+                        controller: 'NavbarController',
+                        controllerAs: 'navbarCtrl'
+                    }
+                }
+            })
+                .state('reportBanedAdvertisement', {
+                    url: '/report_baned_advertisement',
                     views: {
                         'content': {
-                            templateUrl: 'app/advertisement/filterAdvertisement.html',
-                            controller: 'FilterAdvertisementController',
-                            controllerAs: 'filterAdvertisementCtrl'
+                            templateUrl: 'app/user/verifyer/approveAdvertisement/reportBannedAdvertisement.html',
+                            controller: 'ReportBanedAdvertisementController',
+                            controllerAs: 'reportBanedAdvertisementCtrl'
                         },
                         'navbar': {
                             templateUrl: 'app/navbar/navbar.html',

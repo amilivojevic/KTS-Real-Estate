@@ -1,0 +1,66 @@
+<div class="about_top">
+    <div class="container">
+        <div class="about">
+            <h1 class="blog_head" style="color: #F94B4B">Report reason for baning advertisement</h1>
+
+            <div class="contact" ng-submit="reportBanedAdvertisementCtrl.reportBanedAdvertisement()">
+
+
+
+                <div >
+                    <div >
+                        <div class="col-md-2 contact_left">
+
+                        </div>
+                        <div class="col-md-8 contact_right">
+                            <form>
+                                <div class="text">
+                                    <div class="message-fild">
+                                        <span for="description">Comment:</span>
+                                        <textarea type="text" class="text" id="description" required ng-model="reportBanedAdvertisementCtrl.newReport.description" required value="Enter surname here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter surname here';}" > </textarea>
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <div class="text-fild">
+                                        <span for="date">Date:</span>
+                                        <input type="date" style="width: 350px; line-height: 44px;
+                                           border: 1px solid #DAD8D8; !important" class="text" id="date" ng-model="reportBanedAdvertisementCtrl.newReport.date" required value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter password here';}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 contact_left">
+
+                                </div>
+                                <div>
+                                    <div class="text-fild">
+                                        <span for="name">Select reason for baning advertisement:</span>
+                                    </div>
+                                    <div class="col-md-3 contact_left">
+
+                                    </div>
+                                    <div>
+                                        <select style="line-height: 44px;
+  							border: 1px solid #DAD8D8;
+  							width: 370px;" ng-model="reportBanedAdvertisementCtrl.newReport.banningReason" required>
+                                            <option style="color: #F94B4B;" ng-repeat="t in reportBanedAdvertisementCtrl.reason">{{t}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="clearfix"> </div>
+
+                                <div align = "Center">
+                                    <label class="btn1 btn-8 btn-8c"><input type="submit" value="Save"></label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

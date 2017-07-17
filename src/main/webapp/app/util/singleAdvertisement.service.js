@@ -10,19 +10,19 @@
 
             var advertisementId;
 
-            var setRealEstateId = function(id) {
+            var setAdvertisementId = function(id) {
                 console.log("postavio id" + id);
                 advertisementId = id;
             };
 
-            var getRealEstateId = function(){
+            var getAdvertisementId = function(){
                 console.log("citam id" + advertisementId);
                 return advertisementId;
             };
 
             return {
-                setRealEstateId: setRealEstateId,
-                getRealEstateId: getRealEstateId
+                setAdvertisementId: setAdvertisementId,
+                getAdvertisementId: getAdvertisementId
             };
 
         });

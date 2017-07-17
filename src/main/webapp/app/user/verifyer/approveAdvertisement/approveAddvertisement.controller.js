@@ -12,11 +12,27 @@
         getAllWaitingAdvertisements();
 
         vm.redirect = function(id){
-            console.log("id u redirektu" + id);
-            SingleAdvertisementService.setRealEstateId(id);
+            console.log("id advertisementa u redirektu na single" + id);
+            SingleAdvertisementService.setAdvertisementId(id);
             $window.location.href = "http://" + $window.location.host + "/#!/single_advertisement";
 
         }
+
+        vm.declineAdvertisement = function(id){
+            console.log("id advertisementa u redirektu na decline" + id);
+            SingleAdvertisementService.setAdvertisementId(id);
+            $window.location.href = "http://" + $window.location.host + "/#!/report_baned_advertisement";
+
+        }
+
+        vm.acceptAdvertisement = function(id){
+     /*       console.log("id advertisementa u redirektu na decline" + id);
+            SingleAdvertisementService.setAdvertisementId(id);
+            $window.location.href = "http://" + $window.location.host + "/#!/report_baned_advertisement"; */
+
+        }
+
+
 
         function getAllWaitingAdvertisements() {
 
