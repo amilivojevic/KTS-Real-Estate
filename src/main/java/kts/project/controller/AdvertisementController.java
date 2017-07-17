@@ -121,7 +121,7 @@ public class AdvertisementController {
 
         List<Advertisement> allAdvertisements = new ArrayList<>();
 
-        for (Advertisement o : advertisementRepository.findAll()) {
+        for (Advertisement o : advertisementService.findAll()) {
 
             allAdvertisements.add(o);
 
@@ -196,14 +196,102 @@ public class AdvertisementController {
 
         List<Advertisement> filteredAdvertisements = new ArrayList<>();
         System.out.println(filterAdvertisementDTO);
-        for (Advertisement o : advertisementRepository.findAll()) {
 
+        AdvertisementType aTypeDTO = getAdvertisementFromString(filterAdvertisementDTO.getType());
+        Currency aCurrencyDTO = getCurrencyFromString(filterAdvertisementDTO.getCurrency());
+        filteredAdvertisements = advertisementRepository.findAll();
 
-        }
+        filteredAdvertisements = typeFilter(filteredAdvertisements,aTypeDTO);
+        filteredAdvertisements = priceFilter(filteredAdvertisements,filterAdvertisementDTO.getMinPrice(),filterAdvertisementDTO.getMaxPrice(),aCurrencyDTO);
 
         return new ResponseEntity<>(filteredAdvertisements, HttpStatus.OK);
 
     }
 
 
+    private AdvertisementType getAdvertisementFromString(String stringType){
+        if(stringType == null){
+            System.out.println("tip je null");
+            return null;
+        }
+        if(stringType.equalsIgnoreCase("RENT")){
+            System.out.println("tip je rent");
+            return AdvertisementType.RENT;
+        }
+        else if(stringType.equalsIgnoreCase("SELL")){
+            System.out.println("tip je sell");
+            return AdvertisementType.SALE;
+        }
+        return null;
+    }
+
+    private Currency getCurrencyFromString(String stringCurrency){
+        if(stringCurrency == null){
+            System.out.println("Currency je null");
+            return null;
+        }
+        if(stringCurrency.equalsIgnoreCase("EUR")){
+            System.out.println("Currency je EUR");
+            return Currency.EUR;
+        }
+        else if(stringCurrency.equalsIgnoreCase("RSD")){
+            System.out.println("Currency je RSD");
+            return Currency.RSD;
+        }
+        else if(stringCurrency.equalsIgnoreCase("USD")){
+            System.out.println("Currency je USD");
+            return Currency.USD;
+        }
+        return null;
+    }
+
+
+
+    private List<Advertisement> typeFilter(List<Advertisement> list, AdvertisementType type){
+        List<Advertisement> copy = new ArrayList<Advertisement>();
+        for(Advertisement a : list){ copy.add(a);}
+
+        for (Advertisement a : copy){
+
+            if(type != null && type != a.getType()){
+
+                list.remove(a);
+            }
+        }
+        return list;
+    }
+
+    private List<Advertisement> priceFilter(List<Advertisement> list, float minPrice, float maxPrice, Currency currency){
+
+        List<Advertisement> copy = new ArrayList<>();
+        for(Advertisement a : list){ copy.add(a);}
+
+        for (Advertisement a : copy){
+
+            if(currency != a.getCurrency()){
+
+                //ako je maxPrice == 0.0 onda znaci da nije nista upisano u input polje
+                if(maxPrice > 0){
+
+                    if(a.getPrice() < minPrice || a.getPrice() > maxPrice){
+                        list.remove(a);
+                    }
+
+                }
+                // ako nije popunuo maxPrice polje, treba proveriti samo minPrice
+                else if(maxPrice == 0.0 ){
+                    if(a.getPrice() < minPrice){
+                        list.remove(a);
+                    }
+                }
+
+            }
+
+        }
+        return list;
+    }
+
+
 }
+
+

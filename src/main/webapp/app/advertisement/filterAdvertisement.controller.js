@@ -12,15 +12,15 @@
         vm.getAllFiltrated = getAllFiltrated;
         vm.previousFilter = FilterService.getFilter();
         vm.setFilter = setFilter;
+        vm.filterConteiners = {};
+        vm.filterConteiners.currency="EUR";
+
 
         getAllFiltrated();
 
 
         function setFilter() {
-//fileter!! : {"type":"All contracts","location":"","minPrice":10000,"maxPrice":10000,"currency":"All currencies"}
-
 /*
-
             if(vm.filterConteiners.type == null){
                 vm.filterConteiners.type = "All contracts";
             }
@@ -57,17 +57,14 @@
             }
 
 */
-
             console.log("fileter: " + JSON.stringify(vm.filterConteiners));
             $http.post("/api/advertisement/filterListings",vm.filterConteiners)
                 .then(function(response) {
-
+                    console.log("*** filtrirani: " + JSON.stringify(response.data));
 
                 }, function(response) {
                     alert(JSON.stringify(response.data));
                 });
-
-
         }
 
 
