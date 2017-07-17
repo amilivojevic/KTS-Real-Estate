@@ -34,7 +34,7 @@ public class AdvertisementConstants {
 
     public static final Long DB_ADV_ID = 1L;
     //public static final Date DB_ADV_ANNOUNCEMENT_DATE = new Date("2001-01-20 17:00:00");
-    public static final kts.project.model.enumerations.Currency DB_ADV_CURRENCY = kts.project.model.enumerations.Currency.EUR;
+    public static final String DB_ADV_CURRENCY = kts.project.model.enumerations.Currency.RSD.name();
     //public static final Date DB_ADV_ENDING_DATE = new Date("2001-06-20 17:00:00");
     public static final String DB_ADV_PHONE_NUMBER = "021400198";
     public static final double DB_ADV_PRICE = 10000d;
@@ -42,7 +42,7 @@ public class AdvertisementConstants {
     public static final String DB_ADV_TITLE = "Add title";
     public static final AdvertisementType DB_ADV_TYPE = AdvertisementType.RENT;
     //public static final Date DB_ADV_UPDATE_DATE = new Date("2002-02-20 18:00:00");;
-    public static final long DB_ADV_OWNER_ID = 4;
-    public static final long DB_ADV_RS_ID = 2;
+    public static final Long DB_ADV_OWNER_ID = 4L;
+    public static final Long DB_ADV_RS_ID = 2L;
 
 }
