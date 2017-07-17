@@ -115,7 +115,7 @@ public class UserControllerTest {
     /**
      * This method should test registration new admins and verifiers with valid input.
      * Expect all fields to be full filed correctly. Expected: method post, status
-     * OK, and specified content
+     * CREATED, and specified content
      *
      * @throws Exception
      **/

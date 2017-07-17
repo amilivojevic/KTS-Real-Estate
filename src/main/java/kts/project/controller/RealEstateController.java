@@ -45,6 +45,9 @@ public class RealEstateController {
     @RequestMapping(value = "/addNewRealEstate", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity addNewRealEstate(@RequestHeader("X-Auth-Token") String token,@RequestBody RealEstateDTO realEstateDTO) {
 
+        if (!checkRealEstateDTOInput(realEstateDTO)){
+            return new ResponseEntity<>(new ResponseMessage("New Real Estate input is not valid (some fields are null)"), HttpStatus.BAD_REQUEST);
+        }
 
             RealEstate rs = new RealEstate();
 
@@ -112,7 +115,35 @@ public class RealEstateController {
 
             realEstateRepository.save(rs);
 
-            return new ResponseEntity<>(rs, HttpStatus.OK);
+            return new ResponseEntity<>(rs, HttpStatus.CREATED);
+    }
+
+    /**
+     * This method is checking if all required inputs for RealEstateDTO are entered
+     * @param realEstateDTO
+     * @return true or false
+     */
+    private boolean checkRealEstateDTOInput(RealEstateDTO realEstateDTO){
+        if (realEstateDTO.getDescription().equals("") ||
+                realEstateDTO.getImageUrl() == "" ||
+                realEstateDTO.getArea() <= 0 ||
+                realEstateDTO.getConstructionYear().equals("")||
+                realEstateDTO.getRoomsNumber() < 0 ||
+                realEstateDTO.getBathroomsNumber() <0 ||
+                realEstateDTO.getCity().equals("")||
+                realEstateDTO.getCityArea().equals("")||
+                realEstateDTO.getStreet().equals("")||
+                realEstateDTO.getStreetNumber().equals("")||
+                realEstateDTO.getState().equals("")||
+                realEstateDTO.getZipCode().equals("")||
+                realEstateDTO.getHeatingType() == null ||
+                realEstateDTO.getRs_type() == null){
+
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     @RequestMapping(value = "/getAllMyRealEstates", method = RequestMethod.GET)
