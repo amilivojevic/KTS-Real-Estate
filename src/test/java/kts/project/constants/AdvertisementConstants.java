@@ -13,7 +13,7 @@ public class AdvertisementConstants {
     public static final Date NEWADV_ENDING_DATE = new Date();
     public static final String NEWADV_PHONE_NUMBER = "123456789";
     public static final String NEWADV_TYPE = "SELL";
-    public static final long NEWADV_RS_ID = 1L;
+    public static final long NEWADV_RS_ID = 2L;
     public static final String NEWADV_CURRENCY = "EUR";
 
     public static final String USERNAME = "a";

@@ -118,7 +118,7 @@ public class AdvertisementController {
         ad.setOwner((Owner) userService.findByToken(token));
         advertisementService.save(ad);
 
-        return new ResponseEntity<>(ad, HttpStatus.OK);
+        return new ResponseEntity<>(ad, HttpStatus.CREATED);
 
     }
 
