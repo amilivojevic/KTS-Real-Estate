@@ -96,7 +96,7 @@ public class AdvertisementService {
         return list;
     }
 
-    public List<Advertisement> priceFilter(List<Advertisement> list, float minPrice, float maxPrice, Currency currency){
+    public List<Advertisement> priceFilter(List<Advertisement> list, double minPrice, double maxPrice, Currency currency){
 
         List<Advertisement> copy = new ArrayList<>();
         for(Advertisement a : list){ copy.add(a);}

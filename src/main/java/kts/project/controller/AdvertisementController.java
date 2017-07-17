@@ -4,7 +4,6 @@ import kts.project.controller.dto.AddAdvertisementDTO;
 import kts.project.controller.dto.FilterAdvertisementDTO;
 import kts.project.model.Advertisement;
 import kts.project.model.Owner;
-import kts.project.model.Review;
 import kts.project.model.User;
 import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.AdvertisementType;

@@ -24,7 +24,7 @@ public class RealEstateDTO {
 
     protected boolean parking;
 
-    protected float area;
+    protected double area;
 
     protected String constructionYear;
 
@@ -89,11 +89,11 @@ public class RealEstateDTO {
         this.parking = parking;
     }
 
-    public float getArea() {
+    public double getArea() {
         return area;
     }
 
-    public void setArea(float area) {
+    public void setArea(double area) {
         this.area = area;
     }
 

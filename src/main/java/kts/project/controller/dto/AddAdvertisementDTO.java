@@ -1,9 +1,5 @@
 package kts.project.controller.dto;
 
-import kts.project.model.RealEstate;
-import kts.project.model.enumerations.AdvertisementType;
-import kts.project.model.enumerations.Currency;
-
 import java.util.Date;
 
 /**
@@ -14,7 +10,7 @@ public class AddAdvertisementDTO {
 
     protected String title;
 
-    protected float price;
+    protected double price;
 
     protected Date endingDate;
 
@@ -39,11 +35,11 @@ public class AddAdvertisementDTO {
         this.title = title;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

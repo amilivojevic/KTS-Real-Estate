@@ -1,6 +1,5 @@
 package kts.project.model;
 
-import kts.project.model.enumerations.AdvertisementType;
 import kts.project.model.enumerations.BanningReason;
 
 import javax.persistence.*;

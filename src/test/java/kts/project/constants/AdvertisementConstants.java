@@ -3,7 +3,6 @@ package kts.project.constants;
 import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.AdvertisementType;
 
-import java.util.Currency;
 import java.util.Date;
 
 /**

@@ -6,8 +6,8 @@ package kts.project.controller.dto;
 public class FilterAdvertisementDTO {
     protected String type;
     protected String location;
-    protected float minPrice;
-    protected float maxPrice;
+    protected double minPrice;
+    protected double maxPrice;
     protected String currency;
     protected String area;
     protected int roomNu;
@@ -52,19 +52,19 @@ public class FilterAdvertisementDTO {
         this.location = location;
     }
 
-    public float getMinPrice() {
+    public double getMinPrice() {
         return minPrice;
     }
 
-    public void setMinPrice(float minPrice) {
+    public void setMinPrice(double minPrice) {
         this.minPrice = minPrice;
     }
 
-    public float getMaxPrice() {
+    public double getMaxPrice() {
         return maxPrice;
     }
 
-    public void setMaxPrice(float maxPrice) {
+    public void setMaxPrice(double maxPrice) {
         this.maxPrice = maxPrice;
     }
 
