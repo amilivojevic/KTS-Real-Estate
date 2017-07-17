@@ -22,4 +22,8 @@ public class AdvertisementService {
     }
 
     public List<Advertisement> findAll(){ return advertisementRepository.findAll();}
+
+    public void save(Advertisement a){advertisementRepository.save(a);}
+
+    public void delete(Advertisement a){advertisementRepository.delete(a);}
 }
