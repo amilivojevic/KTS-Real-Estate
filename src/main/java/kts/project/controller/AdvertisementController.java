@@ -9,9 +9,8 @@ import kts.project.model.User;
 import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.AdvertisementType;
 import kts.project.model.enumerations.Currency;
-import kts.project.repository.AdvertisementRepository;
-import kts.project.repository.RealEstateRepository;
 import kts.project.service.AdvertisementService;
+import kts.project.service.RealEstateService;
 import kts.project.service.UserService;
 import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +26,13 @@ import java.util.List;
  * Created by Nina on 14-Jul-17.
  */
 
+
+/**
+ *  This controller represents Advertisement and all its functionality
+ */
 @RestController
 @RequestMapping("/api/advertisement")
 public class AdvertisementController {
-
-    @Autowired
-    AdvertisementRepository advertisementRepository;
 
     @Autowired
     AdvertisementService advertisementService;
@@ -41,12 +41,23 @@ public class AdvertisementController {
     UserService userService;
 
     @Autowired
-    RealEstateRepository realEstateRepository;
+    RealEstateService realEstateService;
 
     //Adding new advertisement
+
+    /**
+     *  This method creates new advertisement in Database
+     *
+     * @param token
+     * @param addAdvertisementDTO
+     * @return ResponseEntity with HttpStatus CREATED if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/addNewAdvertisement", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity addNewAdvertisement(@RequestHeader("X-Auth-Token") String token, @RequestBody AddAdvertisementDTO addAdvertisementDTO) {
 
+        if (!checkAdvertisementDTOInput(addAdvertisementDTO)){
+            return new ResponseEntity<>(new ResponseMessage("New Advertisement input is not valid (some fields are null)"), HttpStatus.BAD_REQUEST);
+        }
 
         Advertisement ad = new Advertisement();
 
@@ -61,9 +72,9 @@ public class AdvertisementController {
 
         ad.setState(AdvertisementState.WAITING);
 
-        if (realEstateRepository.findById(addAdvertisementDTO.getId()) != null){
+        if (realEstateService.findById(addAdvertisementDTO.getId()) != null){
             System.out.println("real estate nije null");
-            ad.setRealEstate(realEstateRepository.findById(addAdvertisementDTO.getId()));
+            ad.setRealEstate(realEstateService.findById(addAdvertisementDTO.getId()));
         }
         else{
             System.out.println("real estate NULL");
@@ -72,16 +83,16 @@ public class AdvertisementController {
 
         AdvertisementType type;
 
-        switch (addAdvertisementDTO.getType()){
-            case "Sale":
-                type = AdvertisementType.SALE;
+        switch (addAdvertisementDTO.getType().toUpperCase()){
+            case "SELL":
+                type = AdvertisementType.SELL;
                 break;
-            case "Rent":
+            case "RENT":
                 type = AdvertisementType.RENT;
                 break;
             default:
-                type = AdvertisementType.SALE;
-                break;
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         }
 
         ad.setType(type);
@@ -99,23 +110,35 @@ public class AdvertisementController {
                 break;
 
             default:
-                currency = Currency.EUR;
-                break;
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         }
         ad.setCurrency(currency);
 
-        System.out.println("mrrrrssssssssssss");
         ad.setOwner((Owner) userService.findByToken(token));
+        advertisementService.save(ad);
 
-        System.out.println("mrrrrssssssssssss 2");
-        advertisementRepository.save(ad);
-
-        System.out.println("mrrrrssssssssssss 3");
-        return new ResponseEntity<>(ad, HttpStatus.OK);
+        return new ResponseEntity<>(ad, HttpStatus.CREATED);
 
     }
 
+    private boolean checkAdvertisementDTOInput(AddAdvertisementDTO addAdvertisementDTO){
+        if (addAdvertisementDTO.getCurrency().equals("") ||
+                addAdvertisementDTO.getEndingDate() == null ||
+                addAdvertisementDTO.getPhoneNumber().equals("") ||
+                addAdvertisementDTO.getTitle().equals("") ||
+                addAdvertisementDTO.getType() == null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public ResponseEntity getAllAdvertisements() {
 
@@ -136,7 +159,7 @@ public class AdvertisementController {
 
         List<Advertisement> allAdvertisements = new ArrayList<>();
 
-        for (Advertisement o : advertisementRepository.findAll()) {
+        for (Advertisement o : advertisementService.findAll()) {
             if(o.getState() == AdvertisementState.ACCEPTED) {
                 allAdvertisements.add(o);
             }
@@ -152,7 +175,7 @@ public class AdvertisementController {
 
         List<Advertisement> allWaitingAdvertisements = new ArrayList<>();
 
-        for (Advertisement o : advertisementRepository.findAll()) {
+        for (Advertisement o : advertisementService.findAll()) {
             if(o.getState() == AdvertisementState.WAITING) {
                 allWaitingAdvertisements.add(o);
             }
@@ -167,7 +190,7 @@ public class AdvertisementController {
     public ResponseEntity getSingleAdvertisement(@PathVariable Long id)
     {
 
-        Advertisement singleAdvertisement = advertisementRepository.findById(id);
+        Advertisement singleAdvertisement = advertisementService.findById(id);
 
         return new ResponseEntity<>(singleAdvertisement, HttpStatus.OK);
 
@@ -177,10 +200,10 @@ public class AdvertisementController {
     public ResponseEntity erase(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
     {
         User user = userService.findByToken(token);
-        Advertisement a = advertisementRepository.findById(id);
+        Advertisement a = advertisementService.findById(id);
         if (a.getOwner().getId() == user.getId()){
 
-            advertisementRepository.delete(a);
+            advertisementService.delete(a);
 
             //treba obrisati i sve one iste!!!!
             return new ResponseEntity<>(a, HttpStatus.OK);
@@ -199,7 +222,7 @@ public class AdvertisementController {
 
         AdvertisementType aTypeDTO = getAdvertisementFromString(filterAdvertisementDTO.getType());
         Currency aCurrencyDTO = getCurrencyFromString(filterAdvertisementDTO.getCurrency());
-        filteredAdvertisements = advertisementRepository.findAll();
+        filteredAdvertisements = advertisementService.findAll();
 
         filteredAdvertisements = typeFilter(filteredAdvertisements,aTypeDTO);
         filteredAdvertisements = priceFilter(filteredAdvertisements,filterAdvertisementDTO.getMinPrice(),filterAdvertisementDTO.getMaxPrice(),aCurrencyDTO);
@@ -220,7 +243,7 @@ public class AdvertisementController {
         }
         else if(stringType.equalsIgnoreCase("SELL")){
             System.out.println("tip je sell");
-            return AdvertisementType.SALE;
+            return AdvertisementType.SELL;
         }
         return null;
     }
