@@ -61,14 +61,6 @@ public class UserControllerTest {
      *
      * @throws Exception
      **/
-
-
-    /**
-     * This Method tests if a controller with URL_PREFIX returns token of logged user
-     * with valid input parameters. Expected: Status OK
-     *
-     * @throws Exception
-     */
     @Test
     public void testLogin() throws Exception {
         LoginDTO loginUser = new LoginDTO();
@@ -83,9 +75,8 @@ public class UserControllerTest {
     }
 
     /**
-     * Method tests if a controller with URL_PREFIX returns bad request with
-     * invalid input parameters like empty object and invalid data in object.
-     * Expected: Status Bad Request
+     * This method should test log in of users of all types. Expecting invalid input
+     * fields. Expected: method post, status BAD_REQUEST
      *
      * @throws Exception
      */
@@ -97,7 +88,7 @@ public class UserControllerTest {
 
         String json = TestUtil.json(loginUser);
         mockMvc.perform(post(URL_PREFIX + "/login").contentType(contentType).content(json))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
 
         loginUser = new LoginDTO();
         loginUser.setUsername(NEW_USERNAME);
@@ -105,7 +96,7 @@ public class UserControllerTest {
 
         json = TestUtil.json(loginUser);
         mockMvc.perform(post(URL_PREFIX + "/login").contentType(contentType).content(json))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
 
         loginUser = new LoginDTO();
         loginUser.setUsername(DB_USERNAME);
@@ -113,7 +104,7 @@ public class UserControllerTest {
 
         json = TestUtil.json(loginUser);
         mockMvc.perform(post(URL_PREFIX + "/login").contentType(contentType).content(json))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
 
         String json1 = TestUtil.json(new LoginDTO());
         mockMvc.perform(post(URL_PREFIX + "/login").contentType(contentType).content(json1))

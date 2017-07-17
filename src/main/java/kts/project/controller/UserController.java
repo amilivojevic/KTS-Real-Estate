@@ -73,7 +73,7 @@ import java.util.List;
         private UserUtils userUtils;
 
 
-    // TESTING IN PROGRESS
+    // TESTING COMPLETED
     /**
      *This method represents log in for all types of users.
      *
@@ -99,7 +99,7 @@ import java.util.List;
             return new ResponseEntity<>(new ResponseMessage(tokenUtils.generateToken(details)), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(new ResponseMessage("Invalid login"),
-                    HttpStatus.BAD_REQUEST);
+                    HttpStatus.NOT_FOUND);
         }
     }
 
