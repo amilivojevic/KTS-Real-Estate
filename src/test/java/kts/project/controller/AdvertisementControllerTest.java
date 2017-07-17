@@ -150,13 +150,9 @@ public class AdvertisementControllerTest {
                 .andExpect(jsonPath("$.[*].price").value(hasItem(DB_ADV_PRICE)))
                 .andExpect(jsonPath("$.[*].realEstate.id").value(hasItem(DB_ADV_RS_ID.intValue())))
                 .andExpect(jsonPath("$.[*].owner.id").value(hasItem(DB_ADV_OWNER_ID.intValue())))
-                .andExpect(jsonPath("$.[*].currency").value(hasItem(DB_ADV_CURRENCY)));
-
-/*                .andExpect(jsonPath("$.[*].price").value(hasItem(DB_ADV_PRICE)))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(DB_ADV_ID.intValue())))
-                .andExpect(jsonPath("$.[*].title").value(hasItem(DB_ADV_TITLE)))
-                .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DB_ADV_PHONE_NUMBER)))
-                .andExpect(jsonPath("$.[*].price").value(hasItem(DB_ADV_PRICE)));*/
+                .andExpect(jsonPath("$.[*].currency").value(hasItem(DB_ADV_CURRENCY)))
+                .andExpect(jsonPath("$.[*].type").value(hasItem(DB_ADV_TYPE)))
+                .andExpect(jsonPath("$.[*].state").value(hasItem(DB_ADV_STATE)));
     }
 
 

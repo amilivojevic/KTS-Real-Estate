@@ -3,13 +3,14 @@ package kts.project.constants;
 import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.AdvertisementType;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Sandra on 7/17/2017.
  */
 public class AdvertisementConstants {
-
 
     public static final String NEWADV_TITLE = "New title";
     public static final float NEWADV_PRICE = 100;
@@ -33,15 +34,14 @@ public class AdvertisementConstants {
     public static final int DB_ADV_NUMBER = 1;
 
     public static final Long DB_ADV_ID = 1L;
-    //public static final Date DB_ADV_ANNOUNCEMENT_DATE = new Date("2001-01-20 17:00:00");
+
     public static final String DB_ADV_CURRENCY = kts.project.model.enumerations.Currency.RSD.name();
-    //public static final Date DB_ADV_ENDING_DATE = new Date("2001-06-20 17:00:00");
     public static final String DB_ADV_PHONE_NUMBER = "021400198";
     public static final double DB_ADV_PRICE = 10000d;
-    public static final AdvertisementState DB_ADV_STATE = AdvertisementState.WAITING;
+    public static final String DB_ADV_STATE = AdvertisementState.WAITING.name();
     public static final String DB_ADV_TITLE = "Add title";
-    public static final AdvertisementType DB_ADV_TYPE = AdvertisementType.RENT;
-    //public static final Date DB_ADV_UPDATE_DATE = new Date("2002-02-20 18:00:00");;
+    public static final String DB_ADV_TYPE = AdvertisementType.RENT.name();
+
     public static final Long DB_ADV_OWNER_ID = 4L;
     public static final Long DB_ADV_RS_ID = 2L;
 
