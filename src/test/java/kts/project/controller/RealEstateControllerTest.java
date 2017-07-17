@@ -27,7 +27,13 @@ import javax.annotation.PostConstruct;
 import java.nio.charset.Charset;
 
 import static kts.project.constants.RealEstateConstants.*;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -165,5 +171,66 @@ public class RealEstateControllerTest {
         this.mockMvc.perform(post(URL_PREFIX + "/addNewRealEstate").header("X-Auth-Token", token).contentType(contentType).content(json))
                 .andExpect(status().isBadRequest());
 
+    }
+
+    /**
+     * This method tests getting all Real Estate of one user
+     * Expected invalid input fields, unique phone number. Expected: method
+     * post, status BAD_REQUEST
+     *
+     * @throws Exception
+     **/
+    @Test
+    public void testGetAllMyRealEstates() throws Exception {
+
+        String token = loginTest.login(USERNAME,PASSWORD);
+
+        mockMvc.perform(get(URL_PREFIX + "/getAllMyRealEstates").header("X-Auth-Token", token))
+                .andExpect(status().isOk())
+
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$", hasSize(DB_ADV_NUMBER)))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(DB_ID.intValue())))
+                .andExpect(jsonPath("$.[*].description").value(hasItem(DB_DESCRIPTION)))
+                .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DB_IMAGE_URL)))
+                .andExpect(jsonPath("$.[*].furniture").value(hasItem(DB_FURNITURE)))
+                .andExpect(jsonPath("$.[*].parking").value(hasItem(DB_PARKING)))
+                .andExpect(jsonPath("$.[*].area").value(hasItem(DB_AREA)))
+                .andExpect(jsonPath("$.[*].constructionYear").value(hasItem(DB_CONSTRUCTION_YEAR)))
+                .andExpect(jsonPath("$.[*].roomsNumber").value(hasItem(DB_ROOMS_NUMBER)))
+                .andExpect(jsonPath("$.[*].bathroomsNumber").value(hasItem(DB_BATHROOMS_NUMBER)))
+                .andExpect(jsonPath("$.[*].address.id").value(hasItem(DB_LOCATION_ID.intValue())))
+                .andExpect(jsonPath("$.[*].owner.id").value(hasItem(DB_OWNER_ID.intValue())))
+                .andExpect(jsonPath("$.[*].heatingType").value(hasItem(DB_HEATING_TYPE)))
+                .andExpect(jsonPath("$.[*].rs_type").value(hasItem(DB_RS_TYPE)));
+
+    }
+
+    /**
+     * This method tests deleting of existing Real Estate. Expected: method
+     * get, status OK
+     * @throws Exception
+     */
+    @Test
+    @javax.transaction.Transactional
+    @Rollback(true)
+    public void testErase() throws Exception {
+        String token = loginTest.login(USERNAME, PASSWORD);
+        mockMvc.perform(get(URL_PREFIX + "/erase/" + DB_ID).header("X-Auth-Token", token))
+                .andExpect(status().isOk());
+    }
+
+    /**
+     * This method tests deleting of non existing Real Estate. Expected: method
+     * get, status OK
+     * @throws Exception
+     */
+    @Test
+    @javax.transaction.Transactional
+    @Rollback(true)
+    public void testEraseWrong() throws Exception {
+        String token = loginTest.login(USERNAME, PASSWORD);
+        mockMvc.perform(get(URL_PREFIX + "/erase/" + BAD_ID).header("X-Auth-Token", token))
+                .andExpect(status().isNotFound());
     }
 }

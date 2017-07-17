@@ -32,9 +32,6 @@ import java.util.List;
 public class RealEstateController {
 
     @Autowired
-    private RealEstateRepository realEstateRepository;
-
-    @Autowired
     private RealEstateService realEstateService;
 
     @Autowired
@@ -126,13 +123,17 @@ public class RealEstateController {
         }
         rs.setRs_type(realEstateType);
 
-            realEstateRepository.save(rs);
+            realEstateService.save(rs);
 
             return new ResponseEntity<>(rs, HttpStatus.CREATED);
     }
 
 
-
+    /**
+     * This method returns all Real Estates of specified Owner
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK, BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/getAllMyRealEstates", method = RequestMethod.GET)
     public ResponseEntity getAllMyRealEstates(@RequestHeader("X-Auth-Token") String token)
     {
@@ -142,7 +143,7 @@ public class RealEstateController {
 
             List<RealEstate> allMyRealEstates = new ArrayList<>();
 
-            for (RealEstate o : realEstateRepository.findAll()) {
+            for (RealEstate o : realEstateService.findAll()) {
                 if (o.getOwner().getId() == user.getId()){
                     allMyRealEstates.add(o);
                 }
@@ -154,13 +155,23 @@ public class RealEstateController {
 
     }
 
+    /**
+     * This method represents physical delete of Real Estate
+     * @param id
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK, BAD_REQUEST if not OK, else NOT_FOUND
+     */
     @RequestMapping(value = "/erase/{id}", method = RequestMethod.GET)
     public ResponseEntity erase(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
     {
+        if(realEstateService.findById(id) == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+
         User user = userService.findByToken(token);
 
-
-        RealEstate re = realEstateRepository.findById(id);
+        RealEstate re = realEstateService.findById(id);
 
         if (re.getOwner().getId() == user.getId()){
 
@@ -170,12 +181,12 @@ public class RealEstateController {
                     advertisementRepository.delete(a.getId());
                 }
             }
-            realEstateRepository.delete(re);
+            realEstateService.delete(re);
 
             //treba obrisati i sve one iste!!!!
             return new ResponseEntity<>(re, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete this real estate!"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete this real estate!"), HttpStatus.BAD_REQUEST);
 
     }
 
