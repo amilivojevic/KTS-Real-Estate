@@ -16,5 +16,8 @@ public class AdvertisementConstants {
     public static final long NEWADV_RS_ID = 1L;
     public static final String NEWADV_CURRENCY = "EUR";
 
+    public static final String USERNAME = "a";
+    public static final String PASSWORD = "a";
+
 
 }

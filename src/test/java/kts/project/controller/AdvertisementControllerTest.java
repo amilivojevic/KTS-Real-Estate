@@ -2,6 +2,7 @@ package kts.project.controller;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import kts.project.KtsprojectApplication;
+import kts.project.LoginTest;
 import kts.project.TestUtil;
 import kts.project.controller.dto.AddAdvertisementDTO;
 import org.junit.Test;
@@ -45,6 +46,9 @@ public class AdvertisementControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+
+    private LoginTest loginTest;
+
     /**
      * This method sets up MockMvc object
      */
@@ -73,9 +77,12 @@ public class AdvertisementControllerTest {
         addAdvertisementDTO.setTitle(NEWADV_TITLE);
         addAdvertisementDTO.setType(NEWADV_TYPE);
 
+        String token = loginTest.login(USERNAME,PASSWORD);
+
+
 
         String json = TestUtil.json(addAdvertisementDTO);
-        this.mockMvc.perform(post(URL_PREFIX + "/addNewAdvertisement").contentType(contentType).content(json))
+        this.mockMvc.perform(post(URL_PREFIX + "/addNewAdvertisement").header("X-Auth-Token", token).contentType(contentType).content(json))
                 .andExpect(status().isCreated());
     }
 
