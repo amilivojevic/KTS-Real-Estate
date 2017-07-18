@@ -418,6 +418,21 @@
                         }
                     }
                 })
+                .state('sendRequest', {
+                    url: '/send_request',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/advertisement/sendRequest.html',
+                            controller: 'sendRequestController',
+                            controllerAs: 'sendRequestCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbar.html',
+                            controller: 'NavbarController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
                 .state('filterAdvertisement', {
                 url: '/filterAdvertisement',
                 views: {
@@ -432,7 +447,9 @@
                         controllerAs: 'navbarCtrl'
                     }
                 }
+
             })
+
 
                 .state('verify', {
                     url: '/authenticate/{id:int}',

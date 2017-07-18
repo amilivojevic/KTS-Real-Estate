@@ -1,9 +1,7 @@
 /**
  * Created by Nina on 15-Jul-17.
  */
-/**
- * Created by Nina on 28-Jun-17.
- */
+
 (function() {
     angular.module("realEstateApp")
         .controller('GetAllListingsController', getAllListingsController);
