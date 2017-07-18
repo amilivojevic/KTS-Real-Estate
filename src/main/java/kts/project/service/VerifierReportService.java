@@ -1,5 +1,6 @@
 package kts.project.service;
 
+import kts.project.controller.dto.VerifierReportDTO;
 import kts.project.model.VerifierReport;
 import kts.project.repository.VerifierReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,21 @@ public class VerifierReportService {
      */
     public VerifierReport save(VerifierReport u){
         return verifierReportRepository.save(u);
+    }
+
+    /**
+     * This method is checking if all required inputs for VerifierReportDTO are entered
+     * @param verifierReportDTO
+     * @return true or false
+     */
+    public boolean checkVerifyReportDTOInput(VerifierReportDTO verifierReportDTO){
+        if (verifierReportDTO.getDescription().equals("") ||
+                verifierReportDTO.getDate() == null ||
+                verifierReportDTO.getBanningReason().equals("")){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }

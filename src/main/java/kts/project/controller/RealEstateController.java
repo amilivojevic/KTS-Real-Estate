@@ -22,12 +22,14 @@ import java.util.List;
 /**
  * Created by Nina on 14-Jul-17.
  */
+
+/**
+ *This class represents controller for Real Estate and manages with all Real Estate
+ * functionalities.
+ */
 @RestController
 @RequestMapping("/api/realEstate")
 public class RealEstateController {
-
-    @Autowired
-    private RealEstateRepository realEstateRepository;
 
     @Autowired
     private RealEstateService realEstateService;
@@ -41,11 +43,19 @@ public class RealEstateController {
     @Autowired
     private AdvertisementRepository advertisementRepository;
 
-    //Adding new real estate
+    //TESTING COMPLETED
+
+    /**
+     * This method represents adding of a new Real Estate
+     * @param token
+     * @param realEstateDTO
+     * @return ResponseEntity with HttpStatus CREATED if everything is OK, BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/addNewRealEstate", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity addNewRealEstate(@RequestHeader("X-Auth-Token") String token,@RequestBody RealEstateDTO realEstateDTO) {
 
-        if (!checkRealEstateDTOInput(realEstateDTO)){
+
+        if (!realEstateService.checkRealEstateDTOInput(realEstateDTO)){
             return new ResponseEntity<>(new ResponseMessage("New Real Estate input is not valid (some fields are null)"), HttpStatus.BAD_REQUEST);
         }
 
@@ -113,39 +123,17 @@ public class RealEstateController {
         }
         rs.setRs_type(realEstateType);
 
-            realEstateRepository.save(rs);
+            realEstateService.save(rs);
 
             return new ResponseEntity<>(rs, HttpStatus.CREATED);
     }
 
+
     /**
-     * This method is checking if all required inputs for RealEstateDTO are entered
-     * @param realEstateDTO
-     * @return true or false
+     * This method returns all Real Estates of specified Owner
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK, BAD_REQUEST if not OK
      */
-    private boolean checkRealEstateDTOInput(RealEstateDTO realEstateDTO){
-        if (realEstateDTO.getDescription().equals("") ||
-                realEstateDTO.getImageUrl() == "" ||
-                realEstateDTO.getArea() <= 0 ||
-                realEstateDTO.getConstructionYear().equals("")||
-                realEstateDTO.getRoomsNumber() < 0 ||
-                realEstateDTO.getBathroomsNumber() <0 ||
-                realEstateDTO.getCity().equals("")||
-                realEstateDTO.getCityArea().equals("")||
-                realEstateDTO.getStreet().equals("")||
-                realEstateDTO.getStreetNumber().equals("")||
-                realEstateDTO.getState().equals("")||
-                realEstateDTO.getZipCode().equals("")||
-                realEstateDTO.getHeatingType() == null ||
-                realEstateDTO.getRs_type() == null){
-
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-
     @RequestMapping(value = "/getAllMyRealEstates", method = RequestMethod.GET)
     public ResponseEntity getAllMyRealEstates(@RequestHeader("X-Auth-Token") String token)
     {
@@ -155,7 +143,7 @@ public class RealEstateController {
 
             List<RealEstate> allMyRealEstates = new ArrayList<>();
 
-            for (RealEstate o : realEstateRepository.findAll()) {
+            for (RealEstate o : realEstateService.findAll()) {
                 if (o.getOwner().getId() == user.getId()){
                     allMyRealEstates.add(o);
                 }
@@ -167,13 +155,23 @@ public class RealEstateController {
 
     }
 
+    /**
+     * This method represents physical delete of Real Estate
+     * @param id
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK, BAD_REQUEST if not OK, else NOT_FOUND
+     */
     @RequestMapping(value = "/erase/{id}", method = RequestMethod.GET)
     public ResponseEntity erase(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
     {
+        if(realEstateService.findById(id) == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+
         User user = userService.findByToken(token);
 
-
-        RealEstate re = realEstateRepository.findById(id);
+        RealEstate re = realEstateService.findById(id);
 
         if (re.getOwner().getId() == user.getId()){
 
@@ -183,12 +181,12 @@ public class RealEstateController {
                     advertisementRepository.delete(a.getId());
                 }
             }
-            realEstateRepository.delete(re);
+            realEstateService.delete(re);
 
             //treba obrisati i sve one iste!!!!
             return new ResponseEntity<>(re, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete this real estate!"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete this real estate!"), HttpStatus.BAD_REQUEST);
 
     }
 

@@ -52,7 +52,7 @@ public class VerifierReportController {
     @RequestMapping(value = "/reportBanedAdvertisement/{id}", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity reportBanedAdvertisement(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token, @RequestBody VerifierReportDTO verifierReportDTO) {
 
-        if (!checkVerifyReportDTOInput(verifierReportDTO)){
+        if (!verifierReportService.checkVerifyReportDTOInput(verifierReportDTO)){
             return new ResponseEntity<>(new ResponseMessage("New Verifier Report input is not valid (some fields are null)"), HttpStatus.BAD_REQUEST);
         }
 
@@ -95,21 +95,5 @@ public class VerifierReportController {
             return new ResponseEntity<>(vr, HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseMessage("You are not allowed to ban this advertisement!"), HttpStatus.CREATED);
-    }
-
-    /**
-     * This method is checking if all required inputs for VerifierReportDTO are entered
-     * @param verifierReportDTO
-     * @return true or false
-     */
-    private boolean checkVerifyReportDTOInput(VerifierReportDTO verifierReportDTO){
-        if (verifierReportDTO.getDescription().equals("") ||
-                verifierReportDTO.getDate() == null ||
-                verifierReportDTO.getBanningReason().equals("")){
-            return false;
-        }
-        else{
-            return true;
-        }
     }
 }
