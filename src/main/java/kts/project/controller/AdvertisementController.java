@@ -172,6 +172,22 @@ public class AdvertisementController {
         return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
     }
 
+
+    /**
+     * This method change state of specified Advertisement on EXIPERD (someone bought real estate)
+     * @return ResponseEntity with HttpStatus OK if everything is OK
+     */
+    @RequestMapping(value = "/buy/{id}", method = RequestMethod.GET)
+    public ResponseEntity buyAdvertisements(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
+    {
+
+            Advertisement a = advertisementService.findById(id);
+            a.setState(AdvertisementState.EXPIRED);
+            advertisementService.save(a);
+            return new ResponseEntity<>( HttpStatus.OK);
+
+    }
+
     /**
      * This method is getting all Waiting Advertisements from database
      * @return ResponseEntity with HttpStatus OK if everything is OK

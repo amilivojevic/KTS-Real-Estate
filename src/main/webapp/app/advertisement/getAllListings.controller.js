@@ -13,24 +13,6 @@
         vm.getAllListings = getAllListings;
 
         vm.setFilter = function () {
-/*
-
-            if(vm.filterConteiners.type == null){
-                vm.filterConteiners.type = "All contracts";
-            }
-            if(vm.filterConteiners.location == undefined){
-                vm.filterConteiners.location = "";
-            }
-            if(vm.filterConteiners.minPrice == undefined){
-                vm.filterConteiners.minPrice = 10000;
-            }
-            if(vm.filterConteiners.maxPrice == undefined){
-                vm.filterConteiners.maxPrice = 10000;
-            }
-            if(vm.filterConteiners.currency == undefined){
-                vm.filterConteiners.currency = "All currencies";
-            }
-*/
 
             console.log("fileter!! : " + JSON.stringify(vm.filterConteiners));
             FilterService.setFilter(vm.filterConteiners);
