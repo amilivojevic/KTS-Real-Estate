@@ -51,6 +51,26 @@ public class RegisterCompanyDTO {
     public RegisterCompanyDTO() {
     }
 
+    public RegisterCompanyDTO(String type, String role, String username, String password, String email, String name, String surname, Date birthDate, String phoneNumber, String address, String city, String country, String accountNumber, String imageUrl, String pib, String site, String fax) {
+        this.type = type;
+        this.role = role;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.birthDate = birthDate;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.accountNumber = accountNumber;
+        this.imageUrl = imageUrl;
+        this.pib = pib;
+        this.site = site;
+        this.fax = fax;
+    }
+
     public String getType() {
         return type;
     }

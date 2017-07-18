@@ -1,13 +1,13 @@
 package kts.project.controller;
 
+import kts.project.controller.dto.ApprovedCompanyDTO;
 import kts.project.controller.dto.RegisterCompanyDTO;
-import kts.project.controller.dto.RegisterOwnerDTO;
 import kts.project.model.Company;
-import kts.project.model.Owner;
-import kts.project.model.PrivateAccountInCompany;
 import kts.project.model.User;
 import kts.project.model.enumerations.Role;
-import kts.project.repository.*;
+import kts.project.security.UserUtils;
+import kts.project.service.AuthorityService;
+import kts.project.service.CompanyService;
 import kts.project.service.UserService;
 import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,29 +28,41 @@ public class CompanyController {
 
 
     @Autowired
-    AuthorityRepository authorityRepository;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    OwnerRepository ownerRepository;
-
-    @Autowired
-    CompanyRepository companyRepository;
+    AuthorityService authorityService;
 
     @Autowired
     UserService userService;
 
+    @Autowired
+    private UserUtils userUtils;
+
+    @Autowired
+    private CompanyService companyService;
+
 
     //registracija obicnih korisnika!
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity saveUser(@RequestBody RegisterCompanyDTO registerCompanyDTO) {
+    public ResponseEntity saveUser(@RequestHeader("X-Auth-Token") String token,@RequestBody RegisterCompanyDTO registerCompanyDTO) {
+
+        if(!userUtils.checkUniqueUsername(registerCompanyDTO.getUsername())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Username is not unique!");
+        }
+        if(!companyService.checkUniquePIB(registerCompanyDTO.getPib())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("PIB is not unique!");
+        }
+        if(registerCompanyDTO.getUsername() == null || registerCompanyDTO.getEmail() == null || registerCompanyDTO.getPassword() == null
+                || registerCompanyDTO.getPib() == null){
+            return new ResponseEntity<>(new ResponseMessage("Username should not be null!"), HttpStatus.BAD_REQUEST);
+        }
+
+        if(registerCompanyDTO.getUsername().equals("") || registerCompanyDTO.getEmail().equals("") || registerCompanyDTO.getPassword().equals("")
+                || registerCompanyDTO.getPib().equals("")){
+            return new ResponseEntity<>(new ResponseMessage("Username should not be null!"), HttpStatus.BAD_REQUEST);
+        }
+
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println("Pocinje registracija ownera na backendu!");
-
-        System.out.println("COMPANY: " + registerCompanyDTO.toString());
-
         Company company;
 
         if (registerCompanyDTO.getRole().equalsIgnoreCase("OWNER") &&
@@ -78,7 +90,7 @@ public class CompanyController {
             company.setWorkers(new ArrayList<>());
             company.setAdvertisements(new ArrayList<>());
 
-            company.setAuthority(authorityRepository.findByName(("ROLE_OWNER")));
+            company.setAuthority(authorityService.findByName(("ROLE_OWNER")));
         }
         else {
             System.out.println("Nije Owner ili company");
@@ -86,23 +98,21 @@ public class CompanyController {
                     .body("Cant create that type of user, ony Customer and Advertiser allowed");
         }
 
-        //ownerRepository.save(company);
-        companyRepository.save(company);
-        //userRepository.save(company)
+        companyService.save(company);
 
-        return new ResponseEntity<>(company, HttpStatus.OK);
+        return new ResponseEntity<>(company, HttpStatus.CREATED);
     }
 
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAllCompanies() {
-        return new ResponseEntity<>(companyRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity(companyService.findAll(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/all/unapproved", method = RequestMethod.GET)
     public ResponseEntity getAllUnapprovedCompanies() {
         List<Company> unapprovedCompanies = new ArrayList<>();
-        for (Company c: companyRepository.findAll()) {
+        for (Company c: companyService.findAll()) {
             if (c.isApproved() == false)
                 unapprovedCompanies.add(c);
         }
@@ -117,14 +127,14 @@ public class CompanyController {
         User user = userService.findByToken(token);
         if (user.getRole() == Role.SYS_ADMIN) {
 
-            User eraseUser = userRepository.findByUsername(username);
-            Company c = companyRepository.findByUsername(username);
+            User eraseUser = userService.findByUsername(username);
+            Company c = companyService.findByUsername(username);
             System.out.println("Nasao je kompaniju u bazi : " + c.toString());
 
             c.setApproved(true);
-            companyRepository.save(c);
+            companyService.save(c);
 
-            return new ResponseEntity<>(eraseUser, HttpStatus.OK);
+            return new ResponseEntity<>(new ApprovedCompanyDTO(c), HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
     }

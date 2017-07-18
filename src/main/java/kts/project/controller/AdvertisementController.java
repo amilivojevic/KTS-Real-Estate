@@ -8,6 +8,7 @@ import kts.project.model.User;
 import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.AdvertisementType;
 import kts.project.model.enumerations.Currency;
+import kts.project.model.enumerations.Role;
 import kts.project.service.AdvertisementService;
 import kts.project.service.RealEstateService;
 import kts.project.service.UserService;
@@ -169,9 +170,16 @@ public class AdvertisementController {
     @RequestMapping(value = "/getSingleAdvertisement/{id}", method = RequestMethod.GET)
     public ResponseEntity getSingleAdvertisement(@PathVariable Long id)
     {
+        if(id == null){
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+        }
+
+        if(advertisementService.findById(id) == null){
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        }
 
         Advertisement singleAdvertisement = advertisementService.findById(id);
-
+        System.out.println("ADVERTISEMENT ID : " + singleAdvertisement.getId());
         return new ResponseEntity<>(singleAdvertisement, HttpStatus.OK);
 
     }
@@ -179,7 +187,11 @@ public class AdvertisementController {
     @RequestMapping(value = "/erase/{id}", method = RequestMethod.GET)
     public ResponseEntity erase(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
     {
+
         User user = userService.findByToken(token);
+        if(user.getRole() == Role.SYS_ADMIN || user.getRole() == Role.VERIFYER){
+            return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete advertisement!"), HttpStatus.BAD_REQUEST);
+        }
         Advertisement a = advertisementService.findById(id);
         if (a.getOwner().getId() == user.getId()){
 
@@ -188,7 +200,7 @@ public class AdvertisementController {
             //treba obrisati i sve one iste!!!!
             return new ResponseEntity<>(a, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete advertisement!"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessage("You are not allowed to delete advertisement!"), HttpStatus.BAD_REQUEST);
 
     }
 
