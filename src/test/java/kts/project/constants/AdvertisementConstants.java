@@ -17,8 +17,8 @@ public class AdvertisementConstants {
     public static final String PASSWORD = "a";
 
     //owner id=1
-    public static final String USERNAME = "a";
-    public static final String PASSWORD = "a";
+    public static final String USERNAME_OWNER2 = "g";
+    public static final String PASSWORD_OWNER2 = "g";
 
     //admin
     public static final String USERNAME_ADMIN = "admin";
