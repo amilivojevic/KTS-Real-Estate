@@ -10,8 +10,7 @@ import kts.project.model.*;
 import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.Role;
 import kts.project.repository.*;
-import kts.project.service.EmailService;
-import kts.project.service.UserService;
+import kts.project.service.*;
 import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,16 +30,10 @@ import java.util.List;
 public class OwnerController {
 
     @Autowired
-    OwnerRepository ownerRepository;
+    OwnerService ownerService;
 
     @Autowired
-    AuthorityRepository authorityRepository;
-
-    @Autowired
-    LocationRepository locationRepository;
-
-    @Autowired
-    UserRepository userRepository;
+    AuthorityService authorityService;
 
     @Autowired
     EmailService emailService;
@@ -49,10 +42,10 @@ public class OwnerController {
     UserService userService;
 
     @Autowired
-    AdvertisementRepository advertisementRepository;
+    AdvertisementService advertisementService;
 
     @Autowired
-    RealEstateRepository realEstateRepository;
+    RealEstateService realEstateService;
 
 
     //registracija obicnih korisnika!
@@ -66,7 +59,7 @@ public class OwnerController {
         if (registerOwnerDTO.getRole().equalsIgnoreCase("OWNER")) {
 
             user = new Owner();
-            user.setAuthority(authorityRepository.findByName(("ROLE_OWNER")));
+            user.setAuthority(authorityService.findByName(("ROLE_OWNER")));
 
         }
         else {
@@ -90,7 +83,7 @@ public class OwnerController {
         user.setImageUrl(registerOwnerDTO.getImageUrl());
         //user.setVerifyCode(UUID.randomUUID().toString());
 
-        ownerRepository.save(user);
+        ownerService.save(user);
         emailService.sendMail(user);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -104,7 +97,7 @@ public class OwnerController {
         if (user.getRole() == Role.SYS_ADMIN){
             List<Owner> allOwners = new ArrayList<Owner>();
 
-            for (User o : userRepository.findAll()) {
+            for (User o : userService.findAll()) {
                 if (o.getRole() == Role.OWNER){
                     allOwners.add((Owner)o);
                 }
@@ -138,7 +131,7 @@ public class OwnerController {
 
             List<Advertisement> myAdvertisements = new ArrayList<>();
 
-            for (Advertisement o : advertisementRepository.findAll()) {
+            for (Advertisement o : advertisementService.findAll()) {
                 if (o.getOwner().getId() == user.getId()){
                     myAdvertisements.add(o);
                 }
@@ -155,24 +148,24 @@ public class OwnerController {
         User user = userService.findByToken(token);
         if (user.getRole() == Role.SYS_ADMIN){
 
-            User eraseUser = userRepository.findByUsername(username);
+            User eraseUser = userService.findByUsername(username);
 
-            for (Advertisement a : advertisementRepository.findAll()) {
+            for (Advertisement a : advertisementService.findAll()) {
                 if(a.getOwner().getUsername().equals(username)){
-                    advertisementRepository.delete(a.getId());
+                    advertisementService.delete(a.getId());
                 }
             }
 
-            for (RealEstate re : realEstateRepository.findAll()) {
+            for (RealEstate re : realEstateService.findAll()) {
                 if(re.getOwner().getUsername().equals(username)){
-                    realEstateRepository.delete(re.getId());
+                    realEstateService.delete(re.getId());
                 }
             }
 
 
 
-            ownerRepository.delete((Owner)eraseUser);
-            userRepository.delete(eraseUser);
+            ownerService.delete((Owner)eraseUser);
+            userService.delete(eraseUser);
             //treba obrisati i sve one iste!!!!
             return new ResponseEntity<>(eraseUser, HttpStatus.OK);
         }

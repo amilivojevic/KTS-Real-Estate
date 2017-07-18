@@ -73,6 +73,15 @@ public class RealEstateService {
     /**
      *  This method deletes element from database.
      *
+     * @param
+     */
+    public void delete(Long id){
+        realEstateRepository.delete(id);
+    }
+
+    /**
+     *  This method deletes element from database.
+     *
      * @param u
      */
     public void delete(RealEstate u){
