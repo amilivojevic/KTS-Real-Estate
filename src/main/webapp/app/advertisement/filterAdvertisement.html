@@ -144,13 +144,13 @@
                     <div class="tab-1">
 
                         <div class="tab-1">
-                            <div  ng-repeat="o in ownerCtrl.allAdvertisements">
+                            <div  ng-repeat="o in filterAdvertisementCtrl.filtratedAdvertisements">
 
                                 <ul class="tab_img tab_1" >
                                     <li>
                                         <div class="client_box1">
                                             <img ng-src="{{o.realEstate.imageUrl}}" class="img-responsive" alt="images/pic4.jpg"/>
-                                            <h3 class="m_1"><a href="singleAdvertisement.html">Dolor suit</a></h3>
+                                            <h3 class="m_1"><a ng-click="filterAdvertisementCtrl.buy(o.id)">{{o.type}}</a></h3>
                                             <div class="boxed_mini_details clearfix">
                                                 <span class="bedrooms last"><strong>Title</strong>
                                                     {{o.title}}</span>
