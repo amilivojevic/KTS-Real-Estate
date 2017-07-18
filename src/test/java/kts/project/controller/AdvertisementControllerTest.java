@@ -204,9 +204,8 @@ public class AdvertisementControllerTest {
 
 
     /**
-     * This method tests adding new Advertisement and saving it to the database.
-     * Expected invalid input fields, unique phone number. Expected: method
-     * post, status BAD_REQUEST
+     * This method tests getting all Advertisements from database.
+     * Expected: method get, status OK, and specified content
      *
      * @throws Exception
      **/
@@ -228,11 +227,9 @@ public class AdvertisementControllerTest {
                 .andExpect(jsonPath("$.[*].state").value(hasItem(DB_ADV_STATE)));
     }
 
-
     /**
-     * This method tests adding new Advertisement and saving it to the database.
-     * Expected invalid input fields, unique phone number. Expected: method
-     * post, status BAD_REQUEST
+     * This method tests getting all Advertisements from database that have status WIATING.
+     * Expected: method get, status OK, and specified content
      *
      * @throws Exception
      **/
@@ -255,9 +252,9 @@ public class AdvertisementControllerTest {
     }
 
     /**
-     * This method tests adding new Advertisement and saving it to the database.
-     * Expected invalid input fields, unique phone number. Expected: method
-     * post, status BAD_REQUEST
+     * This method tests getting Advertisements from database that has id specified.
+     * Expected existing advertisement id.
+     * Expected: method get, status OK, and specified content
      *
      * @throws Exception
      **/
@@ -280,9 +277,9 @@ public class AdvertisementControllerTest {
 
 
     /**
-     * This method tests adding new Advertisement and saving it to the database.
-     * Expected invalid input fields, unique phone number. Expected: method
-     * post, status BAD_REQUEST
+     * This method tests getting Advertisements from database that has id specified.
+     * Expected existing invalid advertisement id.
+     * Expected: method get, status NOT_FOUND/BAD_REQUEST, and specified content
      *
      * @throws Exception
      **/
@@ -296,10 +293,12 @@ public class AdvertisementControllerTest {
     }
 
     /**
-     * This method tests deleting of existing Real Estate. Expected: method
-     * get, status OK
+     * This method tests erasing Advertisements from database that has id specified.
+     * Expected existing advertisement id.
+     * Expected: method get, status OK, and specified content
+     *
      * @throws Exception
-     */
+     **/
     @Test
     @Transactional
     @Rollback(true)
@@ -310,10 +309,13 @@ public class AdvertisementControllerTest {
     }
 
     /**
-     * This method tests deleting of existing Real Estate. Expected: method
-     * get, status OK
+     * This method tests erasing Advertisements from database that has id specified.
+     * Expected invalid input: admin logged, verifier logged, logged user is not
+     * the publisher of advertisement
+     * Expected: method get, status BAD_REQUEST, and specified content
+     *
      * @throws Exception
-     */
+     **/
     @Test
     @Transactional
     @Rollback(true)

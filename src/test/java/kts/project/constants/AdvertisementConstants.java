@@ -3,14 +3,15 @@ package kts.project.constants;
 import kts.project.model.enumerations.AdvertisementState;
 import kts.project.model.enumerations.AdvertisementType;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Created by Sandra on 7/17/2017.
  */
 public class AdvertisementConstants {
+
+    public static final int DB_ADV_NUMBER = 1;
+    public static final int DB_WAITING_ADV_NUMBER = 1;
 
     //owner id=4
     public static final String USERNAME = "a";
@@ -36,7 +37,6 @@ public class AdvertisementConstants {
     public static final long NEWADV_RS_ID = 2L;
     public static final String NEWADV_CURRENCY = "EUR";
 
-
     public static final String NEWADV_TITLE_BAD = "";
     public static final float NEWADV_PRICE_BAD = -100;
     public static final Date NEWADV_ENDING_DATE_BAD = null;
@@ -44,8 +44,6 @@ public class AdvertisementConstants {
     public static final String NEWADV_TYPE_BAD = "";
     public static final long NEWADV_RS_ID_BAD = 100L;
     public static final String NEWADV_CURRENCY_BAD = "";
-
-    public static final int DB_ADV_NUMBER = 4;
 
     public static final Long DB_ADV_ID = 1L;
 
@@ -60,7 +58,6 @@ public class AdvertisementConstants {
     public static final Long DB_ADV_RS_ID = 2L;
 
     // adv for getAllWaitingAdvertisement
-    public static final int DB_WAITING_ADV_NUMBER = 3;
 
     public static final Long DB_WAITING_ADV_ID = 1L;
     public static final String DB_WAITING_ADV_CURRENCY = kts.project.model.enumerations.Currency.RSD.name();
@@ -72,7 +69,6 @@ public class AdvertisementConstants {
 
     public static final Long DB_WAITING_ADV_OWNER_ID = 4L;
     public static final Long DB_WAITING_ADV_RS_ID = 2L;
-
 
     // advertisement id that doesn't exist
     public static final Long DB_ADV_ID_DOESNT_EXIST = 200L;
