@@ -1,8 +1,24 @@
 package kts.project;
 
+import kts.project.controller.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
 /**
- * Created by Nina on 17-Jul-17.
+ * This class represents ControllersSuite
+ *
  */
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+        AdvertisementControllerTest.class,
+        CompanyControllerTest.class,
+        LocationControllerTest.class,
+        OwnerControllerTest.class,
+        PrivateAccountInCompanyControllerTest.class,
+        RealEstateControllerTest.class,
+        UserControllerTest.class,
+        VerifierReportControllerTest.class
+})
 public class ControllersSuite {
 
 

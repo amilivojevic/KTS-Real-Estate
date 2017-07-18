@@ -1,9 +1,5 @@
 package kts.project;
 
-/**
- * Created by Nina on 17-Jul-17.
- */
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

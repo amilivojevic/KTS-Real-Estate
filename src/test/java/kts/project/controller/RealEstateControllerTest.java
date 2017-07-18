@@ -1,9 +1,5 @@
 package kts.project.controller;
 
-/**
- * Created by Nina on 17-Jul-17.
- */
-
 import kts.project.KtsprojectApplication;
 import kts.project.LoginTest;
 import kts.project.TestUtil;

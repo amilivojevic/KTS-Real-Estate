@@ -1,7 +1,8 @@
 package kts.project.constants;
 
 /**
- * Created by Sandra on 7/18/2017.
+ * Constants for LocationConstants tests
+ *
  */
 public class LocationConstants {
     public static final int DB_LOCATION_NUMBER = 4;
@@ -13,4 +14,9 @@ public class LocationConstants {
     public static final String DB_LOCATION_STREET_NUMBER = "52";
     public static final String DB_LOCATION_STATE = "Serbia";
 
+    /**
+     * Empty constructor
+     */
+    public LocationConstants() {
+    }
 }

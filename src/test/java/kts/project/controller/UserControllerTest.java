@@ -35,10 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Created by Nina on 17-Jul-17.
- */
-
-/**
  * This class tests User controller
  */
 @SuppressWarnings("deprecation")
@@ -229,39 +225,6 @@ public class UserControllerTest {
     }
 
     /**
-     * This method should test registration of new Owner with valid input.
-     * Expect all fields to be full filed correctly. Expected: method post, status
-     * CREATED, and specified content
-     *
-     * @throws Exception
-     **/
- /*   @Test
-    @Transactional
-    @Rollback(true)
-    public void saveOwner() throws Exception {
-        RegisterPrivateAccDTO registerPrivateAccDTO = new RegisterPrivateAccDTO();
-
-        registerPrivateAccDTO.setRole(NEW_ROLE_O);
-        registerPrivateAccDTO.setUsername(NEW_USERNAME_O);
-        registerPrivateAccDTO.setPassword(NEW_PASSWORD_O);
-        registerPrivateAccDTO.setEmail(NEW_EMAIL_O);
-        registerPrivateAccDTO.setName(NEW_NAME_O);
-        registerPrivateAccDTO.setSurname(NEW_SURNAME_O);
-        registerPrivateAccDTO.setBirthDate(NEW_BIRTH_DATE_O);
-        registerPrivateAccDTO.setAddress(NEW_ADDRESS_O);
-        registerPrivateAccDTO.setAccountNumber(NEW_ACCOUNT_NUMBER_O);
-        registerPrivateAccDTO.setCity(NEW_CITY_O);
-        registerPrivateAccDTO.setCountry(NEW_COUNTRY_O);
-        registerPrivateAccDTO.setImageUrl(NEW_IMAGE_URL_O);
-        registerPrivateAccDTO.setPhoneNumber(NEW_PHONE_NUMBER_O);
-
-
-        String json = TestUtil.json(registerPrivateAccDTO);
-        this.mockMvc.perform(post(URL_PREFIX + "/privateAcc/register").contentType(contentType).content(json))
-                .andExpect(status().isCreated());
-    }*/
-
-    /**
      * This method is getting all data of one User
      * Expected: method get, status
      * OK, and specified content
@@ -319,36 +282,6 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.[*].accountNumber").value(hasItem(DB_ACCOUNT_NUMBER)))
                 .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DB_IMAGE_URL)));
     }
-
-    /**
-     * This method is getting all Users from database
-     * Expected: method get, status
-     * OK, and specified content
-     *
-     * @throws Exception
-     */
- /*   @Test
-    public void testGetAllUsers() throws Exception {
-
-        String token = loginTest.login(USERNAME,PASSWORD);
-        mockMvc.perform(get(URL_PREFIX + "/verifier/getAll").header("X-Auth-Token", token))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$", hasSize(DB_USERS_NUMBER)))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(DB_ID.intValue())))
-                .andExpect(jsonPath("$.[*].username").value(hasItem(DB_USERNAME)))
-                .andExpect(jsonPath("$.[*].email").value(hasItem(DB_EMAIL)))
-                .andExpect(jsonPath("$.[*].role").value(hasItem(DB_ROLE)))
-                .andExpect(jsonPath("$.[*].authority.id").value(hasItem(DB_AUTHORITY.intValue())))
-                .andExpect(jsonPath("$.[*].name").value(hasItem(DB_NAME)))
-                .andExpect(jsonPath("$.[*].surname").value(hasItem(DB_SURNAME)))
-                .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DB_PHONE_NUMBER)))
-                .andExpect(jsonPath("$.[*].address").value(hasItem(DB_ADDRESS)))
-                .andExpect(jsonPath("$.[*].city").value(hasItem(DB_CITY)))
-                .andExpect(jsonPath("$.[*].country").value(hasItem(DB_COUNTRY)))
-                .andExpect(jsonPath("$.[*].accountNumber").value(hasItem(DB_ACCOUNT_NUMBER)))
-                .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DB_IMAGE_URL)));
-    } */
 
     /**
      * This method tests deleting of existing Verifier. Expected: method

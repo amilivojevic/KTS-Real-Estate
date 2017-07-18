@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by USER on 6/11/2017.
+ *This class represents controller for Owner and manages with all Real Estate
+ * functionalities.
  */
-
 @RestController
 @RequestMapping("/api/users/owner")
 public class OwnerController {
@@ -47,12 +47,19 @@ public class OwnerController {
     @Autowired
     RealEstateService realEstateService;
 
-
-    //registracija obicnih korisnika!
+    /**
+     * This method represents registration of Owner
+     * @param registerOwnerDTO
+     * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity saveOwner(@RequestBody RegisterOwnerDTO registerOwnerDTO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println("Pocinje registracija ownera na backendu!");
+
+        if (!ownerService.checkPrivateAccountInCompanyDTOInput(registerOwnerDTO)){
+            return new ResponseEntity<>(new ResponseMessage("New Owner input is not valid (some fields are null)"), HttpStatus.BAD_REQUEST);
+        }
 
         Owner user;
 
@@ -86,10 +93,14 @@ public class OwnerController {
         ownerService.save(user);
         emailService.sendMail(user);
 
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-
+    /**
+     *  This method gets all Owners
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public ResponseEntity getAllUsers(@RequestHeader("X-Auth-Token") String token)
     {
@@ -107,22 +118,11 @@ public class OwnerController {
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.BAD_REQUEST);
     }
 
-/*
-    @RequestMapping(value = "/getAllAdvertisements", method = RequestMethod.GET)
-    public ResponseEntity getAllAdvertisements() {
-
-        List<Advertisement> allAdvertisements = new ArrayList<>();
-
-        for (Advertisement o : advertisementRepository.findAll()) {
-
-            allAdvertisements.add(o);
-
-        }
-
-        return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
-    }
-*/
-
+    /**
+     * This method tests getting all Advertisements of a current User
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK, BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/getAllMyAdvertisements", method = RequestMethod.GET)
     public ResponseEntity getAllMyAdvertisements(@RequestHeader("X-Auth-Token") String token) {
 
@@ -142,6 +142,12 @@ public class OwnerController {
         return new ResponseEntity<>(new ResponseMessage("Logged User is not an owner!"), HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * This method is deleting one Owner together with his Advertisements and RealEstates
+     * @param username
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK, BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/erase/{username}", method = RequestMethod.GET)
     public ResponseEntity erase(@PathVariable String username, @RequestHeader("X-Auth-Token") String token)
     {
@@ -161,15 +167,15 @@ public class OwnerController {
                     realEstateService.delete(re.getId());
                 }
             }
-
-
-
+            System.out.println("Erase user" + eraseUser.getUsername());
             ownerService.delete((Owner)eraseUser);
+            System.out.println("Erase user" + eraseUser.getUsername());
             userService.delete(eraseUser);
+
             //treba obrisati i sve one iste!!!!
             return new ResponseEntity<>(eraseUser, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.BAD_REQUEST);
 
     }
 

@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Sandra on 7/17/2017.
+ * This class represents LoginTest
  */
 @Component
 public class LoginTest {

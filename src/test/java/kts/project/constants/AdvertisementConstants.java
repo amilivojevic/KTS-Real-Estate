@@ -6,7 +6,8 @@ import kts.project.model.enumerations.AdvertisementType;
 import java.util.Date;
 
 /**
- * Created by Sandra on 7/17/2017.
+ * Constants for VerifierReport tests
+ *
  */
 public class AdvertisementConstants {
 
@@ -73,4 +74,9 @@ public class AdvertisementConstants {
     // advertisement id that doesn't exist
     public static final Long DB_ADV_ID_DOESNT_EXIST = 200L;
 
+    /**
+     * Empty constructor
+     */
+    public AdvertisementConstants() {
+    }
 }

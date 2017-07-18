@@ -350,7 +350,4 @@ import java.util.List;
         }
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.BAD_REQUEST);
     }
-
-
-
 }
