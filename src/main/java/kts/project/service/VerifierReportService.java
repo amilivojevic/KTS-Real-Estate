@@ -1,10 +1,14 @@
 package kts.project.service;
 
 import kts.project.controller.dto.VerifierReportDTO;
+import kts.project.model.Advertisement;
 import kts.project.model.VerifierReport;
 import kts.project.repository.VerifierReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nina on 16-Jul-17.
@@ -56,6 +60,23 @@ public class VerifierReportService {
         }
         else{
             return true;
+        }
+    }
+
+    /**
+     * This method deletes all reports of specified Advertisement
+     * @param a
+     */
+    public void deleteReportsOfAdvertisement(Advertisement a){
+        List<Long> reportIds = new ArrayList<>();
+        for(VerifierReport report : verifierReportRepository.findAll()){
+            if(report.getAdvertisement().getId() == a.getId()){
+                reportIds.add(report.getId());
+            }
+        }
+
+        for(Long id : reportIds){
+            verifierReportRepository.delete(id);
         }
     }
 }

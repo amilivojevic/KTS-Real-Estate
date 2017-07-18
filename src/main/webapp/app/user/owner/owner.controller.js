@@ -39,7 +39,7 @@
                     .then(function(response) {
 
 
-                        getAllAdvertisements();
+                        getAllMyAdvertisements();
                     }, function(response) {
                         alert(JSON.stringify(response.data));
                     });
