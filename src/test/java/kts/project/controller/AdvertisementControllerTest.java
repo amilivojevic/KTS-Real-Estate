@@ -223,6 +223,32 @@ public class AdvertisementControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    /**
+     * This method tests deleting of existing Real Estate. Expected: method
+     * get, status OK
+     * @throws Exception
+     */
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void testErase() throws Exception {
+        String token = loginTest.login(USERNAME, PASSWORD);
+        mockMvc.perform(get(URL_PREFIX + "/erase/" + DB_ADV_ID).header("X-Auth-Token", token))
+                .andExpect(status().isOk());
+    }
 
+    /**
+     * This method tests deleting of existing Real Estate. Expected: method
+     * get, status OK
+     * @throws Exception
+     */
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void testEraseInvalid() throws Exception {
+        String token = loginTest.login(USERNAME_ADMIN, PASSWORD_ADMIN);
+        mockMvc.perform(get(URL_PREFIX + "/erase/" + DB_ADV_ID).header("X-Auth-Token", token))
+                .andExpect(status().isBadRequest());
+    }
 
 }

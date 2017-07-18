@@ -12,6 +12,22 @@ import java.util.GregorianCalendar;
  */
 public class AdvertisementConstants {
 
+    //owner id=4
+    public static final String USERNAME = "a";
+    public static final String PASSWORD = "a";
+
+    //owner id=1
+    public static final String USERNAME = "a";
+    public static final String PASSWORD = "a";
+
+    //admin
+    public static final String USERNAME_ADMIN = "admin";
+    public static final String PASSWORD_ADMIN = "admin";
+
+    //verifier
+    public static final String USERNAME_VER = "ver";
+    public static final String PASSWORD_VER = "ver";
+
     public static final String NEWADV_TITLE = "New title";
     public static final float NEWADV_PRICE = 100;
     public static final Date NEWADV_ENDING_DATE = new Date();
@@ -20,8 +36,6 @@ public class AdvertisementConstants {
     public static final long NEWADV_RS_ID = 2L;
     public static final String NEWADV_CURRENCY = "EUR";
 
-    public static final String USERNAME = "a";
-    public static final String PASSWORD = "a";
 
     public static final String NEWADV_TITLE_BAD = "";
     public static final float NEWADV_PRICE_BAD = -100;
