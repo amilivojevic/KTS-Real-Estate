@@ -26,16 +26,17 @@ public class UserService {
     @Autowired
     private TokenUtils tokenUtils;
 
-
-
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
     PrivateAccountInCompanyService privateAccountInCompanyService;
 
-
-
+    /**
+     * This method finds User with specified username
+     * @param username
+     * @return object of User
+     */
     public User findByUsername(String username){
         return userRepository.findByUsername(username);
     }
@@ -50,14 +51,31 @@ public class UserService {
         return user;
     }
 
+    /**
+     * This method finds all the Users
+     *
+     * @return list of Users
+     */
     public List<User> findAll(){
         return userRepository.findAll();
     }
 
+    /**
+     * This method is savid User to database
+     *
+     * @param u
+     *
+     * @return object User
+     */
     public User save(User u){
         return userRepository.save(u);
     }
 
+    /**
+     * This method is deleting User from database
+     *
+     * @param eraseUser
+     */
     public void delete(User eraseUser){
          userRepository.delete(eraseUser);
     }
@@ -105,6 +123,15 @@ public class UserService {
         } else {
             return true;
         }
+    }
+
+    /**
+     * This method finds User with specified id
+     * @param id
+     * @return object of User
+     */
+    public User findById(Long id){
+        return userRepository.findById(id);
     }
 
 }

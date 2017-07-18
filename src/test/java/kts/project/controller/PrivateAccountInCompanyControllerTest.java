@@ -192,22 +192,21 @@ public class PrivateAccountInCompanyControllerTest{
        * Expected: method get, status OK
        *
        * @throws Exception
-       **/
-   /* @Test
+       * **/
+    @Test
     @Transactional
     @Rollback(true)
     public void testApprove() throws Exception {
 
         String token = loginTest.login(USERNAME,PASSWORD);
 
-        mockMvc.perform(get(URL_PREFIX + "/approve/" + DB_ID1).header("X-Auth-Token", token).contentType(contentType))
+        mockMvc.perform(get(URL_PREFIX + "/approve/" + DB_ID_UNAPPROVED).header("X-Auth-Token", token))
                 .andExpect(status().isOk())
 
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$.id").value(hasItem(DB_ID1.intValue())))
-                .andExpect(jsonPath("$.approved").value(hasItem(DB_APPROVED1)))
-                .andExpect(jsonPath("$.company.id").value(hasItem(DB_COMPANY1.intValue())))
-                .andExpect(jsonPath("$.owner.id").value(hasItem(DB_OWNER1.intValue())));
-
-    }*/
+                .andExpect(jsonPath("$.id").value(DB_ID_UNAPPROVED.intValue()))
+                .andExpect(jsonPath("$.approved").value(DB_APPROVED1))
+                .andExpect(jsonPath("$.company_id.id").value(DB_COMPANY1.intValue()))
+                .andExpect(jsonPath("$.owner_id.id").value(DB_OWNER1.intValue()));
+    }
 }

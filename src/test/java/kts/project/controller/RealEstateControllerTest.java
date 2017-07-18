@@ -222,7 +222,7 @@ public class RealEstateControllerTest {
 
     /**
      * This method tests deleting of non existing Real Estate. Expected: method
-     * get, status OK
+     * get, status NOT_FOUND
      * @throws Exception
      */
     @Test

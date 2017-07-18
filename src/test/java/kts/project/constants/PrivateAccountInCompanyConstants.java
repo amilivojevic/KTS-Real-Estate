@@ -55,7 +55,7 @@ public class PrivateAccountInCompanyConstants {
     public static final Long DB_OWNER = 4L;
 
     public static final int DB_PAC_NUMBER_UA1 = 2;
-    public static final Long DB_ID1 = 3L;
+    public static final Long DB_ID_UNAPPROVED = 3L;
     public static final boolean DB_APPROVED1 = true;
     public static final Long DB_COMPANY1 = 5L;
     public static final Long DB_OWNER1 = 6L;

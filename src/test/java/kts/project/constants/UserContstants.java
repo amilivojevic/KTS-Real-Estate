@@ -1,9 +1,5 @@
 package kts.project.constants;
-
-/**
- * Created by Nina on 17-Jul-17.
- */
-
+import kts.project.model.Authority;
 import kts.project.model.enumerations.Role;
 
 import java.util.Date;
@@ -29,22 +25,34 @@ public class UserContstants {
     public static final String NEW_ACCOUNT_NUMBER = "0259841";
     public static final String NEW_IMAGE_URL = "image1.jpg";
 
-    public static final Long DB_ID = 2L;
+    public static final String USERNAME = "a";
+    public static final String PASSWORD = "a";
 
-    public static final String DB_USERNAME = "admin";
-    public static final String DB_PASSWORD = "admin";
-    public static final String DB_EMAIL = "nina@gmail.com";
-    public static final String DB_ROLE = "ADMIN";
-    public static final String DB_AUTHORITY = "1";
-    public static final String DB_NAME = "pera";
-    public static final String DB_SURNAME = "peric";
-    public static final Date DB_BIRTH_DATE = new Date();
-    public static final String DB_PHONE_NUMBER = "06415896325";
-    public static final String DB_ADDRESS = "Trg Majke Jevrosime 11";
+    public static final String USERNAME_A = "admin";
+    public static final String PASSWORD_A = "admin";
+
+    public static final String USERNAME_V = "ver";
+    public static final String USERNAME_V_BAD = "mrs";
+    public static final String PASSWORD_V = "ver";
+
+    public static final Long DB_ID = 4L;
+
+    public static final String DB_USERNAME = "a";
+    public static final String DB_PASSWORD = "a";
+    public static final String DB_EMAIL = "marko@gmail.com";
+    public static final String DB_ROLE = Role.OWNER.name();
+    public static final Long DB_AUTHORITY = 2L;
+    public static final String DB_NAME = "marko";
+    public static final String DB_SURNAME = "Markovic";
+ //   public static final Date DB_BIRTH_DATE = new Date();
+    public static final String DB_PHONE_NUMBER = "021 111 111";
+    public static final String DB_ADDRESS = "Reja 54";
     public static final String DB_CITY = "Wroclaw";
     public static final String DB_COUNTRY = "Poland";
-    public static final String DB_ACCOUNT_NUMBER = "0012300";
-    public static final String DB_IMAGE_URL = "image2.jpg";
+    public static final String DB_ACCOUNT_NUMBER = "3696";
+    public static final String DB_IMAGE_URL = "images/img1.jpg";
+
+    public static final int DB_USERS_NUMBER = 9;
 
     public static final String NEW_USERNAME_O = "Owner username";
     public static final String NEW_PASSWORD_O = "pass";
@@ -62,18 +70,9 @@ public class UserContstants {
     public static final String NEW_IMAGE_URL_O = "image1.jpg";
     public static final Long NEW_COMPANY_ID_O = 5L;
 
-    private String username;
-    private String password;
-    private String email;
-    private String name;
-    private String surname;
-    private Date birthDate;
-    private String phoneNumber;
-    private String address;
-    private String city;
-    private String country;
-    private String accountNumber;
-    private String imageUrl;
-    private long companyId;
-
+    /**
+     * Empty constructor
+     */
+    public UserContstants() {
+    }
 }

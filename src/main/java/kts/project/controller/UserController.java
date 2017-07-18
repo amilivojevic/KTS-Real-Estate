@@ -28,12 +28,6 @@ import javax.servlet.ServletRequest;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by USER on 6/11/2017.
- */
-
-
 /**
  *This class represents controller for User and manages with all User
  * functionalities.
@@ -282,19 +276,20 @@ import java.util.List;
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    // Testing in progress
+    // Testing COMPLETED
     /**
      * This method is getting all data of an user
      * @param token
      * @return ResponseEntity with HttpStatus Ok if everything is OK
      */
     @RequestMapping(value = "/data", method = RequestMethod.GET)
-    public ResponseEntity<UserDTO> getData(@RequestHeader("X-Auth-Token") String token)
+    public ResponseEntity<UserDTO2> getData(@RequestHeader("X-Auth-Token") String token)
     {
         User user = userService.findByToken(token);
-        return new ResponseEntity<>(new UserDTO(user), HttpStatus.OK);
+        return new ResponseEntity<>(new UserDTO2(user), HttpStatus.OK);
     }
 
+    // Testing COMPLETED
     /**
      * This method returns list of all the users
      * @param token
@@ -306,6 +301,7 @@ import java.util.List;
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
+    // Testing COMPLETED WTF SA LINKOM ?????????????????
     /**
      * This method gets all users of type Verifier
      * @param token
@@ -337,6 +333,11 @@ import java.util.List;
     @RequestMapping(value = "/verifier/erase/{username}", method = RequestMethod.GET)
     public ResponseEntity erase(@PathVariable String username, @RequestHeader("X-Auth-Token") String token)
     {
+
+        if(userService.findByUsername(username) == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         User user = userService.findByToken(token);
         if (user.getRole() == Role.SYS_ADMIN){
 
@@ -349,5 +350,7 @@ import java.util.List;
         }
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.BAD_REQUEST);
     }
+
+
 
 }

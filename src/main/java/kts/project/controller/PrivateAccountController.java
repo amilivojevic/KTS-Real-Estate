@@ -1,5 +1,6 @@
 package kts.project.controller;
 
+import kts.project.controller.dto.ApprovedPrivateAccountInCompanyDTO;
 import kts.project.controller.dto.RegisterOwnerDTO;
 import kts.project.controller.dto.RegisterPrivateAccDTO;
 import kts.project.model.Company;
@@ -134,9 +135,9 @@ public class PrivateAccountController {
     public ResponseEntity approve(@PathVariable long id, @RequestHeader("X-Auth-Token") String token) {
 
         User user = userService.findByToken(token);
-        System.out.println("Funkcija approve, user.getId() = " + user.getId());
+ //       System.out.println("Funkcija approve, user.getId() = " + user.getId());
         if (user.getRole() == Role.OWNER) {
-            System.out.println("user je owner");
+       //     System.out.println("user je owner");
             if(companyService.getOne(user.getId()) != null){
 
                 PrivateAccountInCompany p = privateAccountInCompanyService.findById(id);
@@ -147,7 +148,7 @@ public class PrivateAccountController {
                 System.out.println("postavio na approved");
                 privateAccountInCompanyService.save(p);
                 System.out.println("zapamtio u bazi");
-                return new ResponseEntity<>( HttpStatus.OK);
+                return new ResponseEntity<>(new ApprovedPrivateAccountInCompanyDTO(p), HttpStatus.OK);
             }
 
 

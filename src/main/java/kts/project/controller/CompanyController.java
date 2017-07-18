@@ -129,7 +129,7 @@ public class CompanyController {
 
             User eraseUser = userService.findByUsername(username);
             Company c = companyService.findByUsername(username);
-            System.out.println("Nasao je kompaniju u bazi : " + c.toString());
+     //       System.out.println("Nasao je kompaniju u bazi : " + c.toString());
 
             c.setApproved(true);
             companyService.save(c);
