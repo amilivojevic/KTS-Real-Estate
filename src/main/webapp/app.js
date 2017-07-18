@@ -155,7 +155,7 @@
                     url: '/admin_modify',
                     views: {
                         'content': {
-                            templateUrl: 'app/user/admin/adminModify.html',
+                            templateUrl: 'app/user/admin/modify/adminModify.html',
                             controller: 'AdminModifyController',
                             controllerAs: 'adminModifyCtrl'
                         },
@@ -265,8 +265,8 @@
                             controllerAs: 'verifyerCtrl'
                         },
                         'navbar': {
-                            templateUrl: 'app/navbar/navbar.html',
-                            controller: 'NavbarController',
+                            templateUrl: 'app/navbar/navbarVerifier.html',
+                            controller: 'NavbarVerifierController',
                             controllerAs: 'navbarCtrl'
                         }
                     }
@@ -280,8 +280,8 @@
                             controllerAs: 'verifyerModifyCtrl'
                         },
                         'navbar': {
-                            templateUrl: 'app/navbar/navbar.html',
-                            controller: 'NavbarController',
+                            templateUrl: 'app/navbar/navbarVerifier.html',
+                            controller: 'NavbarVerifierController',
                             controllerAs: 'navbarCtrl'
                         }
                     }
@@ -295,8 +295,23 @@
                             controllerAs: 'approveAdvertisementCtrl'
                         },
                         'navbar': {
-                            templateUrl: 'app/navbar/navbar.html',
-                            controller: 'NavbarController',
+                            templateUrl: 'app/navbar/navbarVerifier.html',
+                            controller: 'NavbarVerifierController',
+                            controllerAs: 'navbarCtrl'
+                        }
+                    }
+                })
+                .state('reportBanedAdvertisement', {
+                    url: '/report_baned_advertisement',
+                    views: {
+                        'content': {
+                            templateUrl: 'app/user/verifyer/approveAdvertisement/reportBannedAdvertisement.html',
+                            controller: 'ReportBanedAdvertisementController',
+                            controllerAs: 'reportBanedAdvertisementCtrl'
+                        },
+                        'navbar': {
+                            templateUrl: 'app/navbar/navbarVerifier.html',
+                            controller: 'NavbarVerifierController',
                             controllerAs: 'navbarCtrl'
                         }
                     }
@@ -418,21 +433,7 @@
                     }
                 }
             })
-                .state('reportBanedAdvertisement', {
-                    url: '/report_baned_advertisement',
-                    views: {
-                        'content': {
-                            templateUrl: 'app/user/verifyer/approveAdvertisement/reportBannedAdvertisement.html',
-                            controller: 'ReportBanedAdvertisementController',
-                            controllerAs: 'reportBanedAdvertisementCtrl'
-                        },
-                        'navbar': {
-                            templateUrl: 'app/navbar/navbar.html',
-                            controller: 'NavbarController',
-                            controllerAs: 'navbarCtrl'
-                        }
-                    }
-                })
+
                 .state('verify', {
                     url: '/authenticate/{id:int}',
                     templateUrl: 'page/authentication.html',

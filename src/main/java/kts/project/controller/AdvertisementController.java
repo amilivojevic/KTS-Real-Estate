@@ -12,6 +12,7 @@ import kts.project.model.enumerations.Role;
 import kts.project.service.AdvertisementService;
 import kts.project.service.RealEstateService;
 import kts.project.service.UserService;
+import kts.project.service.VerifierReportService;
 import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,9 @@ public class AdvertisementController {
 
     @Autowired
     RealEstateService realEstateService;
+
+    @Autowired
+    VerifierReportService verifierReportService;
 
     //Adding new advertisement
 
@@ -207,6 +211,7 @@ public class AdvertisementController {
         Advertisement a = advertisementService.findById(id);
         if (a.getOwner().getId() == user.getId()){
 
+            verifierReportService.deleteReportsOfAdvertisement(a);
             advertisementService.delete(a);
 
             //treba obrisati i sve one iste!!!!

@@ -60,30 +60,35 @@
             $http.post('/api/users/login', userData)
                 .then(function(token) {
 
-                    $window.localStorage.setItem("token",token.data.response);
+                    var t = token.data.response.split(" ")[0];
+                    var role = token.data.response.split(" ")[1];
+
+                    $window.localStorage.setItem("token",t);
                     console.log("token = " + $window.localStorage.getItem("token"));
+                    console.log("role = " + role);
+
+                    if (equals(role,"OWNER")){
+                        //provera ako je firma ili owner u okviru firme da li je odobren nalog:
+                        $http.post('/api/users/checkApproved',{})
+                            .then(function(response){
+                                console.log("*** approved response.data = " + response.data);
+                                if(response.data){
+                                    checkIfLogged();
+                                }
+                                else{
+                                    alert("Your registration has not been approved yet");
+                                }
 
 
-                    //provera ako je firma ili owner u okviru firme da li je odobren nalog:
-                    $http.post('/api/users/checkApproved',{})
-                        .then(function(response){
-                            console.log("*** approved response.data = " + response.data);
-                            if(response.data){
-                                checkIfLogged();
-                            }
-                            else{
-                                alert("Your registration has not been approved yet");
-                            }
-
-
-                        }, function(response) {
-                        alert(response.data.response);
-                        console.log("Wrong username and password combination");
-                    });
-
-
-
-
+                            }, function(response) {
+                                alert(response.data.response);
+                                console.log("You are not Company neither Private Account in company");
+                            });
+                    }
+                    else{
+                        //nije kompanije ili privatno lice, normalno ga uloguj
+                        checkIfLogged();
+                    }
 
             }, function(response) {
                 alert(response.data.response);
@@ -101,11 +106,16 @@
                     $window.localStorage['loggedUser'] = angular.toJson(loggedUser);
                     console.log("ucitan u funkciji window.localstorage: " + JSON.stringify($window.localStorage['loggedUser']));
                     $scope.loggedUser = loggedUser;
+                    $scope.approved = loggedUser.approved;
+                    return loggedUser;
 
                 }
             );
         };
 
+        function equals(a,b) {
+            return new String(a).valueOf() == new String(b).valueOf();
+        }
 
         // method for deleting user data - token
         function logout() {

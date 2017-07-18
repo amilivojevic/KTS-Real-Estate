@@ -87,8 +87,11 @@ import java.util.List;
             SecurityContextHolder.getContext().setAuthentication(authentication);
             // Reload user details so we can generate token
             UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
+            String final_token = tokenUtils.generateToken(details);
 
-            return new ResponseEntity<>(new ResponseMessage(tokenUtils.generateToken(details)), HttpStatus.OK);
+            User u = userService.findByToken(final_token);
+
+            return new ResponseEntity<>(new ResponseMessage(final_token + " " + u.getRole().name()), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(new ResponseMessage("Invalid login"),
                     HttpStatus.NOT_FOUND);
@@ -98,11 +101,11 @@ import java.util.List;
     /**
      * This method is checking if Company or private Owner in Company are approved
      * @param token
-     * @param loginDTO
+     * @param emptyDTO
      * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK
      */
     @RequestMapping(value = "/checkApproved", method = RequestMethod.POST, consumes = "application/json;charset=utf-8")
-    public ResponseEntity checkApproved(@RequestHeader("X-Auth-Token") String token,@RequestBody EmptyDTO loginDTO) {
+    public ResponseEntity checkApproved(@RequestHeader("X-Auth-Token") String token,@RequestBody EmptyDTO emptyDTO) {
         boolean approved = true;
         User user = userService.findByToken(token);
 
