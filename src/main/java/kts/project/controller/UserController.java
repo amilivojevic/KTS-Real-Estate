@@ -120,8 +120,8 @@ import java.util.List;
                 approved = ((Company) user).isApproved();
             }
             //private account in company
-            else if(checkIfOwnerIsPrivate(user.getId()) != -1){
-                PrivateAccountInCompany p = privateAccountInCompanyService.findById(checkIfOwnerIsPrivate(user.getId()));
+            else if(userService.checkIfOwnerIsPrivate(user.getId()) != -1){
+                PrivateAccountInCompany p = privateAccountInCompanyService.findById(userService.checkIfOwnerIsPrivate(user.getId()));
                 approved = p.isApproved();
             }
         }
@@ -131,22 +131,6 @@ import java.util.List;
         return new ResponseEntity<>(approved,HttpStatus.OK);
 
     }
-
-    /**
-     * This method is checking if Owner is private Owner inside Company
-     * @param ownerId
-     * @return id of Owner inside company if found, -1 if not
-     */
-    public long checkIfOwnerIsPrivate(long ownerId){
-        for(PrivateAccountInCompany p : privateAccountInCompanyService.findAll()){
-            if(p.getOwner().getId() == ownerId){
-                return p.getId();
-            }
-        }
-        return -1;
-    }
-
-
 
     //TESTED FULLY
     /**
@@ -211,18 +195,26 @@ import java.util.List;
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-
+    // Testing in progress
     /**
      * This method represents registration of private Owners inside Company
      * @param registerPrivateAccDTO
      * @return ResponseEntity with HttpStatus CREATED if everything is OK or BAD_REQUEST if not OK
      */
     //registracija obicnih korisnika unutar firme
-    @RequestMapping(value = "privateAcc/register", method = RequestMethod.POST, consumes = "application/json")
+
+
+    // OVDE SAM DODALA / NA POCETAK LINKA
+    // WTF S OVIMEEEE
+    @RequestMapping(value = "/privateAcc/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity saveOwner(@RequestBody RegisterPrivateAccDTO registerPrivateAccDTO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println("Pocinje registracija ownera unutar firme na backendu!");
 
+
+        if (!userService.checkPrivateAccDTOInput(registerPrivateAccDTO)){
+            return new ResponseEntity<>(new ResponseMessage("New Real Estate input is not valid (some fields are null)"), HttpStatus.BAD_REQUEST);
+        }
         Owner user;
 
         if (registerPrivateAccDTO.getRole().equalsIgnoreCase("OWNER")) {
@@ -290,6 +282,7 @@ import java.util.List;
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    // Testing in progress
     /**
      * This method is getting all data of an user
      * @param token

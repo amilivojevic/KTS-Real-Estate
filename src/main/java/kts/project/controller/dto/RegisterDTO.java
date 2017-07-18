@@ -7,7 +7,6 @@ import java.util.Date;
  */
 public class RegisterDTO {
 
-
     private String role;
     private String username;
     private String password;

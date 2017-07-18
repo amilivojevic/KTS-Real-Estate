@@ -1,9 +1,12 @@
 package kts.project.controller;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import kts.project.KtsprojectApplication;
 import kts.project.TestUtil;
 import kts.project.controller.dto.LoginDTO;
 import kts.project.controller.dto.RegisterDTO;
+import kts.project.controller.dto.RegisterOwnerDTO;
+import kts.project.controller.dto.RegisterPrivateAccDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import javax.annotation.PostConstruct;
 import java.nio.charset.Charset;
 
 import static kts.project.constants.UserContstants.*;
+import static kts.project.constants.UserContstants.NEW_PASSWORD_O;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,7 +33,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by Nina on 17-Jul-17.
  */
 
-
+/**
+ * This class tests User controller
+ */
 @SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = KtsprojectApplication.class)
@@ -213,6 +219,39 @@ public class UserControllerTest {
                 .andExpect(status().isBadRequest());
 
     }
+
+    /**
+     * This method should test registration of new Owner with valid input.
+     * Expect all fields to be full filed correctly. Expected: method post, status
+     * CREATED, and specified content
+     *
+     * @throws Exception
+     **/
+ /*   @Test
+    @Transactional
+    @Rollback(true)
+    public void saveOwner() throws Exception {
+        RegisterPrivateAccDTO registerPrivateAccDTO = new RegisterPrivateAccDTO();
+
+        registerPrivateAccDTO.setRole(NEW_ROLE_O);
+        registerPrivateAccDTO.setUsername(NEW_USERNAME_O);
+        registerPrivateAccDTO.setPassword(NEW_PASSWORD_O);
+        registerPrivateAccDTO.setEmail(NEW_EMAIL_O);
+        registerPrivateAccDTO.setName(NEW_NAME_O);
+        registerPrivateAccDTO.setSurname(NEW_SURNAME_O);
+        registerPrivateAccDTO.setBirthDate(NEW_BIRTH_DATE_O);
+        registerPrivateAccDTO.setAddress(NEW_ADDRESS_O);
+        registerPrivateAccDTO.setAccountNumber(NEW_ACCOUNT_NUMBER_O);
+        registerPrivateAccDTO.setCity(NEW_CITY_O);
+        registerPrivateAccDTO.setCountry(NEW_COUNTRY_O);
+        registerPrivateAccDTO.setImageUrl(NEW_IMAGE_URL_O);
+        registerPrivateAccDTO.setPhoneNumber(NEW_PHONE_NUMBER_O);
+
+
+        String json = TestUtil.json(registerPrivateAccDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/privateAcc/register").contentType(contentType).content(json))
+                .andExpect(status().isCreated());
+    }*/
 
 
 
