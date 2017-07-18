@@ -1,13 +1,10 @@
 package kts.project.controller;
 
+import kts.project.controller.dto.ApprovedCompanyDTO;
 import kts.project.controller.dto.RegisterCompanyDTO;
-import kts.project.controller.dto.RegisterOwnerDTO;
 import kts.project.model.Company;
-import kts.project.model.Owner;
-import kts.project.model.PrivateAccountInCompany;
 import kts.project.model.User;
 import kts.project.model.enumerations.Role;
-import kts.project.repository.*;
 import kts.project.security.UserUtils;
 import kts.project.service.AuthorityService;
 import kts.project.service.CompanyService;
@@ -137,7 +134,7 @@ public class CompanyController {
             c.setApproved(true);
             companyService.save(c);
 
-            return new ResponseEntity<>(eraseUser, HttpStatus.OK);
+            return new ResponseEntity<>(new ApprovedCompanyDTO(c), HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
     }

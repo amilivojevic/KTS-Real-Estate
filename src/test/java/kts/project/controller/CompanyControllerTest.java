@@ -266,22 +266,41 @@ public class CompanyControllerTest {
         mockMvc.perform(get(URL_PREFIX + "/all/unapproved"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$", hasSize(DB_COMPANY_NUMBER)))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(DB_COMPANY_ID.intValue())))
-                .andExpect(jsonPath("$.[*].role").value(hasItem(DB_COMPANY_ROLE)))
-                .andExpect(jsonPath("$.[*].username").value(hasItem(DB_COMPANY_USERNAME)))
-                .andExpect(jsonPath("$.[*].email").value(hasItem(DB_COMPANY_EMAIL)))
-                .andExpect(jsonPath("$.[*].name").value(hasItem(DB_COMPANY_NAME)))
-                .andExpect(jsonPath("$.[*].surname").value(hasItem(DB_COMPANY_SURNAME)))
-                .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DB_COMPANY_PHONE_NUMBER)))
-                .andExpect(jsonPath("$.[*].address").value(hasItem(DB_COMPANY_ADDRESS)))
-                .andExpect(jsonPath("$.[*].city").value(hasItem(DB_COMPANY_CITY)))
-                .andExpect(jsonPath("$.[*].country").value(hasItem(DB_COMPANY_COUNTRY)))
-                .andExpect(jsonPath("$.[*].accountNumber").value(hasItem(DB_COMPANY_ACCOUNT_NUMBER)))
-                .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DB_COMPANY_IMAGE_URL)))
-                .andExpect(jsonPath("$.[*].pib").value(hasItem(DB_COMPANY_PIB)))
-                .andExpect(jsonPath("$.[*].site").value(hasItem(DB_COMPANY_SITE)))
-                .andExpect(jsonPath("$.[*].fax").value(hasItem(DB_COMPANY_FAX)));
+                .andExpect(jsonPath("$", hasSize(DB_UNAPPROVED_COMPANY_NUMBER)))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(DB_COMPANY_ID_UNAPPROVED.intValue())))
+                .andExpect(jsonPath("$.[*].role").value(hasItem(DB_COMPANY_ROLE_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].username").value(hasItem(DB_COMPANY_USERNAME_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].email").value(hasItem(DB_COMPANY_EMAIL_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DB_COMPANY_NAME_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].surname").value(hasItem(DB_COMPANY_SURNAME_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DB_COMPANY_PHONE_NUMBER_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].address").value(hasItem(DB_COMPANY_ADDRESS_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].city").value(hasItem(DB_COMPANY_CITY_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].country").value(hasItem(DB_COMPANY_COUNTRY_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].accountNumber").value(hasItem(DB_COMPANY_ACCOUNT_NUMBER_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DB_COMPANY_IMAGE_URL_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].pib").value(hasItem(DB_COMPANY_PIB_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].site").value(hasItem(DB_COMPANY_SITE_UNAPPROVED)))
+                .andExpect(jsonPath("$.[*].fax").value(hasItem(DB_COMPANY_FAX_UNAPPROVED)));
+    }
+
+
+    /**
+     * This method tests getting an advertisements from the database with a
+     * specified ID. Expected: method get, status OK, specified size and content
+     *
+     * @throws Exception
+     **/
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void testApproved() throws Exception {
+        String token = loginTest.login(USERNAME_ADMIN,PASSWORD_ADMIN);
+        mockMvc.perform(get(URL_PREFIX + "/approve/" + DB_COMPANY_USERNAME_UNAPPROVED).header("X-Auth-Token", token))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.id").value(DB_COMPANY_ID_UNAPPROVED.intValue()))
+                .andExpect(jsonPath("$.approved").value(true));
     }
 
 }

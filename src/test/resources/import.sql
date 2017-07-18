@@ -22,18 +22,25 @@ INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`
 
 INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(9,59856,"Jovana Ducica 12","07.07.2010.","Beograd","Serbia","sandra1@gmail.com","images/img2.jpg","sandra","$2a$10$Qt3BU0OfliX1n2wGSE7E6.Evy9JryYxQp5VbW2FohZyAuv/bej1cq","021 333 555","OWNER","Jaimez","g",2);
 INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(4,3696,"Reja 54","01.01.2000.","Wroclaw","Poland","marko@gmail.com","images/img1.jpg","marko","$2a$10$HeR9A53PD1jmyIJn1IyZOe5o4zu./hc7LZuPV41Ie84prg2JVfo2O","021 111 111","OWNER","Markovic","a",2);
-INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(5,59856,"Jovana Ducica 12","07.07.2010.","Beograd","Serbia","sandra1@gmail.com","images/img2.jpg","sandra","$2a$10$35W57GqfVd6vWgaS5bswoeRlAqZJXXLCm7RjW30iIelVV2gZWMUga","021 333 555","OWNER","Jaimez","b",2);
 INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(6,59856,"Jovana Ducica 12","07.07.2010.","Beograd","Serbia","sandra1@gmail.com","images/img2.jpg","sandra","$10$F6kOHZqMxHKbAOG5QIZcVuufoNb0pyQ0puIpsrWtMiD2YDZfCj4x.","021 333 555","OWNER","Jaimez","m",2);
 
+--(company password for all: b)
+INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(5,59856,"Jovana Ducica 12","07.07.2010.","Beograd","Serbia","sandra1@gmail.com","images/img2.jpg","sandra","$2a$10$35W57GqfVd6vWgaS5bswoeRlAqZJXXLCm7RjW30iIelVV2gZWMUga","021 333 555","OWNER","Jaimez","b",2);
+INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(15,59856,"Jovana Ducica 12","07.07.2010.","Beograd","Serbia","sandra1@gmail.com","images/img2.jpg","nina","$2a$10$35W57GqfVd6vWgaS5bswoeRlAqZJXXLCm7RjW30iIelVV2gZWMUga","021 333 555","OWNER","simic","bb",2);
+INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(25,59856,"Jovana Ducica 12","07.07.2010.","Beograd","Serbia","sandra1@gmail.com","images/img2.jpg","nikola","$2a$10$35W57GqfVd6vWgaS5bswoeRlAqZJXXLCm7RjW30iIelVV2gZWMUga","021 333 555","OWNER","lukic","bbb",2);
 
 
 INSERT INTO `owner`(`id`)VALUES(9);
 INSERT INTO `owner`(`id`)VALUES(4);
 INSERT INTO `owner`(`id`)VALUES(5);
+INSERT INTO `owner`(`id`)VALUES(15);
+INSERT INTO `owner`(`id`)VALUES(25);
 INSERT INTO `owner`(`id`)VALUES(6);
 
 
 INSERT INTO `company`(`approved`, `fax`,`pib`, `site`, `id` )VALUES(true, "fax259945121", "PIB1", "nista", 5);
+INSERT INTO `company`(`approved`, `fax`,`pib`, `site`, `id` )VALUES(false, "fax252222222", "PIB2", "nesto", 15);
+INSERT INTO `company`(`approved`, `fax`,`pib`, `site`, `id` )VALUES(true, "fax253355663", "PIB3", "nista", 25);
 
 INSERT INTO `private_account_in_company`(`id`, `approved`,`company`, `owner` )VALUES(1, true, 5, 9);
 INSERT INTO `private_account_in_company`(`id`, `approved`,`company`, `owner` )VALUES(2, false, 5, 4);

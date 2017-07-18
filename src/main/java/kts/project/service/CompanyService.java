@@ -42,7 +42,7 @@ public class CompanyService {
     public List<Company> findAll(){return companyRepository.findAll();}
 
     public Company findByUsername(String u){return companyRepository.findByUsername(u);}
-    
+
     /**
      * This method is getting one Company by its Id
      * @param id

@@ -13,9 +13,13 @@ public class CompanyConstants {
     public static final String USERNAME = "a";
     public static final String PASSWORD = "a";
 
+    public static final String USERNAME_ADMIN = "admin";
+    public static final String PASSWORD_ADMIN = "admin";
 
 
-    public static final int DB_COMPANY_NUMBER = 1;
+
+    public static final int DB_COMPANY_NUMBER = 3;
+    public static final int DB_UNAPPROVED_COMPANY_NUMBER = 1;
 
     public static final String NEW_COMPANY_TYPE = "Company";
     public static final String NEW_COMPANY_ROLE = Role.OWNER.name();
@@ -61,6 +65,23 @@ public class CompanyConstants {
     public static final String DB_COMPANY_PIB = "PIB1";
     public static final String DB_COMPANY_SITE = "nista";
     public static final String DB_COMPANY_FAX = "fax259945121";
+
+    //unapproved
+    public static final Long DB_COMPANY_ID_UNAPPROVED = 15L;
+    public static final String DB_COMPANY_ROLE_UNAPPROVED = Role.OWNER.name();
+    public static final String DB_COMPANY_USERNAME_UNAPPROVED = "bb";
+    public static final String DB_COMPANY_EMAIL_UNAPPROVED = "sandra1@gmail.com";
+    public static final String DB_COMPANY_NAME_UNAPPROVED = "nina";
+    public static final String DB_COMPANY_SURNAME_UNAPPROVED = "simic";
+    public static final String DB_COMPANY_PHONE_NUMBER_UNAPPROVED = "021 333 555";
+    public static final String DB_COMPANY_ADDRESS_UNAPPROVED = "Jovana Ducica 12";
+    public static final String DB_COMPANY_CITY_UNAPPROVED = "Beograd";
+    public static final String DB_COMPANY_COUNTRY_UNAPPROVED = "Serbia";
+    public static final String DB_COMPANY_ACCOUNT_NUMBER_UNAPPROVED = "59856";
+    public static final String DB_COMPANY_IMAGE_URL_UNAPPROVED = "images/img2.jpg";
+    public static final String DB_COMPANY_PIB_UNAPPROVED = "PIB2";
+    public static final String DB_COMPANY_SITE_UNAPPROVED = "nesto";
+    public static final String DB_COMPANY_FAX_UNAPPROVED = "fax252222222";
 
 
 }
