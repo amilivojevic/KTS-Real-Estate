@@ -20,10 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Nina on 14-Jul-17.
- */
-
-/**
  *This class represents controller for Real Estate and manages with all Real Estate
  * functionalities.
  */
@@ -130,7 +126,7 @@ public class RealEstateController {
 
 
     /**
-     * This method returns all Real Estates of specified Owner
+     * This method gets all Real Estates of specified Owner
      * @param token
      * @return ResponseEntity with HttpStatus OK if everything is OK, BAD_REQUEST if not OK
      */

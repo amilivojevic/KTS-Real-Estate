@@ -23,16 +23,21 @@ INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`
 INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(9,59856,"Jovana Ducica 12","07.07.2010.","Beograd","Serbia","sandra1@gmail.com","images/img2.jpg","sandra","$2a$10$Qt3BU0OfliX1n2wGSE7E6.Evy9JryYxQp5VbW2FohZyAuv/bej1cq","021 333 555","OWNER","Jaimez","g",2);
 INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(4,3696,"Reja 54","01.01.2000.","Wroclaw","Poland","marko@gmail.com","images/img1.jpg","marko","$2a$10$HeR9A53PD1jmyIJn1IyZOe5o4zu./hc7LZuPV41Ie84prg2JVfo2O","021 111 111","OWNER","Markovic","a",2);
 INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(5,59856,"Jovana Ducica 12","07.07.2010.","Beograd","Serbia","sandra1@gmail.com","images/img2.jpg","sandra","$2a$10$35W57GqfVd6vWgaS5bswoeRlAqZJXXLCm7RjW30iIelVV2gZWMUga","021 333 555","OWNER","Jaimez","b",2);
+INSERT INTO `user`(`id`,`account_number`,`address`,`birth_date`,`city`,`country`,`email`,`image_url`,`name`,`password`,`phone_number`,`role`,`surname`,`username`,`authority_id`)VALUES(6,59856,"Jovana Ducica 12","07.07.2010.","Beograd","Serbia","sandra1@gmail.com","images/img2.jpg","sandra","$10$F6kOHZqMxHKbAOG5QIZcVuufoNb0pyQ0puIpsrWtMiD2YDZfCj4x.","021 333 555","OWNER","Jaimez","m",2);
+
 
 
 INSERT INTO `owner`(`id`)VALUES(9);
 INSERT INTO `owner`(`id`)VALUES(4);
 INSERT INTO `owner`(`id`)VALUES(5);
+INSERT INTO `owner`(`id`)VALUES(6);
 
 
 INSERT INTO `company`(`approved`, `fax`,`pib`, `site`, `id` )VALUES(true, "fax259945121", "PIB1", "http\nista", 5);
 
 INSERT INTO `private_account_in_company`(`id`, `approved`,`company`, `owner` )VALUES(1, true, 5, 9);
+INSERT INTO `private_account_in_company`(`id`, `approved`,`company`, `owner` )VALUES(2, false, 5, 4);
+INSERT INTO `private_account_in_company`(`id`, `approved`,`company`, `owner` )VALUES(3, false, 5, 6);
 
 -- real estate
 INSERT INTO `kts_project_test`.`real_estate` (`id`, `area`, `bathrooms_number`, `construction_year`, `description`, `furniture`, `heating_type`, `image_url`, `parking`, `rooms_number`, `rs_type`, `address`, `owner`) VALUES (2, 0, 1, 'adsf', 'xfbnz', true, 'CENTRAL', 'images/img1.jpg', true, 1, "HOUSE", 1, 4);
