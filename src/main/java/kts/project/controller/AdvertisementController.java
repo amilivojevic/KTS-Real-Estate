@@ -23,11 +23,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Nina on 14-Jul-17.
- */
-
-
-/**
  *  This controller represents Advertisement and all its functionality
  */
 @RestController
@@ -47,7 +42,6 @@ public class AdvertisementController {
 
     /**
      *  This method creates new advertisement in Database
-     *
      * @param token
      * @param addAdvertisementDTO
      * @return ResponseEntity with HttpStatus CREATED if everything is OK or BAD_REQUEST if not OK
@@ -119,8 +113,8 @@ public class AdvertisementController {
 
 
     /**
-     *
-     * @return
+     * This method is getting all Advertisements from the database
+     * @return ResponseEntity with HttpStatus OK if everything is OK
      */
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public ResponseEntity getAllAdvertisements() {
@@ -134,6 +128,10 @@ public class AdvertisementController {
         return new ResponseEntity<>(allAdvertisements, HttpStatus.OK);
     }
 
+    /**
+     * This method is getting all Accepted Listings from database
+     * @return ResponseEntity with HttpStatus OK if everything is OK
+     */
     @RequestMapping(value = "/getAllAcceptedListings", method = RequestMethod.GET)
     public ResponseEntity getAllAcceptedAdvertisements()
     {
@@ -150,6 +148,10 @@ public class AdvertisementController {
 
     }
 
+    /**
+     * This method is getting all Waiting Advertisements from database
+     * @return ResponseEntity with HttpStatus OK if everything is OK
+     */
     @RequestMapping(value = "/getAllWaiting", method = RequestMethod.GET)
     public ResponseEntity getAllWaitingAdvertisements()
     {
@@ -167,6 +169,10 @@ public class AdvertisementController {
 
     }
 
+    /**
+     * This method is getting one single Advertisement from database by its id
+     * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK, else NOT_FOUND
+     */
     @RequestMapping(value = "/getSingleAdvertisement/{id}", method = RequestMethod.GET)
     public ResponseEntity getSingleAdvertisement(@PathVariable Long id)
     {
@@ -184,6 +190,12 @@ public class AdvertisementController {
 
     }
 
+    /**
+     * This method is doing physical deleting of one Advertisement from database
+     * @param id
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/erase/{id}", method = RequestMethod.GET)
     public ResponseEntity erase(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
     {
@@ -204,7 +216,11 @@ public class AdvertisementController {
 
     }
 
-
+    /**
+     * This method is used for filtering all Advertisements
+     * @param filterAdvertisementDTO
+     * @return ResponseEntity with HttpStatus OK if everything is OK
+     */
     @RequestMapping(value = "/filterListings", method = RequestMethod.POST)
     public ResponseEntity filterListings(@RequestBody FilterAdvertisementDTO filterAdvertisementDTO)
     {

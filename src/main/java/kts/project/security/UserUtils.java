@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 
-
+/**
+ * This class represents UserUtils
+ */
 @Component
 public class UserUtils {
 
@@ -42,44 +44,9 @@ public class UserUtils {
 		}
 		System.out.println("username : " + details.getUsername());
 		return userService.findByUsername(details.getUsername());
-
-		//NE ZNAM DAL TREBAJU OVE AUTHORITIES DA SE KORISTE?!?!?!?
-		/*
-		if (details.getAuthorities().contains(new SimpleGrantedAuthority(ADMIN))) {
-			return adminService.findByUsername(details.getUsername());
-		} else if (details.getAuthorities().contains(new SimpleGrantedAuthority(USER))) {
-			return userService.findByUsername(details.getUsername());
-		} else if (details.getAuthorities().contains(new SimpleGrantedAuthority(VERIFIER))) {
-			return verifierService.findByUsername(details.getUsername());
-		} else {
-			return null;
-		}*/
 	}
 
-	/*public LoggedUserDTO getLoggedUserData(ServletRequest request) {
-
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		String token = httpRequest.getHeader("X-Auth-Token");
-
-		UserDetails details = userDetailsService.loadUserByUsername(tokenUtils.getUsernameFromToken(token));
-		if (details.getAuthorities().contains(new SimpleGrantedAuthority(ADMIN))) {
-			Admin admin = adminService.findByUsername(details.getUsername());
-			return new LoggedUserDTO(admin.getName(), admin.getSurname(), ADMIN);
-		} else if (details.getAuthorities().contains(new SimpleGrantedAuthority(USER))) {
-			User user = userService.findByUsername(details.getUsername());
-			if (user.isClerk()) {
-				return new LoggedUserDTO(user.getName(), user.getSurname(), CLERK);
-			}
-			return new LoggedUserDTO(user.getName(), user.getSurname(), USER);
-		} else if (details.getAuthorities().contains(new SimpleGrantedAuthority(VERIFIER))) {
-			Verifier verifier = verifierService.findByUsername(details.getUsername());
-			return new LoggedUserDTO(verifier.getUsername(), "", VERIFIER);
-		} else {
-			return null;
-		}
-	}*/
-
-/*	*//**
+	/**
 	 * This method checks if passed user name already exists
 	 *
 	 * @param username

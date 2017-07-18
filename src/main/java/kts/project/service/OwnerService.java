@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by Nina on 17-Jul-17.
+ * This class represents Owner Service
+ *
  */
-
 @Service
 public class OwnerService {
 

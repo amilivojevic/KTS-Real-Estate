@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Sandra on 6/12/2017.
+ *This class represents controller for Company and manages with all Company
+ * functionalities.
  */
 @RestController
 @RequestMapping("/api/users/company")
@@ -39,8 +40,11 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-
-    //registracija obicnih korisnika!
+    /**
+     * This method represents registration of Company
+     * @param registerCompanyDTO
+     * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity saveUser(@RequestBody RegisterCompanyDTO registerCompanyDTO) {
 
@@ -104,6 +108,10 @@ public class CompanyController {
     }
 
 
+    /**
+     * This method gets all Companies
+     * @return ResponseEntity with HttpStatus OK if everything is OK
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAllCompanies() {
         return new ResponseEntity(companyService.findAll(), HttpStatus.OK);
@@ -120,7 +128,12 @@ public class CompanyController {
     }
 
 
-
+    /**
+     * This method is for approving Company by System Admin
+     * @param username
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK
+     */
     @RequestMapping(value = "/approve/{username}", method = RequestMethod.GET)
     public ResponseEntity approve(@PathVariable String username, @RequestHeader("X-Auth-Token") String token) {
 

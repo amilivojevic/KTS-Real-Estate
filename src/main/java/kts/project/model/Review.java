@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by Korisnik on 5/30/2017.
+ * This class represent Review class
  */
 @Entity
 public class Review {

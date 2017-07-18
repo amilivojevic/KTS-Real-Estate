@@ -8,7 +8,7 @@ import javax.jws.soap.SOAPBinding;
 import java.util.Date;
 
 /**
- * Created by Nina on 18-Jul-17.
+ * This class represent UserDTO2 class
  */
 public class UserDTO2 {
 

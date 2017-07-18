@@ -4,10 +4,15 @@ import kts.project.model.Advertisement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by Nina on 14-Jul-17.
+ * This interface represents VerifierReport repository
  */
 public interface AdvertisementRepository extends JpaRepository<Advertisement,Long> {
 
+    /**
+     * This method finds Advertisement with specified id
+     * @param id
+     * @return object of Advertisement
+     */
     Advertisement findById(Long id);
 
 

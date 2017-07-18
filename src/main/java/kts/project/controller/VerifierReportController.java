@@ -20,9 +20,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by Nina on 16-Jul-17.
- */
 
 /**
  *This class represents controller which Verifier use to ban inapropriate

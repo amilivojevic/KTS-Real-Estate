@@ -3,7 +3,7 @@ package kts.project.controller.dto;
 import java.util.Date;
 
 /**
- * Created by Nina on 14-Jul-17.
+ * This class represent AddAdvertisementDTO class
  */
 public class AddAdvertisementDTO {
 

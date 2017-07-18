@@ -3,15 +3,23 @@ package kts.project.util;
 import java.io.Serializable;
 
 /**
- * Created by Korisnik on 6/14/2017.
+ * This class represents custom message of HTTP response
  */
 public class ResponseMessage implements Serializable {
+
     private String response;
 
+    /**
+     * Constructor
+     * @param response
+     */
     public ResponseMessage(String response) {
         this.response = response;
     }
 
+    /**
+     * Empty constructor
+     */
     public ResponseMessage() {
     }
 

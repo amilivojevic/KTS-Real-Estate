@@ -3,7 +3,7 @@ package kts.project.controller.dto;
 import java.util.Date;
 
 /**
- * Created by Sandra on 6/12/2017.
+ * This class represent RegisterPrivateAccDTO class
  */
 public class RegisterPrivateAccDTO {
 

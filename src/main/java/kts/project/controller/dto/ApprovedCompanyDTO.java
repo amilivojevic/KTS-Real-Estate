@@ -3,7 +3,7 @@ package kts.project.controller.dto;
 import kts.project.model.Company;
 
 /**
- * Created by Sandra on 7/18/2017.
+ * This class represent ApprovedCompanyDTO class
  */
 public class ApprovedCompanyDTO {
 

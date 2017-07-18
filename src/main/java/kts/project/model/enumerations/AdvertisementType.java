@@ -1,7 +1,7 @@
 package kts.project.model.enumerations;
 
 /**
- * Created by Korisnik on 5/31/2017.
+ * 	This class represent AdvertisementType enumeration class
  */
 public enum AdvertisementType {
     SELL, RENT

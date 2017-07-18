@@ -1,7 +1,7 @@
 package kts.project.controller.dto;
 
 /**
- * Created by Sandra on 7/15/2017.
+ * This class represent EmptyDTO class
  */
 public class EmptyDTO {
 

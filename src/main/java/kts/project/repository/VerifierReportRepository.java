@@ -4,12 +4,7 @@ import kts.project.model.VerifierReport;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by Nina on 16-Jul-17.
- */
-
-/**
  * This interface represents VerifierReport repository
- *
  */
 public interface VerifierReportRepository  extends JpaRepository<VerifierReport,Long> {
 

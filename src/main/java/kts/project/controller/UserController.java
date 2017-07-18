@@ -66,8 +66,6 @@ import java.util.List;
         @Autowired
         private UserUtils userUtils;
 
-
-    // TESTING COMPLETED
     /**
      *This method represents log in for all types of users.
      *
@@ -126,7 +124,6 @@ import java.util.List;
 
     }
 
-    //TESTED FULLY
     /**
      * This method represents register for Admin and Verifier types of Users, sets authority and saves
      * it to the database.
@@ -189,17 +186,12 @@ import java.util.List;
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    // Testing in progress
+
     /**
      * This method represents registration of private Owners inside Company
      * @param registerPrivateAccDTO
      * @return ResponseEntity with HttpStatus CREATED if everything is OK or BAD_REQUEST if not OK
      */
-    //registracija obicnih korisnika unutar firme
-
-
-    // OVDE SAM DODALA / NA POCETAK LINKA
-    // WTF S OVIMEEEE
     @RequestMapping(value = "/privateAcc/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity saveOwner(@RequestBody RegisterPrivateAccDTO registerPrivateAccDTO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -276,7 +268,6 @@ import java.util.List;
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    // Testing COMPLETED
     /**
      * This method is getting all data of an user
      * @param token
@@ -301,7 +292,6 @@ import java.util.List;
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
-    // Testing COMPLETED WTF SA LINKOM ?????????????????
     /**
      * This method gets all users of type Verifier
      * @param token

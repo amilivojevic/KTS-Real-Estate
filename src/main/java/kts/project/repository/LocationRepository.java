@@ -4,7 +4,7 @@ import kts.project.model.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by USER on 6/11/2017.
+ * This interface represents Location repository
  */
 public interface LocationRepository extends JpaRepository<Location, Long> {
 }

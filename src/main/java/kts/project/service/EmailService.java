@@ -1,10 +1,9 @@
 package kts.project.service;
 
 /**
- * Created by Nina on 12-Jul-17.
+ * This class represents Email Service
+ *
  */
-
-
 import kts.project.model.User;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,10 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class EmailService {
 
+    /**
+     * This method is sending Email to new User with link for verification
+     * @param user
+     */
         public void sendMail(User user) {
             Thread t = new Thread(() -> {
                 Properties properties = new Properties();

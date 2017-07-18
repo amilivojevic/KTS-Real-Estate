@@ -39,8 +39,6 @@ public class RealEstateController {
     @Autowired
     private AdvertisementRepository advertisementRepository;
 
-    //TESTING COMPLETED
-
     /**
      * This method represents adding of a new Real Estate
      * @param token

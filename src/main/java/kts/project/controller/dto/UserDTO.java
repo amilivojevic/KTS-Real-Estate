@@ -8,7 +8,7 @@ import kts.project.model.enumerations.Role;
 import java.util.Date;
 
 /**
- * Created by Korisnik on 6/14/2017.
+ * This class represent UserDTO class
  */
 public class UserDTO {
 

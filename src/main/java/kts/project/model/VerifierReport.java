@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
- * Created by Nina on 16-Jul-17.
+ * This class represent VerifierReport class
  */
 @Entity
 public class VerifierReport {

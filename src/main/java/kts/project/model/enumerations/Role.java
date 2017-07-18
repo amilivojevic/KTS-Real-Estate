@@ -1,7 +1,7 @@
 package kts.project.model.enumerations;
 
 /**
- * Created by Korisnik on 5/30/2017.
+ * 	This class represent Role enumeration class
  */
 public enum Role {
     OWNER, VERIFYER, SYS_ADMIN

@@ -4,11 +4,21 @@ import kts.project.model.Owner;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by USER on 6/11/2017.
+ * This interface represents Owner repository
  */
-
 public interface OwnerRepository extends JpaRepository<Owner,Long>{
 
+    /**
+     * This method finds Owner with specified id
+     * @param id
+     * @return object of Owner
+     */
     Owner findById(Long id);
+
+    /**
+     * This method finds Owner with specified username
+     * @param username
+     * @return object of Owner
+     */
     Owner findByUsername(String username);
 }

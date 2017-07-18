@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Korisnik on 5/30/2017.
+ * This class represent Owner class
  */
 @Entity
 public class Owner extends User {

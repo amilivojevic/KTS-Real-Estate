@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by Korisnik on 5/30/2017.
+ * This class represent User class
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
