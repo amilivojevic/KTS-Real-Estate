@@ -169,9 +169,16 @@ public class AdvertisementController {
     @RequestMapping(value = "/getSingleAdvertisement/{id}", method = RequestMethod.GET)
     public ResponseEntity getSingleAdvertisement(@PathVariable Long id)
     {
+        if(id == null){
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+        }
+
+        if(advertisementService.findById(id) == null){
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        }
 
         Advertisement singleAdvertisement = advertisementService.findById(id);
-
+        System.out.println("ADVERTISEMENT ID : " + singleAdvertisement.getId());
         return new ResponseEntity<>(singleAdvertisement, HttpStatus.OK);
 
     }

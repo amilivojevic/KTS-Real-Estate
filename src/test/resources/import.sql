@@ -27,7 +27,12 @@ INSERT INTO `owner`(`id`)VALUES(4);
 INSERT INTO `kts_project_test`.`real_estate` (`id`, `area`, `bathrooms_number`, `construction_year`, `description`, `furniture`, `heating_type`, `image_url`, `parking`, `rooms_number`, `rs_type`, `address`, `owner`) VALUES (2, 0, 1, 'adsf', 'xfbnz', true, 'CENTRAL', 'images/img1.jpg', true, 1, "HOUSE", 1, 4);
 
 -- advertisement
+
+--adv for real estate id = 2
 INSERT INTO `advertisement`(`id`,`announcement_date`,`currency`,`ending_date`,`phone_number`,`price`,`state`,`title`,`type`,`update_date`,`owner`,`real_estate`)VALUES(1,"01.01.2017","RSD","01.06.2017","021400198","10000","WAITING","Add title","RENT","02.02.2018",4,2);
+INSERT INTO `advertisement`(`id`,`announcement_date`,`currency`,`ending_date`,`phone_number`,`price`,`state`,`title`,`type`,`update_date`,`owner`,`real_estate`)VALUES(2,"01.01.2017","EUR","01.06.2017","021400198","300","WAITING","Title2","RENT","02.02.2018",4,2);
+INSERT INTO `advertisement`(`id`,`announcement_date`,`currency`,`ending_date`,`phone_number`,`price`,`state`,`title`,`type`,`update_date`,`owner`,`real_estate`)VALUES(3,"01.01.2017","RSD","01.06.2017","021400198","10000","ACCEPTED","Title3","SELL","02.02.2018",4,2);
+INSERT INTO `advertisement`(`id`,`announcement_date`,`currency`,`ending_date`,`phone_number`,`price`,`state`,`title`,`type`,`update_date`,`owner`,`real_estate`)VALUES(4,"01.01.2017","RSD","01.06.2017","021400198","10000","WAITING","Title4","RENT","02.02.2018",4,2);
 
 -- verifier report
 INSERT INTO `kts_project_test`.`verifier_report` (`id`, `banning_reason`, `date`, `description`, `advertisement`, `verifier`) VALUES ('1', 'SOLD', '01.01.2000', 'smaras', '1', '3');

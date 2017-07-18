@@ -16,6 +16,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
@@ -155,6 +156,72 @@ public class AdvertisementControllerTest {
                 .andExpect(jsonPath("$.[*].state").value(hasItem(DB_ADV_STATE)));
     }
 
+
+    /**
+     * This method tests adding new Advertisement and saving it to the database.
+     * Expected invalid input fields, unique phone number. Expected: method
+     * post, status BAD_REQUEST
+     *
+     * @throws Exception
+     **/
+    @Test
+    public void testGetAllWaitingAdvertisements() throws Exception {
+
+        mockMvc.perform(get(URL_PREFIX + "/getAllWaiting"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$", hasSize(DB_WAITING_ADV_NUMBER)))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(DB_WAITING_ADV_ID.intValue())))
+                .andExpect(jsonPath("$.[*].title").value(hasItem(DB_WAITING_ADV_TITLE)))
+                .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DB_WAITING_ADV_PHONE_NUMBER)))
+                .andExpect(jsonPath("$.[*].price").value(hasItem(DB_WAITING_ADV_PRICE)))
+                .andExpect(jsonPath("$.[*].realEstate.id").value(hasItem(DB_WAITING_ADV_RS_ID.intValue())))
+                .andExpect(jsonPath("$.[*].owner.id").value(hasItem(DB_WAITING_ADV_OWNER_ID.intValue())))
+                .andExpect(jsonPath("$.[*].currency").value(hasItem(DB_WAITING_ADV_CURRENCY)))
+                .andExpect(jsonPath("$.[*].type").value(hasItem(DB_WAITING_ADV_TYPE)))
+                .andExpect(jsonPath("$.[*].state").value(hasItem(DB_WAITING_ADV_STATE)));
+    }
+
+    /**
+     * This method tests adding new Advertisement and saving it to the database.
+     * Expected invalid input fields, unique phone number. Expected: method
+     * post, status BAD_REQUEST
+     *
+     * @throws Exception
+     **/
+    @Test
+    public void testGetSingleAdvertisement() throws Exception {
+
+        mockMvc.perform(get(URL_PREFIX + "/getSingleAdvertisement/" + DB_ADV_ID))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.id").value(DB_ADV_ID.intValue()))
+                .andExpect(jsonPath("$.title").value(DB_ADV_TITLE))
+                .andExpect(jsonPath("$.phoneNumber").value(DB_ADV_PHONE_NUMBER))
+                .andExpect(jsonPath("$.price").value(DB_ADV_PRICE))
+                .andExpect(jsonPath("$.realEstate.id").value(DB_ADV_RS_ID.intValue()))
+                .andExpect(jsonPath("$.owner.id").value(DB_ADV_OWNER_ID.intValue()))
+                .andExpect(jsonPath("$.currency").value(DB_ADV_CURRENCY))
+                .andExpect(jsonPath("$.type").value(DB_ADV_TYPE))
+                .andExpect(jsonPath("$.state").value(DB_ADV_STATE));
+    }
+
+
+    /**
+     * This method tests adding new Advertisement and saving it to the database.
+     * Expected invalid input fields, unique phone number. Expected: method
+     * post, status BAD_REQUEST
+     *
+     * @throws Exception
+     **/
+    @Test
+    public void testGetSingleAdvertisementInvalid() throws Exception {
+
+        mockMvc.perform(get(URL_PREFIX + "/getSingleAdvertisement/" + DB_ADV_ID_DOESNT_EXIST))
+                .andExpect(status().isNotFound());
+        mockMvc.perform(get(URL_PREFIX + "/getSingleAdvertisement/undefined"))
+                .andExpect(status().isBadRequest());
+    }
 
 
 

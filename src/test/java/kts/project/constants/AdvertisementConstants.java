@@ -31,7 +31,7 @@ public class AdvertisementConstants {
     public static final long NEWADV_RS_ID_BAD = 100L;
     public static final String NEWADV_CURRENCY_BAD = "";
 
-    public static final int DB_ADV_NUMBER = 1;
+    public static final int DB_ADV_NUMBER = 4;
 
     public static final Long DB_ADV_ID = 1L;
 
@@ -44,5 +44,23 @@ public class AdvertisementConstants {
 
     public static final Long DB_ADV_OWNER_ID = 4L;
     public static final Long DB_ADV_RS_ID = 2L;
+
+    // adv for getAllWaitingAdvertisement
+    public static final int DB_WAITING_ADV_NUMBER = 3;
+
+    public static final Long DB_WAITING_ADV_ID = 1L;
+    public static final String DB_WAITING_ADV_CURRENCY = kts.project.model.enumerations.Currency.RSD.name();
+    public static final String DB_WAITING_ADV_PHONE_NUMBER = "021400198";
+    public static final double DB_WAITING_ADV_PRICE = 10000d;
+    public static final String DB_WAITING_ADV_STATE = AdvertisementState.WAITING.name();
+    public static final String DB_WAITING_ADV_TITLE = "Add title";
+    public static final String DB_WAITING_ADV_TYPE = AdvertisementType.RENT.name();
+
+    public static final Long DB_WAITING_ADV_OWNER_ID = 4L;
+    public static final Long DB_WAITING_ADV_RS_ID = 2L;
+
+
+    // advertisement id that doesn't exist
+    public static final Long DB_ADV_ID_DOESNT_EXIST = 200L;
 
 }
