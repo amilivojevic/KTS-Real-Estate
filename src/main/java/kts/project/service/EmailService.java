@@ -45,7 +45,7 @@ public class EmailService {
                     Message message = new MimeMessage(session);
                     message.setFrom(new InternetAddress(username));
                 /**    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmail())); **/
-                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("iceipice.trio@gmail.com"));
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ninasimicns@gmail.com"));
                     message.setSubject(subject);
                     message.setText(messageText);
                     Transport.send(message);
