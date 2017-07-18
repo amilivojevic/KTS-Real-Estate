@@ -26,9 +26,13 @@
         }
 
         vm.acceptAdvertisement = function(id){
-     /*       console.log("id advertisementa u redirektu na decline" + id);
-            SingleAdvertisementService.setAdvertisementId(id);
-            $window.location.href = "http://" + $window.location.host + "/#!/report_baned_advertisement"; */
+            $http.get('/api/advertisement/accept/' + id)
+                .then(function(response) {
+                    console.log("ACCEOT");
+                    getAllWaitingAdvertisements();
+                }, function(response) {
+                    alert(JSON.stringify(response.data));
+                });
 
         }
 

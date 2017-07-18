@@ -153,6 +153,26 @@ public class AdvertisementController {
     }
 
     /**
+     * This method change state of specified Advertisement on ACCEPTED
+     * @return ResponseEntity with HttpStatus OK if everything is OK
+     * BAD_REQUEST if someone who is not a verifier is trying to accept adv.
+     */
+    @RequestMapping(value = "/accept/{id}", method = RequestMethod.GET)
+    public ResponseEntity acceptAdvertisements(@PathVariable Long id, @RequestHeader("X-Auth-Token") String token)
+    {
+        System.out.println("acceptAdvertisements");
+        User user = userService.findByToken(token);
+        if(user.getRole() == Role.VERIFYER){
+            Advertisement a = advertisementService.findById(id);
+            a.setState(AdvertisementState.ACCEPTED);
+            advertisementService.save(a);
+            return new ResponseEntity<>( HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+    }
+
+    /**
      * This method is getting all Waiting Advertisements from database
      * @return ResponseEntity with HttpStatus OK if everything is OK
      */
