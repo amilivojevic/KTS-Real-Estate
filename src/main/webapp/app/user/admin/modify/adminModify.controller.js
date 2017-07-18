@@ -38,7 +38,7 @@
                         console.log("ucitan u funkciji: " + JSON.stringify(loggedUser));
                         $window.localStorage['loggedUser'] = angular.toJson(loggedUser);
                         $scope.userData = loggedUser;
-
+                        $window.location.href = "http://" + $window.location.host + "/#!/admin";
 
                     }
                 );

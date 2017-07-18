@@ -194,7 +194,7 @@ public class AdvertisementController {
         }
         Advertisement a = advertisementService.findById(id);
         if (a.getOwner().getId() == user.getId()){
-
+            
             advertisementService.delete(a);
 
             //treba obrisati i sve one iste!!!!
