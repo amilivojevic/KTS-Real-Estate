@@ -1,9 +1,5 @@
 package kts.project.constants;
 
-/**
- * Created by Nina on 18-Jul-17.
- */
-
 import java.util.Date;
 
 /**

@@ -5,7 +5,8 @@ import kts.project.model.enumerations.Role;
 import java.util.Date;
 
 /**
- * Created by Sandra on 7/18/2017.
+ * Constants for CompanyConstants tests
+ *
  */
 public class CompanyConstants {
 
@@ -83,5 +84,9 @@ public class CompanyConstants {
     public static final String DB_COMPANY_SITE_UNAPPROVED = "nesto";
     public static final String DB_COMPANY_FAX_UNAPPROVED = "fax252222222";
 
-
+    /**
+     * Empty constructor
+     */
+    public CompanyConstants() {
+    }
 }

@@ -7,7 +7,7 @@ import kts.project.model.PrivateAccountInCompany;
 import java.util.Date;
 
 /**
- * Created by Nina on 18-Jul-17.
+ * This class represent ApprovedPrivateAccountInCompanyDTO class
  */
 public class ApprovedPrivateAccountInCompanyDTO {
 

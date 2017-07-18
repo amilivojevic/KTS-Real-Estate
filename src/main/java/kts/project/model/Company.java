@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Korisnik on 5/30/2017.
+ * This class represent Company class
  */
 @Entity
 public class Company extends Owner {

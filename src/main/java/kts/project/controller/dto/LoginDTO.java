@@ -1,7 +1,7 @@
 package kts.project.controller.dto;
 
 /**
- * Created by Korisnik on 6/14/2017.
+ * This class represent LoginDTO class
  */
 public class LoginDTO {
     private String username;

@@ -3,7 +3,7 @@ package kts.project.controller.dto;
 import java.util.Date;
 
 /**
- * Created by Sandra on 6/12/2017.
+ * This class represent RegisterOwnerDTO class
  */
 public class RegisterOwnerDTO {
     private String type;

@@ -3,7 +3,7 @@ package kts.project.model;
 import javax.persistence.*;
 
 /**
- * Created by Korisnik on 5/30/2017.
+ * This class represent PrivateAccountInCompany class
  */
 @Entity
 public class PrivateAccountInCompany {

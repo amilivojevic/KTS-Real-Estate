@@ -49,7 +49,7 @@ public class PrivateAccountInCompanyService {
 
 
     /**
-     * This method is checking if all required inputs for RealEstateDTO are entered
+     * This method is checking if all required inputs for RegisterPrivateAccDTO are entered
      * @param registerPrivateAccDTO
      * @return true or false
      */

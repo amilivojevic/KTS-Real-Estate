@@ -1,9 +1,5 @@
 package kts.project.constants;
 
-/**
- * Created by Nina on 17-Jul-17.
- */
-
 import kts.project.model.enumerations.HeatingType;
 import kts.project.model.enumerations.RealEstateType;
 

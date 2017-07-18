@@ -27,9 +27,14 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+
 	/**
 	 * This method sets authentication on user who doesn't have authentication
+	 * @param request
+	 * @param response
+	 * @param chain
+	 * @throws IOException
+	 * @throws ServletException
 	 */
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,

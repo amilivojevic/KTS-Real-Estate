@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * This class represent Authority class
+ */
 @Entity
 public class Authority {
 	@Id

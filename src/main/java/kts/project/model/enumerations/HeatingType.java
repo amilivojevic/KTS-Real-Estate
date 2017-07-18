@@ -1,7 +1,7 @@
 package kts.project.model.enumerations;
 
 /**
- * Created by Korisnik on 5/31/2017.
+ * 	This class represent HeatingType enumeration class
  */
 public enum HeatingType {
     NONE, CENTRAL, FIREPLACE, SOLAR

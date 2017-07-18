@@ -12,27 +12,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Nina on 14-Jul-17.
+ * This class represents Advertisement Service
+ *
  */
-
 @Service
 public class AdvertisementService {
 
     @Autowired
     AdvertisementRepository advertisementRepository;
 
+    /**
+     * This method is finding one Advertisement by its Id
+     * @param id
+     * @return Advertisement with specified id
+     */
     public Advertisement findById(Long id){
         return advertisementRepository.findById(id);
     }
 
+    /**
+     * This method is finding all Advertisements
+     * @return list of Advertisements
+     */
     public List<Advertisement> findAll(){ return advertisementRepository.findAll();}
 
+    /**
+     * This method saves element to the database.
+     *
+     * @param a
+     *            element to be saved
+     * @return Saved element
+     */
     public void save(Advertisement a){advertisementRepository.save(a);}
 
+    /**
+     * This method deletes element from database.
+     *
+     * @param a
+     *      element to be deleted
+     */
     public void delete(Advertisement a){advertisementRepository.delete(a);}
 
+    /**
+     * This method deletes element from database.
+     *
+     * @param id
+     *       element to be deleted
+     */
     public void delete(Long id){advertisementRepository.delete(id);}
 
+    /**
+     * This method is checking if all required inputs for AddAdvertisementDTO are entered
+     * @param addAdvertisementDTO
+     * @return true or false
+     */
     public boolean checkAdvertisementDTOInput(AddAdvertisementDTO addAdvertisementDTO){
         if (
                 addAdvertisementDTO.getEndingDate() == null ||
@@ -48,6 +81,11 @@ public class AdvertisementService {
         }
     }
 
+    /**
+     * This method is getting Advertisement Type of an Advertisement
+     * @param stringType
+     * @return AdvertisementType of an Advertisement
+     */
     public AdvertisementType getAdvertisementFromString(String stringType){
         if(stringType == null){
             System.out.println("tip je null");
@@ -64,6 +102,11 @@ public class AdvertisementService {
         return null;
     }
 
+    /**
+     * This method is getting Currency of an Advertisement
+     * @param stringCurrency
+     * @return Currency of an Advertisement
+     */
     public Currency getCurrencyFromString(String stringCurrency){
         if(stringCurrency == null){
             System.out.println("Currency je null");
@@ -84,6 +127,12 @@ public class AdvertisementService {
         return null;
     }
 
+    /**
+     * This method is filtering Advertisements according to Advertisement Type
+     * @param list
+     * @param type
+     * @return list of Advertisements
+     */
     public List<Advertisement> typeFilter(List<Advertisement> list, AdvertisementType type){
         List<Advertisement> copy = new ArrayList<Advertisement>();
         for(Advertisement a : list){ copy.add(a);}
@@ -98,6 +147,14 @@ public class AdvertisementService {
         return list;
     }
 
+    /**
+     * This method is filtering Advertisements according to Advertisement Type
+     * @param list
+     * @param minPrice
+     * @param maxPrice
+     * @param currency
+     * @return list of Advertisements
+     */
     public List<Advertisement> priceFilter(List<Advertisement> list, double minPrice, double maxPrice, Currency currency){
 
         List<Advertisement> copy = new ArrayList<>();

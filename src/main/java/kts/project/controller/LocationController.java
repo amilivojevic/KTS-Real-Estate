@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by USER on 6/11/2017.
+ *This class represents controller for Location and manages with all Location
+ * functionalities.
  */
-
 @RestController
 @RequestMapping("/api/location")
 public class LocationController {
@@ -19,6 +19,10 @@ public class LocationController {
     @Autowired
     LocationRepository locationRepository;
 
+    /**
+     * This method gets all Locations
+     * @return ResponseEntity with HttpStatus OK if everything is OK
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAllLocations() {
         return new ResponseEntity<>(locationRepository.findAll(), HttpStatus.OK);

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by Korisnik on 5/30/2017.
+ * This class represent Location class
  */
 @Entity
 public class Location {

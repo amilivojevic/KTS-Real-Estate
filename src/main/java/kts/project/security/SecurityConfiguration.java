@@ -45,15 +45,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	/**
 	 * Method witch returns new instance of PasswordEncoder
 	 * 
-	 * @return
+	 * @return object PasswordEncoder
 	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
+
 	/**
 	 * This method return instance of AuthenticationManager from super class
+	 * @throws Exception
 	 */
 	@Bean
 	@Override
@@ -63,8 +65,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	/**
 	 * This method returns instance of AuthenticationTokenFilter
-	 * 
-	 * @return
+	 *
 	 * @throws Exception
 	 */
 	@Bean
@@ -78,6 +79,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	/**
 	 * This method configures logic about authority, authentication etc.
+	 * @param httpSecurity
+	 * @throws Exception
 	 */
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {

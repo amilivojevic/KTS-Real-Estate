@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Nina on 13-Jul-17.
+ * This class represent RealEstateDTO class
  */
 public class RealEstateDTO {
 

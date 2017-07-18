@@ -4,8 +4,14 @@ import kts.project.model.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by USER on 6/11/2017.
+ * This interface represents Authority repository
  */
 public interface AuthorityRepository extends JpaRepository<Authority, Long> {
+
+        /**
+         * This method finds Authority with specified name
+         * @param name
+         * @return object of Authority
+         */
         Authority findByName(String name);
 }

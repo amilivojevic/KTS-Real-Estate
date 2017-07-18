@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Nina on 16-Jul-17.
- */
-
-/**
  * This class represents VerifyReportService
  *
  */

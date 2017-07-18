@@ -28,10 +28,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Created by Nina on 17-Jul-17.
- */
-
-/**
  *
  * This class tests VerifierReport controller
  *

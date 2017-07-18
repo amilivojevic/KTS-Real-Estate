@@ -3,10 +3,6 @@ package kts.project.constants;
 import java.util.Date;
 
 /**
- * Created by Nina on 17-Jul-17.
- */
-
-/**
  * Constants for VerifierReport tests
  *
  */

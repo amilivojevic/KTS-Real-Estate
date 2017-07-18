@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Korisnik on 5/30/2017.
+ * This class represent RealEstate class
  */
 @Entity
 public class RealEstate {
