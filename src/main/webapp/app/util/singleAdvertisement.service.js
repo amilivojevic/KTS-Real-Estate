@@ -7,17 +7,17 @@
         .module('realEstateApp')
         .service('SingleAdvertisementService', function() {
 
-
+            var vm = this;
             var advertisementId;
 
             var setAdvertisementId = function(id) {
                 console.log("postavio id" + id);
-                advertisementId = id;
+                vm.advertisementId = id;
             };
 
             var getAdvertisementId = function(){
                 console.log("citam id" + advertisementId);
-                return advertisementId;
+                return vm.advertisementId;
             };
 
             return {

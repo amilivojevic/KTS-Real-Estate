@@ -12,12 +12,12 @@
         vm.getSingleAdvertisement = getSingleAdvertisement;
 
         var id = SingleAdvertisementService.getAdvertisementId();
-        
+        console.log(id);
 
-        getSingleAdvertisement();
+      /*  getSingleAdvertisement(); */
 
 
-        function getSingleAdvertisement() {
+      /*  function getSingleAdvertisement() {
 
             $http.get('/api/advertisement/getSingleAdvertisement/' + id)
                 .then(function(response) {
@@ -28,6 +28,6 @@
                 }, function(response) {
                     alert(JSON.stringify(response.data));
                 });
-        }
+        } */
     }
 })();
