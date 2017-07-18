@@ -23,4 +23,8 @@ public class OwnerService {
         return ownerRepository.findByUsername(username);
     }
 
+    public void delete(Owner o){
+        ownerRepository.delete(o);
+    }
+
 }

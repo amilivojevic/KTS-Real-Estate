@@ -31,6 +31,8 @@ public class AdvertisementService {
 
     public void delete(Advertisement a){advertisementRepository.delete(a);}
 
+    public void delete(Long id){advertisementRepository.delete(id);}
+
     public boolean checkAdvertisementDTOInput(AddAdvertisementDTO addAdvertisementDTO){
         if (
                 addAdvertisementDTO.getEndingDate() == null ||

@@ -84,7 +84,7 @@
                 $scope.redirect();
 
             },function(response){
-                alert("Check you email and activate your account!");
+                alert("Registration failed");
             });
 
 

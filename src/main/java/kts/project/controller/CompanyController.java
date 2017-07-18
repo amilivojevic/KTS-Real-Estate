@@ -42,7 +42,7 @@ public class CompanyController {
 
     //registracija obicnih korisnika!
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity saveUser(@RequestHeader("X-Auth-Token") String token,@RequestBody RegisterCompanyDTO registerCompanyDTO) {
+    public ResponseEntity saveUser(@RequestBody RegisterCompanyDTO registerCompanyDTO) {
 
         if(!userUtils.checkUniqueUsername(registerCompanyDTO.getUsername())){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
