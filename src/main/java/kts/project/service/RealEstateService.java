@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Nina on 14-Jul-17.
+ * This class represents Real Estate Service
+ *
  */
 @Service
 public class RealEstateService {
@@ -17,6 +18,11 @@ public class RealEstateService {
     @Autowired
     public RealEstateRepository realEstateRepository;
 
+    /**
+     * This method is finding one Real Estate by its Id
+     * @param id
+     * @return RealEstate with specified id
+     */
     public RealEstate findById(Long id){
         return realEstateRepository.findById(id);
     }

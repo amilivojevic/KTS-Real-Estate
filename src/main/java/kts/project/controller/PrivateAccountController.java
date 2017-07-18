@@ -8,7 +8,7 @@ import kts.project.model.PrivateAccountInCompany;
 import kts.project.model.User;
 import kts.project.model.enumerations.Role;
 import kts.project.repository.*;
-import kts.project.service.UserService;
+import kts.project.service.*;
 import kts.project.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,36 +20,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Sandra on 6/12/2017.
+ *This class represents controller for Private Account in Company and manages with all Real Estate
+ * functionalities.
  */
 @RestController
 @RequestMapping("/api/users/private_acc")
 public class PrivateAccountController {
 
     @Autowired
-    OwnerRepository ownerRepository;
+    OwnerService ownerService;
 
     @Autowired
-    AuthorityRepository authorityRepository;
+    AuthorityService authorityService;
 
     @Autowired
-    LocationRepository locationRepository;
+    PrivateAccountInCompanyService privateAccountInCompanyService;
 
     @Autowired
-    PrivateAccountInCompanyRepository privateAccountInCompanyRepository;
-
-    @Autowired
-    CompanyRepository companyRepository;
+    CompanyService companyService;
 
     @Autowired
     UserService userService;
 
 
-    //registracija obicnih korisnika!
+    /**
+     * This method represents registration of Private Acount inside Company
+     * @param registerPrivateAccDTO
+     * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity savePrivateAccount(@RequestBody RegisterPrivateAccDTO registerPrivateAccDTO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println("Pocinje registracija privatnog lica na backendu!");
+
+        if (!privateAccountInCompanyService.checkPrivateAccountInCompanyDTOInput(registerPrivateAccDTO)){
+            return new ResponseEntity<>(new ResponseMessage("New Private Account in Company input is not valid (some fields are null)"), HttpStatus.BAD_REQUEST);
+        }
 
         Owner user;
         PrivateAccountInCompany privateAcc = new PrivateAccountInCompany();
@@ -71,49 +77,59 @@ public class PrivateAccountController {
                     registerPrivateAccDTO.getAccountNumber(),
                     registerPrivateAccDTO.getImageUrl()
             );
-            user.setAuthority(authorityRepository.findByName(("ROLE_OWNER")));
+            user.setAuthority(authorityService.findByName(("ROLE_OWNER")));
             privateAcc.setOwner(user);
             privateAcc.setApproved(false);
-            privateAcc.setCompany(companyRepository.findOne(registerPrivateAccDTO.getCompanyId()));
+            privateAcc.setCompany(companyService.findOne(registerPrivateAccDTO.getCompanyId()));
         }
         else {
             System.out.println();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Cant create that type of user, ony Customer and Advertiser allowed");
         }
+        ownerService.save(user);
+        privateAccountInCompanyService.save(privateAcc);
 
-        //user.setVerifyCode(UUID.randomUUID().toString());
-
-        ownerRepository.save(user);
-        privateAccountInCompanyRepository.save(privateAcc);
-
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-
-    //dobavljaju se samo unapproved private accounts od companije koja je ulogovana
+    /**
+     * This method gets all Private Accounts in Company with status Unapproved
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/all/unapproved", method = RequestMethod.GET)
     public ResponseEntity getAllUnapproved(@RequestHeader("X-Auth-Token") String token) {
         List<PrivateAccountInCompany> unapprovedPrivate = new ArrayList<>();
         User user = userService.findByToken(token);
         if (user.getRole() == Role.OWNER) {
-            if(companyRepository.getOne(user.getId()) != null){
-                for (PrivateAccountInCompany c: privateAccountInCompanyRepository.findAll()) {
+            if (companyService.getOne(user.getId()) != null) {
+                for (PrivateAccountInCompany c : privateAccountInCompanyService.findAll()) {
 
-                    if(c.getCompany().getId() == user.getId()) {
+                    if (c.getCompany().getId() == user.getId()) {
                         if (c.isApproved() == false) {
                             unapprovedPrivate.add(c);
                         }
                     }
                 }
             }
+
+            return new ResponseEntity<>(unapprovedPrivate, HttpStatus.OK);
         }
-
-
-        return new ResponseEntity<>(unapprovedPrivate, HttpStatus.OK);
+        else{
+            return new ResponseEntity<>(unapprovedPrivate, HttpStatus.BAD_REQUEST);
+        }
     }
 
 
+    // TESTING IN PROGRESS
+
+    /**
+     * This method is gets one unapproved Private accounts in Company in addition to change its status to approved
+     * @param id
+     * @param token
+     * @return ResponseEntity with HttpStatus OK if everything is OK or BAD_REQUEST if not OK
+     */
     @RequestMapping(value = "/approve/{id}", method = RequestMethod.GET)
     public ResponseEntity approve(@PathVariable long id, @RequestHeader("X-Auth-Token") String token) {
 
@@ -121,21 +137,21 @@ public class PrivateAccountController {
         System.out.println("Funkcija approve, user.getId() = " + user.getId());
         if (user.getRole() == Role.OWNER) {
             System.out.println("user je owner");
-            if(companyRepository.getOne(user.getId()) != null){
+            if(companyService.getOne(user.getId()) != null){
 
-                PrivateAccountInCompany p = privateAccountInCompanyRepository.getOne(id);
+                PrivateAccountInCompany p = privateAccountInCompanyService.findById(id);
 
                 System.out.println("Nasao je privateaccount u bazi : " + p.toString());
 
                 p.setApproved(true);
                 System.out.println("postavio na approved");
-                privateAccountInCompanyRepository.save(p);
+                privateAccountInCompanyService.save(p);
                 System.out.println("zapamtio u bazi");
-                return new ResponseEntity<>(new ResponseMessage("Private acccount in company approved!"), HttpStatus.OK);
+                return new ResponseEntity<>( HttpStatus.OK);
             }
 
 
         }
-        return new ResponseEntity<>(new ResponseMessage("You are not system administrator!"), HttpStatus.OK);
+        return new ResponseEntity( HttpStatus.BAD_REQUEST);
     }
 }
